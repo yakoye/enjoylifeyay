@@ -12,12 +12,13 @@ test('v0.8 页面标题、紧凑间距和无装饰横线规则统一', async () 
   assert.match(global, /\.home-intro\s*\{[\s\S]*?margin-bottom:\s*1\.125rem/);
 });
 
-test('v0.8 null 更新日期不会变为 1970，长文目录默认折叠', async () => {
+test('v0.8 null 更新日期不会变为 1970，文章目录默认折叠', async () => {
   const schema = await readFile(new URL('../src/content.config.ts', import.meta.url), 'utf8');
   const article = await readFile(new URL('../src/layouts/ArticleLayout.astro', import.meta.url), 'utf8');
   assert.match(schema, /z\.union\(\[z\.null\(\), date\]\)\.optional\(\)/);
   assert.match(article, /value\.valueOf\(\) !== 0/);
   assert.match(article, /heading\.depth >= 2 && heading\.depth <= 4/);
+  assert.match(article, /toc\.length >= 1/);
   assert.match(article, /<summary aria-label="展开或收起目录">目录<\/summary>/);
   assert.doesNotMatch(article, /<details class="article-toc" open/);
 });

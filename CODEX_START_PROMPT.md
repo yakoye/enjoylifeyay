@@ -7,9 +7,11 @@
 3. `docs/CONTENT_MIGRATION_STATUS.md`
 4. `docs/LEGACY_SOURCE_CATALOG.md`
 5. `docs/TYPOGRAPHY_SYSTEM.md`
-6. `PERSONAL_SITE_CODEX_HANDOFF.md`
+6. `docs/COMMENTS_D1.md`
+7. `docs/V0.10_COMMENTS_TOC_ARTICLE.md`
+8. `PERSONAL_SITE_CODEX_HANDOFF.md`
 
-当前项目已经完成 v0.6：文本目录视觉、完整按年存档、9 篇公开旧博客文章、2 篇草稿、CSDN 91 条历史外链、知乎入口、公开工具链接、Pagefind 中文构建与 Windows Node 24 发布流程均已落地。
+当前项目已经完成 v0.10：文本目录视觉、完整按年存档、旧博客公开文章、CSDN 历史外链、知乎入口、公开工具链接、Pagefind 中文构建、Node 24 发布流程、全文章目录审计，以及 Cloudflare Pages Functions + D1 的审核制评论均已落地。
 
 后续开发原则：
 
@@ -25,6 +27,7 @@
 ```powershell
 npm run check
 npm test
+npm run audit:toc
 npm run build
 npm run check:links
 ```

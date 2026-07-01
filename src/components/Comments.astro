@@ -1,0 +1,137 @@
+---
+interface Props {
+  article: string;
+}
+
+const { article } = Astro.props;
+---
+
+<section class="article-comments" id="comments" data-comments data-article={article} aria-labelledby="comments-title">
+  <h2 id="comments-title">评论</h2>
+  <p class="comments-note">评论需审核后显示；不收集邮箱。</p>
+
+  <div class="comments-list" data-comments-list aria-live="polite"></div>
+  <p class="comments-status" data-comments-status aria-live="polite">正在读取评论。</p>
+
+  <form class="comment-form" data-comment-form>
+    <label class="comment-field">
+      <span>昵称（可选）</span>
+      <input name="author" type="text" maxlength="40" autocomplete="name" />
+    </label>
+    <label class="comment-field">
+      <span>留言</span>
+      <textarea name="body" rows="5" maxlength="1500" required></textarea>
+    </label>
+    <label class="comment-honeypot" aria-hidden="true">
+      <span>网站</span>
+      <input name="website" type="text" tabindex="-1" autocomplete="off" />
+    </label>
+    <button class="comment-submit" type="submit">提交评论</button>
+  </form>
+</section>
+
+<script>
+  interface PublicComment {
+    id?: string;
+    author?: string;
+    body?: string;
+    createdAt?: string;
+  }
+
+  interface CommentApiResponse {
+    configured?: boolean;
+    comments?: PublicComment[];
+    message?: string;
+  }
+
+  const escapeText = (value: unknown): string => String(value ?? '');
+
+  document.querySelectorAll<HTMLElement>('[data-comments]').forEach((root) => {
+    const article = root.dataset.article;
+    const list = root.querySelector<HTMLElement>('[data-comments-list]');
+    const status = root.querySelector<HTMLElement>('[data-comments-status]');
+    const form = root.querySelector<HTMLFormElement>('[data-comment-form]');
+
+    if (!article || !list || !status || !form) return;
+
+    const setStatus = (message: string): void => {
+      status.textContent = message;
+    };
+
+    const renderComments = (comments: PublicComment[]): void => {
+      list.replaceChildren();
+      if (!Array.isArray(comments) || comments.length === 0) {
+        setStatus('暂无已公开评论。');
+        return;
+      }
+
+      comments.forEach((comment) => {
+        const item = document.createElement('article');
+        item.className = 'comment-item';
+
+        const meta = document.createElement('p');
+        meta.className = 'comment-meta';
+        meta.textContent = `${escapeText(comment.author || '匿名')} · ${escapeText(comment.createdAt || '')}`;
+
+        const body = document.createElement('p');
+        body.className = 'comment-body';
+        body.textContent = escapeText(comment.body);
+
+        item.append(meta, body);
+        list.append(item);
+      });
+      setStatus('');
+    };
+
+    const loadComments = async (): Promise<void> => {
+      try {
+        const response = await fetch(`/api/comments?article=${encodeURIComponent(article)}`, { cache: 'no-store' });
+        const payload = await response.json() as CommentApiResponse;
+        if (!response.ok || payload.configured === false) {
+          setStatus(payload.message || '评论服务尚未完成配置。');
+          return;
+        }
+        renderComments(payload.comments || []);
+      } catch {
+        setStatus('评论服务暂时不可用。');
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const body = String(formData.get('body') || '').trim();
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+      if (!body) {
+        setStatus('请填写评论内容。');
+        return;
+      }
+
+      if (button) button.disabled = true;
+      setStatus('正在提交评论。');
+
+      try {
+        const response = await fetch('/api/comments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            article,
+            author: formData.get('author'),
+            body,
+            website: formData.get('website'),
+          }),
+        });
+        const payload = await response.json() as CommentApiResponse;
+        setStatus(payload.message || (response.ok ? '评论已提交。' : '评论暂时无法保存。'));
+        if (response.ok) form.reset();
+      } catch {
+        setStatus('评论服务暂时不可用。');
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+
+    loadComments();
+  });
+</script>

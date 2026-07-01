@@ -2,11 +2,18 @@
 ## Codex 开发与 Cloudflare Pages 部署总交接文档
 
 > **站点长期主线：技术 · 阅读 · 自然 · 工具 · 生活**  
-> 文档版本：v0.6  
+> 文档版本：v0.10  
 > 更新日期：2026-07-01  
-> 本文件是项目根目录应长期保留的开发约束、内容盘点、迁移规则与部署说明。当前代码已完成 v0.6；后续开发必须先阅读 `README.md`、`docs/BUILD_PREVIEW_DEPLOY.md`、`docs/CONTENT_MIGRATION_STATUS.md` 与 `docs/TYPOGRAPHY_SYSTEM.md`，再把本文件作为长期产品约束。
+> 本文件是项目根目录应长期保留的开发约束、内容盘点、迁移规则与部署说明。当前代码已完成 v0.10；后续开发必须先阅读 `README.md`、`docs/BUILD_PREVIEW_DEPLOY.md`、`docs/CONTENT_MIGRATION_STATUS.md` 与 `docs/TYPOGRAPHY_SYSTEM.md`，再把本文件作为长期产品约束。
 
 ---
+
+## v0.10 当前实现状态
+
+- 每篇公开文章都必须有可展开的“目录”；`npm run audit:toc` 会阻止无分节标题的公开文章进入发布流程。
+- 每篇公开文章末尾都有极简评论区，保存方式为 Pages Functions + `COMMENTS_DB` D1；评论默认 `pending`，审核后显示。
+- D1 建表、Pages 绑定、审核 SQL 与本地 Functions 预览详见 `docs/COMMENTS_D1.md`。
+- 评论不收集邮箱，不保存原始 IP；只保存昵称、正文、日期、审核状态与限流用 IP 哈希。
 
 ## 0. 给 Codex 的首要指令
 
@@ -14,7 +21,7 @@
 
 必须遵守：
 
-1. 使用 **Astro 的静态输出模式**、Markdown / MDX 内容集合、TypeScript、语义化 HTML 和原生 CSS。第一版不需要 React、数据库、登录、评论、CMS、SSR 或接口服务。
+1. 使用 **Astro 的静态输出模式**、Markdown / MDX 内容集合、TypeScript、语义化 HTML 和原生 CSS。站点主体保持 Astro 静态输出；文章评论是唯一的轻量动态能力，使用 Cloudflare Pages Functions + 独立评论 D1，默认审核后显示。不要为其引入 React、登录、CMS 或其他接口服务。
 2. 目标部署平台是 **Cloudflare Pages + GitHub Git integration**。构建产物为 `dist/`。
 3. 内容必须优先存放在 Git 仓库中；GitHub 是版本与备份来源。不要把文章正文存到第三方数据库。
 4. 网站桌面正文最大宽度必须为 **890px**，居中；手机端左右保留 **16px** 左右内边距。
@@ -62,13 +69,13 @@
 ### 2.1 顶部导航（桌面端）
 
 ```text
-主页   写作   专题   工具   自然   书架   收藏   项目   关于        搜索图标   主题图标
+主页   写作   专题   工具   自然   书架   收藏   项目   归档   关于        搜索图标   主题图标
 ```
 
 **准确页面文字：**
 
 ```text
-主页 | 写作 | 专题 | 工具 | 自然 | 书架 | 收藏 | 项目 | 关于 | ⌕ | ☾ / ☀
+主页 | 写作 | 专题 | 工具 | 自然 | 书架 | 收藏 | 项目 | 归档 | 关于 | ⌕ | ☾ / ☀
 ```
 
 - “写作”统一承载旧博客文章、知乎回答、CSDN 教程、短记、清单、项目日志。

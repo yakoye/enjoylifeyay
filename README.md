@@ -4,6 +4,23 @@
 
 正式地址：<https://enjoylifeyay.pages.dev>
 
+## v0.10：文章评论、目录审计与新文章
+
+本版在 v0.9 基础上完成：
+
+- 新增文章《程序员、工程师与 AI 时代的独立创造》（2026-07-01）；文章以阅读摘要和 2026 年补记为主，并保留 cnbang 原文链接。
+- 每篇公开文章的末尾加入极简评论区：无头像、无外框、无背景卡片、无邮箱字段，只保留昵称（可选）、留言与提交入口。
+- 评论保存采用 Cloudflare Pages Functions + D1：默认 `pending`，仅审核通过后显示；不保存邮箱和原始 IP。
+- 新增 `database/comments.sql`、`functions/api/comments.js` 与 [`docs/COMMENTS_D1.md`](docs/COMMENTS_D1.md)。首次启用评论前必须创建 D1 并在 Pages 项目中绑定 `COMMENTS_DB`。
+- 所有 `draft: false` 的文章现在都包含至少一个二级至四级标题；正文标题下方会显示默认折叠的“目录”。
+- 新增目录审计命令：
+
+  ```powershell
+  npm run audit:toc
+  ```
+
+  新公开文章没有分节标题时，该命令会失败，避免遗漏目录。
+
 ## v0.9：标题栏宽度、目录文字与窄屏导航
 
 本版在 v0.8 基础上完成：
@@ -57,6 +74,7 @@ npm run dev
 npm ci
 npm run check
 npm test
+npm run audit:toc
 npm run build
 npm run check:links
 
@@ -93,6 +111,7 @@ git push origin main
 
 - [`docs/CONTENT_MAINTENANCE.md`](docs/CONTENT_MAINTENANCE.md)
 - [`docs/MEDIA_MANAGEMENT.md`](docs/MEDIA_MANAGEMENT.md)
+- [`docs/COMMENTS_D1.md`](docs/COMMENTS_D1.md)
 
 ## 迁入旧 EnjoyLifeBlog 图片
 
@@ -113,6 +132,7 @@ npm run import:legacy-images -- --write
 ```powershell
 npm run check
 npm test
+npm run audit:toc
 npm run build
 npm run check:links
 npm run preview
@@ -160,6 +180,7 @@ npm run sync:legacy-archive
 - Astro 静态输出
 - Markdown / MDX
 - Pagefind 本地全文搜索
+- Cloudflare Pages Functions + D1（审核制评论）
 - GitHub 源码备份
 - Cloudflare Pages 静态发布
 

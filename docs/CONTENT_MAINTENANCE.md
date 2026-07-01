@@ -93,7 +93,7 @@ featured: false
 - 不要让公开页面直接依赖 GitHub raw / blob 图片路径；本站图片会随构建发布到 Cloudflare Pages。
 - 已迁入旧 EnjoyLifeBlog 文章若仍有旧图片链接，先运行 `npm run import:legacy-images -- --dry-run`，确认后运行 `npm run import:legacy-images -- --write`。
 - 代码使用 Markdown 代码块；页面会自动渲染成无圆角、可复制的等宽代码区。
-- 有至少两个二级、三级或四级标题的长文，会在标题元信息下自动出现默认折叠的 `[ToC]`；无需手写目录。
+- 每篇公开文章都必须至少有一个二级、三级或四级标题。标题元信息下会自动出现默认折叠的“目录”；无需手写目录。发布前运行 `npm run audit:toc`，任何公开文章没有标题都会失败。
 - 链接、斜体、下划线、引用、表格都可以直接用标准 Markdown 语法书写；网页渲染后不会显示 `#`、`>`、反引号或横线等 Markdown 控制符。
 - 更完整的目录、R2 取舍和旧图迁移说明见 `docs/MEDIA_MANAGEMENT.md`。
 
@@ -224,6 +224,7 @@ src/content/projects.json
 npm ci
 npm run check
 npm test
+npm run audit:toc
 npm run build
 npm run check:links
 
@@ -246,3 +247,17 @@ npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
 docs/BUILD_PREVIEW_DEPLOY.md
 docs/Cloudflare-Pages-部署.md
 ```
+
+## 七、文章评论
+
+每篇公开文章末尾都会自动显示评论区，不需要在 Markdown Frontmatter 中额外配置。
+
+评论使用 Cloudflare Pages Functions + D1：提交后默认进入审核队列，审核通过才显示。评论不收集邮箱、不保存原始 IP，也不会写入 GitHub。
+
+首次启用、D1 建表、Pages 绑定、审核 SQL 和本地 Pages Functions 预览方法详见：
+
+```text
+docs/COMMENTS_D1.md
+```
+
+在添加文章时，请至少写一个 `##`、`###` 或 `####` 分节标题；这样文章页才会有默认折叠的“目录”。

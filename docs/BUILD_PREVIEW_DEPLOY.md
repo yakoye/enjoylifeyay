@@ -22,6 +22,7 @@ npm ci
 ```powershell
 npm run check
 npm test
+npm run audit:toc
 npm run build
 npm run check:links
 ```
@@ -33,6 +34,7 @@ npm run check:links
 | `npm ci` | 严格按锁文件安装依赖 | 命令正常结束，`node_modules/.bin/astro` 存在 |
 | `npm run check` | Astro 与 TypeScript 检查 | 没有 `astro is not recognized` 或类型错误 |
 | `npm test` | 内容模型、路由、SEO、迁移台账与视觉规则测试 | 全部测试通过 |
+| `npm run audit:toc` | 检查每篇公开文章均有可生成“目录”的分节标题 | 不出现 `MISSING` |
 | `npm run build` | 同步历史归档、生成静态站和 Pagefind 中文搜索索引 | 生成 `src/data/legacyArchive.ts`、`dist/` 与 `dist/pagefind/` |
 | `npm run check:links` | 检查构建结果中的主要站内链接 | 不报 `dist/index.html not found` 或死链错误 |
 
@@ -47,6 +49,7 @@ npm run verify
 ```powershell
 npm run check
 npm test
+npm run audit:toc
 npm run build
 npm run check:links
 ```
@@ -101,6 +104,28 @@ npm run preview
 /sitemap-index.xml
 ```
 
+
+## 评论功能的本地预览与正式启用
+
+`npm run preview` 只提供 Astro 静态页面预览，不会运行 Pages Functions；评论区在这种预览中显示“评论服务暂时不可用”属于正常现象。
+
+评论由根目录 `functions/api/comments.js` 提供 API，并保存到 Cloudflare D1。第一次启用时先按：
+
+```text
+docs/COMMENTS_D1.md
+```
+
+创建 `enjoylife-comments` 数据库、执行 `database/comments.sql`、并在 Pages 项目中绑定 `COMMENTS_DB`。
+
+要在本地同时运行静态页面和 Pages Function，先构建后执行：
+
+```powershell
+npm run build
+npx wrangler pages dev dist --d1 COMMENTS_DB=<你的D1数据库ID>
+```
+
+Wrangler 本地开发默认使用本地 D1 数据，生产评论仍以 Cloudflare Dashboard 中绑定的远端 D1 为准。
+
 ## GitHub 备份
 
 本地检查通过后，先把源码提交到 GitHub：
@@ -144,6 +169,7 @@ cd C:\Users\color\Documents\EnjoyLife
 npm ci
 npm run check
 npm test
+npm run audit:toc
 npm run build
 npm run check:links
 
@@ -243,6 +269,7 @@ npm run import:legacy-images -- --write
 ```powershell
 npm run check
 npm test
+npm run audit:toc
 npm run build
 npm run check:links
 npm run preview

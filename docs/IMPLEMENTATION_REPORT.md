@@ -1,3 +1,10 @@
+# v0.10 补充：评论、目录审计与新文章
+
+- 新增文章《程序员、工程师与 AI 时代的独立创造》（2026-07-01），以阅读摘要与个人补记呈现，保留原文链接但不转载全文。
+- 新增 `Comments.astro`、`functions/api/comments.js` 与 `database/comments.sql`：所有公开文章都有极简评论入口，评论默认审核后显示。
+- 新增 `docs/COMMENTS_D1.md`：创建 D1、绑定 `COMMENTS_DB`、审核评论与本地 Pages Functions 预览步骤。
+- 新增 `npm run audit:toc` 与相应测试；所有公开文章已补齐至少一个二级至四级标题，均会显示默认折叠的“目录”。
+
 # v0.9 补充
 
 - 顶栏内部最大宽度与正文统一为 `890px`，不再沿用较宽的 `1000px`。

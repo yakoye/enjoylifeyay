@@ -4,6 +4,7 @@ import BaseLayout from './BaseLayout.astro';
 import { categoryLabels, formatLabels } from '../config/site';
 import { site } from '../config/site';
 import CopyCode from '../components/CopyCode.astro';
+import Comments from '../components/Comments.astro';
 
 interface Heading { depth: number; slug: string; text: string; }
 interface Props { entry: CollectionEntry<'writing'>; headings?: Heading[]; }
@@ -50,8 +51,9 @@ const jsonLd = {
         {data.sourceUrl && <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer">原文</a>}
       </div>
     </header>
-    {toc.length >= 2 && <details class="article-toc"><summary aria-label="展开或收起目录">目录</summary><ol>{toc.map((heading) => <li class:list={{ nested: heading.depth === 3, 'nested-deep': heading.depth === 4 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></details>}
+    {toc.length >= 1 && <details class="article-toc"><summary aria-label="展开或收起目录">目录</summary><ol>{toc.map((heading) => <li class:list={{ nested: heading.depth === 3, 'nested-deep': heading.depth === 4 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></details>}
     <div class="article-prose"><slot /></div>
+    <Comments article={entry.id} />
   </article>
   <CopyCode />
 </BaseLayout>

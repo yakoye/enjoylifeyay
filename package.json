@@ -1,6 +1,6 @@
 {
   "name": "enjoy-life",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,10 +10,12 @@
     "check": "astro check",
     "check:links": "node scripts/check-built-links.mjs",
     "test": "node --test tests/*.test.mjs",
-    "verify": "npm run check && npm test && npm run build && npm run check:links",
+    "verify": "npm run check && npm test && npm run audit:toc && npm run build && npm run check:links",
     "deploy:pages": "npx wrangler pages deploy dist --project-name enjoylifeyay --branch main",
     "sync:legacy-archive": "node scripts/sync-legacy-archive.mjs",
-    "import:legacy-images": "node scripts/import-legacy-images.mjs"
+    "import:legacy-images": "node scripts/import-legacy-images.mjs",
+    "preview:pages": "npx wrangler pages dev dist",
+    "audit:toc": "node scripts/audit-writing-toc.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.0",
