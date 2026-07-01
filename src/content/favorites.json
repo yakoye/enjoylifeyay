@@ -1,1 +1,50 @@
-[{ "id": "_draft", "draft": true }]
+[
+  {
+    "id": "legacy-enjoylifeblog",
+    "draft": false,
+    "featured": true,
+    "name": "EnjoyLifeBlog（旧站）",
+    "url": "https://globetreklog.github.io/EnjoyLifeBlog/",
+    "category": "website-knowledge",
+    "note": "旧个人博客。v0.5 已开始把可确认内容迁入本站，并保留原始地址作为历史来源。",
+    "tags": ["旧站", "写作"],
+    "savedAt": "2026-07-01",
+    "status": "keep"
+  },
+  {
+    "id": "csdn-bjarnecpp",
+    "draft": false,
+    "featured": false,
+    "name": "CSDN：BjarneCpp",
+    "url": "https://blog.csdn.net/BjarneCpp?type=blog",
+    "category": "website-knowledge",
+    "note": "历史技术文章来源。迁移台账保留原链接、日期和建议分类，正文逐篇核对后再迁入。",
+    "tags": ["CSDN", "技术"],
+    "savedAt": "2026-07-01",
+    "status": "keep"
+  },
+  {
+    "id": "zhihu-wikiye",
+    "draft": false,
+    "featured": false,
+    "name": "知乎：wikiye",
+    "url": "https://www.zhihu.com/people/wikiye/posts",
+    "category": "website-knowledge",
+    "note": "历史问答与图文记录来源。页面访问受限，保留入口并等待逐条人工确认。",
+    "tags": ["知乎", "问答"],
+    "savedAt": "2026-07-01",
+    "status": "review"
+  },
+  {
+    "id": "github-enjoylifeblog-source",
+    "draft": false,
+    "featured": false,
+    "name": "EnjoyLifeBlog 源码仓库",
+    "url": "https://github.com/GlobeTrekLog/EnjoyLifeBlog",
+    "category": "long-term-reference",
+    "note": "旧站 Markdown、图片和历史提交记录的长期来源。",
+    "tags": ["GitHub", "归档"],
+    "savedAt": "2026-07-01",
+    "status": "keep"
+  }
+]

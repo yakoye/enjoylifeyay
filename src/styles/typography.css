@@ -107,6 +107,7 @@ del {
 
 .writing-meta,
 .article-meta,
+.article-series,
 .meta-muted {
   color: var(--muted);
   font-size: var(--font-meta);

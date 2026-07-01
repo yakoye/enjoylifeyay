@@ -1,1 +1,67 @@
-[{ "id": "_draft", "draft": true }]
+[
+  {
+    "id": "self-breakthrough",
+    "draft": false,
+    "featured": false,
+    "title": "《自我突围》",
+    "author": "施一公",
+    "status": "read",
+    "startedAt": null,
+    "finishedAt": "2021-06-10",
+    "category": "history-society",
+    "note": "旧站阅读记录已迁入，保留原始发布日期与来源。",
+    "relatedWriting": ["2021-06-10-self-breakthrough-shi-yigong"]
+  },
+  {
+    "id": "flatland",
+    "draft": false,
+    "featured": false,
+    "title": "《平面国》",
+    "author": "Edwin Abbott Abbott",
+    "status": "read",
+    "startedAt": null,
+    "finishedAt": "2022-02-26",
+    "category": "literature-life",
+    "note": "从维度、认知边界和社会隐喻展开的阅读笔记。",
+    "relatedWriting": ["2022-02-26-flatland-notes"]
+  },
+  {
+    "id": "the-last-quarter-of-the-moon",
+    "draft": false,
+    "featured": false,
+    "title": "《额尔古纳河右岸》",
+    "author": "迟子建",
+    "status": "read",
+    "startedAt": null,
+    "finishedAt": "2022-09-11",
+    "category": "literature-life",
+    "note": "旧站长篇读书笔记已迁入。",
+    "relatedWriting": ["2022-09-11-the-last-quarter-of-the-moon-notes"]
+  },
+  {
+    "id": "the-surrender-experiment",
+    "draft": false,
+    "featured": false,
+    "title": "《臣服实验》",
+    "author": "迈克·A. 辛格",
+    "status": "read",
+    "startedAt": null,
+    "finishedAt": "2023-06-27",
+    "category": "philosophy-psychology",
+    "note": "旧站阅读记录已迁入。",
+    "relatedWriting": ["2023-06-27-the-surrender-experiment-notes"]
+  },
+  {
+    "id": "principles",
+    "draft": false,
+    "featured": false,
+    "title": "《原则》1、2",
+    "author": "瑞·达利欧",
+    "status": "read",
+    "startedAt": null,
+    "finishedAt": "2023-11-11",
+    "category": "philosophy-psychology",
+    "note": "旧站仅保留了阅读条目，正文等待补充。",
+    "relatedWriting": []
+  }
+]

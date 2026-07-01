@@ -1,1 +1,30 @@
-[{ "id": "_draft", "draft": true }]
+[
+  {
+    "id": "common-flowers-2024",
+    "draft": false,
+    "featured": true,
+    "title": "常见植物的花",
+    "description": "从花期、花梗、萼片、叶片与花序出发，整理春季常见花木的辨别线索。",
+    "date": "2024-04-25",
+    "category": "plant",
+    "location": "",
+    "method": "资料整理",
+    "images": [],
+    "tags": ["植物", "春天", "花"],
+    "relatedWriting": ["2024-04-25-common-flowers"]
+  },
+  {
+    "id": "desert-plants-minqin-2024",
+    "draft": false,
+    "featured": true,
+    "title": "沙生植物",
+    "description": "围绕甘肃民勤的沙生植物，记录名称、图像与地方自然资料。",
+    "date": "2024-04-29",
+    "category": "local-memory",
+    "location": "甘肃民勤",
+    "method": "资料整理",
+    "images": [],
+    "tags": ["植物", "民勤", "沙生植物"],
+    "relatedWriting": ["2024-04-29-desert-plants-minqin"]
+  }
+]

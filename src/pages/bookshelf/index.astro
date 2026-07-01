@@ -15,6 +15,7 @@ const groups = Object.entries(labels).map(([status, title]) => ({
       title: data.title,
       description: data.note,
       meta: data.author,
+      href: data.relatedWriting[0] ? `/writing/${data.relatedWriting[0]}/` : undefined,
     })),
 }));
 ---

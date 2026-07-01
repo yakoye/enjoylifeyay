@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import { categoryLabels, formatLabels } from '../config/site';
 import { site } from '../config/site';
@@ -12,6 +12,10 @@ const { data } = entry;
 const formatDate = (value?: Date | null) => value?.toISOString().slice(0, 10);
 const sourceLabels = { native: '本站', CSDN: 'CSDN', Zhihu: '知乎', EnjoyLifeBlog: 'EnjoyLifeBlog' } as const;
 const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+const allSeries = await getCollection('series', ({ data }) => !data.draft);
+const relatedSeries = data.series
+  .map((id) => allSeries.find((seriesEntry) => seriesEntry.data.id === id))
+  .filter((seriesEntry): seriesEntry is CollectionEntry<'series'> => Boolean(seriesEntry));
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'BlogPosting', headline: data.title,
   description: data.description, datePublished: data.date.toISOString(),
@@ -25,6 +29,17 @@ const jsonLd = {
     <header class="article-header">
       <h1>{data.title}</h1>
       <div class="writing-meta">{categoryLabels[data.domain]} · {formatLabels[data.format]}{data.tags.length > 0 && ` · ${data.tags.join(' / ')}`}</div>
+      {relatedSeries.length > 0 && (
+        <div class="article-series">
+          所属专题：
+          {relatedSeries.map((seriesEntry, index) => (
+            <>
+              {index > 0 && ' · '}
+              <a href={`/series/${seriesEntry.data.id}/`}>{seriesEntry.data.title}</a>
+            </>
+          ))}
+        </div>
+      )}
       <div class="article-meta">
         <span>{data.source === 'native' ? '发布' : '首次发布'}：{formatDate(data.date)}</span>
         {data.source !== 'native' && <span>来源：{sourceLabels[data.source]}</span>}

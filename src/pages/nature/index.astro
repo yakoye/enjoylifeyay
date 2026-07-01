@@ -26,6 +26,7 @@ const groups = Object.entries(labels).map(([category, title]) => ({
       description: data.description,
       date: data.date,
       meta: [data.location, data.method].filter(Boolean).join(' · '),
+      href: data.relatedWriting[0] ? `/writing/${data.relatedWriting[0]}/` : undefined,
     })),
 }));
 ---

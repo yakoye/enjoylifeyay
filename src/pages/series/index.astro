@@ -4,6 +4,7 @@ import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const entries = (await getCollection('series', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const writing = await getCollection('writing', ({ data }) => !data.draft);
 const groupDefinitions: Array<{ title: string; ids: string[] }> = [
   { title: '技术与工程', ids: ['pcie-high-speed-interconnect', 'chip-firmware-soc', 'dev-environment-productivity', 'chrome-web-tools', 'cloudflare-personal-site'] },
   { title: '记录与观察', ids: ['knowledge-obsidian', 'reading-learning', 'nature-walking'] },
@@ -12,7 +13,10 @@ const groups = groupDefinitions.map(({ title, ids }) => ({
   title,
   items: entries
     .filter((entry) => ids.includes(entry.data.id))
-    .map(({ data }) => ({ title: data.title, description: data.description })),
+    .map(({ data }) => {
+      const count = writing.filter((entry) => entry.data.series.includes(data.id)).length;
+      return { title: data.title, description: data.description, meta: `${count} 篇已公开文章`, href: `/series/${data.id}/` };
+    }),
 }));
 ---
 

@@ -2,9 +2,9 @@
 ## Codex 开发与 Cloudflare Pages 部署总交接文档
 
 > **站点长期主线：技术 · 阅读 · 自然 · 工具 · 生活**  
-> 文档版本：v1.0  
+> 文档版本：v0.5  
 > 更新日期：2026-07-01  
-> 本文件是项目根目录应长期保留的开发约束、内容盘点、迁移规则与部署说明。Codex 开始开发前必须完整阅读本文档。
+> 本文件是项目根目录应长期保留的开发约束、内容盘点、迁移规则与部署说明。当前代码已完成 v0.5；后续开发必须先阅读 `README.md`、`docs/BUILD_PREVIEW_DEPLOY.md`、`docs/CONTENT_MIGRATION_STATUS.md` 与 `docs/TYPOGRAPHY_SYSTEM.md`，再把本文件作为长期产品约束。
 
 ---
 
@@ -21,7 +21,7 @@
 5. 普通中文正文两端对齐；代码、表格、列表、引用、命令行、图片说明、技术参数和英文密集段落必须左对齐，不能被 `justify` 拉开。
 6. 默认克制、稳定、文本优先。不要大 Banner、轮播、玻璃卡片墙、瀑布流、自动播放视频、夸张渐变、炫技动效、头像大图。
 7. 对现有 CSDN、知乎、旧 EnjoyLifeBlog 内容：保留原始发布日期、原始来源和原文链接；不要伪装成今天新写的文章；不要自动搬运版权不清晰的转载内容或下载资源正文。
-8. 任何当前没有公开地址的工具/项目，不得编造 URL；在内容数据中标记为 `draft` / `private` / `linkPending`，并在公开页面中妥善隐藏或显示“准备中”。
+8. 任何当前没有公开地址的工具/项目，不得编造 URL；在内容数据中标记为 `draft` / `private` / `linkPending`，公开列表不显示“准备中”“待确认”等占位状态。
 9. 必须提供深浅色主题，默认遵循系统；用户手动切换后用 `localStorage` 保存主题偏好。`localStorage` 仅可用于主题偏好和无敏感的 UI 状态。
 10. 所有图标采用一个统一的非 Emoji 图标体系（建议 Lucide）；但主题切换按钮可以使用太阳/月亮图形图标。交互图标必须有 `aria-label`、键盘焦点态和桌面端 tooltip。
 
@@ -221,7 +221,7 @@
   --content-max: 890px;
   --page-gutter-desktop: 28px;
   --page-gutter-mobile: 16px;
-  --nav-height: 54px;
+  --nav-height: 48px;
   --rule-color: #e7e7e2;
 }
 ```
@@ -235,34 +235,25 @@
 
 ### 4.3 字体
 
-**正文：**
+v0.5 的实际字体源以 `src/styles/tokens.css` 为准：全站采用中文等宽优先字体栈，形成“文本文件 / 技术知识目录”气质。
 
 ```css
-font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "PingFang SC",
-  "Microsoft YaHei",
-  "Noto Sans CJK SC",
-  "Noto Sans SC",
-  "Helvetica Neue",
-  Arial,
-  sans-serif;
-```
-
-**代码、命令、寄存器与技术参数：**
-
-```css
-font-family:
-  "Cascadia Code",
+--font-mono:
+  "Sarasa Mono SC",
+  "Maple Mono SC",
+  "Cascadia Mono",
   "JetBrains Mono",
   "SFMono-Regular",
-  "Noto Sans Mono CJK SC",
-  Consolas,
+  "Menlo",
+  "Consolas",
+  "Liberation Mono",
+  "Microsoft YaHei UI",
+  "PingFang SC",
+  "Noto Sans SC",
   monospace;
 ```
 
-不要把霞鹜文楷、京华老宋体等作为默认字体。技术和长期阅读场景优先使用稳定、清晰的系统无衬线字体栈。
+标题、正文、导航、日期、代码、表格和目录统一使用该字体栈。不要改回多字体混用，也不要引入大体积在线字体。
 
 ### 4.4 中文两端对齐规则
 

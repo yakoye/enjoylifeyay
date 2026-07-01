@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import WritingList from '../../components/WritingList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('series', ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { id: entry.data.id } }));
+}
+
+const { id } = Astro.params;
+const seriesEntries = await getCollection('series', ({ data }) => !data.draft);
+const series = seriesEntries.find((entry) => entry.data.id === id);
+if (!series) {
+  return new Response(null, { status: 404 });
+}
+
+const writing = (await getCollection('writing', ({ data }) => !data.draft && data.series.includes(series.data.id)))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title={series.data.title} description={series.data.description}>
+  <h1>{series.data.title}</h1>
+  <p class="page-intro">{series.data.description}</p>
+  {series.data.audience && <p class="meta-muted">适合：{series.data.audience}</p>}
+  <hr class="rule" />
+  <h2>文章</h2>
+  <WritingList entries={writing} />
+  <p class="aux-links"><a href="/series/">返回全部专题</a></p>
+</BaseLayout>

@@ -1,31 +1,32 @@
-# 给 Codex 的启动提示词
+# 给后续开发者的启动提示词
 
-请读取同目录的 `PERSONAL_SITE_CODEX_HANDOFF.md`，并把它作为本项目最高优先级的产品、视觉、内容、架构与部署约束。
+请先阅读：
 
-先输出以下内容，再开始改代码：
+1. `README.md`
+2. `docs/BUILD_PREVIEW_DEPLOY.md`
+3. `docs/CONTENT_MIGRATION_STATUS.md`
+4. `docs/LEGACY_SOURCE_CATALOG.md`
+5. `docs/TYPOGRAPHY_SYSTEM.md`
+6. `PERSONAL_SITE_CODEX_HANDOFF.md`
 
-1. 你理解的站点目标、页面结构、内容模型和部署方式；
-2. 拟创建/修改的文件清单；
-3. 分阶段实施计划与每阶段验收点；
-4. 任何不能确认的公开链接或文章正文，先保留占位和 `draft` 状态，不能编造。
+当前项目已经完成 v0.5：文本目录视觉、9 篇公开旧博客文章、2 篇草稿、自然/书架/收藏关联、CSDN 91 条元数据目录、知乎人工迁移入口和 Windows Node 24 发布流程均已落地。
 
-随后直接完成 Milestone 1：
+后续开发原则：
 
-- Astro 静态项目骨架；
-- Markdown / MDX 内容集合 schema；
-- 桌面 890px、手机左右约 16px 的全局布局；
-- 中文阅读排版、代码/表格/引用排版；
-- 深浅主题与主题偏好保存；
-- 顶部导航；
-- 首页；
-- 写作列表页；
-- 文章详情页；
-- 本地构建和 Cloudflare Pages 静态部署配置。
+- 不要重做现有文本目录视觉，不要引入卡片、Hero、渐变、圆角胶囊、伪终端或复杂 UI 框架。
+- 不要虚构 CSDN、知乎、工具、项目、书籍、图片、日期或链接。
+- 旧文章必须保留 `date`、`source`、`sourceUrl`；未核对内容保持 `draft: true`。
+- 工具和项目没有真实公开链接时，列表不显示占位状态。
+- 只允许公开确认过的内容；FamilyJourney、R2、D1、家庭照片和私人数据不得进入本仓库。
+- Node 24 为目标环境。
 
-最后必须运行并修复：
+每次修改后必须运行：
 
-```bash
+```powershell
+npm run check
+npm test
 npm run build
+npm run check:links
 ```
 
-不要使用 React、数据库、登录、CMS、SSR、R2、D1。不要做大 Banner、卡片瀑布流、复杂动画、自动抓取知乎/CSDN，也不要虚构工具链接、项目链接、文章正文或个人信息。
+完整发布命令见 `docs/BUILD_PREVIEW_DEPLOY.md`。
