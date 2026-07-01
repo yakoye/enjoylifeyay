@@ -1,17 +1,12 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
-
-const links = [
-  ['/', '主页'], ['/writing/', '写作'], ['/series/', '专题'], ['/tools/', '工具'],
-  ['/nature/', '自然'], ['/bookshelf/', '书架'], ['/favorites/', '收藏'],
-  ['/projects/', '项目'], ['/about/', '关于'],
-] as const;
+import { site } from '../config/site';
 ---
 
 <header class="site-header">
   <div class="nav-shell">
     <nav class="site-nav" aria-label="主导航">
-      {links.map(([href, label]) => <a href={href}>{label}</a>)}
+      {site.navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
     </nav>
     <div class="nav-actions">
       <a class="icon-button" href="/search/" aria-label="搜索" title="搜索">

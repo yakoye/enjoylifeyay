@@ -1,6 +1,16 @@
+---
+import { site } from '../config/site';
+const year = new Date().getFullYear();
+---
 <footer class="site-footer">
   <div class="content-shell footer-inner">
-    <span>EnjoyLife</span>
-    <nav aria-label="辅助导航"><a href="/archive/">Archive</a><span aria-hidden="true">·</span><span>RSS 准备中</span></nav>
+    <span>© {year} {site.name}</span>
+    <nav aria-label="辅助导航">
+      {site.githubUrl && <><a href={site.githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a><span aria-hidden="true">·</span></>}
+      <a href="/rss.xml">RSS</a><span aria-hidden="true">·</span>
+      <a href="/archive/">Archive</a><span aria-hidden="true">·</span>
+      <a href="/now/">Now</a><span aria-hidden="true">·</span>
+      <a href="/about/">About</a>
+    </nav>
   </div>
 </footer>

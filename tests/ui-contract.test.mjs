@@ -19,9 +19,9 @@ test('主题默认跟随系统并保存手动偏好', async () => {
   assert.match(toggle, /aria-label=/);
 });
 
-test('站点公开名称为 EnjoyLife', async () => {
+test('站点公开名称为 Enjoy Life', async () => {
   const site = await readFile(new URL('../src/config/site.ts', import.meta.url), 'utf8');
   const footer = await readFile(new URL('../src/components/SiteFooter.astro', import.meta.url), 'utf8');
-  assert.match(site, /name:\s*['"]EnjoyLife['"]/);
-  assert.match(footer, />EnjoyLife</);
+  assert.match(site, /name:\s*['"]Enjoy Life['"]/);
+  assert.match(footer, /site\.name/);
 });

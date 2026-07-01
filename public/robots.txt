@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-# SITE_URL 确认后再添加 Sitemap 地址，避免发布虚构域名。
