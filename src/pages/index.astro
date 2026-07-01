@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import WritingList from '../components/WritingList.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+
+const writing = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 6);
+---
+
+<BaseLayout>
+  <h1>{site.name}</h1>
+  <p class="tagline">{site.tagline}</p>
+  <hr class="rule" />
+  <section aria-labelledby="recent-writing">
+    <h2 id="recent-writing">最近写作</h2>
+    <WritingList entries={writing} />
+  </section>
+  <section aria-labelledby="site-directory">
+    <h2 id="site-directory">站点目录</h2>
+    <div class="section-links">
+      <a href="/writing/">写作：文章、问答、短记与项目日志</a>
+      <a href="/series/">专题：按长期主题组织内容</a>
+      <a href="/tools/">工具：可直接使用的工具入口</a>
+      <a href="/nature/">自然：观察、行走与地方记录</a>
+      <a href="/bookshelf/">书架：阅读状态与相关笔记</a>
+      <a href="/projects/">项目：作品、过程与版本记录</a>
+    </div>
+  </section>
+</BaseLayout>

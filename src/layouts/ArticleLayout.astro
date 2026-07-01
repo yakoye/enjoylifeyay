@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import { categoryLabels, formatLabels } from '../config/site';
+
+interface Props { entry: CollectionEntry<'writing'>; }
+const { entry } = Astro.props;
+const { data } = entry;
+const formatDate = (value?: Date | null) => value && new Intl.DateTimeFormat('zh-CN', { dateStyle: 'long' }).format(value);
+const sourceLabels = { native: '本站', csdn: 'CSDN', zhihu: '知乎', 'enjoy-life-blog': 'EnjoyLifeBlog' } as const;
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <article>
+    <header class="article-header">
+      <h1>{data.title}</h1>
+      <div class="writing-meta">{categoryLabels[data.category]} · {formatLabels[data.format]}{data.tags.length > 0 && ` · ${data.tags.join(' / ')}`}</div>
+      <div class="article-meta">
+        <span>首次发布：{formatDate(data.source.originalPublishedAt || data.date)}</span>
+        <span>来源：{sourceLabels[data.source.type]}</span>
+        {data.migratedAt && <span>迁入本站：{formatDate(data.migratedAt)}</span>}
+        {data.updated && <span>最后修订：{formatDate(data.updated)}</span>}
+        {data.source.originalUrl && <a href={data.source.originalUrl} target="_blank" rel="noopener noreferrer">查看原文</a>}
+      </div>
+    </header>
+    <div class="article-prose"><slot /></div>
+  </article>
+</BaseLayout>

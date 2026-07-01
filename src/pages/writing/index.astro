@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import WritingList from '../../components/WritingList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const writing = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="写作" description="技术、阅读、生活、自然与工具相关的长期写作。">
+  <h1>写作</h1>
+  <p class="page-intro">旧文章按首次发布时间进入时间线；迁入时间不会把它们伪装成新内容。</p>
+  <hr class="rule" />
+  <WritingList entries={writing} />
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { site } from '../config/site';
+import '../styles/global.css';
+
+interface Props { title?: string; description?: string; }
+const { title, description = site.tagline } = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : site.name;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem('theme');
+        const systemDark = matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = saved || (systemDark ? 'dark' : 'light');
+      })();
+    </script>
+  </head>
+  <body>
+    <SiteHeader />
+    <main class="content-shell"><slot /></main>
+    <SiteFooter />
+  </body>
+</html>
