@@ -92,11 +92,28 @@ h2 { margin: 46px 0 18px; font-size: 21px; }
 .article-prose p { text-align: justify; text-justify: inter-ideograph; text-align-last: left; }
 .article-prose :is(pre, code, table, ul, ol, blockquote, figure, figcaption) { text-align: left; }
 .article-prose :not(pre) > code { padding: .1em .35em; border-radius: 3px; background: var(--code-background); font-family: "Cascadia Code", "JetBrains Mono", "SFMono-Regular", "Noto Sans Mono CJK SC", Consolas, monospace; font-size: .9em; }
-.article-prose pre { overflow-x: auto; padding: 18px; border-radius: 4px; line-height: 1.65; }
+.article-prose pre { position: relative; overflow-x: auto; padding: 18px; border-radius: 4px; line-height: 1.65; }
 .article-prose blockquote { margin-inline: 0; padding-left: 18px; border-left: 3px solid var(--quote-rule); color: var(--muted); }
 .article-prose table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; }
 .article-prose th, .article-prose td { padding: 8px 12px; border: 1px solid var(--rule-color); white-space: nowrap; }
 .article-prose img { max-width: 100%; height: auto; }
+.article-prose figcaption { margin-top: 7px; color: var(--muted); font-size: 13px; }
+.copy-code { position: absolute; top: 7px; right: 7px; border: 1px solid var(--rule-color); border-radius: 3px; padding: 3px 7px; color: inherit; background: var(--code-background); cursor: pointer; font: inherit; font-size: 12px; }
+.article-toc { margin: 0 0 34px; padding: 12px 16px; border-block: 1px solid var(--rule-color); font-size: 14px; }
+.article-toc summary { cursor: pointer; }
+.article-toc ol { margin: 10px 0 0; padding-left: 1.5em; }
+.article-toc .nested { margin-left: 1em; }
+.search-form { margin: 28px 0 14px; }
+.search-form label { display: block; margin-bottom: 6px; font-size: 13px; color: var(--muted); }
+.search-form > div { display: flex; gap: 8px; }
+.search-form input { min-width: 0; flex: 1; border: 1px solid var(--rule-color); border-radius: 3px; padding: 10px 12px; color: var(--text); background: var(--background); font: inherit; }
+.search-form button { border: 1px solid var(--rule-color); border-radius: 3px; padding-inline: 18px; color: var(--text); background: var(--code-background); cursor: pointer; }
+.search-results { list-style: none; margin: 22px 0 0; padding: 0; }
+.search-results li { padding: 17px 0; border-top: 1px solid var(--rule-color); }
+.search-result-heading { display: flex; gap: 9px; font-size: 14px; }
+.search-result-heading span { color: var(--muted); }
+.search-results p { margin: 5px 0; color: var(--muted); font-size: 14px; }
+.search-results time { color: var(--muted); font-size: 12px; }
 
 .section-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin-top: 26px; border-top: 1px solid var(--rule-color); }
 .section-links a { padding: 15px 0; border-bottom: 1px solid var(--rule-color); color: var(--text); text-decoration: none; }

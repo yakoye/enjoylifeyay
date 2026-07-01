@@ -2,15 +2,25 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import { categoryLabels, formatLabels } from '../config/site';
+import { site } from '../config/site';
+import CopyCode from '../components/CopyCode.astro';
 
-interface Props { entry: CollectionEntry<'writing'>; }
-const { entry } = Astro.props;
+interface Heading { depth: number; slug: string; text: string; }
+interface Props { entry: CollectionEntry<'writing'>; headings?: Heading[]; }
+const { entry, headings = [] } = Astro.props;
 const { data } = entry;
 const formatDate = (value?: Date | null) => value && new Intl.DateTimeFormat('zh-CN', { dateStyle: 'long' }).format(value);
 const sourceLabels = { native: '本站', CSDN: 'CSDN', Zhihu: '知乎', EnjoyLifeBlog: 'EnjoyLifeBlog' } as const;
+const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'BlogPosting', headline: data.title,
+  description: data.description, datePublished: data.date.toISOString(),
+  dateModified: (data.updated || data.date).toISOString(), mainEntityOfPage: `${site.url}/writing/${entry.id}/`,
+};
 ---
 
-<BaseLayout title={data.title} description={data.description}>
+<BaseLayout title={data.title} description={data.description} contentType="文章" publishedAt={data.date}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article>
     <header class="article-header">
       <h1>{data.title}</h1>
@@ -23,6 +33,8 @@ const sourceLabels = { native: '本站', CSDN: 'CSDN', Zhihu: '知乎', EnjoyLif
         {data.sourceUrl && <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer">查看原文</a>}
       </div>
     </header>
+    {toc.length >= 2 && <details class="article-toc"><summary>文章目录</summary><ol>{toc.map((heading) => <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></details>}
     <div class="article-prose"><slot /></div>
   </article>
+  <CopyCode />
 </BaseLayout>

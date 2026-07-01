@@ -1,4 +1,53 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="搜索"><h1>搜索</h1><p class="page-intro">本地全文搜索将在后续里程碑接入，不会把查询发送给第三方。</p></BaseLayout>
+<BaseLayout title="搜索" description="在本地静态索引中搜索文章、专题、工具、项目、自然、书架与收藏。" contentType="搜索">
+  <h1>搜索</h1>
+  <p class="page-intro">搜索在浏览器本地完成，不会把查询发送给第三方。快捷键：Ctrl+K / Cmd+K。</p>
+  <form class="search-form" role="search">
+    <label for="search-input">搜索站内内容</label>
+    <div><input id="search-input" name="q" type="search" autocomplete="off" /><button type="submit">搜索</button></div>
+  </form>
+  <p id="search-status" class="writing-meta" aria-live="polite"></p>
+  <ol id="search-results" class="search-results"></ol>
+  <div id="search-next" class="empty-state" hidden><p>没有找到结果。可以继续：</p><p><a href="/writing/">查看全部写作</a> · <a href="/series/">浏览专题</a></p></div>
+</BaseLayout>
+
+<script is:inline type="module">
+  const form = document.querySelector('.search-form');
+  const input = document.querySelector('#search-input');
+  const status = document.querySelector('#search-status');
+  const list = document.querySelector('#search-results');
+  const next = document.querySelector('#search-next');
+  let pagefind;
+
+  const appendText = (element, text) => { element.textContent = text || ''; return element; };
+  const render = async (query) => {
+    list.replaceChildren();
+    next.hidden = true;
+    if (!query.trim()) { status.textContent = '输入关键词开始搜索。'; return; }
+    status.textContent = '正在搜索…';
+    try {
+      pagefind ||= await import('/pagefind/pagefind.js');
+      await pagefind.init();
+      const response = await pagefind.search(query);
+      const results = await Promise.all(response.results.slice(0, 20).map((item) => item.data()));
+      status.textContent = `找到 ${response.results.length} 条结果`;
+      next.hidden = results.length > 0;
+      for (const result of results) {
+        const li = document.createElement('li');
+        const heading = document.createElement('div'); heading.className = 'search-result-heading';
+        heading.append(appendText(document.createElement('span'), `[${result.meta.type || '页面'}]`));
+        const link = appendText(document.createElement('a'), result.meta.title); link.href = result.url; heading.append(link);
+        li.append(heading);
+        li.append(appendText(document.createElement('p'), result.meta.description || result.excerpt?.replace(/<[^>]+>/g, '') || ''));
+        if (result.meta.date) li.append(appendText(document.createElement('time'), result.meta.date));
+        list.append(li);
+      }
+    } catch {
+      status.textContent = '搜索索引只在生产构建后可用。';
+    }
+  };
+  form.addEventListener('submit', (event) => { event.preventDefault(); const query = input.value; history.replaceState(null, '', query ? `?q=${encodeURIComponent(query)}` : location.pathname); render(query); });
+  const initial = new URLSearchParams(location.search).get('q') || ''; input.value = initial; if (initial) render(initial); else status.textContent = '输入关键词开始搜索。';
+</script>

@@ -4,8 +4,8 @@ import SiteHeader from '../components/SiteHeader.astro';
 import { site } from '../config/site';
 import '../styles/global.css';
 
-interface Props { title?: string; description?: string; }
-const { title, description = site.description } = Astro.props;
+interface Props { title?: string; description?: string; contentType?: string; publishedAt?: Date; }
+const { title, description = site.description, contentType = '页面', publishedAt } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : site.name;
 const canonical = new URL(Astro.url.pathname, site.url);
 ---
@@ -25,6 +25,9 @@ const canonical = new URL(Astro.url.pathname, site.url);
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta data-pagefind-meta="type" content={contentType} />
+    <meta data-pagefind-meta="description" content={description} />
+    {publishedAt && <meta data-pagefind-meta="date" content={publishedAt.toISOString().slice(0, 10)} />}
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <script is:inline>
@@ -37,7 +40,17 @@ const canonical = new URL(Astro.url.pathname, site.url);
   </head>
   <body>
     <SiteHeader />
-    <main class="content-shell"><slot /></main>
+    <main class="content-shell" data-pagefind-body><slot /></main>
     <SiteFooter />
+    <script>
+      document.addEventListener('keydown', (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+          event.preventDefault();
+          const input = document.querySelector<HTMLInputElement>('#search-input');
+          if (input) input.focus();
+          else location.href = '/search/';
+        }
+      });
+    </script>
   </body>
 </html>
