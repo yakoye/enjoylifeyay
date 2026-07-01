@@ -20,7 +20,7 @@ test('v0.7 写作筛选与页面留白规则独立维护', async () => {
   const global = await readFile(new URL('../src/styles/global.css', import.meta.url), 'utf8');
   assert.match(page, /WritingFilters/);
   assert.match(filters, /data-writing-filters/);
-  assert.match(filters, /button\.addEventListener\('click'/);
+  assert.match(filters, /root\.addEventListener\('click'/);
   assert.match(filters, /history\.replaceState/);
   assert.doesNotMatch(home, /<hr/);
   const filtersBlock = global.match(/\.filters\s*\{[\s\S]*?\n\}/)?.[0] || '';

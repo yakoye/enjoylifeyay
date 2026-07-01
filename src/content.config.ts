@@ -3,7 +3,8 @@ import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const date = z.coerce.date();
-const optionalDate = z.union([date, z.null()]).optional();
+// Put null first: z.coerce.date() would otherwise coerce null to Unix epoch 1970-01-01.
+const optionalDate = z.union([z.null(), date]).optional();
 const optionalUrl = z.url().or(z.literal('')).default('');
 const common = {
   draft: z.boolean().default(true),

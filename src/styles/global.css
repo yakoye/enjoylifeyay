@@ -142,7 +142,7 @@ select {
 
 main.content-shell {
   min-height: calc(100vh - 118px);
-  padding-block: 2.25rem 3.5rem;
+  padding-block: 2rem 3.25rem;
 }
 
 .site-footer {
@@ -166,7 +166,7 @@ main.content-shell {
 }
 
 .home-intro {
-  margin-bottom: 2.15rem;
+  margin-bottom: 1.125rem;
 }
 
 .home-intro h1,
@@ -193,7 +193,7 @@ main.content-shell > section > h2:first-child {
 }
 
 main > section + section {
-  margin-top: 2rem;
+  margin-top: 1.25rem;
 }
 
 .plain-list {
@@ -222,7 +222,7 @@ main > section + section {
 }
 
 .text-list-section + .text-list-section {
-  margin-top: 1.7rem;
+  margin-top: 1.35rem;
 }
 
 .text-list-heading {
@@ -300,6 +300,12 @@ main > section + section {
   line-height: 1.55;
 }
 
+.dated-list-inline-meta {
+  color: var(--muted);
+  font-size: var(--font-meta);
+  line-height: inherit;
+}
+
 .dated-list-date {
   color: var(--muted);
   font-size: var(--font-meta);
@@ -312,7 +318,7 @@ main > section + section {
 .filters {
   display: grid;
   gap: 0.28rem;
-  margin: 1rem 0 1.3rem;
+  margin: 0.65rem 0 1rem;
   padding: 0;
   font-size: var(--font-meta);
 }
@@ -407,22 +413,42 @@ main > section + section {
 }
 
 .article-toc {
-  margin: 0 0 1.75rem;
+  margin: -0.25rem 0 1.25rem;
   padding: 0;
   font-size: var(--font-meta);
 }
 
 .article-toc summary {
+  display: inline-block;
+  color: var(--link);
   cursor: pointer;
+  list-style: none;
+  text-decoration: none;
+}
+
+.article-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.article-toc summary:hover,
+.article-toc summary:focus-visible {
+  color: var(--link-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
 .article-toc ol {
-  margin: 0.55rem 0 0;
+  margin: 0.45rem 0 0;
   padding-left: 1.4em;
 }
 
 .article-toc .nested {
   margin-left: 1em;
+}
+
+.article-toc .nested-deep {
+  margin-left: 2em;
 }
 
 .search-form {
@@ -573,6 +599,17 @@ main > section + section {
   }
 }
 
+@media (max-width: 620px) {
+  /* Preserve the favicon mark but remove the text label before it can collide with navigation. */
+  .site-brand-name {
+    display: none;
+  }
+
+  .site-brand {
+    gap: 0;
+  }
+}
+
 @media (max-width: 640px) {
   .content-shell,
   .nav-shell {
@@ -584,11 +621,11 @@ main > section + section {
   }
 
   .home-intro {
-    margin-bottom: 1.85rem;
+    margin-bottom: 1rem;
   }
 
   main > section + section {
-    margin-top: 1.65rem;
+    margin-top: 1.125rem;
   }
 
   .footer-inner {

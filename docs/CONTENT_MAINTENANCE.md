@@ -74,7 +74,7 @@ featured: false
 | 字段 | 用法 |
 | --- | --- |
 | `date` | 首次公开日期。普通文章只写日期，不写时分秒。 |
-| `updated` | 有实质性修订时写最后修订日期，否则 `null`。 |
+| `updated` | 有实质性修订时写最后修订日期，否则严格写 `null`。`null` 不会再被显示为 `1970-01-01`。 |
 | `source` | 新文章用 `native`；旧文使用 `CSDN`、`Zhihu` 或 `EnjoyLifeBlog`。 |
 | `sourceUrl` | 旧文必须保留原始链接；新文章可留空。 |
 | `migratedAt` | 旧文章迁入本站的日期；新文章为 `null`。 |
@@ -93,8 +93,31 @@ featured: false
 - 不要让公开页面直接依赖 GitHub raw / blob 图片路径；本站图片会随构建发布到 Cloudflare Pages。
 - 已迁入旧 EnjoyLifeBlog 文章若仍有旧图片链接，先运行 `npm run import:legacy-images -- --dry-run`，确认后运行 `npm run import:legacy-images -- --write`。
 - 代码使用 Markdown 代码块；页面会自动渲染成无圆角、可复制的等宽代码区。
+- 有至少两个二级、三级或四级标题的长文，会在标题元信息下自动出现默认折叠的 `[ToC]`；无需手写目录。
 - 链接、斜体、下划线、引用、表格都可以直接用标准 Markdown 语法书写；网页渲染后不会显示 `#`、`>`、反引号或横线等 Markdown 控制符。
 - 更完整的目录、R2 取舍和旧图迁移说明见 `docs/MEDIA_MANAGEMENT.md`。
+
+### 5. 骑行与跑步文章
+
+骑行和跑步属于 `domain: life`。为了进入对应的专题页，在 Frontmatter 中填写：
+
+```yaml
+# 骑行
+domain: life
+format: note
+topics: ["骑行", "运动"]
+tags: ["骑行"]
+series: ["life-cycling"]
+
+# 跑步
+domain: life
+format: note
+topics: ["跑步", "运动"]
+tags: ["跑步"]
+series: ["life-running"]
+```
+
+专题入口在 `/series/` 的“生活与运动”分组中。即使暂时没有公开文章，专题入口也会保留，方便以后持续补充。
 
 ## 二、迁入 CSDN、知乎或旧 GitHub 博客文章
 

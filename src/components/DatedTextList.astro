@@ -3,8 +3,9 @@ interface Item {
   title: string;
   description?: string;
   meta?: string;
-  date: Date | string;
+  date?: Date | string | null;
   href?: string;
+  metaInline?: boolean;
 }
 
 interface Group {
@@ -20,9 +21,10 @@ interface Props {
 
 const { items = [], groups: suppliedGroups, emptyMessage = '暂无已公开条目。' } = Astro.props;
 const groups: Group[] = suppliedGroups?.filter((group) => group.items.length > 0) ?? (items.length ? [{ items }] : []);
-const formatDate = (value: Date | string) => {
+const formatDate = (value?: Date | string | null) => {
+  if (!value) return '';
   const date = value instanceof Date ? value : new Date(value);
-  return Number.isNaN(date.valueOf()) ? '' : date.toISOString().slice(0, 10);
+  return Number.isNaN(date.valueOf()) || date.valueOf() === 0 ? '' : date.toISOString().slice(0, 10);
 };
 ---
 
@@ -32,17 +34,20 @@ const formatDate = (value: Date | string) => {
       <section class="text-list-section">
         {group.title && <h2 class="text-list-heading">{group.title}</h2>}
         <ul class="dated-list">
-          {group.items.map((item) => (
-            <li class="dated-list-item">
-              <span class="dated-list-bullet" aria-hidden="true">·</span>
-              <div class="dated-list-content">
-                {item.href ? <a class="dated-list-title" href={item.href}>{item.title}</a> : <span class="dated-list-title">{item.title}</span>}
-                {item.description && <span class="dated-list-description">：{item.description}</span>}
-                {item.meta && <div class="dated-list-meta">{item.meta}</div>}
-              </div>
-              <time class="dated-list-date" datetime={formatDate(item.date)}>{formatDate(item.date)}</time>
-            </li>
-          ))}
+          {group.items.map((item) => {
+            const itemDate = formatDate(item.date);
+            return (
+              <li class="dated-list-item">
+                <span class="dated-list-bullet" aria-hidden="true">·</span>
+                <div class="dated-list-content">
+                  {item.href ? <a class="dated-list-title" href={item.href}>{item.title}</a> : <span class="dated-list-title">{item.title}</span>}
+                  {item.description && <span class="dated-list-description">：{item.description}</span>}
+                  {item.meta && (item.metaInline ? <span class="dated-list-inline-meta">（{item.meta}）</span> : <div class="dated-list-meta">{item.meta}</div>)}
+                </div>
+                {itemDate && <time class="dated-list-date" datetime={itemDate}>{itemDate}</time>}
+              </li>
+            );
+          })}
         </ul>
       </section>
     ))}

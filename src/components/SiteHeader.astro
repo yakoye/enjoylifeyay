@@ -10,7 +10,7 @@ const isCurrent = (href: string) => href === '/' ? pathname === '/' : pathname.s
   <div class="nav-shell">
     <a class="site-brand" href="/" aria-label="Enjoy Life 主页">
       <img class="site-brand-mark" src="/favicon-32.png?v=20260701" alt="" width="22" height="22" />
-      <span>{site.name}</span>
+      <span class="site-brand-name">{site.name}</span>
     </a>
     <nav class="site-nav" aria-label="主导航">
       {site.navigation.map(({ href, label }) => (

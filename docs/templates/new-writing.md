@@ -10,6 +10,7 @@ domain: technology
 format: article
 topics: []
 tags: []
+# 骑行用 ["life-cycling"]；跑步用 ["life-running"]；其他文章按需填写。
 series: []
 legacy: false
 cover: ""

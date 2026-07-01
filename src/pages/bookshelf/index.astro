@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import DirectoryList from '../../components/DirectoryList.astro';
+import DatedTextList from '../../components/DatedTextList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const labels = { reading: '在读', read: '读过', wishlist: '想读' } as const;
+const labels = { read: '读过', reading: '在读', wishlist: '想读' } as const;
 const allEntries = await getCollection('books');
 type PublishedEntry = (typeof allEntries)[number] & { data: Extract<(typeof allEntries)[number]['data'], { draft: false }> };
 const entries = allEntries.filter((entry): entry is PublishedEntry => entry.data.draft === false);
@@ -15,6 +15,8 @@ const groups = Object.entries(labels).map(([status, title]) => ({
       title: data.title,
       description: data.note,
       meta: data.author,
+      metaInline: true,
+      date: data.status === 'read' ? data.finishedAt : data.startedAt,
       href: data.relatedWriting[0] ? `/writing/${data.relatedWriting[0]}/` : undefined,
     })),
 }));
@@ -23,5 +25,5 @@ const groups = Object.entries(labels).map(([status, title]) => ({
 <BaseLayout title="书架" description="在读、读过与想读的书籍索引。">
   <h1>书架</h1>
   <p class="page-intro">书架只记录已确认的书目和阅读状态，不编造评分或进度。</p>
-  <DirectoryList groups={groups} emptyMessage="暂无已核对并公开的书目。" />
+  <DatedTextList groups={groups} emptyMessage="暂无已核对并公开的书目。" />
 </BaseLayout>

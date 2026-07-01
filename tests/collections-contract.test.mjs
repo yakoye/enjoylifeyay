@@ -22,7 +22,7 @@ test('可维护目录数据存在且未知链接保持空值', async () => {
   const series = JSON.parse(await readFile(new URL('../src/content/series.json', import.meta.url), 'utf8'));
   const tools = JSON.parse(await readFile(new URL('../src/content/tools.json', import.meta.url), 'utf8'));
   const projects = JSON.parse(await readFile(new URL('../src/content/projects.json', import.meta.url), 'utf8'));
-  assert.equal(series.length, 8);
+  assert.equal(series.length, 10);
   assert.ok(tools.length >= 11);
   assert.ok(projects.length >= 12);
   for (const entry of [...tools, ...projects]) {

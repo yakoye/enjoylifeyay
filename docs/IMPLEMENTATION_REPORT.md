@@ -1,3 +1,16 @@
+# v0.9 补充
+
+- 顶栏内部最大宽度与正文统一为 `890px`，不再沿用较宽的 `1000px`。
+- 小于等于 `620px` 时，站点名仅隐藏文字、保留 favicon 图标，避免覆盖主导航。
+- 文章默认折叠目录入口改为中文“目录”。
+- 已在打包前通过 `npm run check`、`npm test`、`npm run build`、`npm run check:links`。
+- 详见 [`V0.9_HEADER_TOC_MOBILE.md`](V0.9_HEADER_TOC_MOBILE.md)。
+
+# v0.8 补充
+
+- 标题、页面间距、横线、书架日期、目录、生活运动专题和筛选行为已按 v0.8 调整。
+- 详见 [`V0.8_TYPOGRAPHY_TOC_LIFE.md`](V0.8_TYPOGRAPHY_TOC_LIFE.md)。
+
 # Enjoy Life v0.6 实施报告
 
 日期：2026-07-01

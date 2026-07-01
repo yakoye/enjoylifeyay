@@ -8,6 +8,7 @@ const writing = await getCollection('writing', ({ data }) => !data.draft);
 const groupDefinitions: Array<{ title: string; ids: string[] }> = [
   { title: '技术与工程', ids: ['pcie-high-speed-interconnect', 'chip-firmware-soc', 'dev-environment-productivity', 'chrome-web-tools', 'cloudflare-personal-site'] },
   { title: '记录与观察', ids: ['knowledge-obsidian', 'reading-learning', 'nature-walking'] },
+  { title: '生活与运动', ids: ['life-cycling', 'life-running'] },
 ];
 const groups = groupDefinitions.map(({ title, ids }) => ({
   title,
@@ -15,7 +16,7 @@ const groups = groupDefinitions.map(({ title, ids }) => ({
     .filter((entry) => ids.includes(entry.data.id))
     .map(({ data }) => {
       const count = writing.filter((entry) => entry.data.series.includes(data.id)).length;
-      return { title: data.title, description: data.description, meta: `${count}篇`, href: `/series/${data.id}/` };
+      return { title: data.title, description: data.description, meta: count > 0 ? `${count}篇` : undefined, href: `/series/${data.id}/` };
     }),
 }));
 ---

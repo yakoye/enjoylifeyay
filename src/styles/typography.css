@@ -34,7 +34,7 @@ h3 {
 }
 
 h1 {
-  margin-bottom: var(--space-3);
+  margin-bottom: 0.1875rem;
   font-size: var(--font-page-title);
   line-height: 1.3;
 }
@@ -103,6 +103,10 @@ del {
   color: var(--muted);
   font-size: var(--font-intro);
   line-height: 1.8;
+}
+
+.page-intro {
+  margin-bottom: 1rem;
 }
 
 .writing-meta,
@@ -247,6 +251,7 @@ del {
   line-height: 1.6;
 }
 
+hr,
 .article-prose hr,
 .rule {
   display: none;

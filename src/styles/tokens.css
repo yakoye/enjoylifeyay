@@ -2,7 +2,8 @@
   color-scheme: light;
 
   --content-max: 890px;
-  --nav-max: 1000px;
+  /* Header content uses the same reading width as the main column. */
+  --nav-max: var(--content-max);
   --page-gutter-desktop: 28px;
   --page-gutter-mobile: 16px;
   --nav-height: 48px;
@@ -21,7 +22,7 @@
     "Noto Sans SC",
     monospace;
 
-  --font-page-title: 2rem;
+  --font-page-title: 1.625rem;
   --font-article-title: 1.875rem;
   --font-h2: 1.3125rem;
   --font-h3: 1.0625rem;
@@ -70,7 +71,6 @@
 
 @media (max-width: 640px) {
   :root {
-    --font-page-title: 1.625rem;
     --font-article-title: 1.5625rem;
     --font-h2: 1.25rem;
     --font-h3: 1.0625rem;
