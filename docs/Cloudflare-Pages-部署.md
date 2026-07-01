@@ -12,7 +12,7 @@
 | Framework preset | Astro |
 | Production branch | `main` |
 | Preview branch | `dev` |
-| Build command | `npm run build` |
+| Build command | `npm run build`（自动同步历史归档并构建中文 Pagefind 索引） |
 | Build output directory | `dist` |
 | Root directory | `/` |
 | Node version | `24.x`（建议 Node 24 LTS） |

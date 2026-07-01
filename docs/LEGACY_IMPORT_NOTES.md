@@ -1,4 +1,4 @@
-# v0.5 历史内容导入说明
+# v0.6 历史内容导入说明
 
 ## 已导入至写作集合
 
@@ -22,3 +22,8 @@
 - 在确认每张图片的来源、公开范围与本地文件后，再迁入 `public/images/legacy/` 并将正文链接替换为本地地址。
 
 构建、预览与发布命令见 [`BUILD_PREVIEW_DEPLOY.md`](BUILD_PREVIEW_DEPLOY.md)。
+
+
+## v0.6 归档补充
+
+CSDN 与旧博客的标题、日期和原文链接已通过 `docs/CONTENT_MIGRATION_MANIFEST.csv` 自动生成到 `/archive/`。正文尚未迁入的条目保留原平台链接，不会被伪装成本站正文。

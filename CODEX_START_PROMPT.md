@@ -9,7 +9,7 @@
 5. `docs/TYPOGRAPHY_SYSTEM.md`
 6. `PERSONAL_SITE_CODEX_HANDOFF.md`
 
-当前项目已经完成 v0.5：文本目录视觉、9 篇公开旧博客文章、2 篇草稿、自然/书架/收藏关联、CSDN 91 条元数据目录、知乎人工迁移入口和 Windows Node 24 发布流程均已落地。
+当前项目已经完成 v0.6：文本目录视觉、完整按年存档、9 篇公开旧博客文章、2 篇草稿、CSDN 91 条历史外链、知乎入口、公开工具链接、Pagefind 中文构建与 Windows Node 24 发布流程均已落地。
 
 后续开发原则：
 
@@ -30,3 +30,7 @@ npm run check:links
 ```
 
 完整发布命令见 `docs/BUILD_PREVIEW_DEPLOY.md`。
+
+## v0.7 补充
+
+优先遵循 `docs/V0.7_LAYOUT_MEDIA.md` 和 `docs/MEDIA_MANAGEMENT.md` 的顶栏、归档和媒体规则。

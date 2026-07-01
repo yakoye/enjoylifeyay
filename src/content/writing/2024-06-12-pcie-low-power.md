@@ -14,6 +14,7 @@ series: ["pcie-high-speed-interconnect"]
 legacy: true
 cover: ""
 coverAlt: ""
+mediaKey: "legacy-2024-06-12-pcie-low-power"
 draft: false
 featured: false
 ---

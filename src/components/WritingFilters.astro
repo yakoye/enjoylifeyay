@@ -1,0 +1,76 @@
+---
+type FilterOption = [string, string];
+interface Props {
+  domains: FilterOption[];
+  formats: FilterOption[];
+}
+
+const { domains, formats } = Astro.props;
+---
+
+<div class="filters" aria-label="写作筛选" data-writing-filters>
+  <div><span>领域：</span>{domains.map(([value, label]) => <button type="button" aria-pressed="false" data-filter-group="domain" data-filter-value={value}>{label}</button>)}</div>
+  <div><span>形式：</span>{formats.map(([value, label]) => <button type="button" aria-pressed="false" data-filter-group="format" data-filter-value={value}>{label}</button>)}</div>
+</div>
+
+<script is:inline>
+  (() => {
+    const initializeWritingFilters = () => {
+      const root = document.querySelector('[data-writing-filters]');
+      const list = document.querySelector('[data-writing-list]');
+      if (!root || !list || root.dataset.ready === 'true') return;
+      root.dataset.ready = 'true';
+
+      const query = new URLSearchParams(window.location.search);
+      const filters = {
+        domain: query.get('domain') || 'all',
+        format: query.get('format') || 'all',
+      };
+      const buttons = Array.from(root.querySelectorAll('button[data-filter-group]'));
+      const items = Array.from(list.querySelectorAll('.writing-item'));
+      const empty = document.querySelector('.filter-empty');
+
+      const apply = () => {
+        let visible = 0;
+        items.forEach((item) => {
+          const domainMatches = filters.domain === 'all' || item.dataset.domain === filters.domain;
+          const formatMatches = filters.format === 'all' || item.dataset.format === filters.format;
+          const show = domainMatches && formatMatches;
+          item.hidden = !show;
+          if (show) visible += 1;
+        });
+
+        buttons.forEach((button) => {
+          const group = button.dataset.filterGroup;
+          const value = button.dataset.filterValue;
+          button.setAttribute('aria-pressed', String(filters[group] === value));
+        });
+
+        if (empty) empty.hidden = visible > 0;
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const group = button.dataset.filterGroup;
+          const value = button.dataset.filterValue || 'all';
+          if (group !== 'domain' && group !== 'format') return;
+          filters[group] = value;
+          const next = new URLSearchParams();
+          if (filters.domain !== 'all') next.set('domain', filters.domain);
+          if (filters.format !== 'all') next.set('format', filters.format);
+          const suffix = next.toString();
+          window.history.replaceState(null, '', `${window.location.pathname}${suffix ? `?${suffix}` : ''}`);
+          apply();
+        });
+      });
+
+      apply();
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeWritingFilters, { once: true });
+    } else {
+      initializeWritingFilters();
+    }
+  })();
+</script>

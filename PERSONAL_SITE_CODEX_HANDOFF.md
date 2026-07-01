@@ -2,9 +2,9 @@
 ## Codex 开发与 Cloudflare Pages 部署总交接文档
 
 > **站点长期主线：技术 · 阅读 · 自然 · 工具 · 生活**  
-> 文档版本：v0.5  
+> 文档版本：v0.6  
 > 更新日期：2026-07-01  
-> 本文件是项目根目录应长期保留的开发约束、内容盘点、迁移规则与部署说明。当前代码已完成 v0.5；后续开发必须先阅读 `README.md`、`docs/BUILD_PREVIEW_DEPLOY.md`、`docs/CONTENT_MIGRATION_STATUS.md` 与 `docs/TYPOGRAPHY_SYSTEM.md`，再把本文件作为长期产品约束。
+> 本文件是项目根目录应长期保留的开发约束、内容盘点、迁移规则与部署说明。当前代码已完成 v0.6；后续开发必须先阅读 `README.md`、`docs/BUILD_PREVIEW_DEPLOY.md`、`docs/CONTENT_MIGRATION_STATUS.md` 与 `docs/TYPOGRAPHY_SYSTEM.md`，再把本文件作为长期产品约束。
 
 ---
 
@@ -234,6 +234,8 @@
 - 除正文外，列表页元数据可更小，约 `13px–14px`。
 
 ### 4.3 字体
+
+v0.6 已将 CSDN 和旧博客历史元数据同步到公开 `/archive/`，归档生成源是 `docs/CONTENT_MIGRATION_MANIFEST.csv`，生成文件是 `src/data/legacyArchive.ts`。
 
 v0.5 的实际字体源以 `src/styles/tokens.css` 为准：全站采用中文等宽优先字体栈，形成“文本文件 / 技术知识目录”气质。
 
@@ -1305,3 +1307,7 @@ Codex 不得把本项目做成以下任意一种：
 - 不把个人工作台、私有家庭资料、Token、密码、精确地理位置写进公开仓库；
 - 本文档中的“待补充链接”由用户在确认公开后再填写；Codex 不负责猜测。
 
+
+## v0.7 补充
+
+- 顶栏、归档、favicon、写作筛选和图片迁移策略见 `docs/V0.7_LAYOUT_MEDIA.md` 与 `docs/MEDIA_MANAGEMENT.md`。

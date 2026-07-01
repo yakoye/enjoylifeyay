@@ -1,6 +1,37 @@
 ---
-import { getCollection } from 'astro:content'; import WritingList from '../../components/WritingList.astro'; import BaseLayout from '../../layouts/BaseLayout.astro';
-const entries = (await getCollection('writing', ({ data }) => !data.draft)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf());
-const years = [...new Set(entries.map((entry) => entry.data.date.getFullYear()))];
+import { getCollection } from 'astro:content';
+import ArchiveTimeline from '../../components/ArchiveTimeline.astro';
+import DirectoryList from '../../components/DirectoryList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { legacyArchiveEntries, legacySourceLinks } from '../../data/legacyArchive';
+
+const publishedWriting = await getCollection('writing', ({ data }) => !data.draft);
+const localEntries = publishedWriting.map((entry) => ({
+  id: `local-${entry.id}`,
+  title: entry.data.title,
+  href: `/writing/${entry.id}/`,
+  date: entry.data.date.toISOString().slice(0, 10),
+  source: '本站',
+}));
+const publishedSourceUrls = new Set(publishedWriting.map((entry) => entry.data.sourceUrl).filter(Boolean));
+const externalEntries = legacyArchiveEntries.filter((entry) => !publishedSourceUrls.has(entry.href));
+
+const archiveItems = [...localEntries, ...externalEntries]
+  .sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title, 'zh-CN'));
+
+const sourceGroups = legacySourceLinks.length ? [{
+  title: '其他历史来源',
+  items: legacySourceLinks.map((item) => ({
+    title: item.title,
+    description: item.description,
+    href: item.href,
+  })),
+}] : [];
 ---
-<BaseLayout title="归档" description="按首次发布时间整理的写作归档。"><h1>归档</h1><p class="page-intro">迁入时间不改变旧文章所在年份。</p>{years.length ? years.map((year) => <section><h2>{year}</h2><WritingList entries={entries.filter((entry) => entry.data.date.getFullYear() === year)} /></section>) : <p class="empty-state">暂无已公开文章。</p>}</BaseLayout>
+
+<BaseLayout title="存档" description="按首次发布日期汇总本站文章、旧博客与 CSDN 历史文章。">
+  <h1>存档</h1>
+  <p class="page-intro">按首次发布日期汇总。蓝色标题会打开本站文章或原始发布页面；已迁入本站的旧文不会重复显示。</p>
+  <ArchiveTimeline items={archiveItems} />
+  {sourceGroups.length > 0 && <DirectoryList groups={sourceGroups} />}
+</BaseLayout>

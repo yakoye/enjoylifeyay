@@ -1,48 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
+import WritingFilters from '../../components/WritingFilters.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const writing = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const domains = [['all','全部'],['technology','技术'],['reading','阅读'],['life','生活'],['nature','自然'],['tool','工具']];
-const formats = [['all','全部'],['article','长文'],['answer','问答'],['note','短记'],['guide','操作指南'],['reference','清单 / 速查'],['project-log','项目日志'],['observation','自然观察']];
+const domains: [string, string][] = [['all','全部'],['technology','技术'],['reading','阅读'],['life','生活'],['nature','自然'],['tool','工具']];
+const formats: [string, string][] = [['all','全部'],['article','长文'],['answer','问答'],['note','短记'],['guide','操作指南'],['reference','清单 / 速查'],['project-log','项目日志'],['observation','自然观察']];
 ---
 
 <BaseLayout title="写作" description="技术、阅读、生活、自然与工具相关的长期写作。">
   <h1>写作</h1>
   <p class="page-intro">按首次发布时间排列。旧文章迁入本站后，仍保留原始时间与来源。</p>
-  <div class="filters" aria-label="写作筛选">
-    <div><span>领域：</span>{domains.map(([value,label]) => <button type="button" data-filter-group="domain" data-filter-value={value}>{label}</button>)}</div>
-    <div><span>形式：</span>{formats.map(([value,label]) => <button type="button" data-filter-group="format" data-filter-value={value}>{label}</button>)}</div>
-  </div>
+  <WritingFilters domains={domains} formats={formats} />
   <WritingList entries={writing} />
   <p class="filter-empty" hidden>没有符合当前筛选条件的文章。</p>
   <p class="aux-links"><a href="/archive/">按年份归档</a> · <a href="/tags/">标签索引</a></p>
 </BaseLayout>
-
-<script>
-  const params = new URLSearchParams(location.search);
-  const filters = { domain: params.get('domain') || 'all', format: params.get('format') || 'all' };
-  const apply = () => {
-    let visible = 0;
-    document.querySelectorAll<HTMLElement>('.writing-item').forEach((item) => {
-      const show = (filters.domain === 'all' || item.dataset.domain === filters.domain) && (filters.format === 'all' || item.dataset.format === filters.format);
-      item.hidden = !show;
-      if (show) visible += 1;
-    });
-    document.querySelectorAll<HTMLButtonElement>('[data-filter-group]').forEach((button) => button.setAttribute('aria-pressed', String(filters[button.dataset.filterGroup as 'domain' | 'format'] === button.dataset.filterValue)));
-    const empty = document.querySelector<HTMLElement>('.filter-empty');
-    if (empty) empty.hidden = visible > 0 || document.querySelectorAll('.writing-item').length === 0;
-  };
-  document.querySelectorAll<HTMLButtonElement>('[data-filter-group]').forEach((button) => button.addEventListener('click', () => {
-    const group = button.dataset.filterGroup as 'domain' | 'format';
-    filters[group] = button.dataset.filterValue || 'all';
-    const next = new URLSearchParams();
-    if (filters.domain !== 'all') next.set('domain', filters.domain);
-    if (filters.format !== 'all') next.set('format', filters.format);
-    history.replaceState(null, '', `${location.pathname}${next.size ? `?${next}` : ''}`);
-    apply();
-  }));
-  apply();
-</script>

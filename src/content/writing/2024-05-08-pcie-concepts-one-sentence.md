@@ -14,6 +14,7 @@ series: ["pcie-high-speed-interconnect"]
 legacy: true
 cover: ""
 coverAlt: ""
+mediaKey: "legacy-2024-05-08-pcie-concepts"
 draft: true
 featured: false
 ---

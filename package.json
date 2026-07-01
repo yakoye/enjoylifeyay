@@ -1,17 +1,19 @@
 {
   "name": "enjoy-life",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "npm run sync:legacy-archive && astro build && pagefind --site dist --force-language zh --silent",
     "preview": "astro preview",
     "check": "astro check",
     "check:links": "node scripts/check-built-links.mjs",
     "test": "node --test tests/*.test.mjs",
     "verify": "npm run check && npm test && npm run build && npm run check:links",
-    "deploy:pages": "npx wrangler pages deploy dist --project-name enjoylifeyay --branch main"
+    "deploy:pages": "npx wrangler pages deploy dist --project-name enjoylifeyay --branch main",
+    "sync:legacy-archive": "node scripts/sync-legacy-archive.mjs",
+    "import:legacy-images": "node scripts/import-legacy-images.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.0",

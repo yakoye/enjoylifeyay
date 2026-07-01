@@ -14,6 +14,7 @@ series: ["nature-walking"]
 legacy: true
 cover: ""
 coverAlt: ""
+mediaKey: "legacy-2024-04-25-common-flowers"
 draft: false
 featured: false
 ---

@@ -15,7 +15,7 @@ const groups = groupDefinitions.map(({ title, ids }) => ({
     .filter((entry) => ids.includes(entry.data.id))
     .map(({ data }) => {
       const count = writing.filter((entry) => entry.data.series.includes(data.id)).length;
-      return { title: data.title, description: data.description, meta: `${count} 篇已公开文章`, href: `/series/${data.id}/` };
+      return { title: data.title, description: data.description, meta: `${count}篇`, href: `/series/${data.id}/` };
     }),
 }));
 ---

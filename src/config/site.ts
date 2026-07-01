@@ -15,6 +15,7 @@ export const site = {
     { href: '/bookshelf/', label: '书架' },
     { href: '/favorites/', label: '收藏' },
     { href: '/projects/', label: '项目' },
+    { href: '/archive/', label: '归档' },
     { href: '/about/', label: '关于' },
   ],
 } as const;

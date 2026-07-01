@@ -33,7 +33,7 @@ npm run check:links
 | `npm ci` | 严格按锁文件安装依赖 | 命令正常结束，`node_modules/.bin/astro` 存在 |
 | `npm run check` | Astro 与 TypeScript 检查 | 没有 `astro is not recognized` 或类型错误 |
 | `npm test` | 内容模型、路由、SEO、迁移台账与视觉规则测试 | 全部测试通过 |
-| `npm run build` | 生成静态站和 Pagefind 搜索索引 | 生成 `dist/` 与 `dist/pagefind/` |
+| `npm run build` | 同步历史归档、生成静态站和 Pagefind 中文搜索索引 | 生成 `src/data/legacyArchive.ts`、`dist/` 与 `dist/pagefind/` |
 | `npm run check:links` | 检查构建结果中的主要站内链接 | 不报 `dist/index.html not found` 或死链错误 |
 
 也可以在依赖已经安装后使用一条命令完成四项校验：
@@ -50,6 +50,28 @@ npm test
 npm run build
 npm run check:links
 ```
+
+## 中文 Pagefind 搜索说明
+
+构建命令使用：
+
+```text
+pagefind --site dist --force-language zh --silent
+```
+
+`zh` 会让 Pagefind 以单一中文索引构建站点，`--silent` 只保留真正错误输出，因此不会再显示 `Pagefind doesn't support stemming for the language zh-cn` 的提示。
+
+这不是搜索失效。中文没有英文那样的词根变化；Pagefind 对中文使用分词。搜索单词、词组和带引号的精确短语都可以正常工作。不要为了消掉该提示把页面语言改成英文。
+
+## 历史来源同步
+
+`docs/CONTENT_MIGRATION_MANIFEST.csv` 是 CSDN、知乎与旧博客历史条目的维护台账。每次 `npm run build` 都会自动执行：
+
+```powershell
+npm run sync:legacy-archive
+```
+
+它会更新 `src/data/legacyArchive.ts`，由 `/archive/` 展示按年份排序的历史链接。手工更新 CSV 后，也可单独运行这条命令再查看差异。
 
 ## 本地预览
 
@@ -199,3 +221,33 @@ powershell -ExecutionPolicy Bypass -File .\scripts\reset-local.ps1
 - FamilyJourney 的 R2、D1、私有照片、家庭数据；
 - 未核对的知乎正文、转载正文、附件型资料；
 - `node_modules/`、`dist/`、`.astro/`。
+
+## 图片迁入与发布顺序
+
+新文章图片默认进入 `public/images/`，构建后会进入 `dist/images/`，并随 Wrangler 发布到 Cloudflare Pages；运行时访客不会从 GitHub raw URL 下载这些图片。
+
+已迁入旧 EnjoyLifeBlog 文章仍使用旧图时，先预览迁移计划：
+
+```powershell
+npm run import:legacy-images -- --dry-run
+```
+
+确认图片来源和数量后执行：
+
+```powershell
+npm run import:legacy-images -- --write
+```
+
+该命令会下载图片到 `public/images/legacy/<mediaKey>/`，同时更新 Markdown 为本站 `/images/...` 路径。随后重新运行完整校验与发布：
+
+```powershell
+npm run check
+npm test
+npm run build
+npm run check:links
+npm run preview
+
+npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
+```
+
+图片目录规则、R2 何时再用和隐私边界见：`docs/MEDIA_MANAGEMENT.md`。

@@ -12,11 +12,35 @@
     "category": "knowledge-library"
   },
   {
+    "id": "pcie-tools",
+    "name": "PCIe Tools",
+    "description": "PCIe lspci、LTSSM、寄存器查询与位域解析工具集合。",
+    "status": "active",
+    "category": "web-tool",
+    "startedAt": null,
+    "techStack": [
+      "HTML",
+      "JavaScript"
+    ],
+    "url": "https://yakoye.github.io/pcie_tools/",
+    "githubUrl": "",
+    "versions": [],
+    "articles": [],
+    "tools": [
+      "lspci-explorer",
+      "ltssm-visualizer",
+      "pcie-register-query",
+      "register-bitfield-parser"
+    ],
+    "draft": false,
+    "featured": true
+  },
+  {
     "id": "dictfloat",
     "name": "DictFloat",
-    "description": "浏览器词典扩展项目。",
-    "status": "link-pending",
-    "url": "",
+    "description": "网页划词、本地术语表与在线查询结合的浏览器词典扩展。",
+    "status": "active",
+    "url": "https://chromewebstore.google.com/detail/dictfloat/iaipcegngckhggjjajenegdoeijadfoj?hl=zh-CN",
     "githubUrl": "",
     "draft": false,
     "category": "browser-extension"
@@ -25,7 +49,7 @@
     "id": "quiet-reader",
     "name": "静读网页阅读助手",
     "description": "网页阅读辅助扩展项目。",
-    "status": "link-pending",
+    "status": "development",
     "url": "",
     "githubUrl": "",
     "draft": false,
@@ -34,9 +58,9 @@
   {
     "id": "quick-note-float",
     "name": "Quick Note Float",
-    "description": "浏览器浮动笔记扩展项目。",
-    "status": "link-pending",
-    "url": "",
+    "description": "可在当前网页直接打开、自动本地保存的悬浮便签扩展。",
+    "status": "active",
+    "url": "https://chromewebstore.google.com/detail/quick-note-float/ifcbecnhhibeoodkemeaiamjgohafbdm?hl=zh-CN",
     "githubUrl": "",
     "draft": false,
     "category": "browser-extension"
@@ -44,9 +68,9 @@
   {
     "id": "keypass",
     "name": "KeyPass",
-    "description": "浏览器扩展项目。",
-    "status": "link-pending",
-    "url": "",
+    "description": "本地生成、临时保留并可在当前网页悬浮使用的密码生成扩展。",
+    "status": "active",
+    "url": "https://chromewebstore.google.com/detail/keypass-float/pcnmknfcfmfdkjpfnfmodnkkkafbbkmi?hl=zh-CN",
     "githubUrl": "",
     "draft": false,
     "category": "browser-extension"
@@ -54,9 +78,9 @@
   {
     "id": "regcalc64",
     "name": "RegCalc64",
-    "description": "寄存器数值计算工具项目。",
-    "status": "link-pending",
-    "url": "",
+    "description": "面向硬件、固件与寄存器调试的悬浮式 64 位计算扩展。",
+    "status": "active",
+    "url": "https://chromewebstore.google.com/detail/regcalc64/bdfigfcncdbonpmfbecflcipgahkccjk?hl=zh-CN",
     "githubUrl": "",
     "draft": false,
     "category": "web-tool"
@@ -65,7 +89,7 @@
     "id": "feishu-helper",
     "name": "飞书小助理",
     "description": "飞书相关浏览器扩展项目。",
-    "status": "link-pending",
+    "status": "development",
     "url": "",
     "githubUrl": "",
     "draft": false,

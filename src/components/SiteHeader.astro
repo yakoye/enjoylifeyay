@@ -8,7 +8,10 @@ const isCurrent = (href: string) => href === '/' ? pathname === '/' : pathname.s
 
 <header class="site-header">
   <div class="nav-shell">
-    <a class="site-brand" href="/">{site.name}</a>
+    <a class="site-brand" href="/" aria-label="Enjoy Life 主页">
+      <img class="site-brand-mark" src="/favicon-32.png?v=20260701" alt="" width="22" height="22" />
+      <span>{site.name}</span>
+    </a>
     <nav class="site-nav" aria-label="主导航">
       {site.navigation.map(({ href, label }) => (
         <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>

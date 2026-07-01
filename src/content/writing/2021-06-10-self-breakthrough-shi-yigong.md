@@ -14,6 +14,7 @@ series: ["reading-learning"]
 legacy: true
 cover: ""
 coverAlt: ""
+mediaKey: "legacy-2021-06-10-self-breakthrough"
 draft: false
 featured: false
 ---

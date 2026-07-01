@@ -14,6 +14,7 @@ series: ["pcie-high-speed-interconnect"]
 legacy: true
 cover: ""
 coverAlt: ""
+mediaKey: "legacy-2024-06-06-pcie-questions"
 draft: false
 featured: false
 ---

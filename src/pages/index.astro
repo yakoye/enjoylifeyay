@@ -14,9 +14,10 @@ const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
 ---
 
 <BaseLayout>
-  <h1>{site.name}</h1>
-  <p class="tagline">{site.tagline}</p>
-  <hr class="rule" />
+  <div class="home-intro">
+    <h1>{site.name}</h1>
+    <p class="tagline">{site.tagline}</p>
+  </div>
 
   <section aria-labelledby="recent-writing">
     <div class="section-heading"><h2 id="recent-writing">最近写作</h2><a href="/writing/">全部写作</a></div>

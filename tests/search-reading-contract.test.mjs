@@ -4,7 +4,7 @@ import test from 'node:test';
 
 test('生产构建生成 Pagefind 静态索引', async () => {
   const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
-  assert.match(pkg.scripts.build, /pagefind --site dist/);
+  assert.match(pkg.scripts.build, /pagefind --site dist --force-language zh --silent/);
   assert.ok(pkg.devDependencies.pagefind);
 });
 

@@ -14,6 +14,7 @@ series: ["reading-learning"]
 legacy: true
 cover: ""
 coverAlt: ""
+mediaKey: "legacy-2022-09-11-last-quarter-moon"
 draft: false
 featured: false
 ---

@@ -1,0 +1,42 @@
+---
+interface Item {
+  id: string;
+  title: string;
+  href: string;
+  date: string;
+  external?: boolean;
+  source?: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+const formatMonthDay = (date: string) => date.slice(5);
+const year = (date: string) => date.slice(0, 4);
+const years = [...new Set(items.map((item) => year(item.date)))];
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+---
+
+<div class="archive-timeline">
+  {years.map((currentYear) => (
+    <section class="archive-year" aria-labelledby={`archive-year-${currentYear}`}>
+      <h2 id={`archive-year-${currentYear}`} class="archive-year-title">{currentYear}年</h2>
+      <ul class="archive-list">
+        {items.filter((item) => year(item.date) === currentYear).map((item) => (
+          <li class="archive-list-item">
+            <time class="archive-list-date" datetime={item.date}>{formatMonthDay(item.date)}</time>
+            <a
+              class="archive-list-title"
+              href={item.href}
+              target={isExternal(item.href) ? '_blank' : undefined}
+              rel={isExternal(item.href) ? 'noopener noreferrer' : undefined}
+              title={isExternal(item.href) && item.source ? `打开${item.source}原文` : undefined}
+            >{item.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>

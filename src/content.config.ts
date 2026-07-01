@@ -28,6 +28,7 @@ const writing = defineCollection({
     legacy: z.boolean().default(false),
     cover: z.string().default(''),
     coverAlt: z.string().default(''),
+    mediaKey: z.string().default(''),
     ...common,
   }),
 });

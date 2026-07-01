@@ -23,7 +23,6 @@ const writing = (await getCollection('writing', ({ data }) => !data.draft && dat
   <h1>{series.data.title}</h1>
   <p class="page-intro">{series.data.description}</p>
   {series.data.audience && <p class="meta-muted">适合：{series.data.audience}</p>}
-  <hr class="rule" />
   <h2>文章</h2>
   <WritingList entries={writing} />
   <p class="aux-links"><a href="/series/">返回全部专题</a></p>

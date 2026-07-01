@@ -14,6 +14,7 @@ series: ["reading-learning"]
 legacy: true
 cover: ""
 coverAlt: ""
+mediaKey: "legacy-2023-06-27-surrender-experiment"
 draft: false
 featured: false
 ---
