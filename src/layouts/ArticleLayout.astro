@@ -9,7 +9,7 @@ interface Heading { depth: number; slug: string; text: string; }
 interface Props { entry: CollectionEntry<'writing'>; headings?: Heading[]; }
 const { entry, headings = [] } = Astro.props;
 const { data } = entry;
-const formatDate = (value?: Date | null) => value && new Intl.DateTimeFormat('zh-CN', { dateStyle: 'long' }).format(value);
+const formatDate = (value?: Date | null) => value?.toISOString().slice(0, 10);
 const sourceLabels = { native: '本站', CSDN: 'CSDN', Zhihu: '知乎', EnjoyLifeBlog: 'EnjoyLifeBlog' } as const;
 const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 const jsonLd = {
@@ -26,11 +26,11 @@ const jsonLd = {
       <h1>{data.title}</h1>
       <div class="writing-meta">{categoryLabels[data.domain]} · {formatLabels[data.format]}{data.tags.length > 0 && ` · ${data.tags.join(' / ')}`}</div>
       <div class="article-meta">
-        <span>首次发布：{formatDate(data.date)}</span>
-        <span>来源：{sourceLabels[data.source]}</span>
+        <span>{data.source === 'native' ? '发布' : '首次发布'}：{formatDate(data.date)}</span>
+        {data.source !== 'native' && <span>来源：{sourceLabels[data.source]}</span>}
         {data.migratedAt && <span>迁入本站：{formatDate(data.migratedAt)}</span>}
         {data.updated && <span>最后修订：{formatDate(data.updated)}</span>}
-        {data.sourceUrl && <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer">查看原文</a>}
+        {data.sourceUrl && <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer">原文</a>}
       </div>
     </header>
     {toc.length >= 2 && <details class="article-toc"><summary>文章目录</summary><ol>{toc.map((heading) => <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></details>}

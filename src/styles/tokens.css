@@ -1,0 +1,79 @@
+:root {
+  color-scheme: light;
+
+  --content-max: 890px;
+  --nav-max: 1000px;
+  --page-gutter-desktop: 28px;
+  --page-gutter-mobile: 16px;
+  --nav-height: 48px;
+
+  --font-mono:
+    "Sarasa Mono SC",
+    "Maple Mono SC",
+    "Cascadia Mono",
+    "JetBrains Mono",
+    "SFMono-Regular",
+    "Menlo",
+    "Consolas",
+    "Liberation Mono",
+    "Microsoft YaHei UI",
+    "PingFang SC",
+    "Noto Sans SC",
+    monospace;
+
+  --font-page-title: 2rem;
+  --font-article-title: 1.875rem;
+  --font-h2: 1.3125rem;
+  --font-h3: 1.0625rem;
+  --font-body: 1rem;
+  --font-intro: 0.9375rem;
+  --font-list: 0.9375rem;
+  --font-nav: 0.875rem;
+  --font-meta: 0.8125rem;
+  --font-caption: 0.8125rem;
+  --font-code: 0.875rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --background: #fcfcfa;
+  --text: #1f1f1f;
+  --muted: #6b6b6b;
+  --subtle: #8b8b8b;
+  --rule-color: #dfdfda;
+  --link: #064fb0;
+  --link-hover: #003b86;
+  --code-background: #f4f4f1;
+  --inline-code-background: #eeeeea;
+  --quote-rule: #9c9c96;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --background: #151515;
+  --text: #e7e5df;
+  --muted: #aaa7a0;
+  --subtle: #85827c;
+  --rule-color: #323232;
+  --link: #86bfff;
+  --link-hover: #afd7ff;
+  --code-background: #1d1d1d;
+  --inline-code-background: #252525;
+  --quote-rule: #77756f;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --font-page-title: 1.625rem;
+    --font-article-title: 1.5625rem;
+    --font-h2: 1.25rem;
+    --font-h3: 1.0625rem;
+    --font-code: 0.8125rem;
+  }
+}

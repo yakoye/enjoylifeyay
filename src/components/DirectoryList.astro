@@ -1,28 +1,46 @@
 ---
 interface Item {
   title: string;
-  description: string;
+  description?: string;
   meta?: string;
-  status?: string;
   href?: string;
-  externalUrl?: string;
 }
-interface Props { items: Item[]; emptyMessage?: string; }
-const { items, emptyMessage = '暂无已公开条目。' } = Astro.props;
+
+interface Group {
+  title?: string;
+  items: Item[];
+}
+
+interface Props {
+  groups?: Group[];
+  items?: Item[];
+  emptyMessage?: string;
+}
+
+const { items = [], groups: suppliedGroups, emptyMessage = '暂无已公开条目。' } = Astro.props;
+const groups: Group[] = suppliedGroups?.filter((group) => group.items.length > 0) ?? (items.length ? [{ items }] : []);
+const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href));
 ---
 
-{items.length ? (
-  <ul class="directory-list">
-    {items.map((item) => (
-      <li class="directory-item">
-        <div class="directory-heading">
-          {item.href ? <a href={item.href}>{item.title}</a> : <strong>{item.title}</strong>}
-          {item.status && <span class="status-label">{item.status}</span>}
-        </div>
-        <p>{item.description}</p>
-        {item.meta && <div class="writing-meta">{item.meta}</div>}
-        {item.externalUrl && <a class="external-link" href={item.externalUrl} target="_blank" rel="noopener noreferrer">访问公开地址 →</a>}
-      </li>
+{groups.length ? (
+  <div class="text-directory">
+    {groups.map((group) => (
+      <section class="text-list-section">
+        {group.title && <h2 class="text-list-heading">{group.title}</h2>}
+        <ul class="text-list">
+          {group.items.map((item) => (
+            <li>
+              {item.href ? (
+                <a class="text-list-title" href={item.href} target={isExternal(item.href) ? '_blank' : undefined} rel={isExternal(item.href) ? 'noopener noreferrer' : undefined}>{item.title}</a>
+              ) : (
+                <span class="text-list-title">{item.title}</span>
+              )}
+              {item.description && <span class="text-list-description">：{item.description}</span>}
+              {item.meta && <span class="text-list-meta">（{item.meta}）</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
     ))}
-  </ul>
+  </div>
 ) : <p class="empty-state">{emptyMessage}</p>}

@@ -7,7 +7,7 @@ test('正式站点 URL 只在集中配置中定义', async () => {
   const astro = await readFile(new URL('../astro.config.mjs', import.meta.url), 'utf8');
   assert.match(site, /https:\/\/enjoylifeyay\.pages\.dev/);
   assert.match(site, /name:\s*['"]Enjoy Life['"]/);
-  assert.match(site, /技术 · 阅读 · 工具 · 自然 · 生活/);
+  assert.match(site, /技术 · 阅读 · 自然 · 工具 · 生活/);
   assert.match(astro, /site\.url/);
   assert.match(astro, /sitemap\(\)/);
 });

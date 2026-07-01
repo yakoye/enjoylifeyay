@@ -3,11 +3,12 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 test('全局布局遵守 890px、16px 和中文排版约束', async () => {
-  const css = await readFile(new URL('../src/styles/global.css', import.meta.url), 'utf8');
-  assert.match(css, /--content-max:\s*890px/);
-  assert.match(css, /--page-gutter-mobile:\s*16px/);
-  assert.match(css, /\.article-prose\s+p[\s\S]*text-align:\s*justify/);
-  assert.match(css, /\.article-prose\s+:is\(pre,\s*code,\s*table,\s*ul,\s*ol,\s*blockquote,\s*figure,\s*figcaption\)[\s\S]*text-align:\s*left/);
+  const tokens = await readFile(new URL('../src/styles/tokens.css', import.meta.url), 'utf8');
+  const typography = await readFile(new URL('../src/styles/typography.css', import.meta.url), 'utf8');
+  assert.match(tokens, /--content-max:\s*890px/);
+  assert.match(tokens, /--page-gutter-mobile:\s*16px/);
+  assert.match(typography, /\.article-prose\s+p[\s\S]*text-align:\s*justify/);
+  assert.match(typography, /\.article-prose\s+:is\(h2,\s*h3,\s*h4,\s*ul,\s*ol,\s*li,\s*pre,\s*code,\s*table,\s*blockquote,\s*figure,\s*figcaption,\s*hr\)[\s\S]*text-align:\s*left/);
 });
 
 test('主题默认跟随系统并保存手动偏好', async () => {

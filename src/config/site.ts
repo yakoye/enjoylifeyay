@@ -1,7 +1,7 @@
 export const site = {
   name: 'Enjoy Life',
   description: '记录技术、阅读、工具、自然与生活的个人知识与生活档案。',
-  tagline: '技术 · 阅读 · 工具 · 自然 · 生活',
+  tagline: '技术 · 阅读 · 自然 · 工具 · 生活',
   url: 'https://enjoylifeyay.pages.dev',
   authorName: '',
   githubUrl: '',

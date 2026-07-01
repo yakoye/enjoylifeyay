@@ -1,12 +1,18 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import { site } from '../config/site';
+
+const pathname = Astro.url.pathname;
+const isCurrent = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
 ---
 
 <header class="site-header">
   <div class="nav-shell">
+    <a class="site-brand" href="/">{site.name}</a>
     <nav class="site-nav" aria-label="主导航">
-      {site.navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+      {site.navigation.map(({ href, label }) => (
+        <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>
+      ))}
     </nav>
     <div class="nav-actions">
       <a class="icon-button" href="/search/" aria-label="搜索" title="搜索">

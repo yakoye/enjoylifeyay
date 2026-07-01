@@ -1,8 +1,37 @@
 ---
-import { getCollection } from 'astro:content'; import DirectoryList from '../../components/DirectoryList.astro'; import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import DatedTextList from '../../components/DatedTextList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const labels = {
+  plant: '植物',
+  animal: '动物',
+  season: '季节',
+  'hiking-cycling': '骑行与徒步',
+  'urban-wild': '山野与城市观察',
+  'photo-aerial': '摄影与航拍',
+  'local-memory': '故乡与地方记忆',
+} as const;
+
 const allEntries = await getCollection('nature');
 type PublishedEntry = (typeof allEntries)[number] & { data: Extract<(typeof allEntries)[number]['data'], { draft: false }> };
-const entries = allEntries.filter((entry): entry is PublishedEntry => entry.data.draft === false);
-const items = entries.map(({ data }) => ({ title:data.title, description:data.description, meta:[data.location, data.method].filter(Boolean).join(' · ') }));
+const entries = allEntries.filter((entry): entry is PublishedEntry => entry.data.draft === false)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const groups = Object.entries(labels).map(([category, title]) => ({
+  title,
+  items: entries
+    .filter((entry) => entry.data.category === category)
+    .map(({ data }) => ({
+      title: data.title,
+      description: data.description,
+      date: data.date,
+      meta: [data.location, data.method].filter(Boolean).join(' · '),
+    })),
+}));
 ---
-<BaseLayout title="自然" description="自然观察、行走、摄影与地方记忆。"><h1>自然</h1><p class="page-intro">只展示已核对的公开观察，不公开精确住址、私人定位或敏感路线。</p><DirectoryList items={items} /></BaseLayout>
+
+<BaseLayout title="自然" description="自然观察、行走、摄影与地方记忆。">
+  <h1>自然</h1>
+  <p class="page-intro">只展示已核对的公开观察，不公开精确住址、私人定位或敏感路线。</p>
+  <DatedTextList groups={groups} emptyMessage="暂无已核对并公开的自然观察。" />
+</BaseLayout>

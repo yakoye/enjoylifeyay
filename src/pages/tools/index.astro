@@ -2,9 +2,30 @@
 import { getCollection } from 'astro:content';
 import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-const labels = { 'pcie-hardware':'PCIe / 硬件工具', 'browser-extension':'浏览器扩展', 'developer-productivity':'开发效率工具', 'writing-media':'文字、图片与记录工具', life:'生活工具' } as const;
-const statuses = { available:'可用', development:'开发中', archived:'已归档', 'link-pending':'公开地址待确认' } as const;
+
+const categoryOrder = [
+  ['browser-extension', '浏览器扩展'],
+  ['pcie-hardware', 'PCIe / 硬件工具'],
+  ['developer-productivity', '开发效率工具'],
+  ['writing-media', '文字、图片与记录工具'],
+  ['life', '生活工具'],
+] as const;
+
 const entries = await getCollection('tools', ({ data }) => !data.draft);
-const items = entries.map(({ data }) => ({ title:data.name, description:data.description, meta:labels[data.category], status:statuses[data.status], externalUrl:data.url || undefined }));
+const groups = categoryOrder.map(([category, title]) => ({
+  title,
+  items: entries
+    .filter((entry) => entry.data.category === category)
+    .map(({ data }) => ({
+      title: data.name,
+      description: data.description,
+      href: data.url || data.githubUrl || undefined,
+    })),
+}));
 ---
-<BaseLayout title="工具" description="可直接使用或已确认在开发中的工具目录。"><h1>工具</h1><p class="page-intro">在线地址和源码链接只在确认公开后显示；未知地址保持为空。</p><DirectoryList items={items} /></BaseLayout>
+
+<BaseLayout title="工具" description="在线工具和浏览器扩展目录。">
+  <h1>工具</h1>
+  <p class="page-intro">在线工具和浏览器扩展。只展示已经确认可以公开的信息。</p>
+  <DirectoryList groups={groups} />
+</BaseLayout>

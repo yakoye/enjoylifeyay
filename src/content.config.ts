@@ -70,6 +70,7 @@ const projects = defineCollection({
     name: z.string(),
     description: z.string(),
     status: z.enum(['active', 'development', 'archived', 'private', 'link-pending']),
+    category: z.enum(['browser-extension', 'web-tool', 'knowledge-library', 'private']).default('web-tool'),
     startedAt: optionalDate,
     techStack: z.array(z.string()).default([]),
     url: optionalUrl,
