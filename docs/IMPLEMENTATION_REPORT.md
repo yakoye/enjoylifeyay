@@ -48,6 +48,6 @@
 - 正式地址：`https://enjoylifeyay.pages.dev`
 - 构建命令：`npm run build`
 - 输出目录：`dist`
-- Node：22.12+（Node 22）
+- Node：24.x（Node 24 LTS）
 
 部署前必须执行测试、Astro check、生产构建和链接检查。旧项目 `enjoylife-116` 仅保留迁移历史，不作为 canonical。FamilyJourney 的 R2、D1、照片和家庭数据不得接入本站。

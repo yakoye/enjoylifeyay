@@ -1151,7 +1151,7 @@ docs/content-migration-notes.md
 ```text
 仓库名：enjoy-life
 分支：main / dev
-Node：22（使用 .nvmrc 固定）
+Node：24（使用 `.nvmrc` 固定）
 包管理器：npm（除非仓库已明确统一为 pnpm）
 ```
 
@@ -1163,7 +1163,7 @@ Production branch: main
 Build command: npm run build
 Build output directory: dist
 Root directory: /
-Node version: 22
+Node version: 24
 ```
 
 - 首次部署前，先在本地完成：`npm ci && npm run build`；

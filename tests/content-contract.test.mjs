@@ -9,8 +9,8 @@ test('Astro 使用静态输出且内容 schema 保留严格枚举', async () => 
   const nvmrc = (await readFile(new URL('../.nvmrc', import.meta.url), 'utf8')).trim();
 
   assert.match(astroConfig, /output:\s*['"]static['"]/);
-  assert.equal(packageJson.engines.node, '>=22.12.0 <23');
-  assert.equal(nvmrc, '22.12.0');
+  assert.equal(packageJson.engines.node, '>=24.0.0 <25');
+  assert.equal(nvmrc, '24');
   assert.match(schema, /from ['"]astro\/zod['"]/);
   assert.doesNotMatch(schema, /import\s*\{[^}]*\bz\b[^}]*\}\s*from\s*['"]astro:content['"]/);
   assert.doesNotMatch(schema, /z\.string\(\)\.url\(\)/);

@@ -15,9 +15,16 @@
 | Build command | `npm run build` |
 | Build output directory | `dist` |
 | Root directory | `/` |
-| Node version | `22.12.0` 或更高的 Node 22 |
+| Node version | `24.x`（建议 Node 24 LTS） |
 
 正式 URL 的唯一代码配置位置是 `src/config/site.ts`。Canonical、Open Graph、RSS、Sitemap 和 robots 均从该配置生成。
+
+## Node 24 说明
+
+- 本仓库的 `package.json` 要求 Node `>=24.0.0 <25`。
+- 使用 Git 集成部署时，请在 Cloudflare Pages 的构建环境选择 Node 24。
+- 使用 Wrangler Direct Upload 时，先在本地使用 Node 24 构建 `dist/`，再上传即可。
+- Windows 若出现 Rollup `EPERM ... rollup.win32-x64-msvc.node`，这是文件被占用，不是 Node 24 不兼容：关闭开发服务器、VS Code 中的项目窗口和相关 Node 进程，删除 `node_modules` 后重试 `npm ci`。
 
 ## 发布前检查
 

@@ -6,7 +6,9 @@
 
 ## 本地开发
 
-要求 Node.js 22.12+、npm。
+要求 Node.js 24.x、npm。建议使用 Node 24 LTS。
+
+> 此仓库已按 Node 24 维护；`package.json` 与 `.nvmrc` 均固定为 Node 24。
 
 ```bash
 npm install
