@@ -1,5 +1,48 @@
 # 构建、预览与发布（Windows PowerShell）
 
+## 一键本地检查并自动打开网页
+
+日常改完文章、图片或样式后，优先双击仓库根目录的：
+
+```text
+preview-local.cmd
+```
+
+或在 PowerShell 执行：
+
+```powershell
+npm run preview:local
+```
+
+脚本会完成：
+
+```text
+npm run check
+npm test
+npm run audit:toc
+npm run build
+npm run check:links
+npm run preview -- --host 127.0.0.1 --port 4321
+```
+
+然后自动打开 `http://127.0.0.1:4321/`。
+
+首次使用、依赖被清理，或 `package.json` / `package-lock.json` 有变化时，用：
+
+```powershell
+preview-local.cmd -Install
+```
+
+它会先执行 `npm ci`。正常写文章时不要每次都强制 `npm ci`，这样更快，也能减少 Windows 锁住 Rolldown / Rollup 原生模块的概率。
+
+停止后台预览：
+
+```text
+stop-local-preview.cmd
+```
+
+完整参数和故障排查见 [`V0.11.2_ONE_CLICK_LOCAL_PREVIEW.md`](V0.11.2_ONE_CLICK_LOCAL_PREVIEW.md)。
+
 本仓库按 **Node.js 24.x** 维护。请在仓库根目录执行命令：
 
 ```powershell
@@ -234,7 +277,12 @@ npm ci
 仓库还提供辅助脚本：
 
 ```powershell
+# 只清理 node_modules、dist、.astro
 powershell -ExecutionPolicy Bypass -File .\scripts\reset-local.ps1
+
+# 同时结束正在运行的 Node 开发服务器；
+# 若没有 node.exe，该脚本会正常提示并继续，不会报错。
+powershell -ExecutionPolicy Bypass -File .\scripts\reset-local.ps1 -StopAllNode
 ```
 
 若仍然无法删除，最省时间的处理是重启电脑，重启后不要先打开 VS Code 或启动开发服务器，先执行清理和 `npm ci`。如果 Windows Defender 的“受控文件夹访问”阻止 Documents 目录写入，可以把仓库移到例如 `D:\code\EnjoyLife`，或为 `node.exe` 放行。
@@ -301,3 +349,7 @@ npm run comments:probe -- pcie-msi-msix-introduction
 ```
 
 确认线上 API 返回 `configured: true`。
+
+### Windows 路径说明（v0.11.3）
+
+`npm test` 与 `npm run audit:toc` 已使用跨平台的 `fileURLToPath()` 处理文章目录。若你看到 `C:\C:\Users\...` 这种重复盘符错误，说明仍在使用 v0.11.2 或更早版本的测试/审计脚本；请覆盖 `tests/v10-comments-toc-contract.test.mjs` 与 `scripts/audit-writing-toc.mjs`，或直接使用 v0.11.3。

@@ -4,6 +4,20 @@
 
 正式地址：<https://enjoylifeyay.pages.dev>
 
+## v0.11.2：一键本地检查与预览
+
+- 新增 `preview-local.cmd`：双击后自动完成检查、测试、目录审计、构建、链接检查，启动本地预览并打开浏览器。
+- 新增 `scripts/local-preview.ps1` 与 `scripts/stop-local-preview.ps1`：预览默认使用 `http://127.0.0.1:4321/`，可自动停止上一次由本站脚本启动的预览。
+- 依赖已安装时，普通预览会跳过重复的 `npm ci`；首次使用、清理后或依赖变更时使用 `preview-local.cmd -Install`。
+- 新增 `stop-local-preview.cmd`：无需寻找 Node 进程，即可关闭本脚本启动的本地预览。
+- 详细说明见 [`docs/V0.11.2_ONE_CLICK_LOCAL_PREVIEW.md`](docs/V0.11.2_ONE_CLICK_LOCAL_PREVIEW.md)。
+
+## v0.11.1：Windows 本地清理脚本修复
+
+- 修复 `scripts/reset-local.ps1 -StopAllNode` 在电脑上没有任何 `node.exe` 进程时仍显示 `taskkill ... node.exe not found` 的问题。
+- 现在没有 Node 进程时会正常显示：`No node.exe processes are running; continuing.`，随后继续清理 `node_modules`、`dist` 和 `.astro`。
+- 该提示不是构建失败；它只说明当前没有需要结束的 Node 开发服务器。
+
 ## v0.11：MSI / MSI-X 测试文章与评论命令行管理
 
 本版在 v0.10 基础上完成：
@@ -58,9 +72,45 @@
 - 专题文章数改为简洁的 `（2篇）`，不再显示“已公开文章”。
 - 补充图片长期管理方案：新文章使用不随 Markdown 文件名变化的 `mediaKey`；旧 EnjoyLifeBlog 图片可通过脚本迁入 `public/images/`，随后由 Cloudflare Pages 提供给访问者。
 
+## 最常用：一键检查并打开本地网页
+
+日常改完 Markdown、图片、CSS 或页面后，直接双击仓库根目录的：
+
+```text
+preview-local.cmd
+```
+
+它会自动完成检查、测试、目录审计、构建、链接检查，并打开：
+
+```text
+http://127.0.0.1:4321/
+```
+
+第一次使用、刚清理本地依赖、或修改了 `package.json` / `package-lock.json` 后，使用：
+
+```powershell
+preview-local.cmd -Install
+```
+
+停止预览：
+
+```text
+stop-local-preview.cmd
+```
+
+也可以用 npm：
+
+```powershell
+npm run preview:local
+npm run preview:local:install
+npm run preview:local:stop
+```
+
+完整说明见 [`docs/V0.11.2_ONE_CLICK_LOCAL_PREVIEW.md`](docs/V0.11.2_ONE_CLICK_LOCAL_PREVIEW.md)。
+
 ## 本地开发
 
-首次安装依赖后，可以启动开发服务器：
+需要持续编辑时可以启动开发服务器：
 
 ```powershell
 npm ci
@@ -220,3 +270,7 @@ npm run comments:probe -- pcie-msi-msix-introduction
 ```
 
 完整说明见 [`docs/COMMENTS_D1.md`](docs/COMMENTS_D1.md) 与 [`docs/V0.11_COMMENTS_ADMIN_MSI.md`](docs/V0.11_COMMENTS_ADMIN_MSI.md)。
+
+## v0.11.3：Windows 路径修复
+
+Windows 下运行 `npm test` 或 `npm run audit:toc` 时，如果旧版报出类似 `C:\\C:\\Users\...` 的重复盘符路径错误，请覆盖本版。该问题已通过 `fileURLToPath()` 修复。详见 `docs/V0.11.3_WINDOWS_PATH_FIX.md`。

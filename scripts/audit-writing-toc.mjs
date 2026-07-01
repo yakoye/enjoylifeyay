@@ -1,12 +1,13 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const directory = new URL('../src/content/writing/', import.meta.url);
+const directory = fileURLToPath(new URL('../src/content/writing/', import.meta.url));
 const filenames = (await readdir(directory)).filter((name) => /\.mdx?$/.test(name)).sort();
 let failures = 0;
 
 for (const filename of filenames) {
-  const content = await readFile(join(directory.pathname, filename), 'utf8');
+  const content = await readFile(join(directory, filename), 'utf8');
   const isDraft = /^draft:\s*true\s*$/m.test(content);
   if (isDraft) continue;
   const count = (content.match(/^#{2,4}\s+\S+/gm) || []).length;

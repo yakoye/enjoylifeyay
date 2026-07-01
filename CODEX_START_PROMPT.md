@@ -44,3 +44,8 @@ npm run check:links
 - 评论 D1 绑定名称固定为 `COMMENTS_DB`；可选变量 `COMMENTS_MODERATION=auto` 让新评论自动公开。
 - 评论管理员使用 `npm run comments:pending`、`npm run comments:approve -- <ID>`、`npm run comments:delete -- <ID>`，不要求网页后台。
 - 文章 `2024-05-24-pcie-msi-msix-introduction.mdx` 是本地图片、表格、代码、引用、目录的综合回归测试文。
+
+
+## v0.11.2：本地一键预览
+
+日常本地查看站点时，使用根目录 `preview-local.cmd`；第一次安装依赖或依赖变化时使用 `preview-local.cmd -Install`。脚本会检查、测试、构建、启动 `http://127.0.0.1:4321/` 并自动打开浏览器。停止时使用 `stop-local-preview.cmd`。

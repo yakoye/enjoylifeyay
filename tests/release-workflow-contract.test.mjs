@@ -19,6 +19,10 @@ test('仓库记录完整的 Windows 构建、预览与 Wrangler 发布流程', a
   }
   await access(new URL('../scripts/reset-local.ps1', import.meta.url));
   await access(new URL('../scripts/verify-and-deploy.ps1', import.meta.url));
+  await access(new URL('../scripts/local-preview.ps1', import.meta.url));
+  await access(new URL('../scripts/stop-local-preview.ps1', import.meta.url));
+  await access(new URL('../preview-local.cmd', import.meta.url));
+  await access(new URL('../stop-local-preview.cmd', import.meta.url));
 });
 
 test('v0.5 保留旧博客公开文章与来源台账', async () => {
@@ -30,4 +34,34 @@ test('v0.5 保留旧博客公开文章与来源台账', async () => {
   assert.match(manifest, /EnjoyLifeBlog,自我突围 施一公.*?,migrated,/);
   await access(new URL('2024-06-12-pcie-low-power.md', writingDir));
   await access(new URL('2024-04-25-common-flowers.md', writingDir));
+});
+
+
+test('v0.11.2 提供一键检查、构建并打开本地预览的 Windows 脚本', async () => {
+  const packageJson = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
+  const previewScript = await readFile(new URL('../scripts/local-preview.ps1', import.meta.url), 'utf8');
+  const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
+  const guide = await readFile(new URL('../docs/BUILD_PREVIEW_DEPLOY.md', import.meta.url), 'utf8');
+
+  assert.equal(packageJson.scripts['preview:local'], 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\local-preview.ps1');
+  assert.equal(packageJson.scripts['preview:local:install'], 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\local-preview.ps1 -Install');
+  assert.equal(packageJson.scripts['preview:local:stop'], 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\stop-local-preview.ps1');
+
+  for (const fragment of [
+    "Invoke-NpmCommand @('run', 'check')",
+    "Invoke-NpmCommand @('test')",
+    "Invoke-NpmCommand @('run', 'audit:toc')",
+    "Invoke-NpmCommand @('run', 'build')",
+    "Invoke-NpmCommand @('run', 'check:links')",
+    'http://${hostName}:$Port/',
+    'Start-Process $siteUrl',
+  ]) {
+    assert.ok(previewScript.includes(fragment), `一键预览脚本缺少 ${fragment}`);
+  }
+
+  for (const text of [readme, guide]) {
+    assert.ok(text.includes('preview-local.cmd'));
+    assert.ok(text.includes('stop-local-preview.cmd'));
+    assert.ok(text.includes('preview-local.cmd -Install'));
+  }
 });

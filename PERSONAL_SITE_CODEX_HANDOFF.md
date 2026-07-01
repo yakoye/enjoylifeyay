@@ -1322,3 +1322,8 @@ Codex 不得把本项目做成以下任意一种：
 ## v0.11 追加交接
 
 评论从 v0.10 的纯审核制扩展为：默认审核 + 可选 `COMMENTS_MODERATION=auto` 自动公开；邮箱可选且永不公开。远端 D1 管理走仓库内 `scripts/comments-admin.mjs`，不要新建公开管理后台或把管理员权限放在前端。
+
+
+## v0.11.2：本地一键预览
+
+日常本地查看站点时，使用根目录 `preview-local.cmd`；第一次安装依赖或依赖变化时使用 `preview-local.cmd -Install`。脚本会检查、测试、构建、启动 `http://127.0.0.1:4321/` 并自动打开浏览器。停止时使用 `stop-local-preview.cmd`。

@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import { readdir, readFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
-const writingDir = new URL('../src/content/writing/', import.meta.url);
+const writingDir = fileURLToPath(new URL('../src/content/writing/', import.meta.url));
 
 test('v0.10 每篇公开文章都有可展开的目录', async () => {
   const articleLayout = await readFile(new URL('../src/layouts/ArticleLayout.astro', import.meta.url), 'utf8');
@@ -12,7 +13,7 @@ test('v0.10 每篇公开文章都有可展开的目录', async () => {
 
   const filenames = (await readdir(writingDir)).filter((name) => /\.mdx?$/.test(name));
   for (const filename of filenames) {
-    const content = await readFile(join(writingDir.pathname, filename), 'utf8');
+    const content = await readFile(join(writingDir, filename), 'utf8');
     if (/^draft:\s*true\s*$/m.test(content)) continue;
     assert.match(content, /^#{2,4}\s+\S+/m, `${filename} 缺少用于目录的分节标题`);
   }

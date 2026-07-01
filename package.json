@@ -1,6 +1,6 @@
 {
   "name": "enjoy-life",
-  "version": "0.11.0",
+  "version": "0.11.3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -24,7 +24,10 @@
     "comments:reject": "node scripts/comments-admin.mjs reject",
     "comments:delete": "node scripts/comments-admin.mjs delete",
     "comments:migrate": "node scripts/comments-admin.mjs migrate-email",
-    "comments:probe": "node scripts/comments-admin.mjs probe"
+    "comments:probe": "node scripts/comments-admin.mjs probe",
+    "preview:local": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\local-preview.ps1",
+    "preview:local:install": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\local-preview.ps1 -Install",
+    "preview:local:stop": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\stop-local-preview.ps1"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.0",
