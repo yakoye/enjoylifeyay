@@ -30,11 +30,10 @@ test('首页和栏目页由集合或独立数据驱动', async () => {
   assert.match(home, /最近写作/);
   assert.match(home, /正在做/);
   const writing = await readFile(new URL('../src/pages/writing/index.astro', import.meta.url), 'utf8');
-  assert.match(writing, /WritingFilters/);
-  const filters = await readFile(new URL('../src/components/WritingFilters.astro', import.meta.url), 'utf8');
-  assert.match(filters, /URLSearchParams/);
+  assert.match(writing, /WritingList/);
+  assert.doesNotMatch(writing, /WritingFilters/);
   const writingList = await readFile(new URL('../src/components/WritingList.astro', import.meta.url), 'utf8');
-  assert.match(writingList, /data-domain/);
+  assert.match(writingList, /dated-list-item/);
 });
 
 test('公开页面不保留骨架期长期占位语', async () => {

@@ -26,9 +26,9 @@ test('v0.10 文章末尾提供极简评论入口与 D1 审核 API', async () => 
   const docs = await readFile(new URL('../docs/COMMENTS_D1.md', import.meta.url), 'utf8');
 
   assert.match(articleLayout, /<Comments article=\{entry\.id\}/);
-  assert.match(comments, /评论需审核后显示；不收集邮箱。/);
+  assert.match(comments, /邮箱（可选）/);
   assert.match(comments, /昵称（可选）/);
-  assert.doesNotMatch(comments, /Email/);
+  assert.match(comments, /email/);
   assert.match(api, /env\.COMMENTS_DB/);
   assert.match(api, /'pending'/);
   assert.match(api, /'approved'/);

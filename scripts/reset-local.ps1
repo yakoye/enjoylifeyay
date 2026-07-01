@@ -8,9 +8,26 @@ $projectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $projectRoot
 
 if ($StopAllNode) {
-  Write-Host 'Stopping all node.exe processes...'
-  taskkill /F /T /IM node.exe 2>$null | Out-Null
-  Start-Sleep -Seconds 2
+  # Do not call taskkill directly: when no node.exe process exists, taskkill
+  # writes an error and PowerShell treats the native command failure as noise.
+  # Get-Process with SilentlyContinue makes the no-process case a normal path.
+  $nodeProcesses = @(Get-Process -Name 'node' -ErrorAction SilentlyContinue)
+
+  if ($nodeProcesses.Count -eq 0) {
+    Write-Host 'No node.exe processes are running; continuing.'
+  } else {
+    Write-Host "Stopping $($nodeProcesses.Count) node.exe process(es)..."
+
+    foreach ($nodeProcess in $nodeProcesses) {
+      try {
+        Stop-Process -Id $nodeProcess.Id -Force -ErrorAction Stop
+      } catch {
+        Write-Warning "Could not stop node.exe process $($nodeProcess.Id): $($_.Exception.Message)"
+      }
+    }
+
+    Start-Sleep -Seconds 2
+  }
 }
 
 foreach ($path in @('node_modules', 'dist', '.astro')) {

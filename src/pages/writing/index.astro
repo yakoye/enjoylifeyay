@@ -1,20 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
-import WritingFilters from '../../components/WritingFilters.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const writing = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const domains: [string, string][] = [['all','全部'],['technology','技术'],['reading','阅读'],['life','生活'],['nature','自然'],['tool','工具']];
-const formats: [string, string][] = [['all','全部'],['article','长文'],['answer','问答'],['note','短记'],['guide','操作指南'],['reference','清单 / 速查'],['project-log','项目日志'],['observation','自然观察']];
 ---
 
 <BaseLayout title="写作" description="技术、阅读、生活、自然与工具相关的长期写作。">
   <h1>写作</h1>
   <p class="page-intro">按首次发布时间排列。旧文章迁入本站后，仍保留原始时间与来源。</p>
-  <WritingFilters domains={domains} formats={formats} />
   <WritingList entries={writing} />
-  <p class="filter-empty" hidden>没有符合当前筛选条件的文章。</p>
   <p class="aux-links"><a href="/archive/">按年份归档</a> · <a href="/tags/">标签索引</a></p>
 </BaseLayout>

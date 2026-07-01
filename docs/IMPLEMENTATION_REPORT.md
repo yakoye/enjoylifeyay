@@ -160,3 +160,17 @@ npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
 ### Cloudflare Pages
 
 `public/images/` 会在 Astro 构建时进入 `dist/`，再随 `npx wrangler pages deploy dist --project-name enjoylifeyay --branch main` 发布。第一阶段不需要 R2；R2 仅在公开图片规模增长到不适合版本库维护时再单独启用。
+
+
+## v0.11 更新
+
+写作页已移除领域与形式筛选；评论支持可选邮箱、命令行管理与可选自动公开模式。参见 `docs/COMMENTS_D1.md`、`docs/V0.11_COMMENTS_ADMIN_MSI.md`。
+
+# v0.11 补充：评论命令行管理与 MSI / MSI-X 格式验证
+
+- 移除写作页未稳定的领域 / 形式筛选，改为纯按日期文本目录。
+- 评论区增加可选邮箱、线性图标、单行自适应留言框；邮箱不在公开页面输出。
+- 新增 `COMMENTS_MODERATION=auto` 变量控制自动公开；默认保留审核模式。
+- 新增远程 D1 命令：状态、全部、待审、通过、拒绝、删除、邮箱迁移及线上 API 探测。
+- 新增 `2024-05-24-pcie-msi-msix-introduction.mdx` 及四个本地图片资源，验证图片、表格、代码块、引用和目录。
+- 发布后使用 `npm run comments:probe -- pcie-msi-msix-introduction` 确认线上 Pages Function 能访问 `COMMENTS_DB`。

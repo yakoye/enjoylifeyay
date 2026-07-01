@@ -37,3 +37,10 @@ npm run check:links
 ## v0.7 补充
 
 优先遵循 `docs/V0.7_LAYOUT_MEDIA.md` 和 `docs/MEDIA_MANAGEMENT.md` 的顶栏、归档和媒体规则。
+
+## v0.11 当前状态
+
+- 写作页不再保留领域 / 形式筛选；按日期文本目录为正式方案。
+- 评论 D1 绑定名称固定为 `COMMENTS_DB`；可选变量 `COMMENTS_MODERATION=auto` 让新评论自动公开。
+- 评论管理员使用 `npm run comments:pending`、`npm run comments:approve -- <ID>`、`npm run comments:delete -- <ID>`，不要求网页后台。
+- 文章 `2024-05-24-pcie-msi-msix-introduction.mdx` 是本地图片、表格、代码、引用、目录的综合回归测试文。

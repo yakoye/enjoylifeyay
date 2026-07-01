@@ -278,3 +278,26 @@ npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
 ```
 
 图片目录规则、R2 何时再用和隐私边界见：`docs/MEDIA_MANAGEMENT.md`。
+
+
+## v0.11 更新
+
+写作页已移除领域与形式筛选；评论支持可选邮箱、命令行管理与可选自动公开模式。参见 `docs/COMMENTS_D1.md`、`docs/V0.11_COMMENTS_ADMIN_MSI.md`。
+
+## v0.11：部署评论 Function 的关键条件
+
+`functions/api/comments.js` 不是 Astro 构建产物，不能复制到 `dist/`。请始终在项目**根目录**执行：
+
+```powershell
+npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
+```
+
+Wrangler 会在命令运行目录发现根目录的 `functions/` 并随 Pages 部署上传 Function。不要先 `cd dist` 再发布，否则线上可能只得到静态页面而没有 `/api/comments`。
+
+绑定 `COMMENTS_DB` 或变量 `COMMENTS_MODERATION` 有变化后，都要重新运行上面的部署命令；随后用：
+
+```powershell
+npm run comments:probe -- pcie-msi-msix-introduction
+```
+
+确认线上 API 返回 `configured: true`。

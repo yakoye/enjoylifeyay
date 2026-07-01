@@ -14,6 +14,8 @@ const cleanText = (value, maxLength) => String(value ?? '')
   .slice(0, maxLength);
 
 const isValidArticleSlug = (value) => /^[a-z0-9][a-z0-9-]{0,119}$/i.test(value);
+const isValidEmail = (value) => !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const moderationMode = (env) => env.COMMENTS_MODERATION === 'auto' ? 'auto' : 'pending';
 
 const formatComment = (row) => ({
   id: row.id,
@@ -34,6 +36,7 @@ function unavailable() {
   return json({
     configured: false,
     comments: [],
+    moderation: 'pending',
     message: '评论服务尚未完成配置。',
   });
 }
@@ -41,9 +44,10 @@ function unavailable() {
 export async function onRequestGet(context) {
   const { request, env } = context;
   const article = new URL(request.url).searchParams.get('article') || '';
+  const moderation = moderationMode(env);
 
   if (!isValidArticleSlug(article)) {
-    return json({ configured: true, comments: [], message: '文章标识无效。' }, { status: 400 });
+    return json({ configured: true, moderation, comments: [], message: '文章标识无效。' }, { status: 400 });
   }
 
   if (!env.COMMENTS_DB) return unavailable();
@@ -53,7 +57,7 @@ export async function onRequestGet(context) {
       'SELECT id, author, body, created_at FROM comments WHERE article_slug = ? AND status = ? ORDER BY created_at ASC, id ASC',
     ).bind(article, 'approved').all();
 
-    return json({ configured: true, comments: (result.results || []).map(formatComment) });
+    return json({ configured: true, moderation, comments: (result.results || []).map(formatComment) });
   } catch (error) {
     console.error('comments get failed', error);
     return unavailable();
@@ -62,43 +66,50 @@ export async function onRequestGet(context) {
 
 export async function onRequestPost(context) {
   const { request, env } = context;
+  const moderation = moderationMode(env);
 
   if (!env.COMMENTS_DB) {
-    return json({ ok: false, message: '评论服务尚未完成配置。' }, { status: 503 });
+    return json({ ok: false, moderation, message: '评论服务尚未完成配置。' }, { status: 503 });
   }
 
   const contentType = request.headers.get('content-type') || '';
   if (!contentType.includes('application/json')) {
-    return json({ ok: false, message: '请求格式错误。' }, { status: 415 });
+    return json({ ok: false, moderation, message: '请求格式错误。' }, { status: 415 });
   }
 
   let payload;
   try {
     payload = await request.json();
   } catch {
-    return json({ ok: false, message: '评论内容无法读取。' }, { status: 400 });
+    return json({ ok: false, moderation, message: '评论内容无法读取。' }, { status: 400 });
   }
 
   const article = cleanText(payload.article, 120);
   const author = cleanText(payload.author, 40) || '匿名';
+  const email = cleanText(payload.email, 254).toLowerCase();
   const body = cleanText(payload.body, 1500);
   const honeypot = cleanText(payload.website, 200);
 
   // Bots that fill invisible fields receive a neutral success response and are not stored.
   if (honeypot) {
-    return json({ ok: true, pending: true, message: '评论已提交，审核后显示。' }, { status: 202 });
+    return json({ ok: true, pending: moderation === 'pending', moderation, message: moderation === 'auto' ? '评论已发布。' : '评论已提交，审核后显示。' }, { status: 202 });
   }
 
   if (!isValidArticleSlug(article)) {
-    return json({ ok: false, message: '文章标识无效。' }, { status: 400 });
+    return json({ ok: false, moderation, message: '文章标识无效。' }, { status: 400 });
+  }
+
+  if (!isValidEmail(email)) {
+    return json({ ok: false, moderation, message: '邮箱格式不正确。' }, { status: 400 });
   }
 
   if (!body) {
-    return json({ ok: false, message: '请填写评论内容。' }, { status: 400 });
+    return json({ ok: false, moderation, message: '请填写评论内容。' }, { status: 400 });
   }
 
   const createdAt = Math.floor(Date.now() / 1000);
   const ipHash = await sha256(getClientIp(request) || 'unknown');
+  const status = moderation === 'auto' ? 'approved' : 'pending';
 
   try {
     const recent = await env.COMMENTS_DB.prepare(
@@ -106,16 +117,21 @@ export async function onRequestPost(context) {
     ).bind(ipHash, createdAt - 24 * 60 * 60).first();
 
     if (Number(recent?.count || 0) >= 5) {
-      return json({ ok: false, message: '评论提交过于频繁，请明天再试。' }, { status: 429 });
+      return json({ ok: false, moderation, message: '评论提交过于频繁，请明天再试。' }, { status: 429 });
     }
 
     await env.COMMENTS_DB.prepare(
-      'INSERT INTO comments (id, article_slug, author, body, status, created_at, ip_hash) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    ).bind(crypto.randomUUID(), article, author, body, 'pending', createdAt, ipHash).run();
+      'INSERT INTO comments (id, article_slug, author, email, body, status, created_at, ip_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+    ).bind(crypto.randomUUID(), article, author, email, body, status, createdAt, ipHash).run();
 
-    return json({ ok: true, pending: true, message: '评论已提交，审核通过后显示。' }, { status: 202 });
+    return json({
+      ok: true,
+      pending: status === 'pending',
+      moderation,
+      message: status === 'approved' ? '评论已发布。' : '评论已提交，审核通过后显示。',
+    }, { status: 202 });
   } catch (error) {
     console.error('comments post failed', error);
-    return json({ ok: false, message: '评论暂时无法保存，请稍后再试。' }, { status: 503 });
+    return json({ ok: false, moderation, message: '评论暂时无法保存，请稍后再试。' }, { status: 503 });
   }
 }

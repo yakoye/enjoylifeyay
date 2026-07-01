@@ -1,0 +1,144 @@
+---
+title: "PCIe MSI / MSI-X：Capability、Table 与 Linux 驱动接口"
+description: "从 MSI/MSI-X 的消息写中断机制、Capability 布局到 Linux PCI IRQ 接口的整理；同时用于验证本站图片、表格、代码与目录排版。"
+date: 2024-05-24
+updated: null
+source: EnjoyLifeBlog
+sourceUrl: "https://globetreklog.github.io/EnjoyLifeBlog/2024/05/24/PCIe-MSI-MSIX%E7%AE%80%E4%BB%8B/"
+migratedAt: 2026-07-01
+domain: technology
+format: "article"
+topics: ["PCIe", "Interrupt", "Linux"]
+tags: ["PCIe", "MSI", "MSI-X", "Linux"]
+series: ["pcie-high-speed-interconnect", "chip-firmware-soc"]
+legacy: true
+cover: ""
+coverAlt: ""
+mediaKey: "pcie-msi-msix-introduction"
+draft: false
+featured: true
+---
+
+import Figure from '../../components/Figure.astro';
+
+> 这篇内容从旧 EnjoyLifeBlog 迁入，保留原始发布日期与原文入口。旧文中已经标注参考了其他资料；本页作为重新整理和格式验证版本，关键设计应以 PCIe 规范、Linux 内核源码和具体平台实现为准。
+
+## MSI / MSI-X 的基本思路
+
+传统 `INTx` 依赖引脚电平表达中断；而 MSI（Message Signaled Interrupt）把一次中断请求表达为一次 **Memory Write TLP**：设备向系统指定的 Message Address 写入 Message Data，平台的中断控制器据此接收并分发中断。
+
+这种方式的关键优势是：中断请求不再依赖共享引脚；设备的“数据写”与“中断消息写”保持写入顺序；多队列设备也能用多个向量把不同事件分开处理。
+
+| 项目 | MSI | MSI-X |
+| --- | --- | --- |
+| 最大向量数 | 32 | 2048 |
+| 向量编号 | 请求的向量通常连续 | 向量可独立配置 |
+| 配置位置 | MSI Capability | MSI-X Capability + BAR 中的 MSI-X Table |
+| 单向量屏蔽 | 可选 Per-Vector Masking | 在 MSI-X Table 的 Vector Control 中配置 |
+
+## MSI Capability
+
+MSI Capability 的 Capability ID 为 `0x05`。它保存 Message Control、Message Address、Message Data，以及可选的 Mask / Pending 位图。
+
+<Figure
+  src="/images/articles/pcie-msi-msix-introduction/msi-capability-32bit.png"
+  alt="32 位 Message Address 形式的 MSI Capability 结构图"
+  caption="MSI Capability：32 位 Message Address 与 Per-Vector Masking 形式。"
+  credit="图源：旧 EnjoyLifeBlog 文章资源"
+/>
+
+### Message Control 的关键位
+
+<Figure
+  src="/images/articles/pcie-msi-msix-introduction/msi-message-control.png"
+  alt="MSI Message Control 寄存器的关键位示意"
+  caption="Message Control 中的 MSI Enable、Multiple Message Capable、Multiple Message Enable 等字段。"
+  credit="图源：旧 EnjoyLifeBlog 文章资源"
+/>
+
+- `MSI Enable`：控制 MSI 是否启用。
+- `Multiple Message Capable`：设备声明自身最多可支持多少个 MSI 向量。
+- `Multiple Message Enable`：软件实际启用的 MSI 向量数量，以 `2^n` 表达。
+- `64-bit Address Capable`：决定 Capability 后续的地址字段布局。
+- `Per-Vector Masking Capable`：表示是否有每向量屏蔽及 Pending 位图。
+
+## MSI-X Capability 与 Table
+
+MSI-X Capability 的 Capability ID 为 `0x11`。它不把每个向量的 Message Address / Data 全部塞进 Capability，而是通过 Table BIR 和 Table Offset 指向设备 BAR 空间中的 MSI-X Table。
+
+<Figure
+  src="/images/articles/pcie-msi-msix-introduction/msix-capability.png"
+  alt="MSI-X Capability 结构图，包含 Table 和 PBA 的 BIR 及 Offset"
+  caption="MSI-X Capability：Table 与 Pending Bit Array 的位置由 BIR 和 Offset 描述。"
+  credit="图源：旧 EnjoyLifeBlog 文章资源"
+/>
+
+### MSI-X Table Entry
+
+每个 MSI-X Table Entry 对应一个中断向量，包含地址、数据和 Vector Control。软件可以按向量配置不同目标 CPU 或中断消息；设备发起中断时读取相应 Entry 的地址与数据形成 Memory Write TLP。
+
+<Figure
+  src="/images/articles/pcie-msi-msix-introduction/msix-table.png"
+  alt="MSI-X Table Entry 的连续布局图"
+  caption="MSI-X Table：每个 Entry 包含 Message Address、Message Data 与 Vector Control。"
+  credit="图源：旧 EnjoyLifeBlog 文章资源"
+/>
+
+## 如何用 lspci 确认能力
+
+`lspci -v` 可以看到设备是否声明并启用了 MSI / MSI-X。下面的输出中 `Enable+` 表示 MSI 已经被启用；`Count=1/1` 表示实际启用数量与设备能力。
+
+```text
+00:16.0 PCI bridge: VMware PCI Express Root Port
+        Flags: bus master, fast devsel, latency 0, IRQ 32
+        Capabilities: [8c] MSI: Enable+ Count=1/1 Maskable+ 64bit+
+        Kernel driver in use: pcieport
+```
+
+出现 `MSI-X: Enable+` 时，也应同时检查 Table BIR、Table Offset 与 BAR 映射是否符合预期；不要只看到 Capability 就认为驱动已经完成了全部向量配置。
+
+## Linux 驱动中的通用接口
+
+现代 Linux 驱动通常使用 `pci_alloc_irq_vectors()` 请求中断向量，而不应优先使用较早的单独 MSI / MSI-X 接口。调用者给出最小、最大向量数和允许的类型；内核选择可用方式并完成相应的 Capability 与平台中断域配置。
+
+```c
+int nvec;
+
+nvec = pci_alloc_irq_vectors(
+    pdev,
+    1,
+    8,
+    PCI_IRQ_MSI | PCI_IRQ_MSIX | PCI_IRQ_AFFINITY
+);
+if (nvec < 0)
+    return nvec;
+
+for (int index = 0; index < nvec; ++index) {
+    int irq = pci_irq_vector(pdev, index);
+    /* request_irq(irq, handler, 0, "example", context); */
+}
+
+/* 在 remove 或错误回滚路径中调用。 */
+pci_free_irq_vectors(pdev);
+```
+
+### 调试时应分开确认的层次
+
+1. **设备能力**：Configuration Space 是否有 MSI / MSI-X Capability，字段是否合理。
+2. **软件配置**：驱动是否成功返回期望数量的向量；`pci_irq_vector()` 是否得到有效 IRQ。
+3. **平台中断域**：x86 APIC、ARM GIC / ITS 或其他平台控制器是否正确接收消息。
+4. **设备行为**：设备写出的 Message Address / Data 是否与软件配置一致；MSI-X 的 Function Mask、Per-Vector Mask 是否意外屏蔽。
+
+## 本文格式验证清单
+
+这篇迁入文章用于验证本站当前 Markdown / MDX 渲染是否满足长期技术写作需求：
+
+- 图片与图片说明；
+- 两列表格；
+- 行内代码；
+- 文本代码块；
+- 引用；
+- 二级、三级标题与折叠目录；
+- 长文末尾评论区。
+
+后续如需继续补充 Linux 内核调用链、ARM GICv3 ITS、MSI-X Table 写入时序等内容，可在保留本文结构的基础上逐节扩写。

@@ -1,10 +1,12 @@
 -- Enjoy Life 评论数据库（Cloudflare D1）
--- 评论默认 pending；仅 approved 评论会在公开文章页显示。
+-- 默认 pending；设置 COMMENTS_MODERATION=auto 后新评论会直接 approved。
+-- email 为可选字段，仅供站长后续联系使用，永不在公开文章页输出。
 
 CREATE TABLE IF NOT EXISTS comments (
   id TEXT PRIMARY KEY,
   article_slug TEXT NOT NULL,
   author TEXT NOT NULL,
+  email TEXT NOT NULL DEFAULT '',
   body TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
   created_at INTEGER NOT NULL,

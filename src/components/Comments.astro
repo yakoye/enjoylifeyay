@@ -8,19 +8,23 @@ const { article } = Astro.props;
 
 <section class="article-comments" id="comments" data-comments data-article={article} aria-labelledby="comments-title">
   <h2 id="comments-title">评论</h2>
-  <p class="comments-note">评论需审核后显示；不收集邮箱。</p>
+  <p class="comments-note" data-comments-note>评论默认审核后显示；邮箱仅在你主动填写时保存，永不公开。</p>
 
   <div class="comments-list" data-comments-list aria-live="polite"></div>
   <p class="comments-status" data-comments-status aria-live="polite">正在读取评论。</p>
 
   <form class="comment-form" data-comment-form>
-    <label class="comment-field">
-      <span>昵称（可选）</span>
+    <label class="comment-field comment-field--short">
+      <span class="comment-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" /></svg>昵称（可选）</span>
       <input name="author" type="text" maxlength="40" autocomplete="name" />
     </label>
-    <label class="comment-field">
-      <span>留言</span>
-      <textarea name="body" rows="5" maxlength="1500" required></textarea>
+    <label class="comment-field comment-field--short">
+      <span class="comment-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="0" /><path d="m3 7 9 6 9-6" /></svg>邮箱（可选）</span>
+      <input name="email" type="email" maxlength="254" autocomplete="email" inputmode="email" />
+    </label>
+    <label class="comment-field comment-field--message">
+      <span class="comment-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z" /><path d="M8 9h8M8 12h5" /></svg>留言</span>
+      <textarea name="body" rows="1" maxlength="1500" required aria-label="留言"></textarea>
     </label>
     <label class="comment-honeypot" aria-hidden="true">
       <span>网站</span>
@@ -40,6 +44,7 @@ const { article } = Astro.props;
 
   interface CommentApiResponse {
     configured?: boolean;
+    moderation?: 'pending' | 'auto';
     comments?: PublicComment[];
     message?: string;
   }
@@ -50,12 +55,26 @@ const { article } = Astro.props;
     const article = root.dataset.article;
     const list = root.querySelector<HTMLElement>('[data-comments-list]');
     const status = root.querySelector<HTMLElement>('[data-comments-status]');
+    const note = root.querySelector<HTMLElement>('[data-comments-note]');
     const form = root.querySelector<HTMLFormElement>('[data-comment-form]');
+    const textarea = root.querySelector<HTMLTextAreaElement>('textarea[name="body"]');
 
-    if (!article || !list || !status || !form) return;
+    if (!article || !list || !status || !form || !textarea) return;
 
     const setStatus = (message: string): void => {
       status.textContent = message;
+    };
+
+    const setModerationNote = (mode?: 'pending' | 'auto'): void => {
+      if (!note) return;
+      note.textContent = mode === 'auto'
+        ? '评论会在通过基础反垃圾检查后直接显示；邮箱仅在你主动填写时保存，永不公开。'
+        : '评论默认审核后显示；邮箱仅在你主动填写时保存，永不公开。';
+    };
+
+    const autoResize = (): void => {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${Math.max(textarea.scrollHeight, 30)}px`;
     };
 
     const renderComments = (comments: PublicComment[]): void => {
@@ -87,6 +106,7 @@ const { article } = Astro.props;
       try {
         const response = await fetch(`/api/comments?article=${encodeURIComponent(article)}`, { cache: 'no-store' });
         const payload = await response.json() as CommentApiResponse;
+        setModerationNote(payload.moderation);
         if (!response.ok || payload.configured === false) {
           setStatus(payload.message || '评论服务尚未完成配置。');
           return;
@@ -96,6 +116,9 @@ const { article } = Astro.props;
         setStatus('评论服务暂时不可用。');
       }
     };
+
+    textarea.addEventListener('input', autoResize);
+    autoResize();
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -118,13 +141,19 @@ const { article } = Astro.props;
           body: JSON.stringify({
             article,
             author: formData.get('author'),
+            email: formData.get('email'),
             body,
             website: formData.get('website'),
           }),
         });
         const payload = await response.json() as CommentApiResponse;
+        setModerationNote(payload.moderation);
         setStatus(payload.message || (response.ok ? '评论已提交。' : '评论暂时无法保存。'));
-        if (response.ok) form.reset();
+        if (response.ok) {
+          form.reset();
+          autoResize();
+          if (payload.moderation === 'auto') await loadComments();
+        }
       } catch {
         setStatus('评论服务暂时不可用。');
       } finally {

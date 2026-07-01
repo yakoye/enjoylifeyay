@@ -1,6 +1,6 @@
 {
   "name": "enjoy-life",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,7 +15,16 @@
     "sync:legacy-archive": "node scripts/sync-legacy-archive.mjs",
     "import:legacy-images": "node scripts/import-legacy-images.mjs",
     "preview:pages": "npx wrangler pages dev dist",
-    "audit:toc": "node scripts/audit-writing-toc.mjs"
+    "audit:toc": "node scripts/audit-writing-toc.mjs",
+    "comments:status": "node scripts/comments-admin.mjs status",
+    "comments:list": "node scripts/comments-admin.mjs list",
+    "comments:pending": "node scripts/comments-admin.mjs pending",
+    "comments:approved": "node scripts/comments-admin.mjs approved",
+    "comments:approve": "node scripts/comments-admin.mjs approve",
+    "comments:reject": "node scripts/comments-admin.mjs reject",
+    "comments:delete": "node scripts/comments-admin.mjs delete",
+    "comments:migrate": "node scripts/comments-admin.mjs migrate-email",
+    "comments:probe": "node scripts/comments-admin.mjs probe"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.0",

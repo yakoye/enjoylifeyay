@@ -10,7 +10,7 @@ EnjoyLifeBlog,沙生植物,https://globetreklog.github.io/EnjoyLifeBlog/2024/04/
 EnjoyLifeBlog,方言,https://globetreklog.github.io/EnjoyLifeBlog/2024/05/06/%E6%96%B9%E8%A8%80/,2024-05-06,life,article,migrated,已导入正文，保留旧站发布日期和来源链接
 EnjoyLifeBlog,关于肥胖,https://globetreklog.github.io/EnjoyLifeBlog/2024/05/06/%E5%85%B3%E4%BA%8E%E8%82%A5%E8%83%96/,2024-05-06,life,article,needs-manual-review,含个人健康和身体数据；默认不放入公开源码与公开站点，需站长单独确认
 EnjoyLifeBlog,PCIe概念，一句话说明白,https://globetreklog.github.io/EnjoyLifeBlog/2024/05/08/PCIe%E6%A6%82%E5%BF%B5%EF%BC%8C%E4%B8%80%E5%8F%A5%E8%AF%9D%E8%AF%B4%E6%98%8E%E7%99%BD/,2024-05-08,technology,reference,migrated,已导入为草稿；技术准确性需按当前规范逐段复核
-EnjoyLifeBlog,PCIe-MSI-MSIX简介,https://globetreklog.github.io/EnjoyLifeBlog/2024/05/24/PCIe-MSI-MSIX%E7%AE%80%E4%BB%8B/,2024-05-24,technology,article,skipped-copyright,旧文明确标注转自第三方；不复制正文，可另写原创导读
+EnjoyLifeBlog,PCIe MSI / MSI-X：Capability、Table 与 Linux 驱动接口,https://globetreklog.github.io/EnjoyLifeBlog/2024/05/24/PCIe-MSI-MSIX%E7%AE%80%E4%BB%8B/,2024-05-24,technology,article,migrated,以本站重新整理版本迁入；保留旧文来源，并在文内说明第三方参考边界
 EnjoyLifeBlog,PCIe问题汇总-1,https://globetreklog.github.io/EnjoyLifeBlog/2024/06/06/PCIe%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB-1/,2024-06-06,technology,reference,migrated,已导入正文，保留旧站发布日期和来源链接
 EnjoyLifeBlog,PCIe低功耗,https://globetreklog.github.io/EnjoyLifeBlog/2024/06/12/PCIe%E4%BD%8E%E5%8A%9F%E8%80%97/,2024-06-12,technology,article,migrated,已导入正文，保留旧站发布日期和来源链接
 EnjoyLifeBlog,PCIe概念汇总表格,https://raw.githubusercontent.com/GlobeTrekLog/EnjoyLifeBlog/main/_posts/PCIe%E6%A6%82%E5%BF%B5%E6%B1%87%E6%80%BB%E8%A1%A8%E6%A0%BC.xlsx,,technology,reference,skipped-copyright,附件型资料，版权与公开范围需人工确认

@@ -34,7 +34,7 @@ export const legacyArchiveEntries: LegacyArchiveEntry[] = [
   },
   {
     "id": "enjoylifeblog-12",
-    "title": "PCIe-MSI-MSIX简介",
+    "title": "PCIe MSI / MSI-X：Capability、Table 与 Linux 驱动接口",
     "href": "https://globetreklog.github.io/EnjoyLifeBlog/2024/05/24/PCIe-MSI-MSIX%E7%AE%80%E4%BB%8B/",
     "date": "2024-05-24",
     "source": "EnjoyLifeBlog"

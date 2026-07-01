@@ -1,64 +1,51 @@
 # 文章评论：Cloudflare Pages Functions + D1
 
-从 v0.10 开始，每篇公开文章的正文末尾都有一个极简评论区：
+从 v0.11 开始，每篇公开文章末尾有极简评论区：昵称、邮箱、留言均为单行文本样式；留言框会随输入自动增高。
 
 ```text
 评论
-评论需审核后显示；不收集邮箱。
-昵称（可选）
+昵称（可选）   邮箱（可选）
 留言
 提交评论
 ```
 
-没有头像、没有背景卡片、没有外框、没有邮箱字段，也没有公开的回复链。
+没有头像、没有卡片、没有公开回复链。邮箱可选，若填写仅保存在 D1 中供站长以后联系使用，绝不在文章页输出。
 
-## 一、保存方式与隐私边界
+## 一、为什么之前“看不到评论”
 
-评论不写入 GitHub，也不写入 Markdown。
+你截图中的 **Queries** 页面是 D1 的查询统计，不是评论数据表。它只能说明有 SQL 被执行过，不能当作评论列表。
 
-它使用同一个 Cloudflare Pages 项目的 Pages Functions 与 D1 数据库：
+另外，D1 绑定已在 Pages 项目里设置后，Cloudflare 要求 **重新部署** 才会让当前 Pages Function 使用新绑定。Pages Functions 的 `functions/` 目录必须位于运行 `wrangler pages deploy` 命令时的项目根目录；这样 Wrangler 才会随部署上传它。官方说明：D1 绑定可在 Pages Settings → Bindings 添加，绑定变更后应重新部署。 
 
-```text
-访客文章页
-  → /api/comments Pages Function
-  → COMMENTS_DB D1 数据库
-  → 管理者审核
-  → 仅 approved 评论公开显示
+先在项目根目录重新部署：
+
+```powershell
+npm run build
+npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
 ```
 
-数据库仅保存：
+然后浏览器直接打开任意文章的 API，例如：
 
-- 文章 slug；
-- 昵称（空白时显示“匿名”）；
-- 评论正文；
-- 审核状态；
-- 提交日期；
-- 用于限流的 IP 哈希。
+```text
+https://enjoylifeyay.pages.dev/api/comments?article=pcie-msi-msix-introduction
+```
 
-不保存邮箱，不保存原始 IP，不展示头像。评论默认 `pending`，必须由你审核后才会在文章页显示。
+结果判断：
 
-## 二、首次启用：创建 D1 数据库
+- `404`：本次发布没有携带 Pages Function。确认命令在项目根目录执行，且根目录存在 `functions/api/comments.js`。
+- `configured:false`：Function 已运行，但当前部署仍没有读到 `COMMENTS_DB`。确认绑定名完全是 `COMMENTS_DB`，然后重新部署。
+- `configured:true, comments:[]`：接口和 D1 正常；当前文章暂时没有已通过评论。
+- 返回已通过评论数组：评论链路完整正常。
 
-在项目根目录登录 Cloudflare 后执行：
+## 二、首次创建 D1
 
 ```powershell
 npx wrangler login
 npx wrangler d1 create enjoylife-comments
-```
-
-第二条命令会输出数据库 ID。保存好它。
-
-然后把本项目的评论表结构写入远端数据库：
-
-```powershell
 npx wrangler d1 execute enjoylife-comments --remote --file=./database/comments.sql
 ```
 
-`database/comments.sql` 已包含表、审核状态和限流索引，不需要自行写 SQL 建表。
-
-## 三、把数据库绑定到 Pages 项目
-
-进入 Cloudflare Dashboard：
+然后在 Cloudflare Dashboard：
 
 ```text
 Workers & Pages
@@ -76,92 +63,90 @@ Variable name: COMMENTS_DB
 D1 database: enjoylife-comments
 ```
 
-保存后，重新部署一次本站。Pages Function 会从 `context.env.COMMENTS_DB` 使用该绑定。
+保存后重新部署。
 
-> 不要把数据库 ID、Cloudflare Token 或登录凭据写入文章、GitHub 仓库或公开页面。
+## 三、从 v0.10 升级到 v0.11：添加可选邮箱列
 
-## 四、构建、预览与部署
+旧数据库中没有 `email` 列。第一次升级到 v0.11，请在项目根目录执行一次：
 
-普通静态页面预览仍然使用：
+```powershell
+npm run comments:migrate
+```
+
+它会远程检查 `comments` 表并在需要时添加邮箱列。执行成功后再次部署新版函数。
+
+## 四、命令行管理评论（推荐）
+
+不需要每次打开后台。以下命令都直接操作 **远程 D1**：
+
+```powershell
+# 查看各状态数量
+npm run comments:status
+
+# 查看待审核评论（最常用）
+npm run comments:pending
+
+# 查看全部评论
+npm run comments:list
+
+# 通过一条评论
+npm run comments:approve -- <评论ID>
+
+# 拒绝一条评论（保留记录）
+npm run comments:reject -- <评论ID>
+
+# 管理员彻底删除一条评论
+npm run comments:delete -- <评论ID>
+
+# 探测线上评论 API 与当前绑定是否真的生效
+npm run comments:probe -- pcie-msi-msix-introduction
+```
+
+先运行 `npm run comments:pending` 复制 ID，再运行 `approve`、`reject` 或 `delete`。
+
+D1 官方支持通过 `wrangler d1 execute` 执行远程 SQL；`--remote` 指向已部署站点使用的远程 D1，而不是你电脑里的本地测试数据库。
+
+## 五、审核模式：默认审核，或自动公开
+
+默认是安全的人工审核：新评论保存为 `pending`，你用命令行审批即可。
+
+若你希望评论在通过基础反垃圾限制后直接显示，可在 Pages：
+
+```text
+Workers & Pages → enjoylifeyay → Settings → Variables and Secrets → Add
+```
+
+添加文本变量：
+
+```text
+Name: COMMENTS_MODERATION
+Value: auto
+Environment: Production
+```
+
+保存后重新部署。此时新评论会直接写为 `approved`；honeypot 与每 IP 24 小时 5 次限流仍然有效。
+
+建议：站点刚公开、评论量少时可继续 `pending`；你确认没有垃圾评论后再切到 `auto`。
+
+## 六、本地测试
+
+普通 Astro 预览不会运行 Pages Function：
 
 ```powershell
 npm run preview
 ```
 
-它只检查 Astro 构建结果；因为没有运行 Pages Functions，本地评论区会提示“评论服务暂时不可用”，这是正常的。
-
-要连同评论 API 一起本地启动，请先构建，再使用 Wrangler 的 Pages 本地开发：
+要本地测试评论 Function：
 
 ```powershell
 npm run build
 npx wrangler pages dev dist --d1 COMMENTS_DB=<你的D1数据库ID>
 ```
 
-Wrangler 默认使用本地 D1 存储来进行本地开发；本地测试评论不会自动写入生产数据库。
+这默认使用本地 D1 状态。生产评论管理请用上面的 `npm run comments:*` 命令。
 
-正式发布仍然使用：
+## 七、隐私与反垃圾
 
-```powershell
-npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
-```
+数据库保存：文章 slug、昵称、可选邮箱、评论正文、状态、提交时间、IP 哈希。
 
-仓库根目录的 `functions/api/comments.js` 会作为 Pages Function 一起部署；`functions/` 必须一直保留在项目根目录，不能放进 `dist/`。
-
-## 五、审核评论
-
-评论提交后状态为 `pending`，不会立即公开。
-
-打开 Cloudflare Dashboard：
-
-```text
-Workers & Pages
-→ D1 SQL Database
-→ enjoylife-comments
-→ Console
-```
-
-查看待审核评论：
-
-```sql
-SELECT
-  id,
-  article_slug,
-  author,
-  body,
-  datetime(created_at, 'unixepoch') AS submitted_at
-FROM comments
-WHERE status = 'pending'
-ORDER BY created_at ASC;
-```
-
-通过一条评论：
-
-```sql
-UPDATE comments
-SET status = 'approved'
-WHERE id = '复制这里的评论 ID';
-```
-
-拒绝一条评论：
-
-```sql
-UPDATE comments
-SET status = 'rejected'
-WHERE id = '复制这里的评论 ID';
-```
-
-审核后无需重新构建或重新部署；访客刷新文章页即可看到最新的已通过评论。
-
-## 六、基础反垃圾策略
-
-当前版本已经启用：
-
-- 隐藏 honeypot 字段；
-- 每个 IP 哈希 24 小时最多提交 5 次；
-- 长度限制：昵称 40 字符、评论 1500 字符；
-- 评论默认人工审核；
-- 页面端使用 `textContent` 渲染，评论内容不会作为 HTML 注入页面。
-
-这足够用于第一阶段的个人站。
-
-当垃圾评论明显增多时，再增加 Cloudflare Turnstile；不要在评论量还很小的时候过早增加 CAPTCHA 和复杂登录流程。
+不保存原始 IP；邮箱不公开；评论正文使用 `textContent` 渲染，不会作为 HTML 注入页面。现有防护包括 honeypot、长度限制和 24 小时限流。垃圾评论明显增多时，再考虑 Cloudflare Turnstile。

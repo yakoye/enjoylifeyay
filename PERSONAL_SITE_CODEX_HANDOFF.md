@@ -1318,3 +1318,7 @@ Codex 不得把本项目做成以下任意一种：
 ## v0.7 补充
 
 - 顶栏、归档、favicon、写作筛选和图片迁移策略见 `docs/V0.7_LAYOUT_MEDIA.md` 与 `docs/MEDIA_MANAGEMENT.md`。
+
+## v0.11 追加交接
+
+评论从 v0.10 的纯审核制扩展为：默认审核 + 可选 `COMMENTS_MODERATION=auto` 自动公开；邮箱可选且永不公开。远端 D1 管理走仓库内 `scripts/comments-admin.mjs`，不要新建公开管理后台或把管理员权限放在前端。

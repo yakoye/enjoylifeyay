@@ -4,22 +4,25 @@
 
 正式地址：<https://enjoylifeyay.pages.dev>
 
-## v0.10：文章评论、目录审计与新文章
+## v0.11：MSI / MSI-X 测试文章与评论命令行管理
 
-本版在 v0.9 基础上完成：
+本版在 v0.10 基础上完成：
 
-- 新增文章《程序员、工程师与 AI 时代的独立创造》（2026-07-01）；文章以阅读摘要和 2026 年补记为主，并保留 cnbang 原文链接。
-- 每篇公开文章的末尾加入极简评论区：无头像、无外框、无背景卡片、无邮箱字段，只保留昵称（可选）、留言与提交入口。
-- 评论保存采用 Cloudflare Pages Functions + D1：默认 `pending`，仅审核通过后显示；不保存邮箱和原始 IP。
-- 新增 `database/comments.sql`、`functions/api/comments.js` 与 [`docs/COMMENTS_D1.md`](docs/COMMENTS_D1.md)。首次启用评论前必须创建 D1 并在 Pages 项目中绑定 `COMMENTS_DB`。
-- 所有 `draft: false` 的文章现在都包含至少一个二级至四级标题；正文标题下方会显示默认折叠的“目录”。
-- 新增目录审计命令：
+- 写作页移除领域 / 形式筛选。当前文章量不大，按日期的稳定文本目录更直接；不再保留点击无反应的 UI。
+- 新增《PCIe MSI / MSI-X：Capability、Table 与 Linux 驱动接口》（2024-05-24）：包含本地图片、图片说明、表格、行内代码、代码块、引用、二级 / 三级标题与折叠目录，用于完整验证技术文章框架。
+- 评论区改为极简单行输入：昵称、邮箱、留言均有线性图标；留言随输入自动增高。
+- 邮箱改为可选：只存入 D1，绝不公开显示。
+- 新增远程 D1 命令行管理：查看待审核、通过、拒绝、删除、状态统计、API 探测；无需每次进入 Cloudflare 后台。
+- 新增 `COMMENTS_MODERATION=auto` 可选自动公开模式。默认仍是 `pending` 审核模式。
+- 从 v0.10 升级时请先执行一次：
 
   ```powershell
-  npm run audit:toc
+  npm run comments:migrate
   ```
 
-  新公开文章没有分节标题时，该命令会失败，避免遗漏目录。
+  为已有 D1 表增加可选邮箱列。
+
+完整评论说明见 [`docs/COMMENTS_D1.md`](docs/COMMENTS_D1.md)。
 
 ## v0.9：标题栏宽度、目录文字与窄屏导航
 
@@ -199,3 +202,21 @@ Cloudflare Pages 设置：
 - FamilyJourney 的 R2、D1、照片、家庭数据、私有仓库与本站严格隔离。
 - 旧文迁入必须保留首次日期和原始来源；不确定的正文、图片版权或知乎标题不要猜测。
 - 站点保持“文本目录”视觉：文字优先、蓝色链接、克制细线、无卡片墙、无红色标题和状态徽章。
+
+
+## v0.11 评论与 MSI 测试文章
+
+- 写作页已移除未稳定的领域 / 形式筛选，保留清晰的按日期写作列表。
+- 新增《PCIe MSI / MSI-X：Capability、Table 与 Linux 驱动接口》，用于验证图片、表格、代码块、引用、目录与评论。
+- 评论支持可选邮箱；邮箱不公开。
+- 评论命令行管理：
+
+```powershell
+npm run comments:migrate
+npm run comments:pending
+npm run comments:approve -- <评论ID>
+npm run comments:delete -- <评论ID>
+npm run comments:probe -- pcie-msi-msix-introduction
+```
+
+完整说明见 [`docs/COMMENTS_D1.md`](docs/COMMENTS_D1.md) 与 [`docs/V0.11_COMMENTS_ADMIN_MSI.md`](docs/V0.11_COMMENTS_ADMIN_MSI.md)。
