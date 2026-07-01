@@ -1,4 +1,8 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content'; import DirectoryList from '../../components/DirectoryList.astro'; import BaseLayout from '../../layouts/BaseLayout.astro';
+const allEntries = await getCollection('nature');
+type PublishedEntry = (typeof allEntries)[number] & { data: Extract<(typeof allEntries)[number]['data'], { draft: false }> };
+const entries = allEntries.filter((entry): entry is PublishedEntry => entry.data.draft === false);
+const items = entries.map(({ data }) => ({ title:data.title, description:data.description, meta:[data.location, data.method].filter(Boolean).join(' · ') }));
 ---
-<BaseLayout title="自然"><h1>自然</h1><p class="page-intro">这里将保存自然观察与行走记录，不公开精确位置或私人路线。</p></BaseLayout>
+<BaseLayout title="自然" description="自然观察、行走、摄影与地方记忆。"><h1>自然</h1><p class="page-intro">只展示已核对的公开观察，不公开精确住址、私人定位或敏感路线。</p><DirectoryList items={items} /></BaseLayout>

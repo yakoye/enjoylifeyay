@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import { nowItems } from '../../data/now';
+---
+<BaseLayout title="正在做" description="当前正在推进的公开事项。"><h1>正在做</h1><p class="page-intro">这是一份低频更新的公开工作清单，不是私人日记。</p><ul class="plain-list">{nowItems.map((item) => <li>{item}</li>)}</ul></BaseLayout>

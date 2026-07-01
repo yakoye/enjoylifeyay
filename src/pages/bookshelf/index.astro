@@ -1,4 +1,8 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content'; import DirectoryList from '../../components/DirectoryList.astro'; import BaseLayout from '../../layouts/BaseLayout.astro';
+const allEntries = await getCollection('books');
+type PublishedEntry = (typeof allEntries)[number] & { data: Extract<(typeof allEntries)[number]['data'], { draft: false }> };
+const entries = allEntries.filter((entry): entry is PublishedEntry => entry.data.draft === false);
+const items = entries.map(({ data }) => ({ title:data.title, description:data.note, meta:`${data.author} · ${data.status}` }));
 ---
-<BaseLayout title="书架"><h1>书架</h1><p class="page-intro">书目和阅读状态将在核对后逐步整理。</p></BaseLayout>
+<BaseLayout title="书架" description="在读、读过与想读的书籍索引。"><h1>书架</h1><p class="page-intro">书架只记录已确认的书目和阅读状态，不编造评分或进度。</p><DirectoryList items={items} /></BaseLayout>

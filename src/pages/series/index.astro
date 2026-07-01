@@ -1,4 +1,8 @@
 ---
+import { getCollection } from 'astro:content';
+import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const entries = (await getCollection('series', ({ data }) => !data.draft)).sort((a,b) => a.data.order - b.data.order);
+const items = entries.map(({ data }) => ({ title: data.title, description: data.description, meta: [data.audience, data.topics.join(' / ')].filter(Boolean).join(' · '), status: data.status === 'active' ? '持续更新' : data.status === 'archived' ? '已归档' : '目录已建立' }));
 ---
-<BaseLayout title="专题"><h1>专题</h1><p class="page-intro">专题将按长期主题组织文章、工具与项目；内容尚未核对前保持 draft。</p></BaseLayout>
+<BaseLayout title="专题" description="按长期主题组织的文章、工具与项目目录。"><h1>专题</h1><p class="page-intro">专题不是标签云，而是可持续维护的阅读路径。没有可靠数据时不显示完成度。</p><DirectoryList items={items} /></BaseLayout>

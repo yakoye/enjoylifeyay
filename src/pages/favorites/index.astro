@@ -1,4 +1,8 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content'; import DirectoryList from '../../components/DirectoryList.astro'; import BaseLayout from '../../layouts/BaseLayout.astro';
+const allEntries = await getCollection('favorites');
+type PublishedEntry = (typeof allEntries)[number] & { data: Extract<(typeof allEntries)[number]['data'], { draft: false }> };
+const entries = allEntries.filter((entry): entry is PublishedEntry => entry.data.draft === false);
+const items = entries.map(({ data }) => ({ title:data.name, description:data.note, meta:data.tags.join(' / '), externalUrl:data.url }));
 ---
-<BaseLayout title="收藏"><h1>收藏</h1><p class="page-intro">只公开已经整理并附有个人说明的长期收藏。</p></BaseLayout>
+<BaseLayout title="收藏" description="附有中文备注的长期参考资料。"><h1>收藏</h1><p class="page-intro">只公开已整理且有说明的收藏，不展示裸链接。</p><DirectoryList items={items} /></BaseLayout>

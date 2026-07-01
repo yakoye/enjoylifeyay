@@ -10,7 +10,7 @@ const dateFormat = new Intl.DateTimeFormat('zh-CN', { dateStyle: 'medium' });
 {entries.length ? (
   <ol class="writing-list">
     {entries.map((entry) => (
-      <li class="writing-item">
+      <li class="writing-item" data-domain={entry.data.domain} data-format={entry.data.format}>
         <time datetime={entry.data.date.toISOString()}>{dateFormat.format(entry.data.date)}</time>
         <div>
           <a class="writing-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
@@ -19,8 +19,9 @@ const dateFormat = new Intl.DateTimeFormat('zh-CN', { dateStyle: 'medium' });
             {entry.data.tags.length > 0 && ` · ${entry.data.tags.slice(0, 3).join(' / ')}`}
             {entry.data.source !== 'native' && ` · 原载于 ${entry.data.source}`}
           </div>
+          <p class="writing-description">{entry.data.description}</p>
         </div>
       </li>
     ))}
   </ol>
-) : <p class="empty-state">内容正在整理中。未确认的旧文章不会提前公开。</p>}
+) : <p class="empty-state">尚无已核对并公开的文章。</p>}

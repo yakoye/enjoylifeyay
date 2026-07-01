@@ -1,0 +1,28 @@
+---
+interface Item {
+  title: string;
+  description: string;
+  meta?: string;
+  status?: string;
+  href?: string;
+  externalUrl?: string;
+}
+interface Props { items: Item[]; emptyMessage?: string; }
+const { items, emptyMessage = '暂无已公开条目。' } = Astro.props;
+---
+
+{items.length ? (
+  <ul class="directory-list">
+    {items.map((item) => (
+      <li class="directory-item">
+        <div class="directory-heading">
+          {item.href ? <a href={item.href}>{item.title}</a> : <strong>{item.title}</strong>}
+          {item.status && <span class="status-label">{item.status}</span>}
+        </div>
+        <p>{item.description}</p>
+        {item.meta && <div class="writing-meta">{item.meta}</div>}
+        {item.externalUrl && <a class="external-link" href={item.externalUrl} target="_blank" rel="noopener noreferrer">访问公开地址 →</a>}
+      </li>
+    ))}
+  </ul>
+) : <p class="empty-state">{emptyMessage}</p>}

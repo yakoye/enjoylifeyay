@@ -3,29 +3,38 @@ import { getCollection } from 'astro:content';
 import WritingList from '../components/WritingList.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../config/site';
+import { nowItems } from '../data/now';
 
 const writing = (await getCollection('writing', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 6);
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 6);
+const featuredSeries = (await getCollection('series', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order).find((entry) => entry.data.featured);
+const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
+  .find((entry) => entry.data.featured && ['available', 'development'].includes(entry.data.status));
 ---
 
 <BaseLayout>
   <h1>{site.name}</h1>
   <p class="tagline">{site.tagline}</p>
   <hr class="rule" />
+
   <section aria-labelledby="recent-writing">
-    <h2 id="recent-writing">最近写作</h2>
+    <div class="section-heading"><h2 id="recent-writing">最近写作</h2><a href="/writing/">全部写作 →</a></div>
     <WritingList entries={writing} />
   </section>
-  <section aria-labelledby="site-directory">
-    <h2 id="site-directory">站点目录</h2>
-    <div class="section-links">
-      <a href="/writing/">写作：文章、问答、短记与项目日志</a>
-      <a href="/series/">专题：按长期主题组织内容</a>
-      <a href="/tools/">工具：可直接使用的工具入口</a>
-      <a href="/nature/">自然：观察、行走与地方记录</a>
-      <a href="/bookshelf/">书架：阅读状态与相关笔记</a>
-      <a href="/projects/">项目：作品、过程与版本记录</a>
-    </div>
+
+  <section aria-labelledby="current-work">
+    <div class="section-heading"><h2 id="current-work">正在做</h2><a href="/now/">查看 Now →</a></div>
+    <ul class="plain-list">{nowItems.map((item) => <li>{item}</li>)}</ul>
   </section>
+
+  {featuredSeries && <section aria-labelledby="featured-series">
+    <h2 id="featured-series">一个专题</h2>
+    <div class="feature-line"><div><a href="/series/"><strong>{featuredSeries.data.title}</strong></a><p>{featuredSeries.data.description}</p></div><span class="status-label">{featuredSeries.data.status === 'active' ? '持续更新' : '目录已建立'}</span></div>
+  </section>}
+
+  {featuredTool && <section aria-labelledby="featured-tool">
+    <h2 id="featured-tool">一个工具</h2>
+    <div class="feature-line"><div><a href="/tools/"><strong>{featuredTool.data.name}</strong></a><p>{featuredTool.data.description}</p></div><span class="status-label">{featuredTool.data.status === 'available' ? '可用' : '开发中'}</span></div>
+  </section>}
 </BaseLayout>

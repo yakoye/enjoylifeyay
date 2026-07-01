@@ -1,4 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
+import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const statuses = { active:'持续维护', development:'开发中', archived:'已归档', private:'私人项目', 'link-pending':'公开地址待确认' } as const;
+const entries = await getCollection('projects', ({ data }) => !data.draft);
+const items = entries.map(({ data }) => ({ title:data.name, description:data.description, meta:data.techStack.join(' / '), status:statuses[data.status], externalUrl:data.url || undefined }));
 ---
-<BaseLayout title="项目"><h1>项目</h1><p class="page-intro">项目介绍与公开链接尚待逐项确认；私人资料不会进入本站。</p></BaseLayout>
+<BaseLayout title="项目" description="项目目标、状态、技术栈与公开地址目录。"><h1>项目</h1><p class="page-intro">项目页记录为什么做与如何演进。私人项目只保留公开说明，不接入私有数据。</p><DirectoryList items={items} /></BaseLayout>
