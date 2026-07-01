@@ -1,0 +1,10 @@
+[
+  { "id": "pcie-high-speed-interconnect", "title": "PCIe 与高速互连", "description": "整理 PCIe 架构、协议、调试与高速互连相关内容。", "audience": "需要系统理解 PCIe 与高速互连的工程人员。", "status": "active", "order": 1, "topics": ["PCIe", "SerDes", "CXL"], "draft": false, "featured": true },
+  { "id": "chip-firmware-soc", "title": "芯片、固件与 SoC 工程", "description": "芯片、固件、SoC 验证与 Bring-up 的工程记录目录。", "status": "directory", "order": 2, "topics": ["Firmware", "SoC", "验证"], "draft": false },
+  { "id": "dev-environment-productivity", "title": "开发环境与工程效率", "description": "Windows、Linux、终端、Git 与远程开发相关内容目录。", "status": "directory", "order": 3, "topics": ["Windows", "Linux", "Git"], "draft": false },
+  { "id": "chrome-web-tools", "title": "Chrome 扩展与网页工具", "description": "浏览器扩展、网页工具及其设计与发布记录目录。", "status": "directory", "order": 4, "topics": ["Chrome", "Web"], "draft": false },
+  { "id": "cloudflare-personal-site", "title": "Cloudflare 与个人网站", "description": "静态网站、Cloudflare Pages 与长期维护相关内容目录。", "status": "active", "order": 5, "topics": ["Cloudflare", "Astro"], "draft": false },
+  { "id": "knowledge-obsidian", "title": "知识管理、Obsidian 与长期记录", "description": "知识管理、Markdown、Obsidian 与长期记录方法目录。", "status": "directory", "order": 6, "topics": ["Obsidian", "Markdown"], "draft": false },
+  { "id": "reading-learning", "title": "阅读与学习方法", "description": "阅读、学习路径、长期笔记与知识输出目录。", "status": "directory", "order": 7, "topics": ["阅读", "学习"], "draft": false },
+  { "id": "nature-walking", "title": "自然观察与行走", "description": "植物、动物、季节、骑行、徒步与地方观察目录。", "status": "directory", "order": 8, "topics": ["自然", "行走"], "draft": false }
+]

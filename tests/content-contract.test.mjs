@@ -14,13 +14,13 @@ test('Astro 使用静态输出且内容 schema 保留严格枚举', async () => 
   assert.match(schema, /from ['"]astro\/zod['"]/);
   assert.doesNotMatch(schema, /import\s*\{[^}]*\bz\b[^}]*\}\s*from\s*['"]astro:content['"]/);
   assert.doesNotMatch(schema, /z\.string\(\)\.url\(\)/);
-  for (const value of ['technology', 'reading', 'life', 'nature', 'tools']) {
+  for (const value of ['technology', 'reading', 'life', 'nature', 'tool']) {
     assert.match(schema, new RegExp(`['"]${value}['"]`));
   }
-  for (const value of ['article', 'answer', 'note', 'guide', 'reference', 'project-log']) {
+  for (const value of ['article', 'answer', 'note', 'guide', 'reference', 'project-log', 'observation']) {
     assert.match(schema, new RegExp(`['"]${value}['"]`));
   }
-  for (const value of ['native', 'csdn', 'zhihu', 'enjoy-life-blog']) {
+  for (const value of ['native', 'CSDN', 'Zhihu', 'EnjoyLifeBlog']) {
     assert.match(schema, new RegExp(`['"]${value}['"]`));
   }
   assert.match(schema, /draft:\s*z\.boolean\(\)\.default\(true\)/);

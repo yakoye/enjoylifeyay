@@ -24,7 +24,7 @@ export const categoryLabels = {
   reading: '阅读',
   life: '生活',
   nature: '自然',
-  tools: '工具',
+  tool: '工具',
 } as const;
 
 export const formatLabels = {
@@ -34,4 +34,5 @@ export const formatLabels = {
   guide: '操作指南',
   reference: '清单 / 速查',
   'project-log': '项目日志',
+  observation: '自然观察',
 } as const;

@@ -15,9 +15,9 @@ const dateFormat = new Intl.DateTimeFormat('zh-CN', { dateStyle: 'medium' });
         <div>
           <a class="writing-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
           <div class="writing-meta">
-            {categoryLabels[entry.data.category]} · {formatLabels[entry.data.format]}
+            {categoryLabels[entry.data.domain]} · {formatLabels[entry.data.format]}
             {entry.data.tags.length > 0 && ` · ${entry.data.tags.slice(0, 3).join(' / ')}`}
-            {entry.data.source.type !== 'native' && ` · 原载于 ${entry.data.source.type}`}
+            {entry.data.source !== 'native' && ` · 原载于 ${entry.data.source}`}
           </div>
         </div>
       </li>

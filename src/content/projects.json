@@ -1,0 +1,14 @@
+[
+  { "id": "pcie-chinese-library", "name": "PCIe 中文资料库", "description": "PCI Express 技术资料的中文整理项目。", "status": "active", "techStack": [], "url": "https://github.com/yakoye/pci-express-technology-3.0-chinese", "githubUrl": "https://github.com/yakoye/pci-express-technology-3.0-chinese", "draft": false, "featured": true },
+  { "id": "dictfloat", "name": "DictFloat", "description": "浏览器词典扩展项目。", "status": "link-pending", "url": "", "githubUrl": "", "draft": false },
+  { "id": "quiet-reader", "name": "静读网页阅读助手", "description": "网页阅读辅助扩展项目。", "status": "link-pending", "url": "", "githubUrl": "", "draft": false },
+  { "id": "quick-note-float", "name": "Quick Note Float", "description": "浏览器浮动笔记扩展项目。", "status": "link-pending", "url": "", "githubUrl": "", "draft": false },
+  { "id": "keypass", "name": "KeyPass", "description": "浏览器扩展项目。", "status": "link-pending", "url": "", "githubUrl": "", "draft": false },
+  { "id": "regcalc64", "name": "RegCalc64", "description": "寄存器数值计算工具项目。", "status": "link-pending", "url": "", "githubUrl": "", "draft": false },
+  { "id": "feishu-helper", "name": "飞书小助理", "description": "飞书相关浏览器扩展项目。", "status": "link-pending", "url": "", "githubUrl": "", "draft": false },
+  { "id": "familyjourney", "name": "FamilyJourney", "description": "独立的私有家庭记录项目；本站不接入其私有数据。", "status": "private", "url": "", "githubUrl": "", "draft": false },
+  { "id": "personal-site", "name": "个人博客站点", "description": "当前 Enjoy Life 静态个人站。", "status": "active", "techStack": ["Astro", "Markdown", "Cloudflare Pages"], "url": "https://enjoylifeyay.pages.dev", "githubUrl": "", "draft": false },
+  { "id": "obsidian-journal", "name": "Obsidian 日记系统", "description": "个人知识管理与日记系统项目。", "status": "private", "url": "", "githubUrl": "", "draft": false },
+  { "id": "life-progress", "name": "人生进度可视化", "description": "人生进度可视化网页项目。", "status": "link-pending", "url": "", "githubUrl": "", "draft": false },
+  { "id": "rich-editor", "name": "Rich Editor", "description": "文字编辑网页项目。", "status": "link-pending", "url": "", "githubUrl": "", "draft": false }
+]

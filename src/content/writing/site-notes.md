@@ -2,15 +2,13 @@
 title: "站点内容准备说明"
 description: "用于验证写作内容集合的草稿，不会在公开页面中出现。"
 date: 2026-07-01
-category: life
+domain: life
 format: note
 topics: []
 tags: []
 series: []
-source:
-  type: native
-  originalUrl: ""
-  originalPublishedAt: null
+source: native
+sourceUrl: ""
 migratedAt: null
 draft: true
 featured: false
