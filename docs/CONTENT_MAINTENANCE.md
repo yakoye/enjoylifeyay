@@ -1,4 +1,4 @@
-# 内容维护：以后怎样增加文章、工具、项目与历史存档
+# 内容维护：以后怎样增加文章、工具、阅读、生活与历史存档
 
 这个站是静态 Astro 站点。内容文件就是源代码的一部分：写完、校验、构建、预览、提交 GitHub、发布到 Cloudflare Pages。
 
@@ -117,7 +117,7 @@ tags: ["跑步"]
 series: ["life-running"]
 ```
 
-专题入口在 `/series/` 的“生活与运动”分组中。即使暂时没有公开文章，专题入口也会保留，方便以后持续补充。
+生活栏目入口在 `/life/`。骑行和跑步的旧专题详情仍可访问，但不再单独占用顶部导航。
 
 ## 二、迁入 CSDN、知乎或旧 GitHub 博客文章
 
@@ -192,26 +192,38 @@ src/content/tools.json
 
 - 有公开地址：填 `url`，工具名称会自动成为链接。
 - 未发布：`url` 留空；公开页面只显示名称和说明，不显示“待确认”。
-- `category` 可用：`pcie-hardware`、`browser-extension`、`developer-productivity`、`writing-media`、`life`。
+- `category` 可用：`browser-extension`、`pcie-hardware`、`writing-media`、`websites-life`、`knowledge-library`、`personal-system`。
 - 工具页会按分类自动分组，不需要手动改页面代码。
 
-## 四、添加或修改项目
+## 四、工具页承载公开项目与收藏
 
-编辑：
+“项目”和“收藏”均不再单独占用顶部导航。公开可访问的扩展、网页、资料库、个人网站、个人系统和长期参考统一维护在：
 
 ```text
-src/content/projects.json
+src/content/tools.json
 ```
 
-项目页展示“为什么做、如何演进”的目录。公开地址填 `url`；私有项目保留公开说明，但 `url`、仓库地址和任何私有数据保持空。
+工具页按以下分组自动展示：
 
-## 五、添加自然观察、书架、收藏
+```text
+Chrome 扩展与网页工具
+PCIe / 硬件工具
+文字、图片与记录工具
+个人网站与生活工具
+资料库与阅读
+个人系统与长期项目
+长期收藏与参考
+```
+
+不公开、没有链接或包含私有数据的项目不要为了展示而补造链接。旧 `/projects/` 地址会自动跳转到 `/tools/#projects`，旧 `/favorites/` 地址会跳转到 `/tools/#references`，避免历史书签失效。公开项目请维护在 `src/content/tools.json`。
+
+## 五、添加自然观察、书架与长期参考
 
 | 内容 | 文件 |
 | --- | --- |
 | 自然观察 | `src/content/nature.json` |
 | 书架 | `src/content/books.json` |
-| 收藏 | `src/content/favorites.json` |
+| 长期收藏与参考 | `src/content/favorites.json`（显示在工具页） |
 | 正在做 | `src/data/now.ts` |
 
 收藏条目必须写自己的中文说明；不要只存一个裸链接。自然观察不要公开住址、家庭位置、精确路线或私密定位。
@@ -252,7 +264,7 @@ docs/Cloudflare-Pages-部署.md
 
 每篇公开文章末尾都会自动显示评论区，不需要在 Markdown Frontmatter 中额外配置。
 
-评论使用 Cloudflare Pages Functions + D1：提交后默认进入审核队列，审核通过才显示。评论不收集邮箱、不保存原始 IP，也不会写入 GitHub。
+评论使用 Cloudflare Pages Functions + D1：提交后默认进入审核队列，审核通过才显示。邮箱为可选字段，填写后仅保存在 D1 供作者审核时查看，永不公开；不保存原始 IP，也不会写入 GitHub。
 
 首次启用、D1 建表、Pages 绑定、审核 SQL 和本地 Pages Functions 预览方法详见：
 
@@ -266,3 +278,26 @@ docs/COMMENTS_D1.md
 ## v0.11 更新
 
 写作页已移除领域与形式筛选；评论支持可选邮箱、命令行管理与可选自动公开模式。参见 `docs/COMMENTS_D1.md`、`docs/V0.11_COMMENTS_ADMIN_MSI.md`。
+
+## v0.12 更新：图片宽度与移动端排版
+
+- 文章图片在桌面端默认居中并限制为正文宽度的约 60%，避免普通截图和插图撑满阅读列；手机端会自动恢复为可用的 100% 宽度。
+- 需要放大查看的流程图、宽表格或终端长截图，在 MDX 中使用 `Figure` 组件的 `wide` 参数：
+
+```mdx
+<Figure wide src="/images/articles/<mediaKey>/diagram.png" alt="流程图" caption="图 1：流程图" />
+```
+
+- 普通 Markdown 图片保持默认窄图样式；不要为了获得全宽而上传超大原图。
+- 手机端目前采用：页面 H1 20px、文章 H1 22px、二级标题 18px、三级标题 16px、正文 15px。正文没有降到 14px，以保持中文等宽字体的长期阅读性。
+
+
+## v0.13：去冗余栏目
+
+正式导航现在是：`主页 / 技术 / 工具 / 阅读 / 自然 / 生活 / 归档 / 关于`。
+
+- 技术文章和技术专题在 `/technology/`。
+- 阅读文章和书架在 `/reading/`。
+- 生活、骑行、跑步文章在 `/life/`。
+- 收藏与项目内容并入 `/tools/`。
+- 详细映射见 `docs/V0.13_NAVIGATION_CONSOLIDATION.md`。

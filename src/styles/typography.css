@@ -232,9 +232,18 @@ del {
 
 .article-prose img {
   display: block;
+  width: min(60%, 34rem);
   max-width: 100%;
   height: auto;
+  margin-inline: auto;
   border-radius: 0;
+}
+
+/* Use the `wide` class only for diagrams or screenshots that truly need full reading width. */
+.article-prose figure.wide img,
+.article-prose img.wide {
+  width: 100%;
+  max-width: 100%;
 }
 
 .article-prose figure img[src$='.png'],
@@ -245,10 +254,22 @@ del {
 }
 
 .article-prose figcaption {
-  margin-top: 0.55rem;
+  width: min(60%, 34rem);
+  max-width: 100%;
+  margin: 0.55rem auto 0;
   color: var(--muted);
   font-size: var(--font-caption);
   line-height: 1.6;
+}
+
+.article-prose figure.wide figcaption {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .article-prose figcaption {
+    width: 100%;
+  }
 }
 
 hr,

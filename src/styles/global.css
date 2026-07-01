@@ -674,8 +674,8 @@ main > section + section {
   grid-template-columns: 3.4rem minmax(0, 1fr);
   column-gap: 0.55rem;
   align-items: baseline;
-  margin: 0.22rem 0;
-  line-height: 1.75;
+  margin: 0;
+  line-height: 1.72;
 }
 
 .archive-list-date {
@@ -777,6 +777,11 @@ main > section + section {
     grid-row: auto;
     text-align: left;
   }
+
+  .article-prose img {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -789,4 +794,14 @@ main > section + section {
 
 .comments-status:empty {
   display: none;
+}
+
+/* Consolidated navigation pages: keep section anchors below the fixed visual rhythm. */
+#technology-series,
+#bookshelf,
+#references,
+#projects,
+#cycling,
+#running {
+  scroll-margin-top: calc(var(--nav-height) + var(--space-4));
 }

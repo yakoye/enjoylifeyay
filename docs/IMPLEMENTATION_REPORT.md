@@ -1,3 +1,48 @@
+# v0.13：栏目合并与去冗余
+
+## 修改文件
+
+- 顶部导航与站点配置：`src/config/site.ts`
+- 新栏目页面：`src/pages/technology/index.astro`、`src/pages/reading/index.astro`、`src/pages/life/index.astro`
+- 工具统一入口：`src/pages/tools/index.astro`、`src/components/DirectoryList.astro`
+- 旧入口重定向：`src/pages/writing/index.astro`、`src/pages/series/index.astro`、`src/pages/bookshelf/index.astro`、`src/pages/favorites/index.astro`、`src/pages/projects/index.astro`
+- 首页与维护说明：`src/pages/index.astro`、`README.md`、`docs/CONTENT_MAINTENANCE.md`、`docs/V0.13_NAVIGATION_CONSOLIDATION.md`
+
+## 已完成功能
+
+- 正式导航统一为：主页、技术、工具、阅读、自然、生活、归档、关于。
+- “写作”与“专题”并入技术；技术页同时显示技术文章和技术专题。
+- “书架”并入阅读；阅读页同时显示阅读文章、书架和阅读专题。
+- 新增生活页；生活、骑行和跑步文章归入同一入口。
+- “收藏”和“项目”并入工具；工具页统一展示公开工具、个人系统、项目说明与长期参考。
+- 旧入口保留 301 跳转，避免旧书签失效。
+- 首页副标题更新为“技术 · 工具 · 阅读 · 自然 · 生活”。
+
+## 内容迁移
+
+历史文章迁移台账保持不变；v0.13 仅调整公开信息架构，不伪造或新增未经确认的旧文内容。
+
+## 待人工确认
+
+- CSDN 与知乎正文仍需逐篇确认版权、原始日期与图片后再迁入 Markdown。
+- 长期参考和项目说明可按 `docs/CONTENT_MAINTENANCE.md` 持续补充。
+
+## 已知问题
+
+- 本地预览 `npm run preview` 不运行 Cloudflare Pages Function；评论 D1 接口需线上或 `wrangler pages dev` 才能验证。
+- Windows 若出现 Rollup / Rolldown 文件锁定，按 `docs/BUILD_PREVIEW_DEPLOY.md` 执行清理脚本。
+
+## Cloudflare Pages
+
+- 项目名：`enjoylifeyay`
+- 正式地址：`https://enjoylifeyay.pages.dev`
+- 构建命令：`npm run build`
+- 输出目录：`dist`
+- Node：24.x
+- 手动发布：`npx wrangler pages deploy dist --project-name enjoylifeyay --branch main`
+
+---
+
 # v0.10 补充：评论、目录审计与新文章
 
 - 新增文章《程序员、工程师与 AI 时代的独立创造》（2026-07-01），以阅读摘要与个人补记呈现，保留原文链接但不转载全文。
@@ -174,3 +219,46 @@ npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
 - 新增远程 D1 命令：状态、全部、待审、通过、拒绝、删除、邮箱迁移及线上 API 探测。
 - 新增 `2024-05-24-pcie-msi-msix-introduction.mdx` 及四个本地图片资源，验证图片、表格、代码块、引用和目录。
 - 发布后使用 `npm run comments:probe -- pcie-msi-msix-introduction` 确认线上 Pages Function 能访问 `COMMENTS_DB`。
+
+# v0.12：工具整合、生活写作与图片显示
+
+## 已完成
+
+- 顶部导航移除“项目”；旧 `/projects/` 保留 301 跳转到 `/tools/`，不会让旧书签直接失效。
+- 工具页成为公开作品入口，重新按以下五组组织：
+  - Chrome 扩展与网页工具；
+  - PCIe / 硬件工具；
+  - 文字、图片与记录工具；
+  - 个人网站与生活工具；
+  - 资料库与阅读。
+- 新增或补齐公开入口：DictFloat、KeyPass、Quick Note Float、RegCalc64、PCIe Tools 总入口及四个子工具、Rich Editor、quick_note_richtext、FamilyJourney、RegCalcTextTool、轻食记、FitJourney、雅集 · 中华诗词经典、PCI Express Technology 中文版。
+- 保留未发布的飞书小助理、静读网页阅读助手、Obsidian 日记系统、人生进度可视化为无链接目录项；页面不显示“待确认”或虚构链接。
+- 新增 `/about/me/`，并在“关于”页提供入口。
+- 新增两篇生活文章：
+  - 《我走过的长路》：骑行专题；
+  - 《当我在跑步时》：跑步专题。
+- “正在做”改为当前实际维护方向：历史内容迁入、公开工具入口、骑行与跑步记录。
+- 浅色主题代码块调整为更清楚的冷灰背景；行内代码也同步加深。
+- 归档时间线条目 `margin` 压缩为 `0`，保留日期左、标题右的归档专属排版。
+- 文章普通图片在桌面端默认居中并限制为正文宽度的约 60%；手机端恢复为 100%。MDX 的 `Figure wide` 可用于确实需要全宽的流程图或长截图。
+
+## 维护规则
+
+- 以后新增公开扩展、网页工具、资料库和个人网站，统一编辑 `src/content/tools.json`；不要再新建公开“项目”页面。
+- 新文章使用 `docs/templates/new-writing.md`，图片目录继续使用稳定的 `mediaKey`，而不是文章文件名。
+- 图片显示、目录和 Cloudflare Pages 发布流程详见：
+  - `docs/MEDIA_MANAGEMENT.md`
+  - `docs/CONTENT_MAINTENANCE.md`
+  - `docs/BUILD_PREVIEW_DEPLOY.md`
+
+## 验收
+
+```powershell
+npm run check
+npm test
+npm run audit:toc
+npm run build
+npm run check:links
+```
+
+结果：Astro check 0 errors / 0 warnings；38 项测试通过；13 篇公开写作均可生成目录；构建与内部链接检查通过。

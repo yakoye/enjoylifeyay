@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import DirectoryList from '../../components/DirectoryList.astro';
+import WritingList from '../../components/WritingList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const technicalWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'technology'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allSeries = (await getCollection('series', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const allWriting = await getCollection('writing', ({ data }) => !data.draft);
+const technicalSeriesIds = [
+  'pcie-high-speed-interconnect',
+  'chip-firmware-soc',
+  'dev-environment-productivity',
+  'cloudflare-personal-site',
+  'chrome-web-tools',
+];
+const seriesItems = allSeries
+  .filter((entry) => technicalSeriesIds.includes(entry.data.id))
+  .map(({ data }) => ({
+    title: data.title,
+    description: data.description,
+    meta: (() => { const count = allWriting.filter((entry) => entry.data.series.includes(data.id)).length; return count > 0 ? `${count}篇` : undefined; })(),
+    href: `/series/${data.id}/`,
+  }));
+---
+
+<BaseLayout title="技术" description="芯片、PCIe、固件、开发环境与工程实践的长期记录。">
+  <h1>技术</h1>
+  <p class="page-intro">芯片、PCIe、固件、开发环境与工程实践的长期记录。</p>
+
+  <section aria-labelledby="technology-writing">
+    <h2 id="technology-writing">技术文章</h2>
+    <WritingList entries={technicalWriting} />
+  </section>
+
+  <section aria-labelledby="technology-series">
+    <h2 id="technology-series">技术专题</h2>
+    <DirectoryList groups={[{ items: seriesItems }]} emptyMessage="暂无已公开的技术专题。" />
+  </section>
+</BaseLayout>

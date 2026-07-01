@@ -50,8 +50,8 @@
   --rule-color: #dfdfda;
   --link: #064fb0;
   --link-hover: #003b86;
-  --code-background: #f4f4f1;
-  --inline-code-background: #eeeeea;
+  --code-background: #eef1f4;
+  --inline-code-background: #e7ebef;
   --quote-rule: #9c9c96;
 }
 
@@ -64,16 +64,23 @@
   --rule-color: #323232;
   --link: #86bfff;
   --link-hover: #afd7ff;
-  --code-background: #1d1d1d;
-  --inline-code-background: #252525;
+  --code-background: #1d2228;
+  --inline-code-background: #262c33;
   --quote-rule: #77756f;
 }
 
 @media (max-width: 640px) {
   :root {
-    --font-article-title: 1.5625rem;
-    --font-h2: 1.25rem;
-    --font-h3: 1.0625rem;
+    /* Keep body text at 15px: 14px Chinese mono text is too cramped for sustained reading. */
+    --font-page-title: 1.25rem;
+    --font-article-title: 1.375rem;
+    --font-h2: 1.125rem;
+    --font-h3: 1rem;
+    --font-body: 0.9375rem;
+    --font-intro: 0.875rem;
+    --font-list: 0.875rem;
+    --font-meta: 0.75rem;
+    --font-caption: 0.75rem;
     --font-code: 0.8125rem;
   }
 }

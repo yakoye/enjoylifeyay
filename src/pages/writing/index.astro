@@ -1,15 +1,3 @@
 ---
-import { getCollection } from 'astro:content';
-import WritingList from '../../components/WritingList.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const writing = (await getCollection('writing', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+return Astro.redirect('/technology/', 301);
 ---
-
-<BaseLayout title="写作" description="技术、阅读、生活、自然与工具相关的长期写作。">
-  <h1>写作</h1>
-  <p class="page-intro">按首次发布时间排列。旧文章迁入本站后，仍保留原始时间与来源。</p>
-  <WritingList entries={writing} />
-  <p class="aux-links"><a href="/archive/">按年份归档</a> · <a href="/tags/">标签索引</a></p>
-</BaseLayout>

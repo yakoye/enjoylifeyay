@@ -1,8 +1,8 @@
 ---
-interface Props { src: string; alt: string; caption?: string; credit?: string; width?: number; }
-const { src, alt, caption = '', credit = '', width } = Astro.props;
+interface Props { src: string; alt: string; caption?: string; credit?: string; width?: number; wide?: boolean; }
+const { src, alt, caption = '', credit = '', width, wide = false } = Astro.props;
 ---
-<figure>
+<figure class:list={{ wide }}>
   <img src={src} alt={alt} width={width} loading="lazy" decoding="async" />
   {(caption || credit) && <figcaption>{caption}{caption && credit && ' · '}{credit}</figcaption>}
 </figure>

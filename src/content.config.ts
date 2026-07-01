@@ -55,7 +55,7 @@ const tools = defineCollection({
     id: z.string(),
     name: z.string(),
     description: z.string(),
-    category: z.enum(['pcie-hardware', 'browser-extension', 'developer-productivity', 'writing-media', 'life']),
+    category: z.enum(['pcie-hardware', 'browser-extension', 'writing-media', 'websites-life', 'knowledge-library', 'personal-system']),
     status: z.enum(['available', 'development', 'archived', 'link-pending']),
     url: optionalUrl,
     githubUrl: optionalUrl,

@@ -17,13 +17,18 @@ if (!series) {
 
 const writing = (await getCollection('writing', ({ data }) => !data.draft && data.series.includes(series.data.id)))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sectionHref = series.data.id.startsWith('life-')
+  ? '/life/'
+  : series.data.id === 'reading-learning' || series.data.id === 'knowledge-obsidian'
+    ? '/reading/'
+    : '/technology/';
 ---
 
-<BaseLayout title={series.data.title} description={series.data.description}>
+<BaseLayout title={series.data.title} description={series.data.description} activeNav={sectionHref}>
   <h1>{series.data.title}</h1>
   <p class="page-intro">{series.data.description}</p>
   {series.data.audience && <p class="meta-muted">适合：{series.data.audience}</p>}
   <h2>文章</h2>
   <WritingList entries={writing} />
-  <p class="aux-links"><a href="/series/">返回全部专题</a></p>
+  <p class="aux-links"><a href={sectionHref}>返回对应栏目</a></p>
 </BaseLayout>

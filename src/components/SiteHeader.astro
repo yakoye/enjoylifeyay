@@ -2,8 +2,13 @@
 import ThemeToggle from './ThemeToggle.astro';
 import { site } from '../config/site';
 
+interface Props {
+  activeNav?: string;
+}
+
+const { activeNav } = Astro.props;
 const pathname = Astro.url.pathname;
-const isCurrent = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
+const isCurrent = (href: string) => activeNav ? href === activeNav : (href === '/' ? pathname === '/' : pathname.startsWith(href));
 ---
 
 <header class="site-header">

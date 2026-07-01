@@ -14,6 +14,7 @@ const isMeaningfulDate = (value?: Date | null): value is Date => Boolean(value &
 const formatDate = (value?: Date | null) => isMeaningfulDate(value) ? value.toISOString().slice(0, 10) : '';
 const updatedAt = isMeaningfulDate(data.updated) ? data.updated : undefined;
 const sourceLabels = { native: '本站', CSDN: 'CSDN', Zhihu: '知乎', EnjoyLifeBlog: 'EnjoyLifeBlog' } as const;
+const domainRoutes = { technology: '/technology/', reading: '/reading/', life: '/life/', nature: '/nature/', tool: '/tools/' } as const;
 const toc = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
 const allSeries = await getCollection('series', ({ data }) => !data.draft);
 const relatedSeries = data.series
@@ -26,12 +27,12 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={data.title} description={data.description} contentType="文章" publishedAt={data.date}>
+<BaseLayout title={data.title} description={data.description} contentType="文章" publishedAt={data.date} activeNav={domainRoutes[data.domain]}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article>
     <header class="article-header">
       <h1>{data.title}</h1>
-      <div class="writing-meta">{categoryLabels[data.domain]} · {formatLabels[data.format]}{data.tags.length > 0 && ` · ${data.tags.join(' / ')}`}</div>
+      <div class="writing-meta"><a href={domainRoutes[data.domain]}>{categoryLabels[data.domain]}</a> · {formatLabels[data.format]}{data.tags.length > 0 && ` · ${data.tags.join(' / ')}`}</div>
       {relatedSeries.length > 0 && (
         <div class="article-series">
           所属专题：

@@ -4,8 +4,8 @@ import SiteHeader from '../components/SiteHeader.astro';
 import { site } from '../config/site';
 import '../styles/global.css';
 
-interface Props { title?: string; description?: string; contentType?: string; publishedAt?: Date; }
-const { title, description = site.description, contentType = '页面', publishedAt } = Astro.props;
+interface Props { title?: string; description?: string; contentType?: string; publishedAt?: Date; activeNav?: string; }
+const { title, description = site.description, contentType = '页面', publishedAt, activeNav } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : site.name;
 const canonical = new URL(Astro.url.pathname, site.url);
 ---
@@ -45,7 +45,7 @@ const canonical = new URL(Astro.url.pathname, site.url);
     </script>
   </head>
   <body>
-    <SiteHeader />
+    <SiteHeader activeNav={activeNav} />
     <main class="content-shell" data-pagefind-body><slot /></main>
     <SiteFooter />
     <script>

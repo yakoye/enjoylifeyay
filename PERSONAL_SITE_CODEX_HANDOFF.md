@@ -1,3 +1,40 @@
+# 当前生效说明：v0.13 栏目合并（优先级最高）
+
+> 本段覆盖本文件后续历史版本中关于公开导航、页面职责和栏目名称的旧描述；旧内容仅作为开发历史参考。
+
+## 当前正式导航
+
+```text
+主页  技术  工具  阅读  自然  生活  归档  关于
+```
+
+站点副标题：
+
+```text
+技术 · 工具 · 阅读 · 自然 · 生活
+```
+
+### 栏目职责
+
+- **技术**：`/technology/`。技术文章与技术专题；旧 `/writing/`、`/series/` 仅保留兼容跳转。
+- **工具**：`/tools/`。公开扩展、PCIe 工具、个人网站、资料库、个人系统与长期参考；旧 `/projects/`、`/favorites/` 仅保留兼容跳转。
+- **阅读**：`/reading/`。阅读文章、书架、阅读专题；旧 `/bookshelf/` 仅保留兼容跳转。
+- **自然**：`/nature/`。自然观察与地方记录。
+- **生活**：`/life/`。生活、骑行、跑步。
+- **归档**：`/archive/`。所有已确认历史条目的日期时间线。
+
+### 内容维护
+
+- 技术、阅读、生活类文章：`src/content/writing/`，通过 `domain` 区分。
+- 工具、网站、个人系统：`src/content/tools.json`。
+- 长期收藏与旧站入口：`src/content/favorites.json`，显示于工具页。
+- 书架：`src/content/books.json`，显示于阅读页。
+- 技术、阅读、生活专题：`src/content/series.json`，不单独占用导航。
+
+详细规则以 `README.md` 和 `docs/V0.13_NAVIGATION_CONSOLIDATION.md` 为准。
+
+---
+
 # Enjoy Life — 个人知识与生活档案站
 ## Codex 开发与 Cloudflare Pages 部署总交接文档
 
@@ -1327,3 +1364,11 @@ Codex 不得把本项目做成以下任意一种：
 ## v0.11.2：本地一键预览
 
 日常本地查看站点时，使用根目录 `preview-local.cmd`；第一次安装依赖或依赖变化时使用 `preview-local.cmd -Install`。脚本会检查、测试、构建、启动 `http://127.0.0.1:4321/` 并自动打开浏览器。停止时使用 `stop-local-preview.cmd`。
+
+
+## v0.12 update
+
+- Public project navigation has been removed. `/projects/` redirects to `/tools/`; public extensions, websites and libraries belong in `src/content/tools.json`.
+- Keep the tools categories: `browser-extension`, `pcie-hardware`, `writing-media`, `websites-life`, `knowledge-library`.
+- Article images default to a centered 60% desktop reading width and 100% on mobile; only MDX `Figure wide` should opt into full width.
+- New pages: `/about/me/`; new life series writing for cycling and running.

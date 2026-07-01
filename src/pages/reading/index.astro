@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import DatedTextList from '../../components/DatedTextList.astro';
+import DirectoryList from '../../components/DirectoryList.astro';
+import WritingList from '../../components/WritingList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const readingWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'reading'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const labels = { read: '读过', reading: '在读', wishlist: '想读' } as const;
+const allBooks = await getCollection('books');
+type PublishedBook = (typeof allBooks)[number] & { data: Extract<(typeof allBooks)[number]['data'], { draft: false }> };
+const books = allBooks.filter((entry): entry is PublishedBook => entry.data.draft === false);
+const bookGroups = Object.entries(labels).map(([status, title]) => ({
+  title,
+  items: books
+    .filter((entry) => entry.data.status === status)
+    .map(({ data }) => ({
+      title: data.title,
+      description: data.note,
+      meta: data.author,
+      metaInline: true,
+      date: data.status === 'read' ? data.finishedAt : data.startedAt,
+      href: data.relatedWriting[0] ? `/writing/${data.relatedWriting[0]}/` : undefined,
+    })),
+}));
+
+const series = (await getCollection('series', ({ data }) => !data.draft))
+  .filter((entry) => ['reading-learning', 'knowledge-obsidian'].includes(entry.data.id));
+const allWriting = await getCollection('writing', ({ data }) => !data.draft);
+const seriesItems = series.map(({ data }) => ({
+  title: data.title,
+  description: data.description,
+  meta: (() => { const count = allWriting.filter((entry) => entry.data.series.includes(data.id)).length; return count > 0 ? `${count}篇` : undefined; })(),
+  href: `/series/${data.id}/`,
+}));
+---
+
+<BaseLayout title="阅读" description="读书笔记、书架、学习方法与长期阅读记录。">
+  <h1>阅读</h1>
+  <p class="page-intro">读书笔记、书架、学习方法与长期阅读记录。</p>
+
+  <section aria-labelledby="reading-writing">
+    <h2 id="reading-writing">阅读文章</h2>
+    <WritingList entries={readingWriting} />
+  </section>
+
+  <section id="bookshelf" aria-labelledby="reading-bookshelf">
+    <h2 id="reading-bookshelf">书架</h2>
+    <DatedTextList groups={bookGroups} emptyMessage="暂无已核对并公开的书目。" />
+  </section>
+
+  <section aria-labelledby="reading-series">
+    <h2 id="reading-series">阅读专题</h2>
+    <DirectoryList groups={[{ items: seriesItems }]} emptyMessage="暂无已公开的阅读专题。" />
+  </section>
+</BaseLayout>

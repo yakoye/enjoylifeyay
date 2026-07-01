@@ -1,26 +1,53 @@
-# 给后续开发者的启动提示词
+# Enjoy Life：后续开发启动提示
 
-请先阅读：
+先阅读：
 
 1. `README.md`
-2. `docs/BUILD_PREVIEW_DEPLOY.md`
-3. `docs/CONTENT_MIGRATION_STATUS.md`
-4. `docs/LEGACY_SOURCE_CATALOG.md`
-5. `docs/TYPOGRAPHY_SYSTEM.md`
-6. `docs/COMMENTS_D1.md`
-7. `docs/V0.10_COMMENTS_TOC_ARTICLE.md`
-8. `PERSONAL_SITE_CODEX_HANDOFF.md`
+2. `docs/V0.13_NAVIGATION_CONSOLIDATION.md`
+3. `docs/CONTENT_MAINTENANCE.md`
+4. `docs/BUILD_PREVIEW_DEPLOY.md`
+5. `docs/COMMENTS_D1.md`
+6. `docs/TYPOGRAPHY_SYSTEM.md`
+7. `PERSONAL_SITE_CODEX_HANDOFF.md`
 
-当前项目已经完成 v0.10：文本目录视觉、完整按年存档、旧博客公开文章、CSDN 历史外链、知乎入口、公开工具链接、Pagefind 中文构建、Node 24 发布流程、全文章目录审计，以及 Cloudflare Pages Functions + D1 的审核制评论均已落地。
+## 当前正式信息架构
 
-后续开发原则：
+```text
+主页  技术  工具  阅读  自然  生活  归档  关于
+```
 
-- 不要重做现有文本目录视觉，不要引入卡片、Hero、渐变、圆角胶囊、伪终端或复杂 UI 框架。
-- 不要虚构 CSDN、知乎、工具、项目、书籍、图片、日期或链接。
-- 旧文章必须保留 `date`、`source`、`sourceUrl`；未核对内容保持 `draft: true`。
-- 工具和项目没有真实公开链接时，列表不显示占位状态。
-- 只允许公开确认过的内容；FamilyJourney、R2、D1、家庭照片和私人数据不得进入本仓库。
-- Node 24 为目标环境。
+站点副标题：
+
+```text
+技术 · 工具 · 阅读 · 自然 · 生活
+```
+
+- `技术`：技术文章与技术专题。
+- `工具`：公开扩展、网页工具、个人网站、资料库、个人系统与长期收藏。
+- `阅读`：阅读文章、书架与阅读专题。
+- `自然`：自然观察和地方记录。
+- `生活`：生活、骑行、跑步。
+- `归档`：全量按日期历史记录。
+
+旧入口必须保留重定向：
+
+```text
+/writing/   -> /technology/
+/series/    -> /technology/#technology-series
+/bookshelf/ -> /reading/#bookshelf
+/favorites/ -> /tools/#references
+/projects/  -> /tools/#projects
+```
+
+## 必须遵守
+
+- 不要重做当前文本目录视觉；不要引入卡片、Hero、渐变、圆角胶囊、伪终端或大型 UI 框架。
+- 桌面正文最大宽度 890px；移动端左右 16px；中文正文两端对齐，列表、表格、代码、引用保持左对齐。
+- 不要虚构文章、日期、来源、项目链接、书籍或图片。
+- 旧文保留 `date`、`source` 与 `sourceUrl`；未确认内容维持草稿或迁移台账状态。
+- 公开工具、个人网站、资料库、个人系统统一维护在 `src/content/tools.json`；长期参考维护在 `src/content/favorites.json`，显示在工具页。
+- 私人项目、家庭数据、FamilyJourney 私有 R2/D1、照片和密钥不能进入本站仓库。
+- Node 24 是目标环境。
 
 每次修改后必须运行：
 
@@ -31,21 +58,3 @@ npm run audit:toc
 npm run build
 npm run check:links
 ```
-
-完整发布命令见 `docs/BUILD_PREVIEW_DEPLOY.md`。
-
-## v0.7 补充
-
-优先遵循 `docs/V0.7_LAYOUT_MEDIA.md` 和 `docs/MEDIA_MANAGEMENT.md` 的顶栏、归档和媒体规则。
-
-## v0.11 当前状态
-
-- 写作页不再保留领域 / 形式筛选；按日期文本目录为正式方案。
-- 评论 D1 绑定名称固定为 `COMMENTS_DB`；可选变量 `COMMENTS_MODERATION=auto` 让新评论自动公开。
-- 评论管理员使用 `npm run comments:pending`、`npm run comments:approve -- <ID>`、`npm run comments:delete -- <ID>`，不要求网页后台。
-- 文章 `2024-05-24-pcie-msi-msix-introduction.mdx` 是本地图片、表格、代码、引用、目录的综合回归测试文。
-
-
-## v0.11.2：本地一键预览
-
-日常本地查看站点时，使用根目录 `preview-local.cmd`；第一次安装依赖或依赖变化时使用 `preview-local.cmd -Install`。脚本会检查、测试、构建、启动 `http://127.0.0.1:4321/` 并自动打开浏览器。停止时使用 `stop-local-preview.cmd`。

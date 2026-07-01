@@ -124,3 +124,15 @@ enjoylife-public-media
 - 不上传家庭照片、精确住址、私密路线和私人文件到本站公开 `public/images/`。
 - 优先保留原图的本地备份；站点里放压缩后的 WebP/PNG/JPG 副本。
 - 每次新增一组图片都和对应 Markdown 一起提交 Git。这样文章和图片可以一起回退。
+
+## v0.12 图片显示规则
+
+- 桌面端文章中的普通图片默认显示为正文列约 60% 宽度，并居中，适合普通截图、照片和小型示意图。
+- 手机端普通图片自动使用 100% 宽度，避免 60% 过小。
+- 只有必须细看细节的流程图、宽表格、终端长截图才使用全宽 `wide`；在 MDX 中使用：
+
+```mdx
+<Figure wide src="/images/articles/<mediaKey>/wide-diagram.png" alt="详细流程图" caption="图 1：详细流程图" />
+```
+
+图片目录与 `mediaKey` 的关系仍保持不变：文章文件可改名，图片目录不要随 Markdown slug 改名。

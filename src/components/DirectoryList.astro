@@ -7,6 +7,7 @@ interface Item {
 }
 
 interface Group {
+  id?: string;
   title?: string;
   items: Item[];
 }
@@ -25,7 +26,7 @@ const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href))
 {groups.length ? (
   <div class="text-directory">
     {groups.map((group) => (
-      <section class="text-list-section">
+      <section class="text-list-section" id={group.id}>
         {group.title && <h2 class="text-list-heading">{group.title}</h2>}
         <ul class="text-list">
           {group.items.map((item) => (

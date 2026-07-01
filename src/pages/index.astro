@@ -8,7 +8,7 @@ import { nowItems } from '../data/now';
 const writing = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 6);
 const featuredSeries = (await getCollection('series', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.order - b.data.order).find((entry) => entry.data.featured);
+  .sort((a, b) => a.data.order - b.data.order).find((entry) => entry.data.id === 'pcie-high-speed-interconnect');
 const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
   .find((entry) => entry.data.featured && ['available', 'development'].includes(entry.data.status));
 ---
@@ -20,7 +20,7 @@ const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
   </div>
 
   <section aria-labelledby="recent-writing">
-    <div class="section-heading"><h2 id="recent-writing">最近写作</h2><a href="/writing/">全部写作</a></div>
+    <div class="section-heading"><h2 id="recent-writing">最近更新</h2><a href="/archive/">全部归档</a></div>
     <WritingList entries={writing} />
   </section>
 
@@ -30,8 +30,8 @@ const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
   </section>
 
   {featuredSeries && <section aria-labelledby="featured-series">
-    <h2 id="featured-series">一个专题</h2>
-    <p class="feature-line"><a href="/series/">{featuredSeries.data.title}</a><span>{featuredSeries.data.description}</span></p>
+    <h2 id="featured-series">技术专题</h2>
+    <p class="feature-line"><a href={`/series/${featuredSeries.data.id}/`}>{featuredSeries.data.title}</a><span>{featuredSeries.data.description}</span></p>
   </section>}
 
   {featuredTool && <section aria-labelledby="featured-tool">

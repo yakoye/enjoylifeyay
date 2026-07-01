@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import WritingList from '../../components/WritingList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allLifeWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'life'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const groups = [
+  { id: 'life-notes', title: '生活与思考', seriesId: '' },
+  { id: 'cycling', title: '骑行', seriesId: 'life-cycling' },
+  { id: 'running', title: '跑步', seriesId: 'life-running' },
+].map((group) => ({
+  ...group,
+  entries: allLifeWriting.filter((entry) => group.seriesId ? entry.data.series.includes(group.seriesId) : entry.data.series.length === 0),
+}));
+---
+
+<BaseLayout title="生活" description="生活、骑行、跑步与持续变化的记录。">
+  <h1>生活</h1>
+  <p class="page-intro">生活、骑行、跑步与持续变化的记录。</p>
+
+  {groups.filter((group) => group.entries.length > 0).map((group) => (
+    <section id={group.id} aria-labelledby={`${group.id}-heading`}>
+      <h2 id={`${group.id}-heading`}>{group.title}</h2>
+      <WritingList entries={group.entries} />
+    </section>
+  ))}
+</BaseLayout>
