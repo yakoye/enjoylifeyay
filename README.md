@@ -168,6 +168,16 @@ series: ["life-running"]
 - [`docs/BUILD_PREVIEW_DEPLOY.md`](docs/BUILD_PREVIEW_DEPLOY.md)
 
 
+## v0.17.2：站外专题扩充与描述维护
+
+站外专题已更新为 **96 个**站点；包含你补充的系统工程、硬件逆向、性能、经济与产业、数字协议、独立网络社群等入口。
+
+- 直接编辑 `src/content/reading-sites.json` 即可维护站点。
+- 桌面端每个站点最多显示两行：较长说明允许自然换行一次，超过两行时收束；鼠标悬停可查看完整“名称：说明”。
+- 手机端允许自然换行，不裁切说明。
+- `pinned: true` 仍表示“常看”，不代表排名。
+- 当前分类与条目数：工程 24、认知 33、科学 5、数字考古 9、文学 11、生活 14。
+
 ## v0.17.1：站外专题描述增强
 
 站外专题的 69 个条目已逐一改为更具辨识度的一句话简介：优先保留读者最容易记住的主题词、代表性内容或阅读感受，同时控制为桌面端 `890px` 正文宽度下尽量一行显示。
@@ -258,3 +268,10 @@ public/images/articles/2020-10-31-zpark-duathlon-first/
 ```yaml
 series: ["life-cycling", "life-running"]
 ```
+
+
+## v0.17.3：站外专题两行说明与数据更新
+
+- 已同步用户维护的 96 条站外阅读数据。
+- 桌面端站点说明允许最多两行；手机端自然换行。
+- 详情见 [`docs/V0.17.3_READING_SITES_TWO_LINES.md`](docs/V0.17.3_READING_SITES_TWO_LINES.md)。

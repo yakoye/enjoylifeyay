@@ -1,0 +1,23 @@
+{
+  "version": "0.17.2",
+  "siteCount": 96,
+  "categoryCounts": {
+    "engineering": 24,
+    "cognition": 33,
+    "science": 5,
+    "archives": 9,
+    "culture": 11,
+    "life": 14
+  },
+  "validation": {
+    "uniqueIds": true,
+    "uniqueUrls": true,
+    "allPinnedBoolean": true,
+    "allUrlsAbsoluteHttp": true
+  },
+  "minorEditorialCorrections": [
+    "Conceptually: 补充“把”使句法完整",
+    "Kevin Kelly / The Technium: 删除重复的 Technium",
+    "Textfiles: 去掉描述中重复的原始入口 URL，名称本身已可点击"
+  ]
+}

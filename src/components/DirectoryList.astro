@@ -32,7 +32,7 @@ const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href))
         {group.title && <Heading class="text-list-heading">{group.title}</Heading>}
         <ul class="text-list">
           {group.items.map((item) => (
-            <li>
+            <li title={item.description ? `${item.title}：${item.description}` : item.title}>
               {item.href ? (
                 <a class="text-list-title" href={item.href} target={isExternal(item.href) ? '_blank' : undefined} rel={isExternal(item.href) ? 'noopener noreferrer' : undefined}>{item.title}</a>
               ) : (

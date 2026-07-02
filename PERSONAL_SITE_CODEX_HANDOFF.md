@@ -1397,3 +1397,8 @@ Codex 不得把本项目做成以下任意一种：
 ## v0.17.1：站外专题描述
 
 阅读页的站外专题仍维护在 `src/content/reading-sites.json`。本版已将 69 个站点的描述改为更具辨识度的单句提示；新增或修改时，请优先保留一个能让人立刻联想到该站点的关键词或代表性主题，并尽量控制为桌面端一行。常看站点仍只通过 `pinned: true` 手动置顶。
+
+
+## v0.17.2 update
+
+External reading data is user-maintained in `src/content/reading-sites.json` and now contains 96 unique entries. Preserve descriptions; desktop list is single-line with ellipsis and native hover text, mobile wraps.
