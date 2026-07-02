@@ -2,8 +2,8 @@
 import type { CollectionEntry } from 'astro:content';
 import { categoryLabels, formatLabels } from '../config/site';
 
-interface Props { entries: CollectionEntry<'writing'>[]; }
-const { entries } = Astro.props;
+interface Props { entries: CollectionEntry<'writing'>[]; emptyMessage?: string | false; }
+const { entries, emptyMessage = '尚无已核对并公开的文章。' } = Astro.props;
 const formatDate = (value: Date) => value.toISOString().slice(0, 10);
 ---
 
@@ -11,7 +11,7 @@ const formatDate = (value: Date) => value.toISOString().slice(0, 10);
   <ul class="dated-list writing-list" data-writing-list>
     {entries.map((entry) => (
       <li class="dated-list-item writing-item" data-domain={entry.data.domain} data-format={entry.data.format}>
-        <span class="dated-list-bullet" aria-hidden="true">·</span>
+        <span class="dated-list-bullet" aria-hidden="true">•</span>
         <div class="dated-list-content">
           <a class="dated-list-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
           <span class="dated-list-description">：{entry.data.description}</span>
@@ -25,4 +25,4 @@ const formatDate = (value: Date) => value.toISOString().slice(0, 10);
       </li>
     ))}
   </ul>
-) : <p class="empty-state">尚无已核对并公开的文章。</p>}
+) : (emptyMessage ? <p class="empty-state">{emptyMessage}</p> : null)}

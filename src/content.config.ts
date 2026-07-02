@@ -99,4 +99,24 @@ const favorites = defineCollection({
   ]),
 });
 
-export const collections = { writing, series, tools, nature, books, favorites };
+
+const sectionPages = defineCollection({
+  loader: glob({ base: './src/content/section-pages', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    section: z.enum(['technology', 'tools', 'reading', 'nature', 'life']),
+    routeSlug: z.string().min(1),
+    title: z.string().min(1),
+    description: z.string().min(1),
+    order: z.number().int().nonnegative(),
+    kind: z.enum(['writing', 'tools', 'nature', 'books', 'markdown']).default('markdown'),
+    writingDomain: z.enum(['technology', 'reading', 'life', 'nature', 'tool']).optional(),
+    writingSeries: z.array(z.string()).default([]),
+    writingTopics: z.array(z.string()).default([]),
+    toolCategories: z.array(z.enum(['pcie-hardware', 'browser-extension', 'writing-media', 'websites-life', 'knowledge-library', 'diy-project'])).default([]),
+    natureCategories: z.array(z.enum(['plant', 'animal', 'season', 'hiking-cycling', 'urban-wild', 'photo-aerial', 'local-memory'])).default([]),
+    bookStatuses: z.array(z.enum(['reading', 'read', 'wishlist'])).default([]),
+    ...common,
+  }),
+});
+
+export const collections = { writing, series, tools, nature, books, favorites, sectionPages };

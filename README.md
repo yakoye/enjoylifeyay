@@ -14,9 +14,9 @@
 
 - **技术**：PCIe、芯片、固件、开发环境与工程实践；技术专题也放在这里。
 - **工具**：自己做的项目、浏览器扩展、PCIe 工具、记录工具与资料库。
-- **阅读**：本站阅读文章，以及按主题整理的站外长文、独立博客与知识档案。
-- **自然**：植物、动物、季节、地方记忆与自然观察。
-- **生活**：饮食、影集与家庭、运动，以及生活与思考。
+- **阅读**：本站阅读文章、书架、翻译与写作计划，以及独立维护的站外专题。
+- **自然**：植物、动物、季节、行走、摄影与地方记忆。
+- **生活**：思考、运动、饮食、旅行、家庭与日常方法。
 - **归档**：按日期汇总本站文章与尚未迁入的历史技术条目。
 
 旧入口会自动跳转；内容去重和旧图本地化规则见 [`docs/V0.15_PRIVATE_LEGACY_MIGRATION.md`](docs/V0.15_PRIVATE_LEGACY_MIGRATION.md)。
@@ -156,7 +156,7 @@ series: ["life-running"]
 | 公开工具、扩展、自己 DIY 项目、资料库 | `src/content/tools.json` | 工具 |
 | 饮食、影集与家庭、运动网站 | `src/content/tools.json`（`category: "websites-life"`） | 生活 |
 | 历史内容来源（CSDN / 知乎） | `src/content/favorites.json` | 工具 / 历史内容来源 |
-| 站外阅读专题、常看置顶 | `src/content/reading-sites.json` | 阅读 / 站外专题 |
+| 站外阅读专题 | `src/content/section-pages/reading/reading-sites.md` | 阅读 / 站外专题 |
 | 自然观察 | `src/content/nature.json` | 自然 |
 | 正在做 | `src/data/now.ts` | 主页与 `/now/` |
 
@@ -168,48 +168,46 @@ series: ["life-running"]
 - [`docs/BUILD_PREVIEW_DEPLOY.md`](docs/BUILD_PREVIEW_DEPLOY.md)
 
 
-## v0.17.2：站外专题扩充与描述维护
 
-站外专题已更新为 **96 个**站点；包含你补充的系统工程、硬件逆向、性能、经济与产业、数字协议、独立网络社群等入口。
+## v0.18.1：覆盖升级兼容修复
 
-- 直接编辑 `src/content/reading-sites.json` 即可维护站点。
-- 桌面端每个站点最多显示两行：较长说明允许自然换行一次，超过两行时收束；鼠标悬停可查看完整“名称：说明”。
-- 手机端允许自然换行，不裁切说明。
-- `pinned: true` 仍表示“常看”，不代表排名。
-- 当前分类与条目数：工程 24、认知 33、科学 5、数字考古 9、文学 11、生活 14。
+使用压缩包覆盖已有仓库时，旧版的 `src/content/reading-sites.json` 可能仍留在磁盘上。该文件已不参与网站运行；站外专题只从：
 
-## v0.17.1：站外专题描述增强
+```text
+src/content/section-pages/reading/reading-sites.md
+```
 
-站外专题的 69 个条目已逐一改为更具辨识度的一句话简介：优先保留读者最容易记住的主题词、代表性内容或阅读感受，同时控制为桌面端 `890px` 正文宽度下尽量一行显示。
+读取。v0.18.1 的测试只校验运行时不会引用旧 JSON，因此无需为通过测试而手动删除旧文件。想保持仓库整洁时可以自行删除该旧 JSON。
 
-- 数据仍维护在 `src/content/reading-sites.json`。
-- 名称仍是外链；没有排名、编号或评分。
-- 常看仍只需将 `pinned` 改为 `true`。
-- 新增或修改描述时，优先保留一个可记忆的关键词，例如“聚合理论”“太阳能供电”“BBS 纯文本博物馆”“日本古道徒步”。
+## v0.18：Markdown 内容地图与二级页面
 
-## v0.17：阅读站外专题
+五个一级栏目现在都使用同一套“父页 + 简洁地图 + 二级页面”结构：
 
-阅读页在本站阅读文章之后增加“站外专题”。它不做排名，也不把站点做成卡片；每个条目都是“名称：一句说明”，名称点击会直接打开站外网站。
+```text
+技术：技术文章 / PCIe 与高速互连 / 芯片、固件与 SoC / 系统与开发环境 / 工程与职业
+工具：自己 DIY 项目 / Chrome 扩展与网页工具 / PCIe 硬件工具 / 文字图片与记录 / 资料库
+阅读：阅读文章 / 书架 / 我翻译的书 / 我写的书 / 站外专题
+自然：植物 / 动物 / 季节 / 行走与观察 / 地方记忆
+生活：生活与思考 / 运动 / 饮食 / 旅行 / 家庭 / 日常与方法
+```
 
-- 数据文件：`src/content/reading-sites.json`。
-- 已按工程、认知、科学、知识档案、文学与生活等主题分组。
-- 已去除重复站点；同一个站点只出现一次。
-- 想手动置顶常看站点时，把对应条目的：
+二级页面的标题、说明和正文均来自 Markdown：
 
-  ```json
-  "pinned": false
-  ```
+```text
+src/content/section-pages/<一级栏目>/
+```
 
-  改为：
+站外专题现在是独立 Markdown 页面：
 
-  ```json
-  "pinned": true
-  ```
+```text
+src/content/section-pages/reading/reading-sites.md
+```
 
-  该站会自动移动到“常看”分组，仍然不会显示排名。
-- 新增站点时直接复制一个 JSON 条目，填写唯一 `id`、`name`、`url`、一句 `description`、分类 `category` 与 `pinned`。
-
-详细方法见 [`docs/CONTENT_MAINTENANCE.md`](docs/CONTENT_MAINTENANCE.md) 和 [`docs/V0.17_EXTERNAL_READING.md`](docs/V0.17_EXTERNAL_READING.md)。
+- 名称可直接跳转。
+- 不排名、不打分、不做卡片。
+- 桌面端每条说明最多两行；手机端自然换行。
+- 想置顶某个站点时，直接把它移动到对应分类的最前面；不要重复收录。
+- 用户最初提供的 JSON 仅作为迁移备份保存于 `docs/imports/reading-sites-2026-07-02.json`，不参与网站运行。
 
 ## 技术与部署
 

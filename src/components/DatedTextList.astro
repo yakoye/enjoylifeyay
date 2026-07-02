@@ -16,7 +16,7 @@ interface Group {
 interface Props {
   groups?: Group[];
   items?: Item[];
-  emptyMessage?: string;
+  emptyMessage?: string | false;
 }
 
 const { items = [], groups: suppliedGroups, emptyMessage = '暂无已公开条目。' } = Astro.props;
@@ -38,7 +38,7 @@ const formatDate = (value?: Date | string | null) => {
             const itemDate = formatDate(item.date);
             return (
               <li class="dated-list-item">
-                <span class="dated-list-bullet" aria-hidden="true">·</span>
+                <span class="dated-list-bullet" aria-hidden="true">•</span>
                 <div class="dated-list-content">
                   {item.href ? <a class="dated-list-title" href={item.href}>{item.title}</a> : <span class="dated-list-title">{item.title}</span>}
                   {item.description && <span class="dated-list-description">：{item.description}</span>}
@@ -52,4 +52,4 @@ const formatDate = (value?: Date | string | null) => {
       </section>
     ))}
   </div>
-) : <p class="empty-state">{emptyMessage}</p>}
+) : (emptyMessage ? <p class="empty-state">{emptyMessage}</p> : null)}

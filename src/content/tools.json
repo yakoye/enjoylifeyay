@@ -86,7 +86,7 @@
   },
   {
     "id": "quiet-reader",
-    "name": "静读网页阅读助手",
+    "name": "简读 · 网页阅读助手",
     "description": "网页阅读辅助扩展。",
     "category": "browser-extension",
     "status": "development",

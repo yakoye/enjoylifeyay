@@ -485,7 +485,7 @@ Enjoy Life
 3. **开发环境与工程效率**
    - Windows、Linux、PowerShell、Windows Terminal、SSH、VS Code、Git、GitHub、Python、Shell、Vim、Source Insight、Graphviz、文档处理、编码与字体、远程开发。
 4. **Chrome 扩展与网页工具**
-   - DictFloat、静读网页阅读助手、Quick Note Float、KeyPass、RegCalc64、飞书小助理、Chrome Web Store 发布、权限与隐私、UI/UX、版本记录。
+   - DictFloat、简读 · 网页阅读助手、Quick Note Float、KeyPass、RegCalc64、飞书小助理、Chrome Web Store 发布、权限与隐私、UI/UX、版本记录。
 5. **Cloudflare、个人网站与长期记录**
    - Pages、R2、D1、静态网站、FamilyJourney、图片压缩、GitHub 自动部署、Markdown、搜索、RSS、长期备份。
 6. **知识管理、Obsidian 与长期记录**
@@ -522,7 +522,7 @@ GitHub / 源码 →（有链接才显示）
 #### 浏览器扩展
 
 - DictFloat
-- 静读网页阅读助手
+- 简读 · 网页阅读助手
 - Quick Note Float
 - KeyPass
 - 飞书小助理
@@ -543,7 +543,7 @@ GitHub / 源码 →（有链接才显示）
 ```text
 PCIe 中文资料库
 DictFloat
-静读网页阅读助手
+简读 · 网页阅读助手
 Quick Note Float
 KeyPass
 RegCalc64
@@ -1078,7 +1078,7 @@ https://www.zhihu.com/people/wikiye/posts
 | lspci Explorer | 网页工具 | 工具 + 项目 | 待补充 |
 | RegCalc64 | Chrome 扩展 / 工具 | 工具 + 项目 | 待补充 |
 | DictFloat | Chrome 扩展 | 工具 + 项目 | 待补充 |
-| 静读网页阅读助手 | Chrome 扩展 | 工具 + 项目 | 待补充 |
+| 简读 · 网页阅读助手 | Chrome 扩展 | 工具 + 项目 | 待补充 |
 | Quick Note Float | Chrome 扩展 | 工具 + 项目 | 待补充 |
 | KeyPass | Chrome 扩展 | 工具 + 项目 | 待补充 |
 | 飞书小助理 | Chrome 扩展 | 工具 + 项目 | 待补充 |

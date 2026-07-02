@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -7,66 +7,80 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (relative) => readFile(path.join(root, relative), 'utf8');
 
-test('v0.17 阅读页提供分类的站外专题与可手动置顶数据', async () => {
-  const [page, dataText] = await Promise.all([
+test('v0.18 站外专题由独立 Markdown 页面维护', async () => {
+  const [page, config, sites] = await Promise.all([
     read('src/pages/reading/index.astro'),
-    read('src/content/reading-sites.json'),
+    read('src/content.config.ts'),
+    read('src/content/section-pages/reading/reading-sites.md'),
   ]);
-  const sites = JSON.parse(dataText);
-  const ids = sites.map((site) => site.id);
+  const siteLines = sites.match(/^\s*- \[[^\]]+\]\(https?:\/\//gm) ?? [];
 
-  assert.match(page, /站外专题/);
-  assert.match(page, /pinnedSites/);
-  assert.match(page, /工程、系统与程序设计/);
-  assert.match(page, /生活、独立工作与行走/);
-  assert.ok(sites.length >= 96, '应保留用户扩充后的独立站与长文专题列表');
-  assert.equal(new Set(ids).size, ids.length, '站外专题不能有重复站点');
-  assert.equal(new Set(sites.map((site) => site.url)).size, sites.length, '站外专题不能有重复链接');
-  assert.ok(sites.every((site) => typeof site.pinned === 'boolean'), '每个站点必须可手动置顶');
-  assert.ok(sites.every((site) => /^https?:\/\//.test(site.url)), '每个站点必须有明确跳转地址');
-  for (const required of ['dan-luu', 'gwern', 'paul-graham', 'craig-mod', 'textfiles', 'coolshell', 'scz']) {
-    assert.ok(ids.includes(required), `缺少重要站外专题：${required}`);
+  assert.match(config, /const sectionPages = defineCollection/);
+  assert.match(page, /SectionMap/);
+  assert.ok(page.includes('`/reading/${entry.data.routeSlug}/`'));
+  assert.ok(siteLines.length >= 96, '站外专题 Markdown 应保留用户维护的 96 个入口');
+  for (const heading of ['工程、系统与程序设计', '认知、决策与学习', '科学、未来与社会', '数字考古与知识档案', '文学、思想与非虚构', '生活、独立工作与行走']) {
+    assert.match(sites, new RegExp(`## ${heading}`));
+  }
+  for (const keyword of ['CoolShell', 'Dan Luu', 'Gwern', 'Paul Graham', 'Craig Mod', 'Textfiles', 'SDF Public Access UNIX System']) {
+    assert.ok(sites.includes(keyword), `缺少站外专题：${keyword}`);
   }
 });
 
-test('v0.17 阅读维护文档说明如何置顶与新增站外专题', async () => {
-  const [readme, maintenance] = await Promise.all([
+test('v0.18 外部站点不再由 JSON 运行时数据和 pinned 状态维护', async () => {
+  // Windows users often update the project by extracting an archive over an
+  // existing checkout. In that workflow an obsolete src/content/reading-sites.json
+  // can remain on disk even though the site no longer imports or renders it.
+  // The contract must verify runtime ownership, not require a destructive cleanup.
+  const [readme, maintenance, readingIndex, dynamicPage, config] = await Promise.all([
     read('README.md'),
     read('docs/CONTENT_MAINTENANCE.md'),
+    read('src/pages/reading/index.astro'),
+    read('src/pages/[section]/[slug].astro'),
+    read('src/content.config.ts'),
   ]);
-  assert.match(readme, /reading-sites\.json/);
-  assert.match(maintenance, /pinned/);
-  assert.match(maintenance, /站外专题/);
+
+  assert.match(readme, /reading-sites\.md/);
+  assert.match(maintenance, /reading-sites\.md/);
+  assert.doesNotMatch(maintenance, /"pinned": true/);
+  assert.doesNotMatch(readingIndex, /reading-sites\.json/);
+  assert.doesNotMatch(dynamicPage, /reading-sites\.json/);
+  assert.doesNotMatch(config, /reading-sites\.json/);
 });
 
+test('v0.18 桌面端站外专题说明允许最多两行', async () => {
+  const css = await read('src/styles/global.css');
+  assert.match(css, /\.external-sites-prose > ul > li[\s\S]*-webkit-line-clamp:\s*2/);
+  assert.match(css, /max-height:\s*3\.5em/);
+});
 
-test('v0.17.1 站外专题描述保留可记忆的单句提示', async () => {
-  const sites = JSON.parse(await read('src/content/reading-sites.json'));
-  assert.ok(sites.every((site) => site.description.length >= 16), '每个站点需要有足够辨识度的一句话说明');
-  assert.ok(sites.every((site) => site.description.length <= 160), '站外专题描述应保持为一段简短说明，而不是正文段落');
-  const byId = new Map(sites.map((site) => [site.id, site.description]));
-  const anchors = [
-    ['stratechery', '聚合理论'],
-    ['low-tech-magazine', '太阳能供电'],
-    ['textfiles', 'BBS 时代'],
-    ['craig-mod', '长途徒步'],
-    ['derek-sivers', '极简'],
-    ['mechanical-sympathy', '机械共鸣'],
-    ['tom-critchlow', '数字花园'],
-  ];
-  for (const [id, keyword] of anchors) {
-    assert.match(byId.get(id) ?? '', new RegExp(keyword), `缺少可记忆描述锚点：${id}`);
+test('v0.18 二级地图和二级页面覆盖五个栏目', async () => {
+  const dynamicPage = await read('src/pages/[section]/[slug].astro');
+  assert.match(dynamicPage, /SectionMap/);
+  assert.match(dynamicPage, /getStaticPaths/);
+  for (const section of ['technology', 'tools', 'reading', 'nature', 'life']) {
+    const parent = await read(`src/pages/${section}/index.astro`);
+    assert.match(parent, /SectionMap/, `${section} 首页应提供简洁二级地图`);
+    const files = await readFile(path.join(root, `src/content/section-pages/${section}/`), 'utf8').catch(() => '');
+    assert.equal(files, '', 'directories are checked by static paths below');
+  }
+  for (const file of [
+    'technology/technology-pcie.md', 'technology/technology-engineering.md',
+    'tools/tools-extensions.md', 'reading/reading-translated-books.md', 'reading/reading-my-books.md', 'reading/reading-sites.md',
+    'nature/nature-walking.md', 'life/life-travel.md', 'life/life-food.md', 'life/life-family.md',
+  ]) {
+    await access(path.join(root, 'src/content/section-pages', file));
   }
 });
 
-test('v0.17.3 站外专题桌面端允许最多两行说明', async () => {
-  const [css, dataText] = await Promise.all([
+test('v0.18 全站目录列表使用统一的大黑色圆点', async () => {
+  const [css, writing, dated] = await Promise.all([
     read('src/styles/global.css'),
-    read('src/content/reading-sites.json'),
+    read('src/components/WritingList.astro'),
+    read('src/components/DatedTextList.astro'),
   ]);
-  const sites = JSON.parse(dataText);
-  assert.match(css, /-webkit-line-clamp:\s*2/);
-  assert.match(css, /max-height:\s*3\.5em/);
-  assert.ok(sites.length >= 96, '应保留用户维护的扩充站外专题数据');
-  assert.ok(sites.every((site) => site.description.length <= 160), '每条描述应保持可读，不应扩张成正文段落');
+  assert.match(css, /font-size:\s*1\.16em/);
+  assert.match(css, /\.dated-list-bullet[\s\S]*font-size:\s*1\.15em/);
+  assert.match(writing, />•</);
+  assert.match(dated, />•</);
 });

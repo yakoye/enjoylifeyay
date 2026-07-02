@@ -1,0 +1,26 @@
+---
+interface Item {
+  title: string;
+  href: string;
+}
+
+interface Props {
+  label?: string;
+  items: Item[];
+  currentHref?: string;
+}
+
+const { label = '地图', items, currentHref = '' } = Astro.props;
+---
+
+{items.length > 0 && (
+  <nav class="section-map" aria-label={`${label}目录`}>
+    <span class="section-map-label">{label}：</span>
+    {items.map((item, index) => (
+      <>
+        {index > 0 && <span class="section-map-separator" aria-hidden="true">·</span>}
+        {item.href === currentHref ? <span class="section-map-current" aria-current="page">{item.title}</span> : <a href={item.href}>{item.title}</a>}
+      </>
+    ))}
+  </nav>
+)}

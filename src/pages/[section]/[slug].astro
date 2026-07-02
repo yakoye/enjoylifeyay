@@ -1,0 +1,93 @@
+---
+import { getCollection, render } from 'astro:content';
+import DirectoryList from '../../components/DirectoryList.astro';
+import DatedTextList from '../../components/DatedTextList.astro';
+import WritingList from '../../components/WritingList.astro';
+import SectionMap from '../../components/SectionMap.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('sectionPages', ({ data }) => !data.draft);
+  return pages.map((entry) => ({
+    params: { section: entry.data.section, slug: entry.data.routeSlug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+const currentHref = `/${data.section}/${data.routeSlug}/`;
+const siblingMapItems = (await getCollection('sectionPages', ({ data: item }) => !item.draft && item.section === data.section))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((item) => ({ title: item.data.title, href: `/${item.data.section}/${item.data.routeSlug}/` }));
+
+const allWriting = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const allTools = (await getCollection('tools', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const allNature = await getCollection('nature');
+const allBooks = await getCollection('books');
+
+const writingEntries = data.kind === 'writing'
+  ? allWriting.filter((item) => {
+      if (data.writingDomain && item.data.domain !== data.writingDomain) return false;
+      if (data.writingSeries.length > 0 && !data.writingSeries.some((series) => item.data.series.includes(series))) return false;
+      if (data.writingTopics.length > 0 && !data.writingTopics.some((topic) => item.data.topics.includes(topic) || item.data.tags.includes(topic))) return false;
+      return true;
+    })
+  : [];
+
+const toolEntries = data.kind === 'tools'
+  ? allTools.filter((item) => data.toolCategories.includes(item.data.category))
+  : [];
+
+type PublishedNature = (typeof allNature)[number] & { data: Extract<(typeof allNature)[number]['data'], { draft: false }> };
+type PublishedBook = (typeof allBooks)[number] & { data: Extract<(typeof allBooks)[number]['data'], { draft: false }> };
+
+const natureEntries: PublishedNature[] = data.kind === 'nature'
+  ? allNature.filter((item): item is PublishedNature => item.data.draft === false && data.natureCategories.includes(item.data.category))
+  : [];
+
+const bookEntries: PublishedBook[] = data.kind === 'books'
+  ? allBooks.filter((item): item is PublishedBook => item.data.draft === false && data.bookStatuses.includes(item.data.status))
+  : [];
+
+const bookItems = bookEntries.map((item) => ({
+  title: item.data.title,
+  description: item.data.note,
+  meta: item.data.author,
+  date: item.data.finishedAt || item.data.startedAt,
+  href: item.data.relatedWriting[0] ? `/writing/${item.data.relatedWriting[0]}/` : undefined,
+  metaInline: true,
+}));
+
+const natureItems = natureEntries.map((item) => ({
+  title: item.data.title,
+  description: item.data.description,
+  meta: [item.data.location, item.data.method].filter(Boolean).join(' · '),
+  date: item.data.date,
+  href: item.data.relatedWriting[0] ? `/writing/${item.data.relatedWriting[0]}/` : undefined,
+}));
+
+const toolItems = toolEntries.map((item) => ({
+  title: item.data.name,
+  description: item.data.description,
+  href: item.data.url || item.data.githubUrl || undefined,
+}));
+---
+
+<BaseLayout title={data.title} description={data.description} activeNav={`/${data.section}/`}>
+  <h1>{data.title}</h1>
+  <p class="page-intro">{data.description}</p>
+  <SectionMap label={data.section === 'technology' ? '技术' : data.section === 'tools' ? '工具' : data.section === 'reading' ? '阅读' : data.section === 'nature' ? '自然' : '生活'} items={siblingMapItems} currentHref={currentHref} />
+
+  <article class:list={['article-prose', 'section-page-prose', { 'external-sites-prose': data.section === 'reading' && data.routeSlug === 'sites' }]}>
+    <Content />
+  </article>
+
+  {data.kind === 'writing' && <WritingList entries={writingEntries} emptyMessage={false} />}
+  {data.kind === 'tools' && <DirectoryList items={toolItems} emptyMessage={false} />}
+  {data.kind === 'nature' && <DatedTextList items={natureItems} emptyMessage={false} />}
+  {data.kind === 'books' && <DatedTextList items={bookItems} emptyMessage={false} />}
+</BaseLayout>

@@ -1,46 +1,23 @@
 ---
 import { getCollection } from 'astro:content';
-import DirectoryList from '../../components/DirectoryList.astro';
+import SectionMap from '../../components/SectionMap.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const technicalWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'technology'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const allSeries = (await getCollection('series', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.order - b.data.order);
-const allWriting = await getCollection('writing', ({ data }) => !data.draft);
-const technicalSeriesIds = [
-  'pcie-high-speed-interconnect',
-  'chip-firmware-soc',
-  'dev-environment-productivity',
-  'cloudflare-personal-site',
-  'chrome-web-tools',
-];
-const seriesItems = allSeries
-  .filter((entry) => technicalSeriesIds.includes(entry.data.id))
-  .map(({ data }) => ({
-    title: data.title,
-    description: data.description,
-    count: allWriting.filter((entry) => entry.data.series.includes(data.id)).length,
-    href: `/series/${data.id}/`,
-  }))
-  // Never publish a series entry whose destination has no public article.
-  .filter((item) => item.count > 0)
-  .map(({ count, ...item }) => ({ ...item, meta: `${count}篇` }));
+const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'technology'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ title: entry.data.title, href: `/technology/${entry.data.routeSlug}/` }));
 ---
 
-<BaseLayout title="技术" description="芯片、PCIe、固件、开发环境与工程实践的长期记录。">
+<BaseLayout title="技术" description="芯片、PCIe、固件、系统与工程实践的长期记录。">
   <h1>技术</h1>
-  <p class="page-intro">芯片、PCIe、固件、开发环境与工程实践的长期记录。</p>
+  <p class="page-intro">芯片、PCIe、固件、系统与工程实践的长期记录。</p>
+  <SectionMap label="技术" items={mapItems} />
 
-  <section id="technical-writing" aria-labelledby="technology-writing">
-    <h2 id="technology-writing">技术文章</h2>
-    <WritingList entries={technicalWriting} />
+  <section aria-labelledby="technology-recent-writing">
+    <h2 id="technology-recent-writing">最近技术文章</h2>
+    <WritingList entries={technicalWriting.slice(0, 8)} />
   </section>
-
-  {seriesItems.length > 0 && <section id="technology-series" aria-labelledby="technology-series-heading">
-    <h2 id="technology-series-heading">技术专题</h2>
-    <DirectoryList groups={[{ items: seriesItems }]} />
-  </section>}
 </BaseLayout>

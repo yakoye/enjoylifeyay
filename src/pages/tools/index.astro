@@ -1,48 +1,25 @@
 ---
 import { getCollection } from 'astro:content';
+import SectionMap from '../../components/SectionMap.astro';
 import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const categoryOrder = [
-  ['diy-project', '自己 DIY 项目', 'diy-projects'],
-  ['browser-extension', 'Chrome 扩展与网页工具', 'chrome-extensions'],
-  ['pcie-hardware', 'PCIe / 硬件工具', 'pcie-hardware'],
-  ['writing-media', '文字、图片与记录工具', 'writing-media'],
-  ['knowledge-library', '资料库', 'library'],
-] as const;
-
-const tools = await getCollection('tools', ({ data }) => !data.draft);
-const allFavorites = await getCollection('favorites');
-type PublishedFavorite = (typeof allFavorites)[number] & { data: Extract<(typeof allFavorites)[number]['data'], { draft: false }> };
-const favorites = allFavorites.filter((entry): entry is PublishedFavorite => entry.data.draft === false);
-
-const groups = [
-  ...categoryOrder.map(([category, title, id]) => ({
-    id,
-    title,
-    items: tools
-      .filter((entry) => entry.data.category === category)
-      .sort((a, b) => a.data.order - b.data.order)
-      .map(({ data }) => ({
-        title: data.name,
-        description: data.description,
-        href: data.url || data.githubUrl || undefined,
-      })),
-  })),
-  {
-    id: 'historical-sources',
-    title: '历史内容来源',
-    items: favorites.map(({ data }) => ({
-      title: data.name,
-      description: data.note,
-      href: data.url,
-    })),
-  },
-];
+const tools = (await getCollection('tools', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'tools'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ title: entry.data.title, href: `/tools/${entry.data.routeSlug}/` }));
+const highlights = tools.filter((tool) => tool.data.featured || ['dictfloat', 'regcalc-text-tool', 'pcie-tools-index'].includes(tool.data.id))
+  .map(({ data }) => ({ title: data.name, description: data.description, href: data.url || data.githubUrl || undefined }));
 ---
 
 <BaseLayout title="工具" description="自己做的项目、浏览器扩展、PCIe 工具与长期可用资料。">
   <h1>工具</h1>
   <p class="page-intro">自己做的项目、浏览器扩展、PCIe 工具与长期可用资料。</p>
-  <DirectoryList groups={groups} emptyMessage="暂无已确认可以公开的工具。" />
+  <SectionMap label="工具" items={mapItems} />
+
+  <section aria-labelledby="tool-highlights">
+    <h2 id="tool-highlights">常用入口</h2>
+    <DirectoryList items={highlights} />
+  </section>
 </BaseLayout>

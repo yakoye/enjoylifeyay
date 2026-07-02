@@ -852,3 +852,73 @@ main > section + section {
     overflow-wrap: anywhere;
   }
 }
+
+/* Section maps keep second-level navigation compact and text-first. */
+.section-map {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.12rem 0.42rem;
+  margin: 0.05rem 0 1.35rem;
+  color: var(--muted);
+  font-size: var(--font-meta);
+  line-height: 1.7;
+}
+
+.section-map-label {
+  color: var(--muted);
+}
+
+.section-map-separator {
+  color: var(--muted);
+}
+
+.section-map a {
+  color: var(--link);
+}
+
+/* One bullet language across all directories and Markdown lists. */
+.text-list > li::marker,
+.plain-list > li::marker,
+.article-prose ul > li::marker,
+.section-page-prose ul > li::marker {
+  color: var(--text);
+  font-size: 1.16em;
+}
+
+.dated-list-bullet {
+  display: inline-block;
+  color: var(--text);
+  font-size: 1.15em;
+  line-height: 1.6;
+}
+
+/* External reading is maintained as Markdown. Descriptions may occupy at most two desktop lines. */
+.external-sites-prose > ul > li {
+  display: -webkit-box;
+  max-height: 3.5em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.external-sites-prose > ul > li + li {
+  margin-top: 0.34rem;
+}
+
+@media (max-width: 640px) {
+  .section-map {
+    margin-bottom: 1.1rem;
+  }
+
+  .external-sites-prose > ul > li {
+    display: list-item;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+.section-map-current {
+  color: var(--text);
+  font-weight: 600;
+}

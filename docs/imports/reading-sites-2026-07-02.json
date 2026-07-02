@@ -1,0 +1,770 @@
+[
+  {
+    "id": "coolshell",
+    "name": "CoolShell",
+    "url": "https://coolshell.cn/",
+    "description": "陈皓以工程实践、技术判断与独立思考写下的长期技术随笔。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "scz",
+    "name": "scz（小四）",
+    "url": "http://scz.617.cn:8/",
+    "description": "像 BBS 一样纯粹的安全、Unix 与底层技术笔记。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "dan-luu",
+    "name": "Dan Luu",
+    "url": "https://danluu.com/",
+    "description": "前 Twitter 硬件与系统工程师。用真实的数据和严密的测试去打破各种行业迷信（如分析文件系统性能、编程语言的实际效率、现代编译器的奇葩行为）。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "joel-on-software",
+    "name": "Joel on Software",
+    "url": "https://www.joelonsoftware.com/",
+    "description": "Stack Overflow 联合创始人的博客。关于软件工程、团队管理、技术债和代码质量的思考，至今依然是行业底层逻辑的标杆。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "old-new-thing",
+    "name": "The Old New Thing",
+    "url": "https://devblogs.microsoft.com/oldnewthing/",
+    "description": "微软古董级工程师的硬核笔记。专写 Windows 底层历史、兼容性黑魔法、汇编与 C++ 奇葩 Bug 的“活化石”博客。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "rachel-by-the-bay",
+    "name": "Rachel by the Bay",
+    "url": "https://rachelbythebay.com/",
+    "description": "开发者的碎碎念。关于 Linux 内核、网络协议栈（TCP/IP）、内存泄漏、各种奇葩硬件和服务器在线上崩溃时的真实排障记录。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "antirez",
+    "name": "Antirez",
+    "url": "https://antirez.com/",
+    "description": "Redis 创始人的个人博客。纯粹的开源大师视角。看他如何设计数据结构、如何权衡协议的复杂性与性能、以及他对写代码（Coding as an art）本身的终极热爱。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "julia-evans",
+    "name": "Julia Evans",
+    "url": "https://jvns.ca/",
+    "description": "把极其枯燥的底层技术（如 DNS 怎么工作、Linux 命令行工具、网络抓包 tcpdump）用清晰的逻辑和手绘漫画（Zines）讲得通俗易懂。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "stratechery",
+    "name": "Stratechery",
+    "url": "https://stratechery.com/",
+    "description": "Ben Thompson 独创的“聚合理论”（Aggregation Theory）是理解现代互联网商业生态演进的底层框架。全球商业科技分析的第一博客。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "dynamicland-worrydream",
+    "name": "Dynamicland / Bret Victor",
+    "url": "https://worrydream.com/",
+    "description": "传奇界面设计师 Bret Victor 通过文字和互动草图，对计算、界面与人类思考方式的实验。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "naval",
+    "name": "Naval Ravikant",
+    "url": "https://nav.al/",
+    "description": "硅谷投资思想家 Naval。关于杠杆、财富、判断力与内心平静的极简思考。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "lesswrong",
+    "name": "LessWrong",
+    "url": "https://www.lesswrong.com/",
+    "description": "专注讨论人类认知偏差、决策论、人工智能哲学以及“如何更正确地思考”。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "overcoming-bias",
+    "name": "Overcoming Bias",
+    "url": "https://www.overcomingbias.com/",
+    "description": "Robin Hanson 解剖社会信号、自欺与制度行为的经济学博客。例如我们为什么看病、为什么上学。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "farnam-street",
+    "name": "Farnam Street",
+    "url": "https://fs.blog/",
+    "description": "专注于“心智模型（Mental Models）”与深度决策。帮助你如何思考、如何做决定、如何阅读和学习。它把查理·芒格、物理学、系统论里的底层核心规律抽离出来，应用到日常工作和生活策略中。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "collaborative-fund",
+    "name": "Collaborative Fund",
+    "url": "https://collaborativefund.com/blog/",
+    "description": "《金钱心理学》作者 Morgan Housel 主笔的文章常不谈具体股票指标，而以历史故事讨论人性、财富、耐心与长期价值。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "melting-asphalt",
+    "name": "Melting Asphalt",
+    "url": "https://meltingasphalt.com/",
+    "description": "Kevin Simler 的长文像精密的解剖刀，剖析人类社交中微妙的心理学、文化演化与隐藏动机。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "conceptually",
+    "name": "Conceptually",
+    "url": "https://conceptually.org/",
+    "description": "以极简形式博弈论、系统科学和心理学机制拆成优雅易读的文章。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "james-clear",
+    "name": "James Clear",
+    "url": "https://jamesclear.com/articles",
+    "description": "《原子习惯》作者的文章，是研究行为设计与微观个人进化的纯文字指南。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "tynan",
+    "name": "Tynan",
+    "url": "https://tynan.com/",
+    "description": "把生活当作“系统集成”来优化的极客，长期记录自律、习惯量化、旅行与独立生活实验。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "nat-eliason",
+    "name": "Nat Eliason",
+    "url": "https://www.nateliason.com/blog",
+    "description": "内容涵盖超速学习、哲学、写作、系统构建，以及对现代独立生活方式的深度反思。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "ness-labs",
+    "name": "Ness Labs",
+    "url": "https://nesslabs.com/blog",
+    "description": "聚焦“心智健康度（Mindful Productivity）”与神经科学，讨论如何在不透支精神、不焦虑的前提下保持长期创造力。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "barking-up-the-wrong-tree",
+    "name": "Barking Up The Wrong Tree",
+    "url": "https://bakadesuyo.com/",
+    "description": "Eric Barker 常用科研论文与研究证据，拆解关于成功、幸福和职场的迷信。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "tiago-forte",
+    "name": "Tiago Forte",
+    "url": "https://fortelabs.com/blog/",
+    "description": "打造第二大脑（Building a Second Brain）、知识输入、内化信息、项目管理与长期价值输出的方法论。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "albert-wenger",
+    "name": "Albert Wenger",
+    "url": "https://continuations.com/",
+    "description": "从很高的视角思考人类由工业时代向知识时代转型，以及资本、注意力和社会的长期演化。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "paul-skallas",
+    "name": "Paul Skallas / The Lindy Effect",
+    "url": "https://paulskallas.substack.com/",
+    "description": "林迪效应（Lindy Effect）视角：用时间检验传统、技术和现代焦虑。核心观点是，存续时间本身可作为估计未来生命力的一个线索。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "wait-but-why",
+    "name": "Wait But Why",
+    "url": "https://waitbutwhy.com/",
+    "description": "Tim Urban 用长文把宏大、复杂的概念彻底解构（例如：拖延症的本质、费米悖论、脑机接口 Neuralink 的底层逻辑、人类社会的运行系统）。常配有火柴人手绘。马斯克催更的博客。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "paul-graham",
+    "name": "Paul Graham",
+    "url": "https://paulgraham.com/articles.html",
+    "description": "Y Combinator 创始人的博客。谈“如何做出人们想要的东西”、“如何保持独立思考（How to Think for Yourself）”、以及财富与认知的本质。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "derek-sivers",
+    "name": "Derek Sivers",
+    "url": "https://sive.rs/",
+    "description": "一个特立独行的音乐人、创业家和哲学思考者。极简，用最简单的话语去解构复杂的社会规训、个人专注力、以及人生的选择。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "scott-young",
+    "name": "Scott Young",
+    "url": "https://www.scotthyoung.com/blog/",
+    "description": "专注超速学习（Ultralearning）与技能习得。曾用 1 年时间学完 MIT 计算机 4 年课程。关于认知科学、如何高效记忆、如何攻克硬核技术、如何拆解复杂技能的实操心得。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "ribbonfarm",
+    "name": "Ribbonfarm",
+    "url": "https://www.ribbonfarm.com/",
+    "description": "极其硬核的结构主义哲学随笔。探讨组织、权力、心理学和现代数字生活的演变。如《巨头、悲观主义者与打工人》系列；“Breaking Smart”系列；“Refactoring Tunnels”系列。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "the-diff",
+    "name": "The Diff / Root Issues",
+    "url": "https://diff.substack.com/",
+    "description": "Byrne Hobart 的《The Diff》/ Root Issues 从金融系统、科技趋势与公开数据中寻找隐藏的因果关系、商业博弈与逆向机会。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "astral-codex-ten",
+    "name": "Astral Codex Ten",
+    "url": "https://astralcodexten.substack.com/",
+    "description": "精神科医生的超级硬核长文分析。他精通统计学、博弈论、历史和哲学。善用严密逻辑的长文解构复杂的社会现象或医疗/科学难题。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "shtetl-optimized",
+    "name": "Shtetl-Optimized",
+    "url": "https://scottaaronson.blog/",
+    "description": "量子计算专家 Scott Aaronson 的博客，讨论物理、计算机科学边界、理论数学与人类认知极限。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "aeon",
+    "name": "Aeon",
+    "url": "https://aeon.co/",
+    "description": "人类智识的灯塔，由学者供稿，探讨人类文化、数字哲学、生物演化、心理与社会议题。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "edge",
+    "name": "Edge",
+    "url": "https://www.edge.org/",
+    "description": "“世界上最聪明的网站”，顶尖科学家和思想家围绕一个大问题的年度文字交锋。站内保留许多围绕未来认知演化展开的文字交锋。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "nintil",
+    "name": "Nintil",
+    "url": "https://nintil.com/",
+    "description": "像研究报告一样写长寿科学、经济史、制度和数据问题。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "kevin-kelly",
+    "name": "Kevin Kelly / The Technium",
+    "url": "https://kk.org/thetechnium/",
+    "description": "《失控》作者凯文·凯利对科技演化（Technium）、文明趋势和 Technium 的长期观察。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "gwern",
+    "name": "Gwern",
+    "url": "https://gwern.net/",
+    "description": "Gwern 是一位独立研究员。内容跨度极大：暗网的历史、早期加密货币、人工智能底层的“Scaling Laws（缩放定律）”、心理学和药物实验。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "low-tech-magazine",
+    "name": "Low-Tech Magazine",
+    "url": "https://solar.lowtechmagazine.com/",
+    "description": "一个全太阳能供电的博客！（如果遇到连绵阴天，这个网站真的会断线）。关注人类历史上的“低科技时代”工业与机械智慧。如中国古代的独轮车设计、中世纪风车、古老的保温建筑技术。用现代视角去重新审视。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "idle-words",
+    "name": "Idle Words",
+    "url": "https://idlewords.com/",
+    "description": "Pinboard 创始人的博客。写去南极、阿根廷游历、对现代硅谷大厂膨胀、Web 臃肿化、以及过度偏执的 AI 崇拜的深刻讽刺。其旅行纪实，如切尔诺贝利、南极与偏远地区的记录，兼具观察密度、叙事能力与对技术文化的尖锐判断。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "tedium",
+    "name": "Tedium",
+    "url": "https://tedium.co/",
+    "description": "“无聊事物”的百科全书。专门挖掘那些被现代人遗忘的科技与文化历史碎片。比如：条形码是谁发明的？早期的点阵打印机经历了什么？某款过时的软盘格式有着怎样的兴衰？非常适合沉浸式阅读那些奇特又硬核的历史故事。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "the-browser",
+    "name": "The Browser",
+    "url": "https://thebrowser.com/",
+    "description": "人工每天筛选的深度文章入口，像一份老派长文日报。编辑每天从海量文章中，人工挑选少量值得长期阅读的深度文字。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "textfiles",
+    "name": "Textfiles",
+    "url": "http://textfiles.com/",
+    "description": "由 Jason Scott 维护的、纯粹为了拯救互联网早期记忆的纯文本（.txt）博物馆。里面收集了 80、90 年代 BBS 时代全世界黑客、极客写的各种 .txt 指南、公告、技术随笔和科幻文字。入口：https://textfiles.com/directory.html",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "public-domain-review",
+    "name": "Public Domain Review",
+    "url": "https://publicdomainreview.org/",
+    "description": "从公有领域挖掘奇特、罕见、精美的历史图像和档案。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "the-marginalian",
+    "name": "The Marginalian",
+    "url": "https://www.themarginalian.org/",
+    "description": "Maria Popova 长期阅读并串联文学家、科学家与艺术家的书信、日记和著作，围绕爱、死亡、孤独与意义展开；是兼具书目价值与散文气质的思想档案库。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "paris-review",
+    "name": "The Paris Review",
+    "url": "https://www.theparisreview.org/blog/",
+    "description": "作家访谈、书信、手稿和文学随笔的长期档案。如：作家的艺术（The Art of Fiction）",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "granta",
+    "name": "Granta",
+    "url": "https://granta.com/",
+    "description": "全球纪实与纯文学长文：战乱、荒野、家庭、社会变迁与个人记忆的挣扎。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "laphams-quarterly",
+    "name": "Lapham’s Quarterly",
+    "url": "https://www.laphamsquarterly.org/",
+    "description": "围绕金钱、战争、迷信等主题，把古罗马至现代的历史、文学与思想文本组织在一起，让过去与当下对话。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "quillette",
+    "name": "Quillette",
+    "url": "https://quillette.com/",
+    "description": "以文化、科学、政治与思想史长文见长，倾向于提供反标签化、强调论证的讨论空间。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "longreads",
+    "name": "Longreads",
+    "url": "https://longreads.com/",
+    "description": "面向叙事新闻与非虚构长文的人工精选入口，常收录需要长时间沉浸阅读的人物、事件与人生故事。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "guernica",
+    "name": "Guernica",
+    "url": "https://www.guernicamag.com/",
+    "description": "将艺术、政治与个人叙事交织，收录跨国界的纪实长文和文学随笔。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "the-millions",
+    "name": "The Millions",
+    "url": "https://themillions.com/",
+    "description": "不追热榜的书虫网站：常以长文讨论冷门、深刻且改变作者生命轨迹的书籍。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "creative-nonfiction",
+    "name": "Creative Nonfiction",
+    "url": "https://creativenonfiction.org/",
+    "description": "非虚构写作基地。借用小说般的叙事、修辞和场景能力，记录真实发生的故事。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "the-rumpus",
+    "name": "The Rumpus",
+    "url": "https://therumpus.net/",
+    "description": "Dear Sugar 专栏曾在此发表，围绕脆弱、救赎与人生困境展开。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "hyperallergic",
+    "name": "Hyperallergic",
+    "url": "https://hyperallergic.com/",
+    "description": "以批评性文字解构当代艺术作品及其背后的社会意识形态、权力与文化语境。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "kinfolk",
+    "name": "Kinfolk",
+    "url": "https://www.kinfolk.com/",
+    "description": "慢生活美学的重要代表，关注工作、生活与社区的平衡，呈现克制、缓慢的日常节奏。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "cereal",
+    "name": "Cereal",
+    "url": "https://readcereal.com/",
+    "description": "英国旅行与生活方式独立杂志，关注极简设计、小众建筑与城市的艺术氛围。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "apartamento",
+    "name": "Apartamento",
+    "url": "https://www.apartamentomagazine.com/",
+    "description": "不拍样板房，记录创作者真实、杂乱而有生活痕迹的家。被称为“最真实的室内设计杂志”之一。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "cabinet",
+    "name": "Cabinet",
+    "url": "https://cabinetmagazine.org/",
+    "description": "以极认真学术心态研究尘埃、窗户、声音等古怪日常细节。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "tiny-buddha",
+    "name": "Tiny Buddha",
+    "url": "https://tinybuddha.com/",
+    "description": "讲述如何度过低谷、与焦虑和解、处理复杂亲密关系的故事集。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "zen-habits",
+    "name": "Zen Habits",
+    "url": "https://zenhabits.net/",
+    "description": "Leo Babauta 的极简实践：讨论如何从信息过载与过度忙碌中退出，重建专注与内心平静。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "craig-mod",
+    "name": "Craig Mod / Ridgeline",
+    "url": "https://craigmod.com/ridgeline/",
+    "description": "旅居日本的美国作家/摄影师的博客。他喜欢长途徒步，用极其细腻、慢节奏的文字去记录沿途遇见的普通人、古老的村庄、以及对现代数字社会“快节奏”的反思。读起来就像在喝一杯午后的热茶。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "austin-kleon",
+    "name": "Austin Kleon",
+    "url": "https://austinkleon.com/blog/",
+    "description": "《像艺术家一样偷师》的作者。关于他日常读书笔记、黑白拼贴诗、生活感悟。有他如何保持专注、如何和家人孩子相处、如何从日常的一本书、一部电影中汲取养分。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "paul-kingsnorth",
+    "name": "Paul Kingsnorth",
+    "url": "https://paulkingsnorth.substack.com/",
+    "description": "一位住在爱尔兰乡村的作家。他彻底停用了智能手机。文字带着土地与自然的原始灵性。长期反思算法、AI 与现代技术如何改变人类的生活、精神与土地连接。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "kottke",
+    "name": "Kottke.org",
+    "url": "https://kottke.org/",
+    "description": "Jason Kottke 分享他觉得好玩的电影片段、历史冷知识、艺术设计、科学新发现以及人类学的随笔。互联网上连续更新时间最长的个人独立博客之一（自1998年起）。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "places-journal",
+    "name": "Places Journal",
+    "url": "https://placesjournal.org/",
+    "description": "将建筑、景观与公共空间写成深度散文，关注一堵墙、一座桥、一条旧街道如何塑造人的心智、记忆与孤独。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "orion",
+    "name": "Orion Magazine",
+    "url": "https://orionmagazine.org/",
+    "description": "以诗意且严谨的文字讨论自然、文化与人类居住地的关系，记录人类在自然面前的渺小与精神演变。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "grist",
+    "name": "Grist",
+    "url": "https://grist.org/",
+    "description": "关注气候、可持续发展和人居环境，常通过真实社区与个人故事讨论气候变迁、城市化与生活美学。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "tom-critchlow",
+    "name": "Tom Critchlow",
+    "url": "https://tomcritchlow.com/",
+    "description": "倡导把个人博客当作需要长期培育的“数字花园”，而非展示性媒体；记录独立工作者如何优雅、自由且不随波逐流地生活与工作。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "fabien-sanglard",
+    "name": "Fabien Sanglard",
+    "url": "https://fabiensanglard.net/",
+    "description": "以详尽文章拆解初代 PlayStation、红白机、Sega 等老硬件的电路设计、寄存器限制，并追溯当年程序员如何在极端硬件约束下用汇编榨干性能。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "eli-bendersky",
+    "name": "Eli Bendersky",
+    "url": "https://eli.thegreenplace.net/",
+    "description": "硬核编程与系统开发博客，专注 C、C++、Go、Python、汇编、编译器设计和 Linux 底层机制；文章以代码、架构图和技术权衡分析为主。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "manybutfew",
+    "name": "manybutfew (Tom Stuart)",
+    "url": "https://manybutfew.com/",
+    "description": "把复杂计算机科学理论讲清楚的独立博客，用清晰、优雅的英文推导图灵机、计算理论与算法复杂度等底层逻辑。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "igors-lab",
+    "name": "Igor’s Lab",
+    "url": "https://www.igorslab.de/en/",
+    "description": "硬件测试与逆向分析实验室博客，关注芯片级设计、供电、散热、PCIe 物理层与信号完整性，以严苛测试和工程细节见长。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "embedded-in-academia",
+    "name": "Embedded in Academia (John Regehr)",
+    "url": "https://blog.regehr.org/",
+    "description": "犹他大学计算机教授的博客，专注嵌入式系统、编译器 Bug、代码静态分析和软件安全；对 C 语言未定义行为（Undefined Behavior）的讨论尤其深入。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "arjen-lentz",
+    "name": "Arjen Lentz",
+    "url": "https://lentz.com.au/blog/",
+    "description": "关注高性能数据库系统架构与大规模分布式系统演进，带有强烈的工程批判性与独立判断。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "michael-abrash",
+    "name": "Michael Abrash Archive",
+    "url": "https://www.bluesnews.com/abrash/",
+    "description": "传奇图形学黑客 Michael Abrash 的技术文章归档。内容围绕图形学底层、内存优化、硬件缓存与极致性能；其与卡马克、Quake 时代相关的性能工程文字具有长期参考价值。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "the-morning-paper",
+    "name": "The Morning Paper",
+    "url": "https://blog.acolyer.org/",
+    "description": "Adrian Colyer 曾长期按日精读并总结计算机科学、网络系统和分布式领域论文。虽已停止更新，但归档仍是高质量论文导读库。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "mechanical-sympathy",
+    "name": "Mechanical Sympathy",
+    "url": "https://mechanical-sympathy.blogspot.com/",
+    "description": "“机械共鸣”博客，讨论软件如何与 CPU 缓存、内存屏障和硬件架构协同，以实现极致低延迟；适合高并发与性能优化阅读。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "xe-iaso",
+    "name": "Xe Iaso",
+    "url": "https://xeiaso.net/",
+    "description": "将计算机网络、NixOS 系统构建、API 设计与哲学、软科幻叙事相互连接的个人技术博客，文笔与技术个性都很鲜明。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "high-scalability",
+    "name": "High Scalability",
+    "url": "https://highscalability.com/",
+    "description": "拆解大型科技公司、机构与服务背后的硬件集群、网络协议和软件架构，关注它们如何设计、扩展并抵御故障。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "geer-risk-report",
+    "name": "Geer Risk Report (Dan Geer)",
+    "url": "https://geer.tux.org/",
+    "description": "网络安全思想家 Dan Geer 的长文基地。它不以具体漏洞利用为中心，而从统计学、博弈论和宏观系统演化讨论安全本质。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "noahpinion",
+    "name": "Noahpinion (Noah Smith)",
+    "url": "https://noahpinion.substack.com/",
+    "description": "前经济学教授的独立专栏，以数据和相对清醒的视角讨论制造业、半导体、人口趋势与宏观经济。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "asianometry",
+    "name": "Asianometry",
+    "url": "https://asianometry.com/",
+    "description": "以长文与图文方式研究科技与亚洲商业史，常拆解半导体供应链、光刻机演进、台积电工艺突破和科技产业链重塑。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "bits-about-money",
+    "name": "Bits about Money",
+    "url": "https://www.bitsaboutmoney.com/",
+    "description": "以软件工程式视角解释银行、跨境支付、信用体系与欺诈网络等金融基础设施，揭示其复杂、脆弱且历史包袱深重的运行方式。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "construction-physics",
+    "name": "Construction Physics (Brian Potter)",
+    "url": "https://constructionphysics.substack.com/",
+    "description": "研究一个宏观但具体的问题：为什么建筑、基建和工厂制造在过去一百年的效率没有像摩尔定律般爆炸式进步？从材料、工业与工程管理角度拆解。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "palladium-magazine",
+    "name": "Palladium Magazine",
+    "url": "https://www.palladiummag.com/",
+    "description": "独立长文杂志，关注未来权力、政治体制、全球治理与文明演进；文章常带有较强的历史感与宏观穿透力。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "interconnected",
+    "name": "Interconnected (Kevin Xu)",
+    "url": "https://interconnected.blog/",
+    "description": "游走于硅谷与跨国科技之间，关注开源软件、地缘政经和全球化科技供应链的分裂与交融。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "works-in-progress",
+    "name": "Works in Progress",
+    "url": "https://worksinprogress.co/",
+    "description": "研究重大科学、技术与基础设施突破如何发生、又为何卡壳；关注制度设计如何加速科学发现与建设效率。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "gavekal-research",
+    "name": "Gavekal Research",
+    "url": "https://research.gavekal.com/",
+    "description": "全球宏观研究机构的公开研究入口，关注宏观资本流动、市场互动、技术壁垒与地缘政治对经济结构的重塑。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "libertys-highlights",
+    "name": "Liberty’s Highlights",
+    "url": "https://www.libertyrpf.com/",
+    "description": "围绕商业、科技、科学、艺术、激励机制与人类判断力做深度剪报和延伸观察，强调发现值得进一步探索的线索。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "project-gopher-gemini",
+    "name": "Project Gopher / Gemini",
+    "url": "https://gopherproject.org/",
+    "description": "一个平行于现代 Web 的独立协议空间。Gopher 与 Gemini 社群因反感网页臃肿、追踪与广告，持续维护偏纯文字、轻量排版、重视个人参与的网络“世外桃源”。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "marginal-revolution",
+    "name": "Marginal Revolution",
+    "url": "https://marginalrevolution.com/",
+    "description": "Tyler Cowen 长期维护的独立博客，既有经济学，也有冷门书籍、小众艺术与全球旅行的高密度纯文字点评。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "hackaday",
+    "name": "Hackaday",
+    "url": "https://hackaday.com/",
+    "description": "全球硬核 DIY 极客的大本营，记录世界各地创作者焊接芯片、改装旧设备、用树莓派和微控制器解决现实问题的项目。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "pluralistic",
+    "name": "Pluralistic (Cory Doctorow)",
+    "url": "https://pluralistic.net/",
+    "description": "科幻作家与数字权益倡导者 Cory Doctorow 的每日独立博客，常批判互联网平台垄断、数字牢笼和技术对人类自由的侵蚀。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "the-register",
+    "name": "The Register",
+    "url": "https://www.theregister.com/",
+    "description": "面向系统管理员与硬核工程师的英国科技新闻站点，以辛辣、英式黑色幽默的语言报道软硬件、云、企业 IT 与安全问题。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "sdf-public-access-unix",
+    "name": "SDF Public Access UNIX System",
+    "url": "https://sdf.org/",
+    "description": "长期运营的公共 UNIX 社区，保留命令行、Gopher、Gemini、个人主页与老派网络社群文化；适合体验早期网络的公共性与温度。",
+    "category": "archives",
+    "pinned": false
+  }
+]

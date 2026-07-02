@@ -214,58 +214,71 @@ PCIe / 硬件工具
 历史内容来源
 ```
 
-不公开、没有链接或包含私有数据的项目不要为了展示而补造链接。旧 `/projects/` 地址会自动跳转到 `/tools/#diy-projects`，旧 `/favorites/` 地址会跳转到 `/tools/#historical-sources`，避免历史书签失效。公开项目请维护在 `src/content/tools.json`。
+不公开、没有链接或包含私有数据的项目不要为了展示而补造链接。旧 `/projects/` 地址会自动跳转到 `/tools/diy/`，旧 `/favorites/` 地址会跳转到 `/reading/sites/`，避免历史书签失效。公开项目请维护在 `src/content/tools.json`。
 
 
 ## 四点五、维护“阅读 / 站外专题”
 
-站外长文、独立博客和知识档案统一维护在：
+站外长文、独立博客和知识档案使用 Markdown 维护：
 
 ```text
-src/content/reading-sites.json
+src/content/section-pages/reading/reading-sites.md
 ```
 
-每个条目结构：
+结构如下：
 
-```json
-{
-  "id": "site-id",
-  "name": "网站名称",
-  "url": "https://example.com/",
-  "description": "一句简短说明。",
-  "category": "cognition",
-  "pinned": false
-}
+```md
+## 工程、系统与程序设计
+
+- [CoolShell](https://coolshell.cn/)：陈皓以工程实践、技术判断与独立思考写下的长期技术随笔。
 ```
 
 规则：
 
 - 不添加排名、评分、编号或“推荐指数”。
-- 网站名称自动是外链，点击会在新标签页打开。
-- 描述保持一段简短说明；桌面端最多显示两行，超出两行时收束，悬停可查看完整说明；手机端允许自然换行。
-- 一个网站只保留一次；不要因它跨多个主题而重复录入。
-- 分类可用：
-  - `engineering`：工程、系统与程序设计
-  - `cognition`：认知、决策与学习
-  - `science`：科学、未来与社会
-  - `archives`：数字考古与知识档案
-  - `culture`：文学、思想与非虚构
-  - `life`：生活、独立工作与行走
-- 想把常看站点放到页面最前面的“常看”分组时，只改：
+- 网站名称本身就是外链；网页会在新标签页打开。
+- 每站只保留一次；不要因为跨多个主题而重复录入。
+- 桌面端每条说明最多显示两行，手机端允许自然换行。
+- 想把常看站点置顶时，直接移动到所属分类的最前面；不要再维护 `pinned` 字段。
+- 新增站点时直接复制一条 Markdown 列表项，并按现有六个二级标题归类。
 
-  ```json
-  "pinned": true
-  ```
+原始 JSON 导入备份位于：
 
-  不需要改页面代码，不需要给它设排名。多个常看站点会按 JSON 中的出现顺序展示。
-
-修改后运行：
-
-```powershell
-.\preview-local.cmd
+```text
+docs/imports/reading-sites-2026-07-02.json
 ```
 
-确认阅读页无误后，再按正常 Git / Cloudflare Pages 流程发布。
+它不参与网站运行；日常只编辑 Markdown 文件。
+
+## 四点六、维护二级地图与二级页面
+
+五个一级栏目都由 Markdown 二级页面驱动：
+
+```text
+src/content/section-pages/technology/
+src/content/section-pages/tools/
+src/content/section-pages/reading/
+src/content/section-pages/nature/
+src/content/section-pages/life/
+```
+
+每个文件的 Frontmatter 结构：
+
+```yaml
+section: life
+routeSlug: travel
+title: 旅行
+description: 记录行走、旅行、路线、照片途经的地方、遇见的人和事。
+order: 4
+kind: markdown
+draft: false
+```
+
+- `section + routeSlug` 决定路由，例如上例对应 `/life/travel/`。
+- `order` 决定父页面“地图”中出现的顺序。
+- `kind: markdown` 只渲染 Markdown 正文，适合旅行、家庭、翻译书、写书等还没有结构化条目的页面。
+- `kind: writing`、`tools`、`nature`、`books` 会在 Markdown 说明后自动显示匹配的内容列表。
+- 不要提前虚构书目、旅行路线或家庭资料；没有真实公开内容时，只保留简短页面说明即可。
 
 
 ## 五、添加自然观察、书籍资料与历史来源

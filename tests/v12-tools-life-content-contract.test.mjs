@@ -10,7 +10,7 @@ test('v0.12 removes projects from navigation and redirects legacy projects route
   const route = await readFile(fromHere('../src/pages/projects/index.astro'), 'utf8');
   assert.doesNotMatch(site, /label: '项目'/);
   assert.doesNotMatch(site, /label: '收藏'/);
-  assert.match(route, /Astro\.redirect\('\/tools\/#diy-projects', 301\)/);
+  assert.match(route, /Astro\.redirect\('\/tools\/diy\/', 301\)/);
 });
 
 test('v0.12 tools include the supplied public tool and site links', async () => {

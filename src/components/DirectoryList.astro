@@ -15,7 +15,7 @@ interface Group {
 interface Props {
   groups?: Group[];
   items?: Item[];
-  emptyMessage?: string;
+  emptyMessage?: string | false;
   headingLevel?: 2 | 3;
 }
 
@@ -46,4 +46,4 @@ const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href))
       </section>
     ))}
   </div>
-) : <p class="empty-state">{emptyMessage}</p>}
+) : (emptyMessage ? <p class="empty-state">{emptyMessage}</p> : null)}

@@ -1,3 +1,13 @@
+# v0.18：Markdown 内容地图与二级页面
+
+- 五个一级栏目统一改为“父页 + 简洁地图 + 二级页面”的信息架构。
+- 二级页面全部由 `src/content/section-pages/` 下的 Markdown 驱动；路由自动生成。
+- 新增生活中的“旅行”，并预设思考、运动、饮食、旅行、家庭、日常与方法六个入口。
+- 阅读新增“我翻译的书”“我写的书”入口；不虚构书目，未来直接在相应 Markdown 页面维护。
+- 站外专题从 JSON 运行时数据迁移到独立 Markdown 页面 `src/content/section-pages/reading/reading-sites.md`，保留用户维护的 96 条链接。
+- 所有目录列表统一使用较大的黑色圆点 `•`；站外专题说明桌面端最多两行。
+- 原始 JSON 只作为导入备份保留于 `docs/imports/`，不参与公开页面与构建。
+
 # v0.17.1：站外专题描述增强
 
 - 重写 69 个站外专题的一句话描述，突出各站最容易记住的内容、方法或阅读气质。
@@ -258,7 +268,7 @@ npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
   - 个人网站与生活工具；
   - 资料库与阅读。
 - 新增或补齐公开入口：DictFloat、KeyPass、Quick Note Float、RegCalc64、PCIe Tools 总入口及四个子工具、Rich Editor、quick_note_richtext、FamilyJourney、RegCalcTextTool、轻食记、FitJourney、雅集 · 中华诗词经典、PCI Express Technology 中文版。
-- 保留未发布的飞书小助理、静读网页阅读助手、Obsidian 日记系统、人生进度可视化为无链接目录项；页面不显示“待确认”或虚构链接。
+- 保留未发布的飞书小助理、简读 · 网页阅读助手、Obsidian 日记系统、人生进度可视化为无链接目录项；页面不显示“待确认”或虚构链接。
 - 新增 `/about/me/`，并在“关于”页提供入口。
 - 新增两篇生活文章：
   - 《我走过的长路》：骑行专题；
