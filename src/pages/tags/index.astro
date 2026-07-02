@@ -1,7 +1,17 @@
 ---
-import { getCollection } from 'astro:content'; import BaseLayout from '../../layouts/BaseLayout.astro';
-const writing = await getCollection('writing', ({ data }) => !data.draft); const counts = new Map<string,number>();
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const page = await getEntry('sitePages', 'tags');
+if (!page) throw new Error('Missing Markdown page content: tags');
+const writing = await getCollection('writing', ({ data }) => !data.draft);
+const counts = new Map<string, number>();
 for (const entry of writing) for (const tag of entry.data.tags) counts.set(tag, (counts.get(tag) || 0) + 1);
-const tags = [...counts].sort((a,b) => a[0].localeCompare(b[0], 'zh-CN'));
+const tags = [...counts].sort((a, b) => a[0].localeCompare(b[0], 'zh-CN'));
 ---
-<BaseLayout title="标签" description="规整的写作标签索引。"><h1>标签</h1><p class="page-intro">标签用于定位内容，不做视觉化标签云。</p>{tags.length ? <ul class="plain-list">{tags.map(([tag,count]) => <li>{tag} <span class="writing-meta">{count}</span></li>)}</ul> : <p class="empty-state">暂无公开标签。</p>}</BaseLayout>
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <h1>{page.data.title}</h1>
+  <p class="page-intro">{page.data.intro}</p>
+  {tags.length ? <ul class="plain-list">{tags.map(([tag, count]) => <li>{tag} <span class="writing-meta">{count}</span></li>)}</ul> : <p class="empty-state">暂无标签。</p>}
+</BaseLayout>

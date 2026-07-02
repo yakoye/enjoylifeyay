@@ -9,4 +9,4 @@ draft: false
 toolCategories: ["browser-extension"]
 ---
 
-
+浏览器扩展与网页工具，围绕阅读、记录、计算和日常效率展开。

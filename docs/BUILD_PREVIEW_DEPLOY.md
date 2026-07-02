@@ -20,6 +20,7 @@ npm run preview:local
 npm run check
 npm test
 npm run audit:toc
+npm run audit:public-copy
 npm run build
 npm run check:links
 npm run preview -- --host 127.0.0.1 --port 4321
@@ -66,6 +67,7 @@ npm ci
 npm run check
 npm test
 npm run audit:toc
+npm run audit:public-copy
 npm run build
 npm run check:links
 ```
@@ -78,6 +80,7 @@ npm run check:links
 | `npm run check` | Astro 与 TypeScript 检查 | 没有 `astro is not recognized` 或类型错误 |
 | `npm test` | 内容模型、路由、SEO、迁移台账与视觉规则测试 | 全部测试通过 |
 | `npm run audit:toc` | 检查每篇公开文章均有可生成“目录”的分节标题 | 不出现 `MISSING` |
+| `npm run audit:public-copy` | 检查公开页面没有开发、迁移或占位文案 | 输出 `Public-copy audit passed.` |
 | `npm run build` | 同步历史归档、生成静态站和 Pagefind 中文搜索索引 | 生成 `src/data/legacyArchive.ts`、`dist/` 与 `dist/pagefind/` |
 | `npm run check:links` | 检查构建结果中的主要站内链接 | 不报 `dist/index.html not found` 或死链错误 |
 
@@ -93,6 +96,7 @@ npm run verify
 npm run check
 npm test
 npm run audit:toc
+npm run audit:public-copy
 npm run build
 npm run check:links
 ```
@@ -213,6 +217,7 @@ npm ci
 npm run check
 npm test
 npm run audit:toc
+npm run audit:public-copy
 npm run build
 npm run check:links
 
@@ -318,6 +323,7 @@ npm run import:legacy-images -- --write
 npm run check
 npm test
 npm run audit:toc
+npm run audit:public-copy
 npm run build
 npm run check:links
 npm run preview

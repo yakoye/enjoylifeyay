@@ -654,7 +654,7 @@ export const legacySourceLinks: LegacySourceLink[] = [
   {
     "id": "zhihu-source-1",
     "title": "知乎个人内容页",
-    "description": "知乎历史内容入口；待获得可核对标题和日期的导出数据后再写入时间线。",
+    "description": "知乎上的历史回答与记录。",
     "href": "https://www.zhihu.com/people/wikiye/posts",
     "source": "Zhihu"
   }

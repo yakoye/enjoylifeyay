@@ -74,7 +74,7 @@ const sourceLinks = rows
   .map((row, index) => ({
     id: `zhihu-source-${index + 1}`,
     title: row.title,
-    description: '知乎历史内容入口；待获得可核对标题和日期的导出数据后再写入时间线。',
+    description: '知乎上的历史回答与记录。',
     href: row.originalUrl,
     source: row.source,
   }));

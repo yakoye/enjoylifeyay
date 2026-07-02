@@ -2,6 +2,7 @@
 title: "《臣服实验》读书笔记"
 description: "关于《臣服实验》的阅读记录与书中人物经历整理。"
 date: 2023-06-27
+publishedAt: 2023-06-27T00:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

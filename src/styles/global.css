@@ -811,48 +811,6 @@ main > section + section {
   scroll-margin-top: calc(var(--nav-height) + var(--space-4));
 }
 
-/* Reading keeps local writing first, then a compact external reading directory. */
-.external-reading {
-  margin-top: 2rem;
-}
-
-.external-reading > h2 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
-
-.external-reading .text-list-section + .text-list-section {
-  margin-top: 1.5rem;
-}
-
-/* External reading is a compact text directory. Descriptions may use a second
- * line on desktop, but never create unbounded vertical cards or horizontal overflow.
- * Full text remains available through the native hover title in DirectoryList.
- */
-@media (min-width: 641px) {
-  .external-reading .text-list {
-    font-size: 0.92rem;
-  }
-
-  .external-reading .text-list li {
-    display: -webkit-box;
-    max-width: 100%;
-    max-height: 3.5em;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-height: 1.75;
-    overflow-wrap: anywhere;
-  }
-}
-
-@media (max-width: 640px) {
-  .external-reading .text-list li {
-    white-space: normal;
-    overflow-wrap: anywhere;
-  }
-}
-
 /* Section maps keep second-level navigation compact and text-first. */
 .section-map {
   display: flex;
@@ -877,48 +835,102 @@ main > section + section {
   color: var(--link);
 }
 
-/* One bullet language across all directories and Markdown lists. */
-.text-list > li::marker,
-.plain-list > li::marker,
-.article-prose ul > li::marker,
-.section-page-prose ul > li::marker {
-  color: var(--text);
-  font-size: 1.16em;
-}
-
-.dated-list-bullet {
-  display: inline-block;
-  color: var(--text);
-  font-size: 1.15em;
-  line-height: 1.6;
-}
-
-/* External reading is maintained as Markdown. Descriptions may occupy at most two desktop lines. */
-.external-sites-prose > ul > li {
-  display: -webkit-box;
-  max-height: 3.5em;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.external-sites-prose > ul > li + li {
-  margin-top: 0.34rem;
-}
-
-@media (max-width: 640px) {
-  .section-map {
-    margin-bottom: 1.1rem;
-  }
-
-  .external-sites-prose > ul > li {
-    display: list-item;
-    max-height: none;
-    overflow: visible;
-  }
-}
-
 .section-map-current {
   color: var(--text);
   font-weight: 600;
+}
+
+/* The first word in a section map is always the parent page, so a reader can go back
+   without relying on the global header. */
+.section-map a.section-map-label {
+  color: var(--link);
+}
+
+.section-map-colon {
+  color: var(--muted);
+}
+
+/* v0.20 — one rendered-list language for Markdown and data-driven directories. */
+:root {
+  --directory-bullet-size: 1.34em;
+  --directory-bullet-indent: 1.42em;
+}
+
+:where(.plain-list, .text-list, .article-prose ul, .section-page-prose ul) {
+  list-style: none;
+  padding-left: 0;
+}
+
+:where(.plain-list, .text-list, .article-prose ul, .section-page-prose ul) > li {
+  position: relative;
+  padding-left: var(--directory-bullet-indent);
+}
+
+:where(.plain-list, .text-list, .article-prose ul, .section-page-prose ul) > li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0.075em;
+  color: var(--text);
+  font-size: var(--directory-bullet-size);
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Writing and dated directories use the same visible bullet, even though their date
+   column requires grid layout rather than native list markers. */
+.dated-list-item {
+  grid-template-columns: 1.15rem minmax(0, 1fr) 6rem;
+}
+
+.dated-list-bullet {
+  width: 1.15rem;
+  color: var(--text);
+  font-size: var(--directory-bullet-size);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+/* Keep Markdown list semantics intact: the outer <li> remains a list item.  The
+   two-line cap is height-based so its bullet never disappears in desktop browsers. */
+@media (min-width: 641px) {
+  .external-sites-prose > ul > li {
+    display: list-item;
+    max-height: 3.5em;
+    overflow: hidden;
+    -webkit-box-orient: initial;
+    -webkit-line-clamp: unset;
+  }
+}
+
+/* Astro emits Shiki colors inline. Dual token themes plus these variables keep a
+   light code surface in light mode and a dark surface only in dark mode. */
+.article-prose pre.astro-code {
+  background-color: var(--code-background) !important;
+  color: var(--shiki-light, var(--text)) !important;
+}
+
+.article-prose pre.astro-code span {
+  color: var(--shiki-light, inherit) !important;
+  background-color: transparent !important;
+  font-style: var(--shiki-light-font-style, inherit) !important;
+  font-weight: var(--shiki-light-font-weight, inherit) !important;
+}
+
+:root[data-theme='dark'] .article-prose pre.astro-code {
+  background-color: var(--code-background) !important;
+  color: var(--shiki-dark, var(--text)) !important;
+}
+
+:root[data-theme='dark'] .article-prose pre.astro-code span {
+  color: var(--shiki-dark, inherit) !important;
+  background-color: transparent !important;
+  font-style: var(--shiki-dark-font-style, inherit) !important;
+  font-weight: var(--shiki-dark-font-weight, inherit) !important;
+}
+
+@media (max-width: 640px) {
+  .dated-list-item {
+    grid-template-columns: 1.15rem minmax(0, 1fr);
+  }
 }

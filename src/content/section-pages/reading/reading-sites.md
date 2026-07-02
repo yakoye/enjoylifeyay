@@ -8,7 +8,7 @@ kind: markdown
 draft: false
 ---
 
-这里收录长期值得返回阅读的独立博客、长文专栏与知识档案。名称可直接跳转；想把某个站点置顶时，直接把它移动到所属分类最前面即可。
+这里收录值得反复阅读的独立博客、长文专栏与知识档案。
 
 ## 工程、系统与程序设计
 
@@ -45,7 +45,7 @@ draft: false
 - [Farnam Street](https://fs.blog/)：专注于“心智模型（Mental Models）”与深度决策。帮助你如何思考、如何做决定、如何阅读和学习。它把查理·芒格、物理学、系统论里的底层核心规律抽离出来，应用到日常工作和生活策略中。
 - [Collaborative Fund](https://collaborativefund.com/blog/)：《金钱心理学》作者 Morgan Housel 主笔的文章常不谈具体股票指标，而以历史故事讨论人性、财富、耐心与长期价值。
 - [Melting Asphalt](https://meltingasphalt.com/)：Kevin Simler 的长文像精密的解剖刀，剖析人类社交中微妙的心理学、文化演化与隐藏动机。
-- [Conceptually](https://conceptually.org/)：以极简形式博弈论、系统科学和心理学机制拆成优雅易读的文章。
+- [Conceptually](https://conceptually.org/)：以极简形式把博弈论、系统科学和心理学机制拆成优雅易读的文章。
 - [James Clear](https://jamesclear.com/articles)：《原子习惯》作者的文章，是研究行为设计与微观个人进化的纯文字指南。
 - [Tynan](https://tynan.com/)：把生活当作“系统集成”来优化的极客，长期记录自律、习惯量化、旅行与独立生活实验。
 - [Nat Eliason](https://www.nateliason.com/blog)：内容涵盖超速学习、哲学、写作、系统构建，以及对现代独立生活方式的深度反思。
@@ -79,7 +79,7 @@ draft: false
 - [Aeon](https://aeon.co/)：人类智识的灯塔，由学者供稿，探讨人类文化、数字哲学、生物演化、心理与社会议题。
 - [Edge](https://www.edge.org/)：“世界上最聪明的网站”，顶尖科学家和思想家围绕一个大问题的年度文字交锋。站内保留许多围绕未来认知演化展开的文字交锋。
 - [Nintil](https://nintil.com/)：像研究报告一样写长寿科学、经济史、制度和数据问题。
-- [Kevin Kelly / The Technium](https://kk.org/thetechnium/)：《失控》作者凯文·凯利对科技演化（Technium）、文明趋势和 Technium 的长期观察。
+- [Kevin Kelly / The Technium](https://kk.org/thetechnium/)：《失控》作者凯文·凯利对科技演化（Technium）与文明趋势的长期观察。
 
 ## 数字考古与知识档案
 
@@ -88,7 +88,7 @@ draft: false
 - [Idle Words](https://idlewords.com/)：Pinboard 创始人的博客。写去南极、阿根廷游历、对现代硅谷大厂膨胀、Web 臃肿化、以及过度偏执的 AI 崇拜的深刻讽刺。其旅行纪实，如切尔诺贝利、南极与偏远地区的记录，兼具观察密度、叙事能力与对技术文化的尖锐判断。
 - [Tedium](https://tedium.co/)：“无聊事物”的百科全书。专门挖掘那些被现代人遗忘的科技与文化历史碎片。比如：条形码是谁发明的？早期的点阵打印机经历了什么？某款过时的软盘格式有着怎样的兴衰？非常适合沉浸式阅读那些奇特又硬核的历史故事。
 - [The Browser](https://thebrowser.com/)：人工每天筛选的深度文章入口，像一份老派长文日报。编辑每天从海量文章中，人工挑选少量值得长期阅读的深度文字。
-- [Textfiles](http://textfiles.com/)：由 Jason Scott 维护的、纯粹为了拯救互联网早期记忆的纯文本（.txt）博物馆。里面收集了 80、90 年代 BBS 时代全世界黑客、极客写的各种 .txt 指南、公告、技术随笔和科幻文字。入口：https://textfiles.com/directory.html
+- [Textfiles](http://textfiles.com/)：由 Jason Scott 维护的、纯粹为了拯救互联网早期记忆的纯文本（.txt）博物馆。里面收集了 80、90 年代 BBS 时代全世界黑客、极客写的各种 .txt 指南、公告、技术随笔和科幻文字。
 - [Public Domain Review](https://publicdomainreview.org/)：从公有领域挖掘奇特、罕见、精美的历史图像和档案。
 - [Project Gopher / Gemini](https://gopherproject.org/)：一个平行于现代 Web 的独立协议空间。Gopher 与 Gemini 社群因反感网页臃肿、追踪与广告，持续维护偏纯文字、轻量排版、重视个人参与的网络“世外桃源”。
 - [SDF Public Access UNIX System](https://sdf.org/)：长期运营的公共 UNIX 社区，保留命令行、Gopher、Gemini、个人主页与老派网络社群文化；适合体验早期网络的公共性与温度。

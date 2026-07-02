@@ -1,9 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import SectionMap from '../../components/SectionMap.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+const page = await getEntry('sitePages', 'technology');
+if (!page) throw new Error('Missing Markdown page content: technology');
 const technicalWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'technology'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'technology'))
@@ -11,10 +13,10 @@ const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft 
   .map((entry) => ({ title: entry.data.title, href: `/technology/${entry.data.routeSlug}/` }));
 ---
 
-<BaseLayout title="技术" description="芯片、PCIe、固件、系统与工程实践的长期记录。">
-  <h1>技术</h1>
-  <p class="page-intro">芯片、PCIe、固件、系统与工程实践的长期记录。</p>
-  <SectionMap label="技术" items={mapItems} />
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <h1>{page.data.title}</h1>
+  <p class="page-intro">{page.data.intro}</p>
+  <SectionMap label={page.data.title} sectionHref="/technology/" items={mapItems} />
 
   <section aria-labelledby="technology-recent-writing">
     <h2 id="technology-recent-writing">最近技术文章</h2>

@@ -2,7 +2,7 @@
 section: technology
 routeSlug: articles
 title: 技术文章
-description: 按发布时间浏览所有公开的技术文章与工程记录。
+description: 按发布时间浏览所有技术文章与工程记录。
 order: 0
 kind: writing
 writingDomain: technology

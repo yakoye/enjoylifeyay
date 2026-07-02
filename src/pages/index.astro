@@ -1,9 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import WritingList from '../components/WritingList.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../config/site';
-import { nowItems } from '../data/now';
+
+const home = await getEntry('sitePages', 'home');
+if (!home) throw new Error('Missing Markdown page content: home');
 
 const writing = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 6);
@@ -13,10 +14,10 @@ const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
   .find((entry) => entry.data.featured && ['available', 'development'].includes(entry.data.status));
 ---
 
-<BaseLayout>
+<BaseLayout title={home.data.title} description={home.data.description}>
   <div class="home-intro">
-    <h1>{site.name}</h1>
-    <p class="tagline">{site.tagline}</p>
+    <h1>{home.data.title}</h1>
+    <p class="tagline">{home.data.tagline}</p>
   </div>
 
   <section aria-labelledby="recent-writing">
@@ -26,7 +27,7 @@ const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
 
   <section aria-labelledby="current-work">
     <div class="section-heading"><h2 id="current-work">正在做</h2><a href="/now/">查看全部</a></div>
-    <ul class="plain-list">{nowItems.map((item) => <li>{item}</li>)}</ul>
+    <ul class="plain-list">{home.data.nowItems.map((item) => <li>{item}</li>)}</ul>
   </section>
 
   {featuredSeries && <section aria-labelledby="featured-series">

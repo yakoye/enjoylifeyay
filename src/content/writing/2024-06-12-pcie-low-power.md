@@ -2,6 +2,7 @@
 title: "PCIe 低功耗"
 description: "旧站对 PCIe 链路低功耗状态、L1 子状态与相关电路概念的整理。"
 date: 2024-06-12
+publishedAt: 2024-06-12T00:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

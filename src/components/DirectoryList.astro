@@ -19,7 +19,7 @@ interface Props {
   headingLevel?: 2 | 3;
 }
 
-const { items = [], groups: suppliedGroups, emptyMessage = '暂无已公开条目。', headingLevel = 2 } = Astro.props;
+const { items = [], groups: suppliedGroups, emptyMessage = '暂无条目。', headingLevel = 2 } = Astro.props;
 const Heading = headingLevel === 3 ? 'h3' : 'h2';
 const groups: Group[] = suppliedGroups?.filter((group) => group.items.length > 0) ?? (items.length ? [{ items }] : []);
 const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href));

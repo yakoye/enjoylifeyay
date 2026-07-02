@@ -1,9 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import SectionMap from '../../components/SectionMap.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+const page = await getEntry('sitePages', 'life');
+if (!page) throw new Error('Missing Markdown page content: life');
 const allLifeWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'life'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'life'))
@@ -11,10 +13,10 @@ const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft 
   .map((entry) => ({ title: entry.data.title, href: `/life/${entry.data.routeSlug}/` }));
 ---
 
-<BaseLayout title="生活" description="思考、运动、饮食、旅行、家庭与日常方法的长期记录。">
-  <h1>生活</h1>
-  <p class="page-intro">思考、运动、饮食、旅行、家庭与日常方法的长期记录。</p>
-  <SectionMap label="生活" items={mapItems} />
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <h1>{page.data.title}</h1>
+  <p class="page-intro">{page.data.intro}</p>
+  <SectionMap label={page.data.title} sectionHref="/life/" items={mapItems} />
 
   <section aria-labelledby="life-recent-writing">
     <h2 id="life-recent-writing">最近生活记录</h2>

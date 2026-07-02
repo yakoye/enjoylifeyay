@@ -2,6 +2,7 @@
 title: "文章标题"
 description: "一两句话概括文章。"
 date: 2026-07-05
+publishedAt: 2026-07-05T12:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

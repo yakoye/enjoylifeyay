@@ -8,6 +8,14 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   site: site.url,
   markdown: {
-    shikiConfig: { theme: 'github-dark-default', wrap: false },
+    shikiConfig: {
+      // Keep syntax tokens legible in both manually-selected themes.
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark-default',
+      },
+      defaultColor: false,
+      wrap: false,
+    },
   },
 });

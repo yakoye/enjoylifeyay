@@ -23,6 +23,7 @@ if ($Install) {
 Invoke-NpmCommand @('run', 'check')
 Invoke-NpmCommand @('test')
 Invoke-NpmCommand @('run', 'audit:toc')
+Invoke-NpmCommand @('run', 'audit:public-copy')
 Invoke-NpmCommand @('run', 'build')
 Invoke-NpmCommand @('run', 'check:links')
 

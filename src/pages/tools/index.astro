@@ -1,9 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import SectionMap from '../../components/SectionMap.astro';
 import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+const page = await getEntry('sitePages', 'tools');
+if (!page) throw new Error('Missing Markdown page content: tools');
 const tools = (await getCollection('tools', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
 const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'tools'))
@@ -13,10 +15,10 @@ const highlights = tools.filter((tool) => tool.data.featured || ['dictfloat', 'r
   .map(({ data }) => ({ title: data.name, description: data.description, href: data.url || data.githubUrl || undefined }));
 ---
 
-<BaseLayout title="工具" description="自己做的项目、浏览器扩展、PCIe 工具与长期可用资料。">
-  <h1>工具</h1>
-  <p class="page-intro">自己做的项目、浏览器扩展、PCIe 工具与长期可用资料。</p>
-  <SectionMap label="工具" items={mapItems} />
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <h1>{page.data.title}</h1>
+  <p class="page-intro">{page.data.intro}</p>
+  <SectionMap label={page.data.title} sectionHref="/tools/" items={mapItems} />
 
   <section aria-labelledby="tool-highlights">
     <h2 id="tool-highlights">常用入口</h2>

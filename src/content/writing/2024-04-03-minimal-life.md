@@ -2,6 +2,7 @@
 title: "极简生活"
 description: "一则保留自旧站的生活整理：减少无效占有，把注意力留给真正重要的事情。"
 date: 2024-04-03
+publishedAt: 2024-04-03T00:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

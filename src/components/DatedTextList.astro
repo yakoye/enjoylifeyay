@@ -19,7 +19,7 @@ interface Props {
   emptyMessage?: string | false;
 }
 
-const { items = [], groups: suppliedGroups, emptyMessage = '暂无已公开条目。' } = Astro.props;
+const { items = [], groups: suppliedGroups, emptyMessage = '暂无记录。' } = Astro.props;
 const groups: Group[] = suppliedGroups?.filter((group) => group.items.length > 0) ?? (items.length ? [{ items }] : []);
 const formatDate = (value?: Date | string | null) => {
   if (!value) return '';

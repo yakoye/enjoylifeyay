@@ -150,6 +150,7 @@ Write-Host 'Running local verification ...' -ForegroundColor Cyan
 Invoke-NpmCommand @('run', 'check')
 Invoke-NpmCommand @('test')
 Invoke-NpmCommand @('run', 'audit:toc')
+Invoke-NpmCommand @('run', 'audit:public-copy')
 Invoke-NpmCommand @('run', 'verify:public-content')
 try {
   Invoke-NpmCommand @('run', 'verify:legacy-assets')

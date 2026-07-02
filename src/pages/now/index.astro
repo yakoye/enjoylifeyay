@@ -1,4 +1,14 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import { nowItems } from '../../data/now';
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const page = await getEntry('sitePages', 'now');
+const home = await getEntry('sitePages', 'home');
+if (!page || !home) throw new Error('Missing Markdown page content: now or home');
 ---
-<BaseLayout title="正在做" description="当前正在推进的公开事项。"><h1>正在做</h1><p class="page-intro">这是一份低频更新的公开工作清单，不是私人日记。</p><ul class="plain-list">{nowItems.map((item) => <li>{item}</li>)}</ul></BaseLayout>
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <h1>{page.data.title}</h1>
+  <p class="page-intro">{page.data.intro}</p>
+  <ul class="plain-list">{home.data.nowItems.map((item) => <li>{item}</li>)}</ul>
+</BaseLayout>

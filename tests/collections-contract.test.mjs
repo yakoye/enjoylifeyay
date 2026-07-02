@@ -31,7 +31,13 @@ test('可维护目录数据存在且未知链接保持空值', async () => {
   }
 });
 
-test('正在做数据独立于首页组件', async () => {
-  const now = await readFile(new URL('../src/data/now.ts', import.meta.url), 'utf8');
-  assert.match(now, /export const nowItems/);
+test('正在做内容由 Markdown 页面维护，首页与独立页面共用同一份数据', async () => {
+  const [home, index, now] = await Promise.all([
+    readFile(new URL('../src/content/site-pages/home.md', import.meta.url), 'utf8'),
+    readFile(new URL('../src/pages/index.astro', import.meta.url), 'utf8'),
+    readFile(new URL('../src/pages/now/index.astro', import.meta.url), 'utf8'),
+  ]);
+  assert.match(home, /^nowItems:/m);
+  assert.match(index, /getEntry\('sitePages', 'home'\)/);
+  assert.match(now, /getEntry\('sitePages', 'home'\)/);
 });

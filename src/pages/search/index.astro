@@ -1,9 +1,14 @@
 ---
+import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const page = await getEntry('sitePages', 'search');
+if (!page) throw new Error('Missing Markdown page content: search');
 ---
-<BaseLayout title="搜索" description="在本地静态索引中搜索文章、工具、阅读、自然、生活与归档。" contentType="搜索">
-  <h1>搜索</h1>
-  <p class="page-intro">搜索在浏览器本地完成，不会把查询发送给第三方。快捷键：Ctrl+K / Cmd+K。</p>
+
+<BaseLayout title={page.data.title} description={page.data.description} contentType="搜索">
+  <h1>{page.data.title}</h1>
+  <p class="page-intro">{page.data.intro}</p>
   <form class="search-form" role="search">
     <label for="search-input">搜索站内内容</label>
     <div><input id="search-input" name="q" type="search" autocomplete="off" /><button type="submit">搜索</button></div>

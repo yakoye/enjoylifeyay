@@ -1,3 +1,76 @@
+# v0.20：Markdown 页面与渲染一致性
+
+## 修改文件
+
+- `src/content.config.ts`、`src/content/site-pages/*.md`：新增静态页面 Markdown 内容集合，并将一级页的标题、说明、引言与“关于”正文迁入 Markdown。
+- `src/pages/`：一级页面、关于、搜索、标签和“现在”页从 Markdown 读取读者文案。
+- `src/styles/global.css`：普通目录、数据目录和 Markdown 无序列表统一使用较大的黑色圆点；站外专题桌面端保留最多两行说明。
+- `astro.config.mjs`：Shiki 同时配置浅色和深色主题。
+- `docs/V0.20_MARKDOWN_RENDERING_CONSISTENCY.md`：补充内容位置、列表规则和验收方法。
+
+## 已完成功能
+
+- 站外专题的 Markdown 无序列表恢复可见圆点，不再因两行截断样式丢失列表标记。
+- 首页“最近更新”、主页“正在做”、普通目录和 Markdown 内容页的圆点尺寸统一。
+- 浅色主题下的文章代码块使用浅灰背景和浅色 token；深色主题下才使用深色代码背景。
+- 静态页面内容与二级栏目说明尽量使用 Markdown；需要按日期、标签、分类自动筛选的数据目录继续使用内容集合，但共享同一套展示样式。
+- 公开网页文案仍只面向读者；维护与实现说明仅保留在文档中。
+
+## 验收
+
+- `npm run check`
+- `npm test`
+- `npm run audit:toc`
+- `npm run audit:public-copy`
+- `npm run build`
+- `npm run check:links`
+
+---
+
+# v0.19：二级地图返回、发布时间与读者文案
+
+## 修改文件
+
+- `src/components/SectionMap.astro`：五个一级栏目地图中的一级名称改为父页链接。
+- `src/pages/technology/`、`tools/`、`reading/`、`nature/`、`life/` 与 `src/pages/[section]/[slug].astro`：统一传入父页路由。
+- `src/content.config.ts`、`src/content/writing/`、`src/layouts/ArticleLayout.astro`：为每篇文章加入 `publishedAt`，并显示到秒的发布时间。
+- `src/pages/nature/index.astro`、`src/pages/archive/index.astro`、`src/pages/about/` 与 `src/content/section-pages/`：改为面向读者的公开文案。
+- `src/content/tools.json`：将阅读扩展统一命名为“简读 · 网页阅读助手”。
+- `scripts/audit-public-copy.mjs`：新增公开文案审计，并接入构建与一键预览流程。
+
+## 已完成功能
+
+- 二级页显示“技术：技术文章”时，“技术”可直接返回技术首页；工具、阅读、自然、生活同样适用。
+- 文章详情页显示 `发布：YYYY-MM-DD HH:mm:ss`；发布时间采用中国标准时间格式。
+- 历史文章仅保留日期时，先以当天 `00:00:00+08:00` 作为可调整的默认发布时间。
+- 自然页使用“植物·动物·季节·行走与观察·地方记忆”。
+- 存档页使用“按首次发布日期汇总。”
+- 旅行页使用“记录行走、旅行、路线、照片途经的地方、遇见的人和事。”
+- 公开页面不再保留开发、迁移、私有资源或维护操作提示；这些说明保留在 `docs/`。
+
+## 内容迁移
+
+本版不新增或虚构历史文章；仅补齐已有文章的发布时间字段与显示方式。
+
+## 待人工确认
+
+旧文章若找到精确发布时间，可直接修改对应 Markdown Frontmatter 的 `publishedAt`。
+
+## 已知问题
+
+历史图片的本地补全仍需在保留私有下载清单的环境中执行；与公开页面无关。
+
+## Cloudflare Pages
+
+- 项目名：`enjoylifeyay`
+- 正式地址：`https://enjoylifeyay.pages.dev`
+- 构建命令：`npm run build`
+- 输出目录：`dist`
+- Node：24.x
+- 手动发布：`npx wrangler pages deploy dist --project-name enjoylifeyay --branch main`
+
+---
+
 # v0.18：Markdown 内容地图与二级页面
 
 - 五个一级栏目统一改为“父页 + 简洁地图 + 二级页面”的信息架构。

@@ -10,7 +10,7 @@ let assets;
 try {
   assets = JSON.parse(await readFile(manifestPath, 'utf8'));
 } catch {
-  throw new Error('Missing scripts/legacy-assets.private.json. Restore it from the release package before downloading legacy assets.');
+  throw new Error('Missing scripts/legacy-assets.private.json. This private one-time source manifest is intentionally not part of the public release. Existing local article images remain usable; restore your private manifest only when you need to re-download legacy assets.');
 }
 
 let downloaded = 0;

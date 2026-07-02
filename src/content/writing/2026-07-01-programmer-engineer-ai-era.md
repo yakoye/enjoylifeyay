@@ -2,6 +2,7 @@
 title: "程序员、工程师与 AI 时代的独立创造"
 description: "从程序员与工程师的角色差异出发，重新理解 AI 时代个人创作、一人公司与产品责任。"
 date: 2026-07-01
+publishedAt: 2026-07-01T00:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

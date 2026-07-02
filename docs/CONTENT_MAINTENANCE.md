@@ -52,6 +52,7 @@ draft: false
 title: "文章标题"
 description: "一两句话说明文章内容。"
 date: 2026-07-05
+publishedAt: 2026-07-05T12:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""
@@ -73,7 +74,8 @@ featured: false
 
 | 字段 | 用法 |
 | --- | --- |
-| `date` | 首次公开日期。普通文章只写日期，不写时分秒。 |
+| `date` | 首次公开日期，用于时间线与排序。 |
+| `publishedAt` | 文章详情页显示的发布时间，格式为 `YYYY-MM-DDTHH:mm:ss+08:00`。旧文仅有日期时可先使用当天 `00:00:00+08:00`，以后获得准确时间再改。 |
 | `updated` | 有实质性修订时写最后修订日期，否则严格写 `null`。`null` 不会再被显示为 `1970-01-01`。 |
 | `source` | 新文章用 `native`；旧文使用 `CSDN` 或 `Zhihu`。 |
 | `sourceUrl` | 旧文必须保留原始链接；新文章可留空。 |
@@ -250,7 +252,23 @@ docs/imports/reading-sites-2026-07-02.json
 
 它不参与网站运行；日常只编辑 Markdown 文件。
 
-## 四点六、维护二级地图与二级页面
+## 四点六、维护一级页面、二级地图与二级页面
+
+面向读者的静态页面文字由 Markdown 维护：
+
+```text
+src/content/site-pages/
+```
+
+例如：
+
+| 页面 | 文件 |
+| --- | --- |
+| 主页与正在做 | `src/content/site-pages/home.md` |
+| 技术、工具、阅读、自然、生活、存档 | `src/content/site-pages/<page>.md` |
+| 关于、关于我 | `src/content/site-pages/about.md`、`about-me.md` |
+
+一级页的标题、说明和短引言写在 Frontmatter；“关于”类页面的正文直接写在 Markdown 正文中。
 
 五个一级栏目都由 Markdown 二级页面驱动：
 
@@ -278,6 +296,7 @@ draft: false
 - `order` 决定父页面“地图”中出现的顺序。
 - `kind: markdown` 只渲染 Markdown 正文，适合旅行、家庭、翻译书、写书等还没有结构化条目的页面。
 - `kind: writing`、`tools`、`nature`、`books` 会在 Markdown 说明后自动显示匹配的内容列表。
+- Markdown 列表会自动使用全站统一的大黑色圆点；不需要手写 `•` 或添加额外样式。
 - 不要提前虚构书目、旅行路线或家庭资料；没有真实公开内容时，只保留简短页面说明即可。
 
 
@@ -288,7 +307,7 @@ draft: false
 | 自然观察 | `src/content/nature.json` |
 | 书架 | `src/content/books.json` |
 | 历史内容来源 | `src/content/favorites.json`（显示在工具页） |
-| 正在做 | `src/data/now.ts` |
+| 主页与正在做 | `src/content/site-pages/home.md` |
 
 历史来源条目必须写清楚迁移用途；不要只存一个裸链接。自然观察不要公开住址、家庭位置、精确路线或私密定位。
 

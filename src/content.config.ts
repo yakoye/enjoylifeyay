@@ -17,6 +17,7 @@ const writing = defineCollection({
     title: z.string().min(1),
     description: z.string().min(1),
     date,
+    publishedAt: date,
     updated: optionalDate,
     source: z.enum(['native', 'CSDN', 'Zhihu']).default('native'),
     sourceUrl: optionalUrl,
@@ -119,4 +120,17 @@ const sectionPages = defineCollection({
   }),
 });
 
-export const collections = { writing, series, tools, nature, books, favorites, sectionPages };
+const sitePages = defineCollection({
+  loader: glob({ base: './src/content/site-pages', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    intro: z.string().default(''),
+    eyebrow: z.string().default(''),
+    tagline: z.string().default(''),
+    nowItems: z.array(z.string()).default([]),
+    ...common,
+  }),
+});
+
+export const collections = { writing, series, tools, nature, books, favorites, sectionPages, sitePages };

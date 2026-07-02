@@ -80,7 +80,7 @@ const { article } = Astro.props;
     const renderComments = (comments: PublicComment[]): void => {
       list.replaceChildren();
       if (!Array.isArray(comments) || comments.length === 0) {
-        setStatus('暂无已公开评论。');
+        setStatus('暂无评论。');
         return;
       }
 
@@ -108,7 +108,7 @@ const { article } = Astro.props;
         const payload = await response.json() as CommentApiResponse;
         setModerationNote(payload.moderation);
         if (!response.ok || payload.configured === false) {
-          setStatus(payload.message || '评论服务尚未完成配置。');
+          setStatus(payload.message || '评论暂时不可用。');
           return;
         }
         renderComments(payload.comments || []);

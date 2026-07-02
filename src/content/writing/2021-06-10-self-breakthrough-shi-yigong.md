@@ -2,6 +2,7 @@
 title: "《自我突围》：施一公"
 description: "阅读《自我突围》时，对书中人物经历与家族脉络所作的整理。"
 date: 2021-06-10
+publishedAt: 2021-06-10T00:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

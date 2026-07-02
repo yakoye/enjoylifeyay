@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { categoryLabels, formatLabels } from '../config/site';
 
 interface Props { entries: CollectionEntry<'writing'>[]; emptyMessage?: string | false; }
-const { entries, emptyMessage = '尚无已核对并公开的文章。' } = Astro.props;
+const { entries, emptyMessage = '暂无文章。' } = Astro.props;
 const formatDate = (value: Date) => value.toISOString().slice(0, 10);
 ---
 

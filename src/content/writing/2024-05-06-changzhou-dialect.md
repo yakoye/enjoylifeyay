@@ -2,6 +2,7 @@
 title: "方言：常州话"
 description: "关于常州方言的资料整理与语言特征记录。"
 date: 2024-05-06
+publishedAt: 2024-05-06T00:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

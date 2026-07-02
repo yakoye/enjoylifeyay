@@ -8,6 +8,12 @@ interface Props { title?: string; description?: string; contentType?: string; pu
 const { title, description = site.description, contentType = '页面', publishedAt, activeNav } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : site.name;
 const canonical = new URL(Astro.url.pathname, site.url);
+const pagefindDate = publishedAt
+  ? new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' })
+      .formatToParts(publishedAt)
+      .reduce((result, part) => ({ ...result, [part.type]: part.value }), {} as Record<string, string>)
+  : undefined;
+const pagefindDateValue = pagefindDate ? `${pagefindDate.year}-${pagefindDate.month}-${pagefindDate.day}` : '';
 ---
 
 <!doctype html>
@@ -33,7 +39,7 @@ const canonical = new URL(Astro.url.pathname, site.url);
     <meta name="twitter:description" content={description} />
     <meta data-pagefind-meta="type" content={contentType} />
     <meta data-pagefind-meta="description" content={description} />
-    {publishedAt && <meta data-pagefind-meta="date" content={publishedAt.toISOString().slice(0, 10)} />}
+    {publishedAt && <meta data-pagefind-meta="date" content={pagefindDateValue} />}
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <script is:inline>

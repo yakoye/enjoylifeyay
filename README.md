@@ -158,7 +158,7 @@ series: ["life-running"]
 | 历史内容来源（CSDN / 知乎） | `src/content/favorites.json` | 工具 / 历史内容来源 |
 | 站外阅读专题 | `src/content/section-pages/reading/reading-sites.md` | 阅读 / 站外专题 |
 | 自然观察 | `src/content/nature.json` | 自然 |
-| 正在做 | `src/data/now.ts` | 主页与 `/now/` |
+| 主页与正在做 | `src/content/site-pages/home.md` | 主页与 `/now/` |
 
 完整字段说明见：
 
@@ -273,3 +273,56 @@ series: ["life-cycling", "life-running"]
 - 已同步用户维护的 96 条站外阅读数据。
 - 桌面端站点说明允许最多两行；手机端自然换行。
 - 详情见 [`docs/V0.17.3_READING_SITES_TWO_LINES.md`](docs/V0.17.3_READING_SITES_TWO_LINES.md)。
+
+## v0.20：Markdown 页面与渲染一致性
+
+面向读者的一级页面文字、完整静态页面正文和站外专题继续统一由 Markdown 维护：
+
+```text
+src/content/site-pages/
+src/content/section-pages/
+src/content/writing/
+```
+
+其中，站外专题仍在：
+
+```text
+src/content/section-pages/reading/reading-sites.md
+```
+
+普通无序列表、Markdown 列表和数据目录现在使用同一套较大的黑色圆点；站外专题桌面端每条说明最多两行。文章代码块使用 Shiki 的浅色与深色双主题：浅色页面显示浅灰代码背景，深色页面显示深色代码背景。
+
+维护位置和验收流程见 [`docs/V0.20_MARKDOWN_RENDERING_CONSISTENCY.md`](docs/V0.20_MARKDOWN_RENDERING_CONSISTENCY.md)。
+
+## v0.19：二级地图、发布时间与公开文案
+
+五个一级栏目中的二级地图现在都以父栏目作为可点击入口。例如页面出现：
+
+```text
+技术：技术文章 · PCIe 与高速互连 · …
+```
+
+点击“技术”即可回到技术首页；工具、阅读、自然、生活同样适用。
+
+每篇文章 Frontmatter 需要同时保留：
+
+```yaml
+date: 2026-07-05
+publishedAt: 2026-07-05T12:00:00+08:00
+```
+
+文章页会显示：
+
+```text
+发布：2026-07-05 12:00:00
+```
+
+旧文只有日期时，暂以当天 `00:00:00+08:00` 作为时间默认值；找到准确时间后直接修改 `publishedAt`。
+
+公开网页只保留面向读者的文字。开发、迁移、部署和维护提示只放在 `docs/` 中。发布前可额外运行：
+
+```powershell
+npm run audit:public-copy
+```
+
+详细规则见 [`docs/V0.19_NAVIGATION_PUBLISH_TIME_AND_PUBLIC_COPY.md`](docs/V0.19_NAVIGATION_PUBLISH_TIME_AND_PUBLIC_COPY.md)。

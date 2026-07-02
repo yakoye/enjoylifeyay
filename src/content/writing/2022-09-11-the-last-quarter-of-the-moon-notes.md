@@ -2,6 +2,7 @@
 title: "《额尔古纳河右岸》读书笔记"
 description: "阅读迟子建《额尔古纳河右岸》时，对人物、叙事与自然环境的记录。"
 date: 2022-09-11
+publishedAt: 2022-09-11T00:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

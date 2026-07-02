@@ -8,14 +8,17 @@ interface Props {
   label?: string;
   items: Item[];
   currentHref?: string;
+  /** Parent category route. When supplied, the category label is always a direct way back. */
+  sectionHref?: string;
 }
 
-const { label = '地图', items, currentHref = '' } = Astro.props;
+const { label = '地图', items, currentHref = '', sectionHref = '' } = Astro.props;
 ---
 
 {items.length > 0 && (
   <nav class="section-map" aria-label={`${label}目录`}>
-    <span class="section-map-label">{label}：</span>
+    {sectionHref ? <a class="section-map-label" href={sectionHref} aria-label={`返回${label}首页`}>{label}</a> : <span class="section-map-label">{label}</span>}
+    <span class="section-map-colon" aria-hidden="true">：</span>
     {items.map((item, index) => (
       <>
         {index > 0 && <span class="section-map-separator" aria-hidden="true">·</span>}

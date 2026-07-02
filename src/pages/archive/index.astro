@@ -1,10 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import ArchiveTimeline from '../../components/ArchiveTimeline.astro';
 import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { legacyArchiveEntries, legacySourceLinks } from '../../data/legacyArchive';
 
+const page = await getEntry('sitePages', 'archive');
+if (!page) throw new Error('Missing Markdown page content: archive');
 const publishedWriting = await getCollection('writing', ({ data }) => !data.draft);
 const localEntries = publishedWriting.map((entry) => ({
   id: `local-${entry.id}`,
@@ -29,9 +31,9 @@ const sourceGroups = legacySourceLinks.length ? [{
 }] : [];
 ---
 
-<BaseLayout title="存档" description="按首次发布日期汇总本站文章与历史技术记录。">
-  <h1>存档</h1>
-  <p class="page-intro">按首次发布日期汇总。</p>
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <h1>{page.data.title}</h1>
+  <p class="page-intro">{page.data.intro}</p>
   <ArchiveTimeline items={archiveItems} />
   {sourceGroups.length > 0 && <DirectoryList groups={sourceGroups} />}
 </BaseLayout>

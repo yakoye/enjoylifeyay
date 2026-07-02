@@ -2,6 +2,7 @@
 title: "PCIe 概念，一句话说明白"
 description: "一份待持续扩写的 PCIe 概念索引：从链路、事务、中断到调试问题逐步补全。"
 date: 2024-05-08
+publishedAt: 2024-05-08T00:00:00+08:00
 updated: 2026-07-02
 source: native
 sourceUrl: ""

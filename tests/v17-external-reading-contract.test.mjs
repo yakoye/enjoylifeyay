@@ -48,10 +48,12 @@ test('v0.18 外部站点不再由 JSON 运行时数据和 pinned 状态维护', 
   assert.doesNotMatch(config, /reading-sites\.json/);
 });
 
-test('v0.18 桌面端站外专题说明允许最多两行', async () => {
+test('v0.20 桌面端站外专题最多两行，同时保留 Markdown 无序列表圆点', async () => {
   const css = await read('src/styles/global.css');
-  assert.match(css, /\.external-sites-prose > ul > li[\s\S]*-webkit-line-clamp:\s*2/);
+  assert.match(css, /\.external-sites-prose > ul > li[\s\S]*display:\s*list-item/);
   assert.match(css, /max-height:\s*3\.5em/);
+  assert.doesNotMatch(css, /\.external-sites-prose > ul > li[\s\S]*display:\s*-webkit-box/);
+  assert.match(css, /:where\(\.plain-list, \.text-list, \.article-prose ul, \.section-page-prose ul\) > li::before/);
 });
 
 test('v0.18 二级地图和二级页面覆盖五个栏目', async () => {
@@ -73,14 +75,14 @@ test('v0.18 二级地图和二级页面覆盖五个栏目', async () => {
   }
 });
 
-test('v0.18 全站目录列表使用统一的大黑色圆点', async () => {
+test('v0.20 全站目录列表使用统一的大黑色圆点', async () => {
   const [css, writing, dated] = await Promise.all([
     read('src/styles/global.css'),
     read('src/components/WritingList.astro'),
     read('src/components/DatedTextList.astro'),
   ]);
-  assert.match(css, /font-size:\s*1\.16em/);
-  assert.match(css, /\.dated-list-bullet[\s\S]*font-size:\s*1\.15em/);
+  assert.match(css, /--directory-bullet-size:\s*1\.34em/);
+  assert.match(css, /\.dated-list-bullet[\s\S]*font-size:\s*var\(--directory-bullet-size\)/);
   assert.match(writing, />•</);
   assert.match(dated, />•</);
 });

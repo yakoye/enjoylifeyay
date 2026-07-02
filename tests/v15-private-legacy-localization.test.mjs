@@ -26,12 +26,13 @@ test('v0.15 旧个人文章已本地化且公开内容不暴露旧站标识', as
 test('v0.15 提供一次性本地旧图下载与发布前完整性检查', async () => {
   const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
   const gitignore = await readFile(join(root, '.gitignore'), 'utf8');
-  const assetManifest = JSON.parse(await readFile(join(root, 'scripts/legacy-assets.private.json'), 'utf8'));
   assert.match(pkg.scripts['fetch:legacy-assets'], /fetch-legacy-assets/);
   assert.match(pkg.scripts['verify:legacy-assets'], /verify-legacy-assets/);
   assert.match(pkg.scripts.verify, /verify:legacy-assets/);
   assert.match(pkg.scripts.verify, /verify:public-content/);
-  assert.ok(assetManifest.length >= 100);
+  // The one-time source manifest intentionally stays out of distributable archives
+  // so that retired legacy-host URLs are not committed or published.
+  assert.match(await readFile(join(root, 'scripts/fetch-legacy-assets.mjs'), 'utf8'), /legacy-assets\.private\.json/);
   assert.match(gitignore, /scripts\/legacy-assets\.private\.json/);
 });
 

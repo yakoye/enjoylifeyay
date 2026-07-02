@@ -80,7 +80,7 @@ const toolItems = toolEntries.map((item) => ({
 <BaseLayout title={data.title} description={data.description} activeNav={`/${data.section}/`}>
   <h1>{data.title}</h1>
   <p class="page-intro">{data.description}</p>
-  <SectionMap label={data.section === 'technology' ? '技术' : data.section === 'tools' ? '工具' : data.section === 'reading' ? '阅读' : data.section === 'nature' ? '自然' : '生活'} items={siblingMapItems} currentHref={currentHref} />
+  <SectionMap label={data.section === 'technology' ? '技术' : data.section === 'tools' ? '工具' : data.section === 'reading' ? '阅读' : data.section === 'nature' ? '自然' : '生活'} sectionHref={`/${data.section}/`} items={siblingMapItems} currentHref={currentHref} />
 
   <article class:list={['article-prose', 'section-page-prose', { 'external-sites-prose': data.section === 'reading' && data.routeSlug === 'sites' }]}>
     <Content />

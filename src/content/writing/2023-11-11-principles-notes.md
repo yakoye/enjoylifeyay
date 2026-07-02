@@ -2,6 +2,7 @@
 title: "《原则》1、2"
 description: "一条保留自旧阅读记录的书目笔记；先保留阅读入口与待补充的思考方向。"
 date: 2023-11-11
+publishedAt: 2023-11-11T00:00:00+08:00
 updated: null
 source: native
 sourceUrl: ""

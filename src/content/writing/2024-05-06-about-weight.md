@@ -2,6 +2,7 @@
 title: "关于体重与长期习惯"
 description: "一则保留自旧站的个人生活笔记：不追求短期惩罚式改变，而是把饮食、运动和休息放回长期节奏。"
 date: 2024-05-06
+publishedAt: 2024-05-06T00:00:00+08:00
 updated: 2026-07-02
 source: native
 sourceUrl: ""

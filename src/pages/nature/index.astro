@@ -1,9 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import DatedTextList from '../../components/DatedTextList.astro';
 import SectionMap from '../../components/SectionMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+const page = await getEntry('sitePages', 'nature');
+if (!page) throw new Error('Missing Markdown page content: nature');
 const allEntries = await getCollection('nature');
 type PublishedNature = (typeof allEntries)[number] & { data: Extract<(typeof allEntries)[number]['data'], { draft: false }> };
 const entries = allEntries.filter((entry): entry is PublishedNature => entry.data.draft === false)
@@ -20,10 +22,10 @@ const items = entries.map(({ data }) => ({
 }));
 ---
 
-<BaseLayout title="自然" description="自然观察、行走、摄影与地方记忆。">
-  <h1>自然</h1>
-  <p class="page-intro">植物·动物·季节·行走与观察·地方记忆</p>
-  <SectionMap label="自然" items={mapItems} />
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <h1>{page.data.title}</h1>
+  <p class="page-intro">{page.data.intro}</p>
+  <SectionMap label={page.data.title} sectionHref="/nature/" items={mapItems} />
 
   <section aria-labelledby="nature-recent-observations">
     <h2 id="nature-recent-observations">最近观察</h2>

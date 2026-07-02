@@ -11,7 +11,25 @@ interface Props { entry: CollectionEntry<'writing'>; headings?: Heading[]; }
 const { entry, headings = [] } = Astro.props;
 const { data } = entry;
 const isMeaningfulDate = (value?: Date | null): value is Date => Boolean(value && !Number.isNaN(value.valueOf()) && value.valueOf() !== 0);
-const formatDate = (value?: Date | null) => isMeaningfulDate(value) ? value.toISOString().slice(0, 10) : '';
+const dateParts = (value?: Date | null) => {
+  if (!isMeaningfulDate(value)) return null;
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23',
+  }).formatToParts(value);
+  const get = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value ?? '';
+  return { year: get('year'), month: get('month'), day: get('day'), hour: get('hour'), minute: get('minute'), second: get('second') };
+};
+const formatDate = (value?: Date | null) => {
+  const parts = dateParts(value);
+  return parts ? `${parts.year}-${parts.month}-${parts.day}` : '';
+};
+const formatDateTime = (value?: Date | null) => {
+  const parts = dateParts(value);
+  return parts ? `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:${parts.second}` : '';
+};
+const publishedAt = data.publishedAt;
 const updatedAt = isMeaningfulDate(data.updated) ? data.updated : undefined;
 const domainRoutes = { technology: '/technology/', reading: '/reading/', life: '/life/', nature: '/nature/', tool: '/tools/' } as const;
 const toc = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
@@ -21,12 +39,12 @@ const relatedSeries = data.series
   .filter((seriesEntry): seriesEntry is CollectionEntry<'series'> => Boolean(seriesEntry));
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'BlogPosting', headline: data.title,
-  description: data.description, datePublished: data.date.toISOString(),
-  dateModified: (updatedAt || data.date).toISOString(), mainEntityOfPage: `${site.url}/writing/${entry.id}/`,
+  description: data.description, datePublished: publishedAt.toISOString(),
+  dateModified: (updatedAt || publishedAt).toISOString(), mainEntityOfPage: `${site.url}/writing/${entry.id}/`,
 };
 ---
 
-<BaseLayout title={data.title} description={data.description} contentType="文章" publishedAt={data.date} activeNav={domainRoutes[data.domain]}>
+<BaseLayout title={data.title} description={data.description} contentType="文章" publishedAt={publishedAt} activeNav={domainRoutes[data.domain]}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article>
     <header class="article-header">
@@ -44,7 +62,7 @@ const jsonLd = {
         </div>
       )}
       <div class="article-meta">
-        <span>发布：{formatDate(data.date)}</span>
+        <span>发布：{formatDateTime(publishedAt)}</span>
         {updatedAt && <span>最后修订：{formatDate(updatedAt)}</span>}
       </div>
     </header>

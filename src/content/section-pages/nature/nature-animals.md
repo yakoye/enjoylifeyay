@@ -9,4 +9,4 @@ draft: false
 natureCategories: ["animal"]
 ---
 
-暂不人为补充内容；有真实观察后再添加。
+这里收录鸟类、昆虫与其他动物的观察记录。
