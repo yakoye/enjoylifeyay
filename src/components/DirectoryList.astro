@@ -16,9 +16,11 @@ interface Props {
   groups?: Group[];
   items?: Item[];
   emptyMessage?: string;
+  headingLevel?: 2 | 3;
 }
 
-const { items = [], groups: suppliedGroups, emptyMessage = '暂无已公开条目。' } = Astro.props;
+const { items = [], groups: suppliedGroups, emptyMessage = '暂无已公开条目。', headingLevel = 2 } = Astro.props;
+const Heading = headingLevel === 3 ? 'h3' : 'h2';
 const groups: Group[] = suppliedGroups?.filter((group) => group.items.length > 0) ?? (items.length ? [{ items }] : []);
 const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href));
 ---
@@ -27,7 +29,7 @@ const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href))
   <div class="text-directory">
     {groups.map((group) => (
       <section class="text-list-section" id={group.id}>
-        {group.title && <h2 class="text-list-heading">{group.title}</h2>}
+        {group.title && <Heading class="text-list-heading">{group.title}</Heading>}
         <ul class="text-list">
           {group.items.map((item) => (
             <li>

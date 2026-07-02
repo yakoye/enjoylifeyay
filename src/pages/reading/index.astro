@@ -1,19 +1,50 @@
 ---
 import { getCollection } from 'astro:content';
-import DatedTextList from '../../components/DatedTextList.astro';
+import DirectoryList from '../../components/DirectoryList.astro';
+import WritingList from '../../components/WritingList.astro';
+import readingSites from '../../content/reading-sites.json';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const readingWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'reading'))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .map((entry) => ({
-    title: entry.data.title,
-    date: entry.data.date,
-    href: `/writing/${entry.id}/`,
-  }));
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categoryOrder = [
+  ['engineering', '工程、系统与程序设计'],
+  ['cognition', '认知、决策与学习'],
+  ['science', '科学、未来与社会'],
+  ['archives', '数字考古与知识档案'],
+  ['culture', '文学、思想与非虚构'],
+  ['life', '生活、独立工作与行走'],
+] as const;
+
+const toDirectoryItem = (site: (typeof readingSites)[number]) => ({
+  title: site.name,
+  description: site.description,
+  href: site.url,
+});
+
+const pinnedSites = readingSites.filter((site) => site.pinned);
+const externalGroups = categoryOrder.map(([id, title]) => ({
+  id: `external-${id}`,
+  title,
+  items: readingSites.filter((site) => !site.pinned && site.category === id).map(toDirectoryItem),
+}));
 ---
 
-<BaseLayout title="阅读" description="读过的书，以及留下来的文字。">
+<BaseLayout title="阅读" description="本站阅读文章，以及按主题整理的站外长文、独立博客与知识档案。">
   <h1>阅读</h1>
-  <p class="page-intro">读过的书，以及留下来的文字。</p>
-  <DatedTextList items={readingWriting} emptyMessage="暂无已核对并公开的内容。" />
+  <p class="page-intro">本站阅读文章，以及按主题整理的站外长文、独立博客与知识档案。</p>
+
+  <WritingList entries={readingWriting} />
+
+  <section class="external-reading" id="external-reading" aria-labelledby="external-reading-title">
+    <h2 id="external-reading-title">站外专题</h2>
+    {pinnedSites.length > 0 && (
+      <DirectoryList
+        headingLevel={3}
+        groups={[{ id: 'pinned-reading', title: '常看', items: pinnedSites.map(toDirectoryItem) }]}
+      />
+    )}
+    <DirectoryList headingLevel={3} groups={externalGroups} />
+  </section>
 </BaseLayout>

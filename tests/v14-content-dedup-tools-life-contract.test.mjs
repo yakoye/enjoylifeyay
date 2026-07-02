@@ -4,10 +4,10 @@ import test from 'node:test';
 
 const file = (value) => new URL(`../${value}`, import.meta.url);
 
-test('v0.14 reading page shows one nonduplicated list of public reading articles', async () => {
+test('v0.14 reading page keeps one nonduplicated list of public reading articles', async () => {
   const page = await readFile(file('src/pages/reading/index.astro'), 'utf8');
-  assert.match(page, /DatedTextList/);
-  for (const forbidden of ["getCollection('books')", "getCollection('series')", '<h2']) {
+  assert.match(page, /WritingList/);
+  for (const forbidden of ["getCollection('books')", "getCollection('series')"]) {
     assert.equal(page.includes(forbidden), false, `reading page must not retain ${forbidden}`);
   }
 });

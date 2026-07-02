@@ -810,3 +810,17 @@ main > section + section {
 #running {
   scroll-margin-top: calc(var(--nav-height) + var(--space-4));
 }
+
+/* Reading keeps local writing first, then a compact external reading directory. */
+.external-reading {
+  margin-top: 2rem;
+}
+
+.external-reading > h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.external-reading .text-list-section + .text-list-section {
+  margin-top: 1.5rem;
+}

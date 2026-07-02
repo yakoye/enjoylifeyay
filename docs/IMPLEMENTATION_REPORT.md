@@ -1,3 +1,21 @@
+# v0.17：阅读站外专题
+
+## 已完成
+
+- 阅读页在本站阅读文章后增加“站外专题”，按六个主题分组。
+- 收录 69 个用户指定的独立博客、长文专栏与知识档案入口；同一站点只保留一次。
+- 每条使用“名称：一句说明”的文本目录形式，名称直接跳转站外页面。
+- 支持在 `src/content/reading-sites.json` 中通过 `pinned: true` 手动置顶“常看”网站；无默认排名。
+- `DirectoryList` 支持二级或三级分组标题，避免“站外专题”和分类标题层级混乱。
+
+## 维护
+
+- 数据：`src/content/reading-sites.json`
+- 使用说明：`docs/V0.17_EXTERNAL_READING.md`
+- 发布前通过：`npm run check`、`npm test`、`npm run audit:toc`、`npm run build`、`npm run check:links`。
+
+---
+
 # v0.13：栏目合并与去冗余
 
 ## 修改文件

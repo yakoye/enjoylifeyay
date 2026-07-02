@@ -14,7 +14,7 @@
 
 - **技术**：PCIe、芯片、固件、开发环境与工程实践；技术专题也放在这里。
 - **工具**：自己做的项目、浏览器扩展、PCIe 工具、记录工具与资料库。
-- **阅读**：已经公开的阅读文章，按时间排列。
+- **阅读**：本站阅读文章，以及按主题整理的站外长文、独立博客与知识档案。
 - **自然**：植物、动物、季节、地方记忆与自然观察。
 - **生活**：饮食、影集与家庭、运动，以及生活与思考。
 - **归档**：按日期汇总本站文章与尚未迁入的历史技术条目。
@@ -156,6 +156,7 @@ series: ["life-running"]
 | 公开工具、扩展、自己 DIY 项目、资料库 | `src/content/tools.json` | 工具 |
 | 饮食、影集与家庭、运动网站 | `src/content/tools.json`（`category: "websites-life"`） | 生活 |
 | 历史内容来源（CSDN / 知乎） | `src/content/favorites.json` | 工具 / 历史内容来源 |
+| 站外阅读专题、常看置顶 | `src/content/reading-sites.json` | 阅读 / 站外专题 |
 | 自然观察 | `src/content/nature.json` | 自然 |
 | 正在做 | `src/data/now.ts` | 主页与 `/now/` |
 
@@ -165,6 +166,31 @@ series: ["life-running"]
 - [`docs/MEDIA_MANAGEMENT.md`](docs/MEDIA_MANAGEMENT.md)
 - [`docs/COMMENTS_D1.md`](docs/COMMENTS_D1.md)
 - [`docs/BUILD_PREVIEW_DEPLOY.md`](docs/BUILD_PREVIEW_DEPLOY.md)
+
+
+## v0.17：阅读站外专题
+
+阅读页在本站阅读文章之后增加“站外专题”。它不做排名，也不把站点做成卡片；每个条目都是“名称：一句说明”，名称点击会直接打开站外网站。
+
+- 数据文件：`src/content/reading-sites.json`。
+- 已按工程、认知、科学、知识档案、文学与生活等主题分组。
+- 已去除重复站点；同一个站点只出现一次。
+- 想手动置顶常看站点时，把对应条目的：
+
+  ```json
+  "pinned": false
+  ```
+
+  改为：
+
+  ```json
+  "pinned": true
+  ```
+
+  该站会自动移动到“常看”分组，仍然不会显示排名。
+- 新增站点时直接复制一个 JSON 条目，填写唯一 `id`、`name`、`url`、一句 `description`、分类 `category` 与 `pinned`。
+
+详细方法见 [`docs/CONTENT_MAINTENANCE.md`](docs/CONTENT_MAINTENANCE.md) 和 [`docs/V0.17_EXTERNAL_READING.md`](docs/V0.17_EXTERNAL_READING.md)。
 
 ## 技术与部署
 

@@ -216,6 +216,58 @@ PCIe / 硬件工具
 
 不公开、没有链接或包含私有数据的项目不要为了展示而补造链接。旧 `/projects/` 地址会自动跳转到 `/tools/#diy-projects`，旧 `/favorites/` 地址会跳转到 `/tools/#historical-sources`，避免历史书签失效。公开项目请维护在 `src/content/tools.json`。
 
+
+## 四点五、维护“阅读 / 站外专题”
+
+站外长文、独立博客和知识档案统一维护在：
+
+```text
+src/content/reading-sites.json
+```
+
+每个条目结构：
+
+```json
+{
+  "id": "site-id",
+  "name": "网站名称",
+  "url": "https://example.com/",
+  "description": "一句简短说明。",
+  "category": "cognition",
+  "pinned": false
+}
+```
+
+规则：
+
+- 不添加排名、评分、编号或“推荐指数”。
+- 网站名称自动是外链，点击会在新标签页打开。
+- 描述保持一句话，尽量让桌面端一行显示完。
+- 一个网站只保留一次；不要因它跨多个主题而重复录入。
+- 分类可用：
+  - `engineering`：工程、系统与程序设计
+  - `cognition`：认知、决策与学习
+  - `science`：科学、未来与社会
+  - `archives`：数字考古与知识档案
+  - `culture`：文学、思想与非虚构
+  - `life`：生活、独立工作与行走
+- 想把常看站点放到页面最前面的“常看”分组时，只改：
+
+  ```json
+  "pinned": true
+  ```
+
+  不需要改页面代码，不需要给它设排名。多个常看站点会按 JSON 中的出现顺序展示。
+
+修改后运行：
+
+```powershell
+.\preview-local.cmd
+```
+
+确认阅读页无误后，再按正常 Git / Cloudflare Pages 流程发布。
+
+
 ## 五、添加自然观察、书籍资料与历史来源
 
 | 内容 | 文件 |

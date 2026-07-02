@@ -1,0 +1,554 @@
+[
+  {
+    "id": "coolshell",
+    "name": "CoolShell",
+    "url": "https://coolshell.cn/",
+    "description": "陈皓的技术、工程与独立思考文章。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "scz",
+    "name": "scz（小四）",
+    "url": "http://scz.617.cn:8/",
+    "description": "纯文本的安全、Unix 与底层技术笔记。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "dan-luu",
+    "name": "Dan Luu",
+    "url": "https://danluu.com/",
+    "description": "系统、性能与工程事实的实证分析。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "joel-on-software",
+    "name": "Joel on Software",
+    "url": "https://www.joelonsoftware.com/",
+    "description": "软件工程、团队与技术债的经典随笔。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "old-new-thing",
+    "name": "The Old New Thing",
+    "url": "https://devblogs.microsoft.com/oldnewthing/",
+    "description": "Windows 底层历史、兼容性与 C++ 细节。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "rachel-by-the-bay",
+    "name": "Rachel by the Bay",
+    "url": "https://rachelbythebay.com/",
+    "description": "系统、运维与真实故障现场的短记。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "antirez",
+    "name": "Antirez",
+    "url": "https://antirez.com/",
+    "description": "Redis 作者关于代码、协议与设计取舍的随笔。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "julia-evans",
+    "name": "Julia Evans",
+    "url": "https://jvns.ca/",
+    "description": "把系统、网络和命令行讲清楚的技术图文。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "stratechery",
+    "name": "Stratechery",
+    "url": "https://stratechery.com/",
+    "description": "科技产业、商业结构与聚合理论分析。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "dynamicland-worrydream",
+    "name": "Dynamicland / Bret Victor",
+    "url": "https://worrydream.com/",
+    "description": "计算、界面与人类思考方式的实验性文章。",
+    "category": "engineering",
+    "pinned": false
+  },
+  {
+    "id": "naval",
+    "name": "Naval Ravikant",
+    "url": "https://nav.al/",
+    "description": "财富、杠杆、判断力与内心平静的短文。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "lesswrong",
+    "name": "LessWrong",
+    "url": "https://www.lesswrong.com/",
+    "description": "理性主义、决策、认知偏差与 AI 思考。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "overcoming-bias",
+    "name": "Overcoming Bias",
+    "url": "https://www.overcomingbias.com/",
+    "description": "社会信号、自欺与制度行为的经济学视角。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "farnam-street",
+    "name": "Farnam Street",
+    "url": "https://fs.blog/",
+    "description": "心智模型、决策与长期学习的文章库。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "collaborative-fund",
+    "name": "Collaborative Fund",
+    "url": "https://collaborativefund.com/blog/",
+    "description": "人性、财富、耐心与长期价值的历史叙事。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "melting-asphalt",
+    "name": "Melting Asphalt",
+    "url": "https://meltingasphalt.com/",
+    "description": "社会心理、文化演化与隐藏动机的长文。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "conceptually",
+    "name": "Conceptually",
+    "url": "https://conceptually.org/",
+    "description": "把复杂学术概念拆成清晰长文的知识站。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "james-clear",
+    "name": "James Clear",
+    "url": "https://jamesclear.com/articles",
+    "description": "习惯、行为设计与微观改变的写作。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "tynan",
+    "name": "Tynan",
+    "url": "https://tynan.com/",
+    "description": "把生活当作系统来实验与优化的记录。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "nat-eliason",
+    "name": "Nat Eliason",
+    "url": "https://www.nateliason.com/blog",
+    "description": "学习、写作、系统构建与独立生活反思。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "ness-labs",
+    "name": "Ness Labs",
+    "url": "https://nesslabs.com/blog",
+    "description": "心智健康、创造力与可持续生产力。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "barking-up-the-wrong-tree",
+    "name": "Barking Up The Wrong Tree",
+    "url": "https://bakadesuyo.com/",
+    "description": "用研究证据检验成功、幸福与职场常识。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "tiago-forte",
+    "name": "Tiago Forte",
+    "url": "https://fortelabs.com/blog/",
+    "description": "第二大脑、知识输入与长期输出的方法。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "albert-wenger",
+    "name": "Albert Wenger",
+    "url": "https://continuations.com/",
+    "description": "知识时代的资本、注意力与社会演化。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "paul-skallas",
+    "name": "Paul Skallas / The Lindy Effect",
+    "url": "https://paulskallas.substack.com/",
+    "description": "用林迪效应观察时间、传统与现代焦虑。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "wait-but-why",
+    "name": "Wait But Why",
+    "url": "https://waitbutwhy.com/",
+    "description": "用长文和手绘拆解宏大复杂的问题。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "paul-graham",
+    "name": "Paul Graham",
+    "url": "https://paulgraham.com/articles.html",
+    "description": "创业、独立思考与创造人们想要的东西。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "derek-sivers",
+    "name": "Derek Sivers",
+    "url": "https://sive.rs/",
+    "description": "短小、克制的人生选择与专注思考。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "scott-young",
+    "name": "Scott Young",
+    "url": "https://www.scotthyoung.com/blog/",
+    "description": "超速学习、记忆与复杂技能习得的方法。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "ribbonfarm",
+    "name": "Ribbonfarm",
+    "url": "https://www.ribbonfarm.com/",
+    "description": "组织、权力、心理与现代数字生活的长文。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "the-diff",
+    "name": "The Diff / Root Issues",
+    "url": "https://diff.substack.com/",
+    "description": "金融、科技与宏观因果关系的深度解构。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "astral-codex-ten",
+    "name": "Astral Codex Ten",
+    "url": "https://astralcodexten.substack.com/",
+    "description": "统计、医学、历史与社会问题的长文分析。",
+    "category": "cognition",
+    "pinned": false
+  },
+  {
+    "id": "shtetl-optimized",
+    "name": "Shtetl-Optimized",
+    "url": "https://scottaaronson.blog/",
+    "description": "量子计算、理论计算与科学边界讨论。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "aeon",
+    "name": "Aeon",
+    "url": "https://aeon.co/",
+    "description": "文化、哲学、生物演化与前沿科学长文。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "edge",
+    "name": "Edge",
+    "url": "https://www.edge.org/",
+    "description": "科学家与思想家围绕宏大问题的交锋。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "nintil",
+    "name": "Nintil",
+    "url": "https://nintil.com/",
+    "description": "长寿、经济史与制度问题的独立研究。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "kevin-kelly",
+    "name": "Kevin Kelly / The Technium",
+    "url": "https://kk.org/thetechnium/",
+    "description": "科技演化、文明趋势与长期观察。",
+    "category": "science",
+    "pinned": false
+  },
+  {
+    "id": "gwern",
+    "name": "Gwern",
+    "url": "https://gwern.net/",
+    "description": "带有大量证据、数据与引文的个人知识库。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "low-tech-magazine",
+    "name": "Low-Tech Magazine",
+    "url": "https://solar.lowtechmagazine.com/",
+    "description": "被遗忘的工业、能源与低技术智慧。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "idle-words",
+    "name": "Idle Words",
+    "url": "https://idlewords.com/",
+    "description": "旅行纪实与互联网、城市、技术文化批评。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "tedium",
+    "name": "Tedium",
+    "url": "https://tedium.co/",
+    "description": "技术与文化中被忽略细节的长篇考古。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "the-browser",
+    "name": "The Browser",
+    "url": "https://thebrowser.com/",
+    "description": "人工筛选的深度文章与长文入口。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "textfiles",
+    "name": "Textfiles",
+    "url": "https://textfiles.com/",
+    "description": "BBS 时代的纯文本、技术与互联网记忆。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "public-domain-review",
+    "name": "Public Domain Review",
+    "url": "https://publicdomainreview.org/",
+    "description": "公有领域中奇特、罕见与优美的历史档案。",
+    "category": "archives",
+    "pinned": false
+  },
+  {
+    "id": "the-marginalian",
+    "name": "The Marginalian",
+    "url": "https://www.themarginalian.org/",
+    "description": "文学、科学与人生书信中的恒久问题。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "paris-review",
+    "name": "The Paris Review",
+    "url": "https://www.theparisreview.org/blog/",
+    "description": "作家访谈、书信与文学随笔。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "granta",
+    "name": "Granta",
+    "url": "https://granta.com/",
+    "description": "文学、纪实与世界隐秘角落的人类故事。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "laphams-quarterly",
+    "name": "Lapham’s Quarterly",
+    "url": "https://www.laphamsquarterly.org/",
+    "description": "用历史与文学回应古老而持续的话题。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "quillette",
+    "name": "Quillette",
+    "url": "https://quillette.com/",
+    "description": "文化、科学与思想史的独立长文讨论。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "longreads",
+    "name": "Longreads",
+    "url": "https://longreads.com/",
+    "description": "深度纪实、人物故事与非虚构长文。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "guernica",
+    "name": "Guernica",
+    "url": "https://www.guernicamag.com/",
+    "description": "艺术、政治与跨国个人叙事。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "the-millions",
+    "name": "The Millions",
+    "url": "https://themillions.com/",
+    "description": "书籍、作家与阅读生活的长文讨论。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "creative-nonfiction",
+    "name": "Creative Nonfiction",
+    "url": "https://creativenonfiction.org/",
+    "description": "用文学方法书写真实生活的非虚构写作。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "the-rumpus",
+    "name": "The Rumpus",
+    "url": "https://therumpus.net/",
+    "description": "个人情绪、文学反思与真实人生困境。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "hyperallergic",
+    "name": "Hyperallergic",
+    "url": "https://hyperallergic.com/",
+    "description": "当代艺术、文化与社会意识的文字批评。",
+    "category": "culture",
+    "pinned": false
+  },
+  {
+    "id": "kinfolk",
+    "name": "Kinfolk",
+    "url": "https://www.kinfolk.com/",
+    "description": "慢生活、社区、工作与日常美学。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "cereal",
+    "name": "Cereal",
+    "url": "https://readcereal.com/",
+    "description": "旅行、建筑与克制的城市生活美学。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "apartamento",
+    "name": "Apartamento",
+    "url": "https://www.apartamentomagazine.com/",
+    "description": "真实居住空间、创作者与生活痕迹。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "cabinet",
+    "name": "Cabinet",
+    "url": "https://cabinetmagazine.org/",
+    "description": "以严肃好奇心研究古怪日常细节。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "tiny-buddha",
+    "name": "Tiny Buddha",
+    "url": "https://tinybuddha.com/",
+    "description": "普通人面对焦虑、关系与低谷的故事。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "zen-habits",
+    "name": "Zen Habits",
+    "url": "https://zenhabits.net/",
+    "description": "极简、专注与退出过度忙碌的实践。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "craig-mod",
+    "name": "Craig Mod / Ridgeline",
+    "url": "https://craigmod.com/ridgeline/",
+    "description": "徒步、摄影、书籍与数字时代的慢观察。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "austin-kleon",
+    "name": "Austin Kleon",
+    "url": "https://austinkleon.com/blog/",
+    "description": "读书、剪报、创作与家庭生活的日常记录。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "paul-kingsnorth",
+    "name": "Paul Kingsnorth",
+    "url": "https://paulkingsnorth.substack.com/",
+    "description": "土地、灵性与现代技术生活的反思。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "kottke",
+    "name": "Kottke.org",
+    "url": "https://kottke.org/",
+    "description": "艺术、科学、历史与网络文化的老派精选。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "places-journal",
+    "name": "Places Journal",
+    "url": "https://placesjournal.org/",
+    "description": "建筑、景观与公共空间如何塑造生活。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "orion",
+    "name": "Orion Magazine",
+    "url": "https://orionmagazine.org/",
+    "description": "自然、文化与人类居住地的文学写作。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "grist",
+    "name": "Grist",
+    "url": "https://grist.org/",
+    "description": "气候、社区与可持续生活的真实故事。",
+    "category": "life",
+    "pinned": false
+  },
+  {
+    "id": "tom-critchlow",
+    "name": "Tom Critchlow",
+    "url": "https://tomcritchlow.com/",
+    "description": "独立工作、数字花园与有尊严的职业生活。",
+    "category": "life",
+    "pinned": false
+  }
+]
