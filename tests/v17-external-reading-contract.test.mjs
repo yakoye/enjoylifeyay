@@ -37,3 +37,13 @@ test('v0.17 阅读维护文档说明如何置顶与新增站外专题', async ()
   assert.match(maintenance, /pinned/);
   assert.match(maintenance, /站外专题/);
 });
+
+
+test('v0.17.1 站外专题描述保留可记忆的单句提示', async () => {
+  const sites = JSON.parse(await read('src/content/reading-sites.json'));
+  assert.ok(sites.every((site) => site.description.length >= 16), '每个站点需要有足够辨识度的一句话说明');
+  assert.ok(sites.every((site) => site.description.length <= 48), '站外专题描述应控制在桌面端尽量一行显示的长度');
+  for (const required of ['聚合理论', '太阳能供电', 'BBS 时代', '日本古道', '一分钟短文']) {
+    assert.match(sites.map((site) => site.description).join('\n'), new RegExp(required));
+  }
+});
