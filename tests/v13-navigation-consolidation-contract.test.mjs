@@ -21,11 +21,11 @@ test('v0.13 provides consolidated technology reading life routes and preserves o
   }
 
   const redirects = [
-    ['src/pages/writing/index.astro', '/technology/'],
+    ['src/pages/writing/index.astro', '/technology/#technical-writing'],
     ['src/pages/series/index.astro', '/technology/#technology-series'],
-    ['src/pages/bookshelf/index.astro', '/reading/#bookshelf'],
-    ['src/pages/favorites/index.astro', '/tools/#references'],
-    ['src/pages/projects/index.astro', '/tools/#projects'],
+    ['src/pages/bookshelf/index.astro', '/reading/'],
+    ['src/pages/favorites/index.astro', '/tools/#historical-sources'],
+    ['src/pages/projects/index.astro', '/tools/#diy-projects'],
   ];
   for (const [path, target] of redirects) {
     const source = await readFile(file(path), 'utf8');
@@ -33,11 +33,11 @@ test('v0.13 provides consolidated technology reading life routes and preserves o
   }
 });
 
-test('v0.13 merges references and standalone projects into tools without adding a separate public project menu', async () => {
+test('v0.13 merges project presentation into tools without adding a separate public project menu', async () => {
   const toolsPage = await readFile(file('src/pages/tools/index.astro'), 'utf8');
-  assert.match(toolsPage, /getCollection\('favorites'/);
-  assert.match(toolsPage, /长期收藏与参考/);
-  assert.match(toolsPage, /个人系统与长期项目/);
-  assert.match(toolsPage, /id: 'references'/);
-  assert.match(toolsPage, /'personal-system', '个人系统与长期项目', 'projects'/);
+  assert.match(toolsPage, /自己 DIY 项目/);
+  assert.match(toolsPage, /Chrome 扩展与网页工具/);
+  assert.match(toolsPage, /历史内容来源/);
+  assert.match(toolsPage, /id: 'historical-sources'/);
+  assert.match(toolsPage, /'diy-project', '自己 DIY 项目', 'diy-projects'/);
 });

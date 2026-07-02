@@ -4,8 +4,13 @@ import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('series', ({ data }) => !data.draft);
-  return entries.map((entry) => ({ params: { id: entry.data.id } }));
+  const [seriesEntries, writingEntries] = await Promise.all([
+    getCollection('series', ({ data }) => !data.draft),
+    getCollection('writing', ({ data }) => !data.draft),
+  ]);
+  return seriesEntries
+    .filter((series) => writingEntries.some((entry) => entry.data.series.includes(series.data.id)))
+    .map((entry) => ({ params: { id: entry.data.id } }));
 }
 
 const { id } = Astro.params;
@@ -28,7 +33,6 @@ const sectionHref = series.data.id.startsWith('life-')
   <h1>{series.data.title}</h1>
   <p class="page-intro">{series.data.description}</p>
   {series.data.audience && <p class="meta-muted">适合：{series.data.audience}</p>}
-  <h2>文章</h2>
   <WritingList entries={writing} />
   <p class="aux-links"><a href={sectionHref}>返回对应栏目</a></p>
 </BaseLayout>

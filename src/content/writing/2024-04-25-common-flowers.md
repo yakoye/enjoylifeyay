@@ -3,15 +3,15 @@ title: "常见植物的花"
 description: "记录春季常见花木的辨别线索，包括杏、梅、梨、桃、樱、李与海棠。"
 date: 2024-04-25
 updated: null
-source: EnjoyLifeBlog
-sourceUrl: "https://globetreklog.github.io/EnjoyLifeBlog/2024/04/25/%E5%B8%B8%E8%A7%81%E6%A4%8D%E7%89%A9%E7%9A%84%E8%8A%B1/"
-migratedAt: 2026-07-01
+source: native
+sourceUrl: ""
+migratedAt: null
 domain: nature
 format: "observation"
 topics: ["植物", "城市观察"]
 tags: ["植物", "春天"]
 series: ["nature-walking"]
-legacy: true
+legacy: false
 cover: ""
 coverAlt: ""
 mediaKey: "legacy-2024-04-25-common-flowers"
@@ -20,11 +20,11 @@ featured: false
 ---
 ## 花的结构
 
-![image-20240425170046975](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240425170046975.jpg)
+![image-20240425170046975](/images/articles/legacy-2024-04-25-common-flowers/image-ad3bb1ed8502fed7.jpg)
 
 ## 辨别方法
 
-![梅杏桃樱李梨棠](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/梅杏桃樱李梨棠.png)
+![梅杏桃樱李梨棠](/images/articles/legacy-2024-04-25-common-flowers/image-b9266d3130079271.png)
 
 ## 杏花
 
@@ -35,7 +35,7 @@ featured: false
 - 初开时花瓣会带一些浅红色，花萼深红色，枝条深红褐色
 
 
-![image-20240425173048307](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240425173048307.jpg)
+![image-20240425173048307](/images/articles/legacy-2024-04-25-common-flowers/image-ac5690b4469f2535.jpg)
 
 ## 梅花
 
@@ -44,7 +44,7 @@ featured: false
 - 花落后再长叶，花期1-3月。
 - 凑近闻一般都有梅子的香味。
 
-![image-20240425174624754](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240425174624754.jpg)
+![image-20240425174624754](/images/articles/legacy-2024-04-25-common-flowers/image-868553be719a2d9a.jpg)
 
 
 
@@ -56,9 +56,9 @@ featured: false
 
 - 花和叶子都比较大，边开花边长叶子
 
-  ![image-20240425180444858](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240425180444858.jpg)
+  ![image-20240425180444858](/images/articles/legacy-2024-04-25-common-flowers/image-3a2d9d109453d713.jpg)
 
-![image-20240426165831899](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240426165831899.jpg)
+![image-20240426165831899](/images/articles/legacy-2024-04-25-common-flowers/image-082c741d722efdb9.jpg)
 
 ## 桃花
 
@@ -70,7 +70,7 @@ featured: false
 
 - 树皮光滑，暗紫色
 
-  ![image-20240425201024558](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240425201024558.jpg)
+  ![image-20240425201024558](/images/articles/legacy-2024-04-25-common-flowers/image-b78a40f5e34ee98b.jpg)
 
 
 
@@ -84,9 +84,9 @@ featured: false
 
 - 晚樱树皮多为银灰色
 
-![image-20240425192514809](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240425192514809.jpg)
+![image-20240425192514809](/images/articles/legacy-2024-04-25-common-flowers/image-4706a4d7ab44ef89.jpg)
 
-![image-20240425193150888](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240425193150888.jpg)
+![image-20240425193150888](/images/articles/legacy-2024-04-25-common-flowers/image-bf512e16be02b6e4.jpg)
 
 
 
@@ -96,9 +96,9 @@ featured: false
 - 开花同时长叶，花期仲春（3-4月）。
 - 花瓣洁白，花蕊浅黄。
 
-![image-20240426175606582](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240426175606582.jpg)
+![image-20240426175606582](/images/articles/legacy-2024-04-25-common-flowers/image-78e000f6af4fdbf4.jpg)
 
-![李花](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/640.webp)
+![李花](/images/articles/legacy-2024-04-25-common-flowers/image-bce2fc393cc6da84.webp)
 
 ## 山楂花
 
@@ -111,7 +111,7 @@ featured: false
 - 叶片较大，有锯齿状的边缘，与花朵同时生长。
 
 
-![image-20240426175419153](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240426175419153.jpg)
+![image-20240426175419153](/images/articles/legacy-2024-04-25-common-flowers/image-60004bcc2186c087.jpg)
 
 
 
@@ -123,7 +123,7 @@ featured: false
 - 开花同时长叶。
 - 花瓣具有由红到粉，粉到白的层次渐变。
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/1124176039_15513374727801n.jpg)
+![img](/images/articles/legacy-2024-04-25-common-flowers/image-50e6459c17ab2753.jpg)
 
 ### 垂丝海棠
 
@@ -131,7 +131,7 @@ featured: false
 - 花期3-4月。
 - 叶片卵形或椭圆形，花梗细弱下垂，粉红色。
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/1124176039_15513374812711n.jpg)
+![img](/images/articles/legacy-2024-04-25-common-flowers/image-6adc5beb7d114054.jpg)
 
 ### 贴梗海棠
 
@@ -139,7 +139,7 @@ featured: false
 - 花先叶开放，花朵簇生。
 - 花梗短粗，花瓣倒卵形或近圆形，猩红色，稀淡红色或白色。
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/1124176039_15513374881901n.jpg)
+![img](/images/articles/legacy-2024-04-25-common-flowers/image-612a59cd1d9412e4.jpg)
 
 ### 木瓜海棠
 
@@ -147,7 +147,7 @@ featured: false
 - 花先叶开放,- 瓣倒卵形或近圆形,淡红色或白色。
 - 花期3-5月。
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/1124176039_15513374951251n.jpg)
+![img](/images/articles/legacy-2024-04-25-common-flowers/image-f422dbba0aae11f7.jpg)
 
 
 
@@ -175,21 +175,21 @@ featured: false
 
 迎春花 ▼
 
-![迎春花](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/202.jpg)
+![迎春花](/images/articles/legacy-2024-04-25-common-flowers/image-dd9b36ea0041d1b7.jpg)
 
 金钟花 ▼
 
-![金钟花](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240426163250834.jpg)
+![金钟花](/images/articles/legacy-2024-04-25-common-flowers/image-79148c1a3b9e1264.jpg)
 
 连翘花 ▼
 
-![连翘花](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/206.jpg)
+![连翘花](/images/articles/legacy-2024-04-25-common-flowers/image-3711822dbb039d2f.jpg)
 
-![image-20240426160334204](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240426160334204.jpg)
+![image-20240426160334204](/images/articles/legacy-2024-04-25-common-flowers/image-2cd41a849347d62b.jpg)
 
 探春花 ▼
 
-![探春花image-20240426155653811](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-25-常见植物的花.assets/image-20240426155653811.jpg)
+![探春花image-20240426155653811](/images/articles/legacy-2024-04-25-common-flowers/image-fb4079e7c2a82b40.jpg)
 
 
 

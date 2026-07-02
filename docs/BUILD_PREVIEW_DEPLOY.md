@@ -300,7 +300,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\reset-local.ps1 -StopAllNode
 
 新文章图片默认进入 `public/images/`，构建后会进入 `dist/images/`，并随 Wrangler 发布到 Cloudflare Pages；运行时访客不会从 GitHub raw URL 下载这些图片。
 
-已迁入旧 EnjoyLifeBlog 文章仍使用旧图时，先预览迁移计划：
+已迁入旧 旧个人站 文章仍使用旧图时，先预览迁移计划：
 
 ```powershell
 npm run import:legacy-images -- --dry-run
@@ -353,3 +353,20 @@ npm run comments:probe -- pcie-msi-msix-introduction
 ### Windows 路径说明（v0.11.3）
 
 `npm test` 与 `npm run audit:toc` 已使用跨平台的 `fileURLToPath()` 处理文章目录。若你看到 `C:\C:\Users\...` 这种重复盘符错误，说明仍在使用 v0.11.2 或更早版本的测试/审计脚本；请覆盖 `tests/v10-comments-toc-contract.test.mjs` 与 `scripts/audit-writing-toc.mjs`，或直接使用 v0.11.3。
+
+## v0.15：首次下载旧文章本地图片
+
+第一次升级到 v0.15 时，在项目根目录执行：
+
+```powershell
+.\preview-local.cmd -FetchLegacyAssets
+```
+
+或手动执行：
+
+```powershell
+npm run fetch:legacy-assets
+npm run verify:legacy-assets
+```
+
+图片下载完成后会存到 `public/images/articles/`，正式部署不会再向已退役的旧个人站请求图片。

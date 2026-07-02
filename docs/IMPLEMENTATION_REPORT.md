@@ -262,3 +262,90 @@ npm run check:links
 ```
 
 结果：Astro check 0 errors / 0 warnings；38 项测试通过；13 篇公开写作均可生成目录；构建与内部链接检查通过。
+
+
+## v0.14 内容去重与栏目整理
+
+### 修改文件
+
+- `src/pages/tools/index.astro`
+- `src/pages/technology/index.astro`
+- `src/pages/reading/index.astro`
+- `src/pages/life/index.astro`
+- `src/pages/series/[id].astro`
+- `src/content/tools.json`
+- `src/content/favorites.json`
+- `src/content.config.ts`
+- `src/data/now.ts`
+
+### 已完成功能
+
+- 阅读页只展示公开阅读文章，取消书架与专题的重复展示。
+- 技术页和专题详情页不再输出无公开文章的空专题链接。
+- 工具页把 DIY 项目、Chrome 扩展、PCIe 工具、记录工具、资料库分开；生活类网站移到生活页。
+- 删除旧 旧个人站 的站点与源码仓库两个重复历史收藏条目。
+- Rich Editor 与 quick_note_richtext 分别采用直接渲染 HTML 的工具入口，并保留源码链接字段。
+
+### 内容迁移
+
+历史来源保留 CSDN 与知乎入口；旧 旧个人站 原文来源继续通过已迁入文章的 `sourceUrl` 保留，不再作为工具页重复收藏。
+
+### 待人工确认
+
+- 继续逐篇确认 CSDN、知乎与旧博客文章的正文、版权和图片。
+- 新增技术文章后，按 Frontmatter 关联对应专题。
+
+### 已知问题
+
+- 未发布的扩展没有公开 URL，因此只展示名称和说明。
+
+### Cloudflare Pages
+
+- 继续从项目根目录使用 `npx wrangler pages deploy dist --project-name enjoylifeyay --branch main` 部署。
+
+## v0.14.1 reliability fix
+
+- The v0.14 test suite no longer treats a stale, unreferenced `src/content/projects.json` file as a verification failure after a Windows zip-overlay upgrade. Astro content integration remains removed; `/projects/` continues to redirect to `/tools/#diy-projects`.
+- `preview-local.cmd -Install` now invokes the cleanup script automatically before `npm ci`, stops stale Node processes, and retries generated-directory removal to reduce Windows Rollup/Rolldown `EPERM` failures.
+
+
+## v0.15：旧文章本地化与公开隔离
+
+### 修改文件
+
+- `src/content/writing/`：旧个人文章统一改为本站本地文章，补齐两篇旧生活笔记，公开原先草稿条目；
+- `src/layouts/ArticleLayout.astro`：文章页只显示本站发布日期与修订日期；
+- `src/styles/tokens.css`、`src/styles/global.css`：同步字体栈、代码块明暗主题背景、文章标题全宽；
+- `scripts/fetch-legacy-assets.mjs`、`scripts/verify-legacy-assets.mjs`：一次性下载与核验本地图片；
+- `scripts/verify-public-content-private.mjs`：构建前检查公开内容不泄露已退役旧站标识；
+- `scripts/sync-legacy-archive.mjs`：归档仅保留本站与 CSDN 历史条目，并移除 C语言速查。
+
+### 已完成功能
+
+- 旧个人站的 14 篇文章都已本地化到 `src/content/writing/`；
+- 文章中不再显示旧站来源、原文按钮和迁入日期；
+- 旧图片路径统一改为本站 `/images/articles/` 路径；
+- 标题可用完整正文宽度，不再受 `22em` 人为限制；
+- 代码块在浅色主题使用 `#f6f8fa`，深色主题使用 `#202124`。
+
+### 内容迁移
+
+本地图片需要在可访问旧图网络的环境中运行一次 `npm run fetch:legacy-assets`。下载完成后，将 `public/images/articles/` 提交到 GitHub；私有下载清单已被 `.gitignore` 排除。
+
+### 待人工确认
+
+CSDN 与知乎文章仍按迁移台账逐条确认。
+
+### 已知问题
+
+本发布包不预装历史图片二进制文件；在执行图片下载前，本地预览可打开，但相应旧文图片会缺失。请先使用 `./preview-local.cmd -FetchLegacyAssets` 完成一次下载。
+
+### Cloudflare Pages
+
+图片下载完成并提交后，Pages 会把 `public/images/articles/` 作为静态资源部署；访问者不会再请求已退役旧个人站。
+
+## v0.16：ZPark 骑跑两项记录
+
+- 新增 2020-10-31 生活 / 运动文章《中关村软件园 ZPark 骑跑两项第一名》。
+- 文章同时归入骑行、跑步两个专题。
+- 使用用户提供的本地 WebP 图片，放入稳定的 `mediaKey` 图片目录。

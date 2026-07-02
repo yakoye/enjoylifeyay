@@ -1,29 +1,48 @@
 ---
 import { getCollection } from 'astro:content';
+import DirectoryList from '../../components/DirectoryList.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const allLifeWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'life'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const groups = [
-  { id: 'life-notes', title: '生活与思考', seriesId: '' },
-  { id: 'cycling', title: '骑行', seriesId: 'life-cycling' },
-  { id: 'running', title: '跑步', seriesId: 'life-running' },
-].map((group) => ({
-  ...group,
-  entries: allLifeWriting.filter((entry) => group.seriesId ? entry.data.series.includes(group.seriesId) : entry.data.series.length === 0),
-}));
+const tools = await getCollection('tools', ({ data }) => !data.draft);
+type DirectoryItem = { title: string; description: string; href?: string };
+const toolItem = (id: string): DirectoryItem | null => {
+  const entry = tools.find((item) => item.data.id === id);
+  if (!entry) return null;
+  return { title: entry.data.name, description: entry.data.description, href: entry.data.url || undefined };
+};
+const isDirectoryItem = (item: DirectoryItem | null): item is DirectoryItem => item !== null;
+const dining = [toolItem('litebites')].filter(isDirectoryItem);
+const galleryAndFamily = [toolItem('familyjourney')].filter(isDirectoryItem);
+const sportSites = [toolItem('fitjourney')].filter(isDirectoryItem);
+const sportWriting = allLifeWriting.filter((entry) => entry.data.series.includes('life-cycling') || entry.data.series.includes('life-running'));
+const lifeNotes = allLifeWriting.filter((entry) => !entry.data.series.includes('life-cycling') && !entry.data.series.includes('life-running'));
 ---
 
-<BaseLayout title="生活" description="生活、骑行、跑步与持续变化的记录。">
+<BaseLayout title="生活" description="饮食、影集、运动与日常生活里的长期记录。">
   <h1>生活</h1>
-  <p class="page-intro">生活、骑行、跑步与持续变化的记录。</p>
+  <p class="page-intro">饮食、影集、运动与日常生活里的长期记录。</p>
 
-  {groups.filter((group) => group.entries.length > 0).map((group) => (
-    <section id={group.id} aria-labelledby={`${group.id}-heading`}>
-      <h2 id={`${group.id}-heading`}>{group.title}</h2>
-      <WritingList entries={group.entries} />
-    </section>
-  ))}
+  {dining.length > 0 && <section id="food" aria-labelledby="life-food">
+    <h2 id="life-food">饮食</h2>
+    <DirectoryList groups={[{ items: dining }]} />
+  </section>}
+
+  {galleryAndFamily.length > 0 && <section id="gallery" aria-labelledby="life-gallery">
+    <h2 id="life-gallery">影集与家庭</h2>
+    <DirectoryList groups={[{ items: galleryAndFamily }]} />
+  </section>}
+
+  <section id="sport" aria-labelledby="life-sport">
+    <h2 id="life-sport">运动</h2>
+    {sportSites.length > 0 && <DirectoryList groups={[{ items: sportSites }]} />}
+    <WritingList entries={sportWriting} />
+  </section>
+
+  {lifeNotes.length > 0 && <section id="life-notes" aria-labelledby="life-notes-heading">
+    <h2 id="life-notes-heading">生活与思考</h2>
+    <WritingList entries={lifeNotes} />
+  </section>}
 </BaseLayout>

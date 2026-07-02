@@ -29,9 +29,9 @@ const sourceGroups = legacySourceLinks.length ? [{
 }] : [];
 ---
 
-<BaseLayout title="存档" description="按首次发布日期汇总本站文章、旧博客与 CSDN 历史文章。">
+<BaseLayout title="存档" description="按首次发布日期汇总本站文章与历史技术记录。">
   <h1>存档</h1>
-  <p class="page-intro">按首次发布日期汇总。蓝色标题会打开本站文章或原始发布页面；已迁入本站的旧文不会重复显示。</p>
+  <p class="page-intro">按首次发布日期汇总。本站文章直接打开正文；尚未迁入的历史技术条目保留原始发布页。</p>
   <ArchiveTimeline items={archiveItems} />
   {sourceGroups.length > 0 && <DirectoryList groups={sourceGroups} />}
 </BaseLayout>

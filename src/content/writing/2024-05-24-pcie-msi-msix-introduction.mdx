@@ -3,15 +3,15 @@ title: "PCIe MSI / MSI-X：Capability、Table 与 Linux 驱动接口"
 description: "从 MSI/MSI-X 的消息写中断机制、Capability 布局到 Linux PCI IRQ 接口的整理；同时用于验证本站图片、表格、代码与目录排版。"
 date: 2024-05-24
 updated: null
-source: EnjoyLifeBlog
-sourceUrl: "https://globetreklog.github.io/EnjoyLifeBlog/2024/05/24/PCIe-MSI-MSIX%E7%AE%80%E4%BB%8B/"
-migratedAt: 2026-07-01
+source: native
+sourceUrl: ""
+migratedAt: null
 domain: technology
 format: "article"
 topics: ["PCIe", "Interrupt", "Linux"]
 tags: ["PCIe", "MSI", "MSI-X", "Linux"]
 series: ["pcie-high-speed-interconnect", "chip-firmware-soc"]
-legacy: true
+legacy: false
 cover: ""
 coverAlt: ""
 mediaKey: "pcie-msi-msix-introduction"
@@ -21,7 +21,7 @@ featured: true
 
 import Figure from '../../components/Figure.astro';
 
-> 这篇内容从旧 EnjoyLifeBlog 迁入，保留原始发布日期与原文入口。旧文中已经标注参考了其他资料；本页作为重新整理和格式验证版本，关键设计应以 PCIe 规范、Linux 内核源码和具体平台实现为准。
+> 本页保留 2024 年的首次发布日期，并作为本站用于验证图片、表格、代码与目录排版的技术文章。关键设计应以 PCIe 规范、Linux 内核源码和具体平台实现为准。
 
 ## MSI / MSI-X 的基本思路
 
@@ -44,7 +44,7 @@ MSI Capability 的 Capability ID 为 `0x05`。它保存 Message Control、Messag
   src="/images/articles/pcie-msi-msix-introduction/msi-capability-32bit.png"
   alt="32 位 Message Address 形式的 MSI Capability 结构图"
   caption="MSI Capability：32 位 Message Address 与 Per-Vector Masking 形式。"
-  credit="图源：旧 EnjoyLifeBlog 文章资源"
+  credit=""
 />
 
 ### Message Control 的关键位
@@ -53,7 +53,7 @@ MSI Capability 的 Capability ID 为 `0x05`。它保存 Message Control、Messag
   src="/images/articles/pcie-msi-msix-introduction/msi-message-control.png"
   alt="MSI Message Control 寄存器的关键位示意"
   caption="Message Control 中的 MSI Enable、Multiple Message Capable、Multiple Message Enable 等字段。"
-  credit="图源：旧 EnjoyLifeBlog 文章资源"
+  credit=""
 />
 
 - `MSI Enable`：控制 MSI 是否启用。
@@ -70,7 +70,7 @@ MSI-X Capability 的 Capability ID 为 `0x11`。它不把每个向量的 Message
   src="/images/articles/pcie-msi-msix-introduction/msix-capability.png"
   alt="MSI-X Capability 结构图，包含 Table 和 PBA 的 BIR 及 Offset"
   caption="MSI-X Capability：Table 与 Pending Bit Array 的位置由 BIR 和 Offset 描述。"
-  credit="图源：旧 EnjoyLifeBlog 文章资源"
+  credit=""
 />
 
 ### MSI-X Table Entry
@@ -81,7 +81,7 @@ MSI-X Capability 的 Capability ID 为 `0x11`。它不把每个向量的 Message
   src="/images/articles/pcie-msi-msix-introduction/msix-table.png"
   alt="MSI-X Table Entry 的连续布局图"
   caption="MSI-X Table：每个 Entry 包含 Message Address、Message Data 与 Vector Control。"
-  credit="图源：旧 EnjoyLifeBlog 文章资源"
+  credit=""
 />
 
 ## 如何用 lspci 确认能力

@@ -3,27 +3,27 @@ title: "《额尔古纳河右岸》读书笔记"
 description: "阅读迟子建《额尔古纳河右岸》时，对人物、叙事与自然环境的记录。"
 date: 2022-09-11
 updated: null
-source: EnjoyLifeBlog
-sourceUrl: "https://globetreklog.github.io/EnjoyLifeBlog/2022/09/11/%E9%A2%9D%E5%B0%94%E5%8F%A4%E7%BA%B3%E6%B2%B3%E5%8F%B3%E5%B2%B8_%E8%BF%9F%E5%AD%90%E5%BB%BA/"
-migratedAt: 2026-07-01
+source: native
+sourceUrl: ""
+migratedAt: null
 domain: reading
 format: "article"
 topics: ["读书笔记", "文学"]
 tags: ["读书笔记", "文学"]
 series: ["reading-learning"]
-legacy: true
+legacy: false
 cover: ""
 coverAlt: ""
 mediaKey: "legacy-2022-09-11-last-quarter-moon"
 draft: false
 featured: false
 ---
-![额尔古纳河](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/meilizhongguo-eergunahe.jpg)
+![额尔古纳河](/images/articles/legacy-2022-09-11-last-quarter-moon/image-5729058f05da3feb.jpg)
 
-![额尔古纳河](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/meilizhongguo-eergunahe-yangqun.jpg)
-![额尔古纳河](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/meilizhongguo-eergunahe-jinse.jpg)
+![额尔古纳河](/images/articles/legacy-2022-09-11-last-quarter-moon/image-9c0a1697063e2cd8.jpg)
+![额尔古纳河](/images/articles/legacy-2022-09-11-last-quarter-moon/image-9e1e87048c7e4727.jpg)
 
-![图鄂温克族特色驯鹿群、雪地、树林](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906380.webp)
+![图鄂温克族特色驯鹿群、雪地、树林](/images/articles/legacy-2022-09-11-last-quarter-moon/image-701121311c93c44d.webp)
 
 
 
@@ -33,7 +33,7 @@ featured: false
 
 ‍
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7899727.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-3cab5cce613fd6f0.webp)
 
 
 
@@ -59,16 +59,16 @@ featured: false
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906388.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-af624dc00e3b5793.webp)
 
 桦树皮的希楞柱
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906385.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-d9774410bcb9f6c4.webp)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906389.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-6b76184715e75f6d.webp)
 
 
 
@@ -94,13 +94,13 @@ featured: false
 
 ‍
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906390.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-b783690f8694fce6.webp)
 
 靠老宝
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906391.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-c05d744012b9150e.webp)
 
 靠老宝
 
@@ -116,19 +116,19 @@ featured: false
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906392.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-8d393456f5554485.webp)
 
 驯鹿、苔藓(石蕊)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906393.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-cd8b764c231f053b.webp)
 
 驯鹿脱茸
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906396.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-b7d83d4a71ce984b.webp)
 
 驯鹿脱茸
 
@@ -158,13 +158,13 @@ featured: false
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906401.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-0668fd554331d98b.webp)
 
 桦树皮工艺品
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906402.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-8ec3c3084bf3cb45.webp)
 
 桦树皮工艺品
 
@@ -182,13 +182,13 @@ featured: false
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906405.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-50cde7b361ff591d.webp)
 
 取白桦树汁
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/p7906404.webp)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-51992d5132f06071.webp)
 
 白桦树汁
 
@@ -358,7 +358,7 @@ featured: false
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/额尔古纳河右岸-人物关系图谱-不含结局.drawio.png)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-7ab3ff1b2e0d25d5.png)
 
 
 
@@ -366,7 +366,7 @@ featured: false
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/额尔古纳河右岸_迟子建.assets/额尔古纳河右岸-人物关系图谱-含结局.drawio.png)
+![img](/images/articles/legacy-2022-09-11-last-quarter-moon/image-2a1a0032d6067bd4.png)
 
 
 

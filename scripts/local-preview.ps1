@@ -11,7 +11,10 @@ param(
   [switch]$NoPreview,
 
   # Start the server but do not launch the default browser.
-  [switch]$NoBrowser
+  [switch]$NoBrowser,
+
+  # Download one-time local copies of migrated legacy images before verification.
+  [switch]$FetchLegacyAssets
 )
 
 $ErrorActionPreference = 'Stop'
@@ -112,16 +115,34 @@ if ($nodeVersion -notmatch '^v24\.') {
 }
 
 # A normal content edit does not need another npm ci. The script installs automatically
-# on first use and can be forced with -Install after dependency changes.
+# on first use and can be forced with -Install after dependency changes. Forced installs
+# first stop stale Node processes and remove generated directories to avoid Windows EPERM
+# failures when npm tries to replace Rollup/Rolldown native bindings.
+if ($Install) {
+  $resetScript = Join-Path $PSScriptRoot 'reset-local.ps1'
+  Write-Host 'Preparing a clean dependency install ...' -ForegroundColor Cyan
+  try {
+    & $resetScript -StopAllNode
+  } catch {
+    throw "Could not clean old local dependencies. $($_.Exception.Message)"
+  }
+}
+
 if ($Install -or -not (Test-Path $astroBinary)) {
   Write-Host 'Installing dependencies with npm ci ...'
   try {
     Invoke-NpmCommand @('ci')
   } catch {
-    throw "npm ci failed. If Windows reports EPERM / rollup / rolldown file locking, run: powershell -ExecutionPolicy Bypass -File .\\scripts\\reset-local.ps1 -StopAllNode ; then rerun this script with -Install. Details: $($_.Exception.Message)"
+    throw "npm ci failed after cleanup. If Windows still reports EPERM / rollup / rolldown file locking, close VS Code and File Explorer windows that opened the project, reboot Windows, then rerun .\preview-local.cmd -Install. Details: $($_.Exception.Message)"
   }
 } else {
   Write-Host 'Dependencies already exist; skipping npm ci. Use -Install to force a clean install.'
+}
+
+if ($FetchLegacyAssets) {
+  Write-Host ''
+  Write-Host 'Downloading localized legacy article images ...' -ForegroundColor Cyan
+  Invoke-NpmCommand @('run', 'fetch:legacy-assets')
 }
 
 Write-Host ''
@@ -129,6 +150,12 @@ Write-Host 'Running local verification ...' -ForegroundColor Cyan
 Invoke-NpmCommand @('run', 'check')
 Invoke-NpmCommand @('test')
 Invoke-NpmCommand @('run', 'audit:toc')
+Invoke-NpmCommand @('run', 'verify:public-content')
+try {
+  Invoke-NpmCommand @('run', 'verify:legacy-assets')
+} catch {
+  Write-Warning 'Localized legacy images are not complete yet. The preview can still open, but do not deploy before running: npm run fetch:legacy-assets'
+}
 Invoke-NpmCommand @('run', 'build')
 Invoke-NpmCommand @('run', 'check:links')
 

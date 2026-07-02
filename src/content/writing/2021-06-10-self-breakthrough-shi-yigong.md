@@ -3,22 +3,22 @@ title: "《自我突围》：施一公"
 description: "阅读《自我突围》时，对书中人物经历与家族脉络所作的整理。"
 date: 2021-06-10
 updated: null
-source: EnjoyLifeBlog
-sourceUrl: "https://globetreklog.github.io/EnjoyLifeBlog/2021/06/10/%E8%87%AA%E6%88%91%E7%AA%81%E5%9B%B4_%E6%96%BD%E4%B8%80%E5%85%AC/"
-migratedAt: 2026-07-01
+source: native
+sourceUrl: ""
+migratedAt: null
 domain: reading
 format: "article"
 topics: ["读书笔记", "人物"]
 tags: ["读书笔记", "人物"]
 series: ["reading-learning"]
-legacy: true
+legacy: false
 cover: ""
 coverAlt: ""
 mediaKey: "legacy-2021-06-10-self-breakthrough"
 draft: false
 featured: false
 ---
-![自我突围》向理想前行 西湖大学校长、中国科学院院士施一公](https://globetreklog.github.io/EnjoyLifeBlog/img/2021-06-10-自我突围_施一公.assets/ziwotuwei.jpg)
+![自我突围》向理想前行 西湖大学校长、中国科学院院士施一公](/images/articles/legacy-2021-06-10-self-breakthrough/image-5cbf78a1411dd706.jpg)
 
 
 

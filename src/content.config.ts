@@ -18,7 +18,7 @@ const writing = defineCollection({
     description: z.string().min(1),
     date,
     updated: optionalDate,
-    source: z.enum(['native', 'CSDN', 'Zhihu', 'EnjoyLifeBlog']).default('native'),
+    source: z.enum(['native', 'CSDN', 'Zhihu']).default('native'),
     sourceUrl: optionalUrl,
     migratedAt: optionalDate,
     domain: z.enum(['technology', 'reading', 'life', 'nature', 'tool']),
@@ -55,31 +55,13 @@ const tools = defineCollection({
     id: z.string(),
     name: z.string(),
     description: z.string(),
-    category: z.enum(['pcie-hardware', 'browser-extension', 'writing-media', 'websites-life', 'knowledge-library', 'personal-system']),
+    category: z.enum(['pcie-hardware', 'browser-extension', 'writing-media', 'websites-life', 'knowledge-library', 'diy-project']),
+    order: z.number().int().nonnegative().default(0),
     status: z.enum(['available', 'development', 'archived', 'link-pending']),
     url: optionalUrl,
     githubUrl: optionalUrl,
     articles: z.array(z.string()).default([]),
     project: z.string().default(''),
-    ...common,
-  }),
-});
-
-const projects = defineCollection({
-  loader: file('src/content/projects.json'),
-  schema: z.object({
-    id: z.string(),
-    name: z.string(),
-    description: z.string(),
-    status: z.enum(['active', 'development', 'archived', 'private', 'link-pending']),
-    category: z.enum(['browser-extension', 'web-tool', 'knowledge-library', 'private']).default('web-tool'),
-    startedAt: optionalDate,
-    techStack: z.array(z.string()).default([]),
-    url: optionalUrl,
-    githubUrl: optionalUrl,
-    versions: z.array(z.string()).default([]),
-    articles: z.array(z.string()).default([]),
-    tools: z.array(z.string()).default([]),
     ...common,
   }),
 });
@@ -117,4 +99,4 @@ const favorites = defineCollection({
   ]),
 });
 
-export const collections = { writing, series, tools, projects, nature, books, favorites };
+export const collections = { writing, series, tools, nature, books, favorites };

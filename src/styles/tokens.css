@@ -9,17 +9,17 @@
   --nav-height: 48px;
 
   --font-mono:
+    "Noto Sans SC",
+    "Maple Mono NL NF CN",
+    "Microsoft YaHei UI",
+    "Consolas",
+    "PingFang SC",
     "Sarasa Mono SC",
-    "Maple Mono SC",
     "Cascadia Mono",
     "JetBrains Mono",
     "SFMono-Regular",
     "Menlo",
-    "Consolas",
     "Liberation Mono",
-    "Microsoft YaHei UI",
-    "PingFang SC",
-    "Noto Sans SC",
     monospace;
 
   --font-page-title: 1.625rem;
@@ -50,8 +50,8 @@
   --rule-color: #dfdfda;
   --link: #064fb0;
   --link-hover: #003b86;
-  --code-background: #eef1f4;
-  --inline-code-background: #e7ebef;
+  --code-background: #f6f8fa;
+  --inline-code-background: #eef1f4;
   --quote-rule: #9c9c96;
 }
 
@@ -64,8 +64,8 @@
   --rule-color: #323232;
   --link: #86bfff;
   --link-hover: #afd7ff;
-  --code-background: #1d2228;
-  --inline-code-background: #262c33;
+  --code-background: #202124;
+  --inline-code-background: #2b2d31;
   --quote-rule: #77756f;
 }
 

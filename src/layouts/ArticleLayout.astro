@@ -13,7 +13,6 @@ const { data } = entry;
 const isMeaningfulDate = (value?: Date | null): value is Date => Boolean(value && !Number.isNaN(value.valueOf()) && value.valueOf() !== 0);
 const formatDate = (value?: Date | null) => isMeaningfulDate(value) ? value.toISOString().slice(0, 10) : '';
 const updatedAt = isMeaningfulDate(data.updated) ? data.updated : undefined;
-const sourceLabels = { native: '本站', CSDN: 'CSDN', Zhihu: '知乎', EnjoyLifeBlog: 'EnjoyLifeBlog' } as const;
 const domainRoutes = { technology: '/technology/', reading: '/reading/', life: '/life/', nature: '/nature/', tool: '/tools/' } as const;
 const toc = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
 const allSeries = await getCollection('series', ({ data }) => !data.draft);
@@ -45,11 +44,8 @@ const jsonLd = {
         </div>
       )}
       <div class="article-meta">
-        <span>{data.source === 'native' ? '发布' : '首次发布'}：{formatDate(data.date)}</span>
-        {data.source !== 'native' && <span>来源：{sourceLabels[data.source]}</span>}
-        {data.migratedAt && <span>迁入本站：{formatDate(data.migratedAt)}</span>}
+        <span>发布：{formatDate(data.date)}</span>
         {updatedAt && <span>最后修订：{formatDate(updatedAt)}</span>}
-        {data.sourceUrl && <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer">原文</a>}
       </div>
     </header>
     {toc.length >= 1 && <details class="article-toc"><summary aria-label="展开或收起目录">目录</summary><ol>{toc.map((heading) => <li class:list={{ nested: heading.depth === 3, 'nested-deep': heading.depth === 4 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></details>}

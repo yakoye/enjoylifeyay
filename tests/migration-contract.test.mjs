@@ -2,14 +2,14 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-test('迁移清单覆盖三个来源并使用受控状态', async () => {
+test('迁移清单仅保留仍需人工迁入的 CSDN 与知乎来源', async () => {
   const csv = await readFile(new URL('../docs/CONTENT_MIGRATION_MANIFEST.csv', import.meta.url), 'utf8');
   const lines = csv.trim().split(/\r?\n/);
   assert.equal(lines[0], 'source,title,originalUrl,originalPublishedAt,suggestedDomain,suggestedFormat,status,reason');
-  assert.ok(lines.length >= 107, `清单数据不足：${lines.length - 1}`);
-  assert.ok(lines.filter((line) => line.startsWith('EnjoyLifeBlog,')).length >= 14);
-  assert.ok(lines.filter((line) => line.startsWith('CSDN,')).length >= 91);
+  assert.equal(lines.filter((line) => line.startsWith('CSDN,')).length, 90);
   assert.ok(lines.some((line) => line.startsWith('Zhihu,')));
+  assert.equal(csv.includes(['Enjoy', 'LifeBlog'].join('')), false);
+  assert.equal(csv.includes('C语言速查'), false);
   for (const line of lines.slice(1)) {
     assert.match(line, /,(migrated|needs-manual-review|skipped-copyright),/);
   }

@@ -327,10 +327,13 @@ main > section + section {
 }
 
 .article-header h1 {
-  max-width: 22em;
+  width: 100%;
+  max-width: none;
   margin-bottom: 0.75rem;
   font-size: var(--font-article-title);
   line-height: 1.42;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .article-meta {
@@ -798,9 +801,11 @@ main > section + section {
 
 /* Consolidated navigation pages: keep section anchors below the fixed visual rhythm. */
 #technology-series,
-#bookshelf,
-#references,
-#projects,
+#diy-projects,
+#historical-sources,
+#food,
+#gallery,
+#sport,
 #cycling,
 #running {
   scroll-margin-top: calc(var(--nav-height) + var(--space-4));

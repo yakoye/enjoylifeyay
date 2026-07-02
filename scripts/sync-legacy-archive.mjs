@@ -54,38 +54,55 @@ const rows = parseCsv(await readFile(manifestPath, 'utf8'));
 const hasDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(value);
 
 // Public archive policy:
-// - all CSDN entries remain as original-platform links;
-// - all dated old GitHub-blog entries are generated; the archive page removes entries already published locally;
-// - drafts, withheld posts and original-only pages stay visible as their historical source links;
-// - Zhihu has no reliable per-post dates in the accessible source, so it is exposed as one source entry below.
+// - Local writing is shown directly by the archive page.
+// - Dated CSDN entries remain as original-platform links until their full text is migrated.
+// - The retired old personal site is intentionally not exposed in the generated archive.
+// - Zhihu has no reliable per-post dates in the accessible source, so it remains one source entry below.
 const entries = rows
-  .filter((row) => {
-    if (!hasDate(row.originalPublishedAt) || !row.originalUrl) return false;
-    return row.source === 'CSDN' || row.source === 'EnjoyLifeBlog';
-  })
+  .filter((row) => hasDate(row.originalPublishedAt) && row.originalUrl && row.source === 'CSDN' && row.title !== 'C语言速查')
   .map((row, index) => ({
-    id: `${row.source.toLowerCase()}-${index + 1}`,
+    id: `csdn-${index + 1}`,
     title: row.title,
     href: row.originalUrl,
     date: row.originalPublishedAt,
-    source: row.source,
+    source: 'CSDN',
   }))
   .sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title, 'zh-CN'));
 
 const sourceLinks = rows
-  .filter((row) => !hasDate(row.originalPublishedAt) && row.originalUrl)
+  .filter((row) => !hasDate(row.originalPublishedAt) && row.originalUrl && row.source === 'Zhihu')
   .map((row, index) => ({
-    id: `${row.source.toLowerCase()}-source-${index + 1}`,
+    id: `zhihu-source-${index + 1}`,
     title: row.title,
-    description: row.source === 'Zhihu'
-      ? '知乎历史内容入口；待获得可核对标题和日期的导出数据后再写入时间线。'
-      : row.reason || '历史来源入口。',
+    description: '知乎历史内容入口；待获得可核对标题和日期的导出数据后再写入时间线。',
     href: row.originalUrl,
     source: row.source,
   }));
 
-const source = `// 此文件由 scripts/sync-legacy-archive.mjs 从 docs/CONTENT_MIGRATION_MANIFEST.csv 自动生成。\n// 请不要手工修改；更新历史来源后运行 npm run sync:legacy-archive 或 npm run build。\n\nexport type LegacyArchiveEntry = {\n  id: string;\n  title: string;\n  href: string;\n  date: string;\n  source: 'CSDN' | 'EnjoyLifeBlog';\n};\n\nexport type LegacySourceLink = {\n  id: string;\n  title: string;\n  description: string;\n  href: string;\n  source: string;\n};\n\nexport const legacyArchiveEntries: LegacyArchiveEntry[] = ${JSON.stringify(entries, null, 2)};\n\nexport const legacySourceLinks: LegacySourceLink[] = ${JSON.stringify(sourceLinks, null, 2)};\n`;
+const source = `// 此文件由 scripts/sync-legacy-archive.mjs 从 docs/CONTENT_MIGRATION_MANIFEST.csv 自动生成。
+// 请不要手工修改；更新历史来源后运行 npm run sync:legacy-archive 或 npm run build。
+
+export type LegacyArchiveEntry = {
+  id: string;
+  title: string;
+  href: string;
+  date: string;
+  source: 'CSDN';
+};
+
+export type LegacySourceLink = {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  source: string;
+};
+
+export const legacyArchiveEntries: LegacyArchiveEntry[] = ${JSON.stringify(entries, null, 2)};
+
+export const legacySourceLinks: LegacySourceLink[] = ${JSON.stringify(sourceLinks, null, 2)};
+`;
 
 await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(outputPath, source, 'utf8');
-console.log(`Synced ${entries.length} dated historical entries and ${sourceLinks.length} undated source links.`);
+console.log(`Synced ${entries.length} dated CSDN entries and ${sourceLinks.length} undated source links.`);

@@ -4,12 +4,11 @@ import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const categoryOrder = [
-  ['browser-extension', 'Chrome 扩展与网页工具', 'extensions'],
-  ['pcie-hardware', 'PCIe / 硬件工具', 'pcie'],
+  ['diy-project', '自己 DIY 项目', 'diy-projects'],
+  ['browser-extension', 'Chrome 扩展与网页工具', 'chrome-extensions'],
+  ['pcie-hardware', 'PCIe / 硬件工具', 'pcie-hardware'],
   ['writing-media', '文字、图片与记录工具', 'writing-media'],
-  ['websites-life', '个人网站与生活工具', 'websites'],
-  ['knowledge-library', '资料库与阅读', 'library'],
-  ['personal-system', '个人系统与长期项目', 'projects'],
+  ['knowledge-library', '资料库', 'library'],
 ] as const;
 
 const tools = await getCollection('tools', ({ data }) => !data.draft);
@@ -23,6 +22,7 @@ const groups = [
     title,
     items: tools
       .filter((entry) => entry.data.category === category)
+      .sort((a, b) => a.data.order - b.data.order)
       .map(({ data }) => ({
         title: data.name,
         description: data.description,
@@ -30,8 +30,8 @@ const groups = [
       })),
   })),
   {
-    id: 'references',
-    title: '长期收藏与参考',
+    id: 'historical-sources',
+    title: '历史内容来源',
     items: favorites.map(({ data }) => ({
       title: data.name,
       description: data.note,
@@ -41,8 +41,8 @@ const groups = [
 ];
 ---
 
-<BaseLayout title="工具" description="公开工具、个人网站、资料库与长期参考的统一入口。">
+<BaseLayout title="工具" description="自己做的项目、浏览器扩展、PCIe 工具与长期可用资料。">
   <h1>工具</h1>
-  <p class="page-intro">公开工具、个人网站、资料库与长期参考的统一入口。</p>
-  <DirectoryList groups={groups} emptyMessage="暂无已确认可以公开的工具或参考。" />
+  <p class="page-intro">自己做的项目、浏览器扩展、PCIe 工具与长期可用资料。</p>
+  <DirectoryList groups={groups} emptyMessage="暂无已确认可以公开的工具。" />
 </BaseLayout>

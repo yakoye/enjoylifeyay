@@ -20,8 +20,9 @@ test('Astro 使用静态输出且内容 schema 保留严格枚举', async () => 
   for (const value of ['article', 'answer', 'note', 'guide', 'reference', 'project-log', 'observation']) {
     assert.match(schema, new RegExp(`['"]${value}['"]`));
   }
-  for (const value of ['native', 'CSDN', 'Zhihu', 'EnjoyLifeBlog']) {
+  for (const value of ['native', 'CSDN', 'Zhihu']) {
     assert.match(schema, new RegExp(`['"]${value}['"]`));
   }
+  assert.doesNotMatch(schema, new RegExp(['Enjoy', 'LifeBlog'].join('')));
   assert.match(schema, /draft:\s*z\.boolean\(\)\.default\(true\)/);
 });

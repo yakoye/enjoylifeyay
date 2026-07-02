@@ -25,11 +25,11 @@ for (const [index, line] of lines.slice(1).entries()) {
   assert.equal(row.length, header.length, `第 ${index + 2} 行字段数量错误`);
   const [source, title, url, date, , , status, reason] = row;
   assert.ok(source && title && url && reason, `第 ${index + 2} 行缺少必填字段`);
+  assert.ok(['CSDN', 'Zhihu'].includes(source), `第 ${index + 2} 行来源不应再公开旧个人站`);
   assert.ok(allowedStatus.has(status), `第 ${index + 2} 行状态非法`);
   if (date) assert.match(date, /^\d{4}-\d{2}-\d{2}$/);
   counts.set(source, (counts.get(source) || 0) + 1);
 }
-assert.ok((counts.get('EnjoyLifeBlog') || 0) >= 15);
-assert.equal(counts.get('CSDN'), 91);
+assert.equal(counts.get('CSDN'), 90);
 assert.ok((counts.get('Zhihu') || 0) >= 1);
 console.log(`Migration manifest valid: ${lines.length - 1} rows`);

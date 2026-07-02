@@ -1,6 +1,6 @@
-# 当前生效说明：v0.13 栏目合并（优先级最高）
+# 当前生效说明：v0.14 内容去重与工具、生活整理（优先级最高）
 
-> 本段覆盖本文件后续历史版本中关于公开导航、页面职责和栏目名称的旧描述；旧内容仅作为开发历史参考。
+> 本段覆盖本文件后续历史版本中关于公开导航、页面职责、收藏、项目、书架和专题名称的旧描述；后续内容仅作为开发历史参考。
 
 ## 当前正式导航
 
@@ -16,24 +16,31 @@
 
 ### 栏目职责
 
-- **技术**：`/technology/`。技术文章与技术专题；旧 `/writing/`、`/series/` 仅保留兼容跳转。
-- **工具**：`/tools/`。公开扩展、PCIe 工具、个人网站、资料库、个人系统与长期参考；旧 `/projects/`、`/favorites/` 仅保留兼容跳转。
-- **阅读**：`/reading/`。阅读文章、书架、阅读专题；旧 `/bookshelf/` 仅保留兼容跳转。
+- **技术**：`/technology/`。技术文章与有公开文章的技术专题；空专题不输出链接。
+- **工具**：`/tools/`。自己 DIY 项目、Chrome 扩展与网页工具、PCIe / 硬件工具、文字图片记录工具、资料库、历史内容来源。
+- **阅读**：`/reading/`。只显示已公开阅读文章；不重复展示书架或阅读专题。
 - **自然**：`/nature/`。自然观察与地方记录。
-- **生活**：`/life/`。生活、骑行、跑步。
+- **生活**：`/life/`。饮食、影集与家庭、运动、生活与思考。
 - **归档**：`/archive/`。所有已确认历史条目的日期时间线。
 
 ### 内容维护
 
 - 技术、阅读、生活类文章：`src/content/writing/`，通过 `domain` 区分。
-- 工具、网站、个人系统：`src/content/tools.json`。
-- 长期收藏与旧站入口：`src/content/favorites.json`，显示于工具页。
-- 书架：`src/content/books.json`，显示于阅读页。
-- 技术、阅读、生活专题：`src/content/series.json`，不单独占用导航。
+- 工具、DIY 项目、扩展、资料库、生活网站：`src/content/tools.json`。
+- 历史内容来源：`src/content/favorites.json`。
+- 生活网站（`websites-life`）只在 `/life/` 展示，不要在 `/tools/` 重复展示。
+- 历史项目集合已移除；旧 `/projects/` 仅跳转到 `/tools/#diy-projects`。
 
-详细规则以 `README.md` 和 `docs/V0.13_NAVIGATION_CONSOLIDATION.md` 为准。
+旧入口：
 
----
+```text
+/writing/   -> /technology/#technical-writing
+/series/    -> /technology/#technology-series
+/bookshelf/ -> /reading/
+/favorites/ -> /tools/#historical-sources
+/projects/  -> /tools/#diy-projects
+```
+
 
 # Enjoy Life — 个人知识与生活档案站
 ## Codex 开发与 Cloudflare Pages 部署总交接文档
@@ -64,7 +71,7 @@
 4. 网站桌面正文最大宽度必须为 **890px**，居中；手机端左右保留 **16px** 左右内边距。
 5. 普通中文正文两端对齐；代码、表格、列表、引用、命令行、图片说明、技术参数和英文密集段落必须左对齐，不能被 `justify` 拉开。
 6. 默认克制、稳定、文本优先。不要大 Banner、轮播、玻璃卡片墙、瀑布流、自动播放视频、夸张渐变、炫技动效、头像大图。
-7. 对现有 CSDN、知乎、旧 EnjoyLifeBlog 内容：保留原始发布日期、原始来源和原文链接；不要伪装成今天新写的文章；不要自动搬运版权不清晰的转载内容或下载资源正文。
+7. 对现有 CSDN、知乎、旧 旧个人站 内容：保留原始发布日期、原始来源和原文链接；不要伪装成今天新写的文章；不要自动搬运版权不清晰的转载内容或下载资源正文。
 8. 任何当前没有公开地址的工具/项目，不得编造 URL；在内容数据中标记为 `draft` / `private` / `linkPending`，公开列表不显示“准备中”“待确认”等占位状态。
 9. 必须提供深浅色主题，默认遵循系统；用户手动切换后用 `localStorage` 保存主题偏好。`localStorage` 仅可用于主题偏好和无敏感的 UI 状态。
 10. 所有图标采用一个统一的非 Emoji 图标体系（建议 Lucide）；但主题切换按钮可以使用太阳/月亮图形图标。交互图标必须有 `aria-label`、键盘焦点态和桌面端 tooltip。
@@ -946,12 +953,12 @@ Cloudflare Pages
 
 | 来源 | 链接 | 主要内容 / Codex 处理方式 |
 |---|---|---|
-| 旧个人博客 EnjoyLifeBlog | https://globetreklog.github.io/EnjoyLifeBlog/ | 迁入高质量原创文章；保留原始日期与 `source.type: enjoy-life-blog`。主要方向：PCIe、读书笔记、植物、地方与生活。 |
+| 旧个人博客 旧个人站 | （已退役旧站，仅本地迁移使用） | 迁入高质量原创文章；保留原始日期与 `source.type: enjoy-life-blog`。主要方向：PCIe、读书笔记、植物、地方与生活。 |
 | 知乎个人内容页 | https://www.zhihu.com/people/wikiye/posts | 迁入用户明确确认的高质量回答、图文与视频类记录；保持“问题 / 回答”结构；不要自动抓取，页面可能限制访问。 |
 | CSDN 博客主页 | https://blog.csdn.net/BjarneCpp?type=blog | 技术教程、操作指南、速查、工具和问题排查；保留来源与原始日期。 |
 | PCIe 中文资料库 GitHub | https://github.com/yakoye/pci-express-technology-3.0-chinese | 作为项目与专题入口；可链接至仓库、在线文档和项目说明。 |
 
-### 8.2 旧 EnjoyLifeBlog 已识别内容
+### 8.2 旧 旧个人站 已识别内容
 
 以下不是完整迁移清单，而是本次已确认的公开内容样本与归类方向。上线前应由用户决定每篇是否迁入、修订或仅保留原链接。
 
@@ -1094,7 +1101,7 @@ https://www.zhihu.com/people/wikiye/posts
 | https://agri-history.ihns.ac.cn/agrobiology/20110429.htm | 纯文本文章的克制感 | 全屏平铺、缺少现代导航与时间信息 |
 | http://scz.617.cn:8/ | 文字排版规整、信息密度克制 | 左贴边、宽屏阅读距离过长 |
 | https://jia.je/kb/mathematics/abstract_algebra.html | 知识库的章节组织、清晰信息结构 | 过重的文档站导航感、复杂侧栏常驻 |
-| https://globetreklog.github.io/EnjoyLifeBlog/ | 旧内容主题与长期写作脉络 | 模板博客化右侧栏、旧式摘要布局 |
+| （已退役旧站，仅本地迁移使用） | 旧内容主题与长期写作脉络 | 模板博客化右侧栏、旧式摘要布局 |
 
 ---
 
@@ -1372,3 +1379,11 @@ Codex 不得把本项目做成以下任意一种：
 - Keep the tools categories: `browser-extension`, `pcie-hardware`, `writing-media`, `websites-life`, `knowledge-library`.
 - Article images default to a centered 60% desktop reading width and 100% on mobile; only MDX `Figure wide` should opt into full width.
 - New pages: `/about/me/`; new life series writing for cycling and running.
+
+
+## v0.14 当前栏目约束
+
+- 阅读页只显示已公开阅读文章；不要同时复制书架、读过、阅读专题。
+- 技术页仅链接到有已公开文章的专题；不能有空专题详情页。
+- 工具页优先放自己 DIY 项目、Chrome 扩展与网页工具、PCIe / 硬件工具、文字图片记录工具、资料库；生活网站放到生活页。
+- `Rich Editor` 和 `quick_note_richtext` 的公开入口必须是可直接渲染的 HTML，不是 GitHub `blob` 代码查看页。

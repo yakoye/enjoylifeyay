@@ -3,15 +3,15 @@ title: "沙生植物"
 description: "围绕甘肃民勤的沙生植物所做的资料整理与图文记录。"
 date: 2024-04-29
 updated: null
-source: EnjoyLifeBlog
-sourceUrl: "https://globetreklog.github.io/EnjoyLifeBlog/2024/04/29/%E6%B2%99%E7%94%9F%E6%A4%8D%E7%89%A9/"
-migratedAt: 2026-07-01
+source: native
+sourceUrl: ""
+migratedAt: null
 domain: nature
 format: "observation"
 topics: ["植物", "民勤", "地方记忆"]
 tags: ["植物", "民勤", "沙生植物"]
 series: ["nature-walking"]
-legacy: true
+legacy: false
 cover: ""
 coverAlt: ""
 mediaKey: "legacy-2024-04-29-desert-plants"
@@ -24,45 +24,45 @@ featured: false
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-c158c265b1816e2d41abc287a97817e5_r-1715052535431-213.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-a3de71a95ebf9bef.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-41bf81c226250ab7b56e604cb8420cfb_r-1715052535431-214.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-6688a3434d3828e3.jpg)
 
 
 
 ## [沙拐枣（Calligonum mongolicum Turcz.）](https://baike.baidu.com/item/沙拐枣/1813727) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-e665c6f59ea98181587f1745a4154b31_r-1715052535431-215.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-43b5593814b33691.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-b932294ea4f5eaeca18eb938f8f3fdab_r-1715052535431-217.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-ec7dd3c6c9faeb72.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-ffa66aaf003034aa49fa69d1dcc88aff_r-1715052535431-216.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-127c82d382afd678.jpg)
 
 
 
 ## [白刺（酸胖、Nitraria tangutorum Bobrov）](https://baike.baidu.com/item/白刺/24160392) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-0bafb577d532eb2274a1a2051f1bbbd9_b-1715052535431-218.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-3cdbaa1b148c0100.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-0759662ded96f60e323896bc6ee1fa41_r-1715052535431-219.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-abbbc97121fe77f7.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-5a8a2c65482d378fbaa3d00c23e59d0c_r-1715052535431-220.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-914a947cbde088a4.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-369c4d8a6222d279000b58cf6dd34686_r-1715052535431-223.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-769accf5884ebcaa.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-f9856ab4eff805d289b18af9b65edc76_r-1715052535431-221.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-516165057aef70b4.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-a24aececb0601b8174b53e3ff0c9cbc6_r-1715052535431-222.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-4f132979c0646b53.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-e2e14ad92e5e0a846cc63bf5d29124c1-1715052535431-224.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-f9c1ea7218c1c698.jpg)
 
 00:20
 
@@ -70,117 +70,117 @@ featured: false
 
 ## [沙葱（蒙古韭、蒙古葱、Allium mongolicum Regel）](https://baike.baidu.com/item/蒙古韭) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-d2f737821642c74e64c3aa332b0faeca_r-1715052535431-225.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-a74f12010e6b0148.jpg)
 
 ## [梭梭（Haloxylon ammodendron (C. A. Mey.) Bunge）](https://baike.baidu.com/item/梭梭) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-96177609cd82cfc8138635444abbd01e_r-1715052535431-226.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e8e993f87aa6683f.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-08bce22dba8465223fdff129d494c409_r-1715052535431-228.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-b443301bf2107278.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-db34e54306fe099788932f23aaa1bfbd_r-1715052535431-227.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e9da166129ce049a.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-d63edaf32c10e50c0b375dd891a09587_r-1715052535431-229.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-6dcbd83ec7022ce1.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-4b05dded537a2aec54d64a0bec104509_r-1715052535431-231.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-d260afc177c59252.jpg)
 
 ## [沙米（沙蓬、Agriophyllum squarrosum (L.) Moq.）](https://baike.baidu.com/item/沙蓬/9769303) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-5ace326d004634564c2cd7c51d8098a7_r-1715052535431-230.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-8d176b5c08732e38.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-6829a2ace5c1822f19f04cf1205bed63_r-1715052535431-232.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-8fb103b6fa32824c.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-bb1d49431eb46dbfeec0040531d43b55_r-1715052535431-234.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-210505128e0e650c.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-198a74ff061ec6c5bcb9112889aabd4d_r-1715052535431-233.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-502693f16bf93179.jpg)
 
 ## [黑果枸杞（Lycium ruthenicum Murray）](https://baike.baidu.com/item/黑果枸杞/9678364) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-63eecbfa7a000ca4dbeb99c512aaaf23_r-1715052535431-235.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e203b6dfab6863c5.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-f5a0eaa89f1605cc4ba351dc0323a094_r-1715052535431-237.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-dac0d87360a339cd.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-a02c4e57a874e4cac2081861d5d12d22_r-1715052535431-236.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-201b1c1177119288.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-23e63290ffd7d05fdd205730e6eb5864_r-1715052535431-238.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-529ad4f64b34933b.jpg)
 
 ## [沙冬青（Ammopiptanthus mongolicus (Maxim. ex Kom.) Cheng f.）](https://baike.baidu.com/item/沙冬青/1815248) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-7dbbd2618ace712f92598d7f9e3633ad_r-1715052535431-239.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-9c097a4d3790d792.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-b3cbde6692be6f8a24d3e3a1e96ff2ba_r-1715052535431-240.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-51303020716c27c2.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-31772af9be865d7084c68dbf06e59f8d_r-1715052535431-241.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-c71795ffb365a60b.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-c6553cd8e2c76ad1dad41d3f49824603_r-1715052535431-242.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-ece8a431205a823c.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-6502971605c1d5a451c24b2d6d57cb13_r-1715052535431-244.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e6fbecf9e4aa3141.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-2475ad7b057b47b87ea5f9af5faf214b_r-1715052535431-243.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-2269217ecced03ff.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-ac5ea684ca7c27d027ffcff08512694e_r-1715052535431-245.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-891040b5bd42d62b.jpg)
 
 ## [红柳（多枝怪柳、Tamarix ramosissima Ledeb.）](https://baike.baidu.com/item/多枝柽柳) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-31faf7223f4c327a20c5fd96047ed45d_r-1715052535431-246.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e79c55602dcaf0c1.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-ef51f5fa6e2f0cd5548348c17788b291_r-1715052535431-247.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-973e13fadb0502b2.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-c2f1c118a76140a34bce73b2f6ecc7b9_r-1715052535431-248.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-c930328c62f91039.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-54ae7fba3b819dca08e0340fad6c8b40_r-1715052535432-250.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-1b92ac7e8357b90d.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-d202e78a144440b147bbbe5d50a07034_r-1715052535432-251.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-dcefdfe3abacad7f.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-6e8aff10a8fddae9cfded34a9cfd4f5d_r-1715052535432-249.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-8a14e41a6d14e9e3.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-b697abdf76099b8ae37067d5f754a72e_r-1715052535432-252.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-3e15cbc9e14ff498.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-ff60a0c7edf962795232865461ffcfb9_r-1715052535432-253.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-ee27d63dc3349fe5.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-c5b4460a4cddd72e331cbcabe245ff6e_r-1715052535432-254.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-2576d12638cc206d.jpg)
 
 ## [绵刺（Potaninia mongolica Maxim.）](https://baike.baidu.com/item/绵刺) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-83f2bc0d191fd3dcfec28303f571baf5_r-1715052535432-255.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-dab06532a55f5901.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-44d671e81b344322e06a6b0b560d183f_r-1715052535432-256.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-906f33d2b0acd907.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-63c36bb9f50bc446439fe961a8d109d3_r-1715052535432-257.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-3fdf49241d2edece.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-60144d41b97ef06650bad17da7ec3d58_r-1715052535432-259.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-5581bc682a038a56.jpg)
 
 
 
 ## [沙鞭（沙竹、Psammochloa villosa (Trin.) Bor）](https://baike.baidu.com/item/沙鞭) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-8c01baca0832fdc2cb6362d956719b5b_r-1715052535432-258.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-adc0a06e374cc960.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-9be571dc67538ea3dc6a4e0ab3340d66_r-1715052535432-262.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-f2f4bce5beb7edbb.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-f225af9e79d6adf63ea13b643b6fd6df_r-1715052535432-260.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-68b5024df337c0fa.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-7ab8a9f3005f571ea2a05c9ff7b25d7a_r-1715052535432-261.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e441259c2d042389.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-39fc54301b665a8aa8d427876f47e016_r-1715052535432-263.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-5cc506da08680d0c.jpg)
 
 ## [黄花矶松（黄花补血草、Limonium aureum (L.) Hill）](https://baike.baidu.com/item/黄花补血草/4847214) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-97721e2176a6e243c402d138b6a47654_r-1715052535432-264.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-5614213019b59ad5.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-625c8df632f3ed1d971a9aabbbd54c14_r-1715052535432-265.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-8aa240b927af4baa.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-5da00894de6f47258adacd337a9f408a_r-1715052535432-268.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-b16b2ba5f265a9ff.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-0e5ad06619e9a70d863f733185505fbd_r-1715052535432-266.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-c0e33d3e7250a250.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-dd5221b8c9cd7417c9ccb6f7ea32db00-1715052535432-267.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-d1a4a6b10cfd40bd.jpg)
 
 00:18
 
@@ -188,41 +188,41 @@ featured: false
 
 ## [锁阳（Cynomorium songaricum Rupr.）](https://baike.baidu.com/item/锁阳/329873) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-3423e52363f2f457e7351ba8dbf2bdd3_r-1715052535432-269.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-558599a3929db66f.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-126e6b442bfd02a48f466d5a1e107a40_r-1715052535432-270.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-3c8b7f1742eb02aa.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-62911fcb8e1af8f992cc6f4db6532913_r-1715052535432-271.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-db793713f593ef21.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-cfc68ca0edac56eb66ed04a3c5a47d33_r-1715052535432-272.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-2604f253d55c56d3.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-5da6fff088f584a1a815124e7f09470d_r-1715052535432-273.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-91a9f4495060ab56.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-e8addde16ba1926504337e8e143c8990_r-1715052535432-274.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-a2d98375dbc197f4.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-f7fc050169e7546dd95b3bdd21291a8a_r-1715052535432-275.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-04c83a63e5c9fba5.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-b69b26ee8b0b34427f8f32cade0d19de_r-1715052535432-276.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-c696a1a362eaeb64.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-ae981330601fc184c510eb40d13f00d4_r-1715052535432-277.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-15415666cf70dacd.jpg)
 
 ## [铃铛刺（Caragana halodendron (Pall.) Dum. Cours.）](https://baike.baidu.com/item/铃铛刺)▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-6b22d21bad7621f1957ad8949de71edb_r-1715052535432-278.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-79ac8521c10d8f87.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-4c854ed8d34fafcf8a82af11548a0b78_r-1715052535432-279.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-13bd5e185d5479ec.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-1594daf2127ccdb5f06f702d24999110_r-1715052535432-280.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-7c64f26a48f1fe15.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-9fd16ce5a98b0fc4e9209400f1e956ea_r-1715052535432-281.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-5edab37e33cefcd7.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-a2cbfde46a2d30abba7603b31e31ee26_r-1715052535432-282.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-cc883547e13a322c.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-136ba8cd398dca28f117439b1592a6f8_r-1715052535432-283.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-6c665b8ad095e1b3.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-706ae6d7e1a42361a443984f61d48a03_r-1715052535433-284.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e5dab0a15bedb936.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-5d43b40103caf4382a7ed4f4fd652ea0_r-1715052535433-286.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-64bdf46409f64f22.jpg)
 
 
 
@@ -230,77 +230,77 @@ featured: false
 
 ## [马蔺（马兰、马莲、Iris lactea Pall.）](https://baike.baidu.com/item/马蔺/2776595) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-e62647e224ab6ec56639aef4e0a2d8bd_r-1715052535433-287.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-08597d4f4299f51a.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-4b0cff065aec2301edd11c9323d95c99_r-1715052535433-285.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-6d7065a04a470301.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-e8ee30e364108279fc35468101aa7ae3_r-1715052535433-288.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-42d37b07efdcafa5.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-47772db7f5160525b458fe5403fd4746_r-1715052535433-289.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-1f2e137ddb918dd6.jpg)
 
 ## [麻黄（Ephedra sinica Stapf）](https://baike.baidu.com/item/麻黄/523096) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-8c56919c12181dcf0beb6a167d5aeb22_r-1715052535433-292.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-b4e4485a78521333.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-e2ea3bb0c414820ce13537af61b0b95d_r-1715052535433-290.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-9fa29a7fedda1cba.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-aef4a19d3e455565458b76c55bfe5d39_r-1715052535433-291.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-ac5efe1acba86e7b.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-70b8f3cf899b1847c2c1fd0a1c016368_r-1715052535433-293.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-6e1cf3986fe91bd3.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-2e164ec7e3e9e587a5d8062c5db43af8_r-1715052535433-294.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-7cc7c0e22e6924b8.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-f55bd8f41856ae6c5c17098d8dd1b5c8_r-1715052535433-295.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-cd4ccba5034d1934.jpg)
 
 ## [花棒（细枝岩黄耆、Corethrodendron scoparium Fisch. et Basiner）](https://baike.baidu.com/item/细枝岩黄耆) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-6743224b12736b1e4db1470bedcdf4a2_r-1715052535433-296.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-ed331fb3fd5694c9.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-87dc4f7c836eae88c917e5b40f229ce4_r-1715052535433-299.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-31289253905f1ef3.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-ec7917bbe0c25406cd5519464c0300d4_r-1715052535433-297.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-c2d91b7c56df06a1.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-90f5912775727f7ab0dd859865f17749_r-1715052535433-298.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-4150f3253371d16b.jpg)
 
 ## [毛条（拧条锦鸡儿、柠条、Caragana korshinskii Kom.）](https://baike.baidu.com/item/拧条锦鸡儿) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-b6003bb2e39d4ccc814ab2afb3088d4b_r-1715052535433-302.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-f8b2cf3a958a023b.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-e54cab770ae7d50114d05f7c1ad3d054_r-1715052535433-300.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-025f84f34199f16f.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-15f190c0f5e71b5479146ffbd2181a60_r-1715052535433-301.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-4eb526947578a382.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-c48a3174a9ba7e618c398c90b7a8dd4f_r-1715052535434-304.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-c5d148d32e2295f4.jpg)
 
 
 
 ## [红砂（Reaumuria songarica (Pall.) Maxim.）](https://baike.baidu.com/item/红砂/16129897) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-34dcf3b751099635bb7713ceec6d6f6c_r-1715052535434-303.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-960d2f2d99275c63.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-6b1aaea7bf0af7bb51a3aedf4d1db56e_r-1715052535434-305.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-49d2433628d06956.jpg)
 
 ## [枸杞（Lycium chinense Miller）](https://baike.baidu.com/item/枸杞/272759) ▼
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-deabbc35e088f768c3218ab9c18c2c2a_r-1715052535434-307.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-0e557861cf18b28c.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-7b21b52da25f46fee940e068a373dcda_r-1715052535434-306.jpg)
-
-
-
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-73ff06365e7f9c4d2435529dbe5b66f4_r-1715052535434-309.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-4d48dad60dadc4c7.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-a8b40d00cd9954aa6d8c0ba3e09823c5_r-1715052535434-308.jpg)
-
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-6f89d482be7165e7fd18cf2f2dc9c1a1_r-1715052535434-310.jpg)
-
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-17745439f8c184e573e21e92e5665462_r-1715052535434-312.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-880b24b50a2f9393.jpg)
 
 
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-50d0cc6a6dd930579111001a1040f5f3-1715052535434-311.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e364a3d4cd982b8e.jpg)
+
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-01220b857b9d6519.jpg)
+
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-d38e489d19fba19f.jpg)
+
+
+
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e3511c173926e9ce.jpg)
 
 00:38
 
@@ -324,17 +324,17 @@ featured: false
 
 早在十几年前，乡亲们已经不舍得用蓬灰做饭了，因蓬灰可卖钱，对于贫困地区人来说，这是一条致富挣钱门路。他们烧制的蓬灰都卖给了小贩子。随着工业食用碱到来，现在乡亲们基本上没有人烧蓬灰了。
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-f26a247bef6b2afb883187683fe1190e_r-1715052535434-314.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-8ecd924766232bfa.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-9f052a828044d5e6f4d44126ed9f7f31_r-1715052535434-313.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-27cb2de0b7f91c3b.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-b9062afdb9c5cb52c906b133473e35df_r-1715052535434-315.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-3b832fe53a9a49f2.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-0eb1a2f5858e3d0cafd7175a562726c8_r-1715052535434-316.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-33ac551808f9fe30.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-1d3069983a1c2378e6f2ac9ea87c4714_r-1715052535434-317.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-01bcc4214f47d064.jpg)
 
-![img](https://globetreklog.github.io/EnjoyLifeBlog/img/2024-04-29-沙生植物.assets/v2-1bb21bda7bea0d147c4fe855aba731e1_r-1715052535434-318.jpg)
+![img](/images/articles/legacy-2024-04-29-desert-plants/image-e5d3f3bd58a08185.jpg)
 
 
 

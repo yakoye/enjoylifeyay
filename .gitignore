@@ -3,3 +3,6 @@ dist/
 .astro/
 .env
 .DS_Store
+
+# One-time local migration source URLs; intentionally never commit or deploy.
+scripts/legacy-assets.private.json

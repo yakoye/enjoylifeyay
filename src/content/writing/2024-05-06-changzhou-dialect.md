@@ -3,15 +3,15 @@ title: "方言：常州话"
 description: "关于常州方言的资料整理与语言特征记录。"
 date: 2024-05-06
 updated: null
-source: EnjoyLifeBlog
-sourceUrl: "https://globetreklog.github.io/EnjoyLifeBlog/2024/05/06/%E6%96%B9%E8%A8%80/"
-migratedAt: 2026-07-01
+source: native
+sourceUrl: ""
+migratedAt: null
 domain: life
 format: "article"
 topics: ["方言", "地方记忆"]
 tags: ["方言", "常州"]
 series: []
-legacy: true
+legacy: false
 cover: ""
 coverAlt: ""
 mediaKey: "legacy-2024-05-06-changzhou-dialect"

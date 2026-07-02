@@ -25,17 +25,17 @@ test('仓库记录完整的 Windows 构建、预览与 Wrangler 发布流程', a
   await access(new URL('../stop-local-preview.cmd', import.meta.url));
 });
 
-test('v0.5 保留旧博客公开文章与来源台账', async () => {
+test('v0.15 将旧个人文章本地化并保留 CSDN 与知乎迁移台账', async () => {
   const catalog = await readFile(new URL('../docs/LEGACY_SOURCE_CATALOG.md', import.meta.url), 'utf8');
   const manifest = await readFile(new URL('../docs/CONTENT_MIGRATION_MANIFEST.csv', import.meta.url), 'utf8');
   const writingDir = new URL('../src/content/writing/', import.meta.url);
   assert.match(catalog, /CSDN：BjarneCpp/);
   assert.match(catalog, /知乎：wikiye/);
-  assert.match(manifest, /EnjoyLifeBlog,自我突围 施一公.*?,migrated,/);
+  assert.doesNotMatch(manifest, new RegExp(['Enjoy', 'LifeBlog'].join('')));
   await access(new URL('2024-06-12-pcie-low-power.md', writingDir));
-  await access(new URL('2024-04-25-common-flowers.md', writingDir));
+  await access(new URL('2024-04-03-minimal-life.md', writingDir));
+  await access(new URL('2024-05-06-about-weight.md', writingDir));
 });
-
 
 test('v0.11.2 提供一键检查、构建并打开本地预览的 Windows 脚本', async () => {
   const packageJson = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));

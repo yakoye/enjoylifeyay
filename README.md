@@ -13,13 +13,13 @@
 栏目分工：
 
 - **技术**：PCIe、芯片、固件、开发环境与工程实践；技术专题也放在这里。
-- **工具**：浏览器扩展、PCIe 工具、个人网站、资料库、项目说明与长期参考。
-- **阅读**：读书文章、书架、阅读与学习方法。
+- **工具**：自己做的项目、浏览器扩展、PCIe 工具、记录工具与资料库。
+- **阅读**：已经公开的阅读文章，按时间排列。
 - **自然**：植物、动物、季节、地方记忆与自然观察。
-- **生活**：生活、骑行、跑步与长期变化。
-- **归档**：按日期汇总本站文章、旧 EnjoyLifeBlog 与 CSDN 历史条目。
+- **生活**：饮食、影集与家庭、运动，以及生活与思考。
+- **归档**：按日期汇总本站文章与尚未迁入的历史技术条目。
 
-旧入口会自动跳转，具体映射见 [`docs/V0.13_NAVIGATION_CONSOLIDATION.md`](docs/V0.13_NAVIGATION_CONSOLIDATION.md)。
+旧入口会自动跳转；内容去重和旧图本地化规则见 [`docs/V0.15_PRIVATE_LEGACY_MIGRATION.md`](docs/V0.15_PRIVATE_LEGACY_MIGRATION.md)。
 
 ## 最常用：一键检查并打开本地网页
 
@@ -47,6 +47,14 @@ check → test → ToC 审计 → build → 链接检查 → 打开 http://127.0
 .\preview-local.cmd -Install
 ```
 
+本次 v0.15 首次迁移旧文章图片时，使用：
+
+```powershell
+.\preview-local.cmd -FetchLegacyAssets
+```
+
+它会先把旧文图片下载为本站 `public/images/articles/` 本地文件，再继续检查、构建和打开网页。
+
 停止本地预览：
 
 ```text
@@ -58,6 +66,18 @@ stop-local-preview.cmd
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\reset-local.ps1 -StopAllNode
 ```
+
+
+## v0.15：旧文章与图片本地化
+
+旧个人站的文章已迁入本站。第一次使用 v0.15 时，先运行：
+
+```powershell
+npm run fetch:legacy-assets
+npm run verify:legacy-assets
+```
+
+图片会保存到 `public/images/articles/`，随后由 Cloudflare Pages 提供访问。`scripts/legacy-assets.private.json` 仅用于一次性本地下载，已加入 `.gitignore`，不要提交到 GitHub。
 
 ## 持续本地开发
 
@@ -80,6 +100,8 @@ npm ci
 npm run check
 npm test
 npm run audit:toc
+npm run verify:public-content
+npm run verify:legacy-assets
 npm run build
 npm run check:links
 
@@ -131,10 +153,9 @@ series: ["life-running"]
 
 | 内容 | 维护文件 | 页面位置 |
 | --- | --- | --- |
-| 公开工具、扩展、网站、资料库 | `src/content/tools.json` | 工具 |
-| 个人系统与长期项目 | `src/content/tools.json`（`category: "personal-system"`） | 工具 / 个人系统与长期项目 |
-| 长期收藏、旧站、资料来源 | `src/content/favorites.json` | 工具 / 长期收藏与参考 |
-| 书架 | `src/content/books.json` | 阅读 |
+| 公开工具、扩展、自己 DIY 项目、资料库 | `src/content/tools.json` | 工具 |
+| 饮食、影集与家庭、运动网站 | `src/content/tools.json`（`category: "websites-life"`） | 生活 |
+| 历史内容来源（CSDN / 知乎） | `src/content/favorites.json` | 工具 / 历史内容来源 |
 | 自然观察 | `src/content/nature.json` | 自然 |
 | 正在做 | `src/data/now.ts` | 主页与 `/now/` |
 
@@ -170,3 +191,35 @@ Cloudflare Pages 配置：
 - FamilyJourney 的 R2、D1、照片、家庭数据、私有仓库与本站严格隔离。
 - 旧文迁入必须保留首次日期和原始来源；不确定的正文、图片版权或知乎标题不要猜测。
 - 站点保持“文本目录”视觉：文字优先、蓝色链接、克制细线、无卡片墙、无红色标题和状态徽章。
+
+
+## v0.14 内容去重规则
+
+- **阅读**只显示已经公开的阅读文章；书架条目和阅读专题不在阅读页重复列出。
+- **技术专题**只展示至少有一篇公开文章的专题，避免链接到空目录。
+- **工具**只放自己做的项目、Chrome 扩展、PCIe 工具、记录工具、资料库与历史来源。
+- **生活**独立放饮食、影集与家庭、运动相关的网站；这些链接不会在工具页重复出现。
+- `Rich Editor` 与 `quick_note_richtext` 使用可直接渲染 HTML 的 CDN 链接；源码链接仍保存在 `tools.json` 的 `githubUrl` 字段中。
+
+
+
+## v0.14.1：本地预览可靠性
+
+- 仅改文章、工具数据或 CSS：运行 `./preview-local.cmd`。
+- 覆盖新版本、依赖异常或需要完全重装依赖：运行 `./preview-local.cmd -Install`。该命令会先自动清理旧的 `node_modules`、`dist`、`.astro`，并关闭残留 Node 进程。
+- 若 Windows 仍报 `EPERM`，关闭 VS Code / 资源管理器项目窗口并重启后再次运行 `./preview-local.cmd -Install`。
+- 详见 `docs/V0.14.1_PREVIEW_RELIABILITY_FIX.md`。
+
+## v0.16：ZPark 骑跑两项记录
+
+新增 2020-10-31 的生活文章《中关村软件园 ZPark 骑跑两项第一名》。照片存放在：
+
+```text
+public/images/articles/2020-10-31-zpark-duathlon-first/
+```
+
+该文章同时归入“骑行”和“跑步”专题；以后骑跑两项记录也可以同时写入：
+
+```yaml
+series: ["life-cycling", "life-running"]
+```

@@ -3,15 +3,15 @@ title: "《平面国》总结"
 description: "从二维、三维与认知边界出发，整理《平面国》的阅读笔记。"
 date: 2022-02-26
 updated: null
-source: EnjoyLifeBlog
-sourceUrl: "https://globetreklog.github.io/EnjoyLifeBlog/2022/02/26/%E5%B9%B3%E9%9D%A2%E5%9B%BD_%E5%9F%83%E5%BE%B7%E6%B8%A9%C2%B7A%C2%B7%E8%89%BE%E5%8B%83%E7%89%B9/"
-migratedAt: 2026-07-01
+source: native
+sourceUrl: ""
+migratedAt: null
 domain: reading
 format: "article"
 topics: ["读书笔记", "空间"]
 tags: ["读书笔记", "数学"]
 series: ["reading-learning"]
-legacy: true
+legacy: false
 cover: ""
 coverAlt: ""
 mediaKey: "legacy-2022-02-26-flatland"
@@ -59,15 +59,15 @@ featured: false
 
 ## 图片记录
 
-![image-20230629153455357](https://globetreklog.github.io/EnjoyLifeBlog/img/平面国_埃德温·A·艾勃特.assets/image-20230629153455357.png)
+![image-20230629153455357](/images/articles/legacy-2022-02-26-flatland/image-b986b5641912fe32.png)
 
-![image-20230629153533630](https://globetreklog.github.io/EnjoyLifeBlog/img/平面国_埃德温·A·艾勃特.assets/image-20230629153533630.jpg)
+![image-20230629153533630](/images/articles/legacy-2022-02-26-flatland/image-7c9792f485a3b978.jpg)
 
-![image-20230629153552945](https://globetreklog.github.io/EnjoyLifeBlog/img/平面国_埃德温·A·艾勃特.assets/image-20230629153552945.png)
+![image-20230629153552945](/images/articles/legacy-2022-02-26-flatland/image-8d8096c60c6cda96.png)
 
-![image-20230629153912165](https://globetreklog.github.io/EnjoyLifeBlog/img/平面国_埃德温·A·艾勃特.assets/image-20230629153912165.png)
+![image-20230629153912165](/images/articles/legacy-2022-02-26-flatland/image-57a58a1e3a31e067.png)
 
-![image-20230629153632295](https://globetreklog.github.io/EnjoyLifeBlog/img/平面国_埃德温·A·艾勃特.assets/image-20230629153632295.png)
+![image-20230629153632295](/images/articles/legacy-2022-02-26-flatland/image-db105c38f712ebb4.png)
 
 
 

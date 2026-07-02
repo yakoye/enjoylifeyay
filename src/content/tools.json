@@ -1,5 +1,41 @@
 [
   {
+    "id": "regcalc-text-tool",
+    "name": "RegCalcTextTool",
+    "description": "文本、日期时间、密码、哈希与链接等实用工具集合。",
+    "category": "diy-project",
+    "status": "available",
+    "url": "https://tools.regcalc.online/RegCalcTextTool",
+    "githubUrl": "",
+    "project": "regcalc-text-tool",
+    "draft": false,
+    "order": 1
+  },
+  {
+    "id": "yaji-classic-poetry",
+    "name": "雅集 · 中华诗词经典",
+    "description": "中华诗词的分类检索与日常阅读网站。",
+    "category": "diy-project",
+    "status": "available",
+    "url": "https://yakoye.github.io/chinese-poetry-yaji/",
+    "githubUrl": "",
+    "project": "yaji-classic-poetry",
+    "draft": false,
+    "order": 2
+  },
+  {
+    "id": "life-progress",
+    "name": "人生进度可视化",
+    "description": "以时间格与水位表达人生进度的网页工具。",
+    "category": "diy-project",
+    "status": "development",
+    "url": "",
+    "githubUrl": "",
+    "project": "life-progress",
+    "draft": false,
+    "order": 3
+  },
+  {
     "id": "dictfloat",
     "name": "DictFloat",
     "description": "网页划词与本地术语表结合的浏览器词典扩展。",
@@ -9,7 +45,8 @@
     "githubUrl": "",
     "project": "dictfloat",
     "draft": false,
-    "featured": true
+    "featured": true,
+    "order": 1
   },
   {
     "id": "feishu-helper",
@@ -20,7 +57,8 @@
     "url": "",
     "githubUrl": "",
     "project": "feishu-helper",
-    "draft": false
+    "draft": false,
+    "order": 2
   },
   {
     "id": "keypass",
@@ -31,7 +69,8 @@
     "url": "https://chromewebstore.google.com/detail/keypass-float/pcnmknfcfmfdkjpfnfmodnkkkafbbkmi?authuser=0&hl=zh-CN",
     "githubUrl": "",
     "project": "keypass",
-    "draft": false
+    "draft": false,
+    "order": 3
   },
   {
     "id": "quick-note-float",
@@ -42,7 +81,8 @@
     "url": "https://chromewebstore.google.com/detail/quick-note-float/ifcbecnhhibeoodkemeaiamjgohafbdm?authuser=0&hl=zh-CN",
     "githubUrl": "",
     "project": "quick-note-float",
-    "draft": false
+    "draft": false,
+    "order": 4
   },
   {
     "id": "quiet-reader",
@@ -53,7 +93,8 @@
     "url": "",
     "githubUrl": "",
     "project": "quiet-reader",
-    "draft": false
+    "draft": false,
+    "order": 5
   },
   {
     "id": "regcalc64",
@@ -64,7 +105,8 @@
     "url": "https://chromewebstore.google.com/detail/regcalc64/bdfigfcncdbonpmfbecflcipgahkccjk?authuser=0&hl=zh-CN",
     "githubUrl": "",
     "project": "regcalc64",
-    "draft": false
+    "draft": false,
+    "order": 6
   },
   {
     "id": "pcie-tools-index",
@@ -75,7 +117,8 @@
     "url": "https://yakoye.github.io/pcie_tools/",
     "githubUrl": "",
     "project": "pcie-tools",
-    "draft": false
+    "draft": false,
+    "order": 1
   },
   {
     "id": "lspci-explorer",
@@ -86,7 +129,8 @@
     "url": "https://yakoye.github.io/pcie_tools/pcie_lspci_explorer/pcie_lspci_explorer.html",
     "githubUrl": "",
     "project": "pcie-tools",
-    "draft": false
+    "draft": false,
+    "order": 2
   },
   {
     "id": "ltssm-visualizer",
@@ -97,7 +141,8 @@
     "url": "https://yakoye.github.io/pcie_tools/pcie_ltssm_visualizer/pcie_ltssm_visualizer.html",
     "githubUrl": "",
     "project": "pcie-tools",
-    "draft": false
+    "draft": false,
+    "order": 3
   },
   {
     "id": "pcie-register-query",
@@ -108,7 +153,8 @@
     "url": "https://yakoye.github.io/pcie_tools/pcie_register_query/pcie_register_query.html",
     "githubUrl": "",
     "project": "pcie-tools",
-    "draft": false
+    "draft": false,
+    "order": 4
   },
   {
     "id": "register-bitfield-parser",
@@ -119,7 +165,8 @@
     "url": "https://yakoye.github.io/pcie_tools/register_bitfield_parser/pcie_register_bitfield_parser.html",
     "githubUrl": "",
     "project": "pcie-tools",
-    "draft": false
+    "draft": false,
+    "order": 5
   },
   {
     "id": "rich-editor",
@@ -127,10 +174,11 @@
     "description": "文字编辑网页工具。",
     "category": "writing-media",
     "status": "available",
-    "url": "https://github.com/yakoye/dotfiles/blob/main/htmledit/rich_editor_CKEditor5.html",
-    "githubUrl": "",
+    "url": "https://cdn.jsdelivr.net/gh/yakoye/dotfiles@main/htmledit/rich_editor_CKEditor5.html",
+    "githubUrl": "https://github.com/yakoye/dotfiles/blob/main/htmledit/rich_editor_CKEditor5.html",
     "project": "rich-editor",
-    "draft": false
+    "draft": false,
+    "order": 1
   },
   {
     "id": "quick-note-richtext",
@@ -138,65 +186,11 @@
     "description": "轻量网页富文本便签工具。",
     "category": "writing-media",
     "status": "available",
-    "url": "https://github.com/yakoye/dotfiles/blob/main/htmledit/quick_note_richtext.html",
-    "githubUrl": "",
+    "url": "https://cdn.jsdelivr.net/gh/yakoye/dotfiles@main/htmledit/quick_note_richtext.html",
+    "githubUrl": "https://github.com/yakoye/dotfiles/blob/main/htmledit/quick_note_richtext.html",
     "project": "quick-note-richtext",
-    "draft": false
-  },
-  {
-    "id": "familyjourney",
-    "name": "FamilyJourney",
-    "description": "面向家庭生活记录的图片与文字网站。",
-    "category": "personal-system",
-    "status": "available",
-    "url": "https://familyjourney.pages.dev/",
-    "githubUrl": "",
-    "project": "familyjourney",
-    "draft": false
-  },
-  {
-    "id": "regcalc-text-tool",
-    "name": "RegCalcTextTool",
-    "description": "文本、日期时间、密码、哈希与链接等实用工具集合。",
-    "category": "websites-life",
-    "status": "available",
-    "url": "https://tools.regcalc.online/RegCalcTextTool",
-    "githubUrl": "",
-    "project": "regcalc-text-tool",
-    "draft": false
-  },
-  {
-    "id": "litebites",
-    "name": "轻食记",
-    "description": "轻食与日常饮食记录网站。",
-    "category": "websites-life",
-    "status": "available",
-    "url": "https://litebites.pages.dev/",
-    "githubUrl": "",
-    "project": "litebites",
-    "draft": false
-  },
-  {
-    "id": "fitjourney",
-    "name": "FitJourney",
-    "description": "训练、习惯与蜕变记录网站。",
-    "category": "websites-life",
-    "status": "available",
-    "url": "https://fitjourney.goldke.online/",
-    "githubUrl": "",
-    "project": "fitjourney",
-    "draft": false
-  },
-  {
-    "id": "yaji-classic-poetry",
-    "name": "雅集 · 中华诗词经典",
-    "description": "中华诗词的分类检索与日常阅读网站。",
-    "category": "knowledge-library",
-    "status": "available",
-    "url": "https://yakoye.github.io/chinese-poetry-yaji/",
-    "githubUrl": "",
-    "project": "yaji-classic-poetry",
-    "draft": false
+    "draft": false,
+    "order": 2
   },
   {
     "id": "pcie-chinese-library",
@@ -207,39 +201,43 @@
     "url": "https://yakoye.github.io/pci-express-technology-3.0-chinese/docs/index.html",
     "githubUrl": "https://github.com/yakoye/pci-express-technology-3.0-chinese",
     "project": "pcie-chinese-library",
-    "draft": false
+    "draft": false,
+    "order": 1
   },
   {
-    "id": "obsidian-journal",
-    "name": "Obsidian 日记系统",
-    "description": "个人知识管理与日记记录工作流。",
-    "category": "personal-system",
-    "status": "development",
-    "url": "",
-    "githubUrl": "",
-    "project": "obsidian-journal",
-    "draft": false
-  },
-  {
-    "id": "life-progress",
-    "name": "人生进度可视化",
-    "description": "以时间格与水位表达人生进度的网页工具。",
+    "id": "litebites",
+    "name": "轻食记",
+    "description": "轻食与日常饮食记录网站。",
     "category": "websites-life",
-    "status": "development",
-    "url": "",
+    "status": "available",
+    "url": "https://litebites.pages.dev/",
     "githubUrl": "",
-    "project": "life-progress",
-    "draft": false
+    "project": "litebites",
+    "draft": false,
+    "order": 1
   },
   {
-    "id": "enjoy-life",
-    "name": "Enjoy Life",
-    "description": "技术、工具、阅读、自然与生活的长期记录站。",
-    "category": "personal-system",
+    "id": "fitjourney",
+    "name": "FitJourney",
+    "description": "训练、习惯与蜕变记录网站。",
+    "category": "websites-life",
     "status": "available",
-    "url": "https://enjoylifeyay.pages.dev/",
+    "url": "https://fitjourney.goldke.online/",
     "githubUrl": "",
-    "project": "personal-site",
-    "draft": false
+    "project": "fitjourney",
+    "draft": false,
+    "order": 2
+  },
+  {
+    "id": "familyjourney",
+    "name": "FamilyJourney",
+    "description": "面向家庭生活记录的图片与文字网站。",
+    "category": "websites-life",
+    "status": "available",
+    "url": "https://familyjourney.pages.dev/",
+    "githubUrl": "",
+    "project": "familyjourney",
+    "draft": false,
+    "order": 3
   }
 ]

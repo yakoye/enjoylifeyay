@@ -75,7 +75,7 @@ featured: false
 | --- | --- |
 | `date` | 首次公开日期。普通文章只写日期，不写时分秒。 |
 | `updated` | 有实质性修订时写最后修订日期，否则严格写 `null`。`null` 不会再被显示为 `1970-01-01`。 |
-| `source` | 新文章用 `native`；旧文使用 `CSDN`、`Zhihu` 或 `EnjoyLifeBlog`。 |
+| `source` | 新文章用 `native`；旧文使用 `CSDN` 或 `Zhihu`。 |
 | `sourceUrl` | 旧文必须保留原始链接；新文章可留空。 |
 | `migratedAt` | 旧文章迁入本站的日期；新文章为 `null`。 |
 | `domain` | `technology`、`reading`、`life`、`nature`、`tool`。 |
@@ -91,7 +91,7 @@ featured: false
 - Markdown 中使用从根目录开始的路径，例如：`/images/articles/2026-07-05-pcie-completion-timeout/pcie-layer.webp`。
 - 每张图片都要有清楚的替代文本：`![PCIe 分层关系图](/images/articles/2026-07-05-pcie-completion-timeout/pcie-layer.webp)`。
 - 不要让公开页面直接依赖 GitHub raw / blob 图片路径；本站图片会随构建发布到 Cloudflare Pages。
-- 已迁入旧 EnjoyLifeBlog 文章若仍有旧图片链接，先运行 `npm run import:legacy-images -- --dry-run`，确认后运行 `npm run import:legacy-images -- --write`。
+- 旧个人文章的图片已改用本站本地路径。首次升级后运行 `npm run fetch:legacy-assets` 下载一次，再运行 `npm run verify:legacy-assets` 确认文件齐全。
 - 代码使用 Markdown 代码块；页面会自动渲染成无圆角、可复制的等宽代码区。
 - 每篇公开文章都必须至少有一个二级、三级或四级标题。标题元信息下会自动出现默认折叠的“目录”；无需手写目录。发布前运行 `npm run audit:toc`，任何公开文章没有标题都会失败。
 - 链接、斜体、下划线、引用、表格都可以直接用标准 Markdown 语法书写；网页渲染后不会显示 `#`、`>`、反引号或横线等 Markdown 控制符。
@@ -119,7 +119,7 @@ series: ["life-running"]
 
 生活栏目入口在 `/life/`。骑行和跑步的旧专题详情仍可访问，但不再单独占用顶部导航。
 
-## 二、迁入 CSDN、知乎或旧 GitHub 博客文章
+## 二、迁入 CSDN 或知乎文章
 
 ### 有完整正文且确认可公开
 
@@ -158,7 +158,7 @@ npm run sync:legacy-archive
 npm run build
 ```
 
-构建会自动同步 `src/data/legacyArchive.ts`。这样该条目会显示在 `/archive/` 的按年时间线中，并链接回 CSDN 或旧博客原文；不会假装已经迁入本站正文。
+构建会自动同步 `src/data/legacyArchive.ts`。这样该条目会显示在 `/archive/` 的按年时间线中，并链接回 CSDN 原文；不会假装已经迁入本站正文。
 
 ### 知乎内容
 
@@ -192,8 +192,8 @@ src/content/tools.json
 
 - 有公开地址：填 `url`，工具名称会自动成为链接。
 - 未发布：`url` 留空；公开页面只显示名称和说明，不显示“待确认”。
-- `category` 可用：`browser-extension`、`pcie-hardware`、`writing-media`、`websites-life`、`knowledge-library`、`personal-system`。
-- 工具页会按分类自动分组，不需要手动改页面代码。
+- `category` 可用：`diy-project`、`browser-extension`、`pcie-hardware`、`writing-media`、`knowledge-library`、`websites-life`。
+- 工具页会按分类自动分组；同一分组内使用 `order` 从小到大排序，不需要手动改页面代码。
 
 ## 四、工具页承载公开项目与收藏
 
@@ -206,27 +206,26 @@ src/content/tools.json
 工具页按以下分组自动展示：
 
 ```text
+自己 DIY 项目
 Chrome 扩展与网页工具
 PCIe / 硬件工具
 文字、图片与记录工具
-个人网站与生活工具
-资料库与阅读
-个人系统与长期项目
-长期收藏与参考
+资料库
+历史内容来源
 ```
 
-不公开、没有链接或包含私有数据的项目不要为了展示而补造链接。旧 `/projects/` 地址会自动跳转到 `/tools/#projects`，旧 `/favorites/` 地址会跳转到 `/tools/#references`，避免历史书签失效。公开项目请维护在 `src/content/tools.json`。
+不公开、没有链接或包含私有数据的项目不要为了展示而补造链接。旧 `/projects/` 地址会自动跳转到 `/tools/#diy-projects`，旧 `/favorites/` 地址会跳转到 `/tools/#historical-sources`，避免历史书签失效。公开项目请维护在 `src/content/tools.json`。
 
-## 五、添加自然观察、书架与长期参考
+## 五、添加自然观察、书籍资料与历史来源
 
 | 内容 | 文件 |
 | --- | --- |
 | 自然观察 | `src/content/nature.json` |
 | 书架 | `src/content/books.json` |
-| 长期收藏与参考 | `src/content/favorites.json`（显示在工具页） |
+| 历史内容来源 | `src/content/favorites.json`（显示在工具页） |
 | 正在做 | `src/data/now.ts` |
 
-收藏条目必须写自己的中文说明；不要只存一个裸链接。自然观察不要公开住址、家庭位置、精确路线或私密定位。
+历史来源条目必须写清楚迁移用途；不要只存一个裸链接。自然观察不要公开住址、家庭位置、精确路线或私密定位。
 
 ## 六、每次发布前的完整流程
 
@@ -297,7 +296,32 @@ docs/COMMENTS_D1.md
 正式导航现在是：`主页 / 技术 / 工具 / 阅读 / 自然 / 生活 / 归档 / 关于`。
 
 - 技术文章和技术专题在 `/technology/`。
-- 阅读文章和书架在 `/reading/`。
+- 阅读页在 `/reading/`，只显示已公开阅读文章。
 - 生活、骑行、跑步文章在 `/life/`。
 - 收藏与项目内容并入 `/tools/`。
 - 详细映射见 `docs/V0.13_NAVIGATION_CONSOLIDATION.md`。
+
+
+## v0.14 栏目去重约定
+
+- 阅读页只列出 `domain: reading` 且 `draft: false` 的文章。书籍条目仅保留为内部资料，不再在阅读页重复显示。
+- 工具类内容使用 `src/content/tools.json`。`websites-life` 类目只在生活页展示，不在工具页重复展示。
+- 技术专题必须至少关联一篇公开文章，才会出现在技术页和生成专题详情页。
+- 历史来源只保留 CSDN 和知乎入口；已迁入旧文自身的 `sourceUrl` 已足够记录 旧个人站 来源。
+
+
+## 七、旧个人文章本地化
+
+已迁入旧个人站的文章现在全部使用本站地址和本站图片路径。首次升级到 v0.15，请运行：
+
+```powershell
+.\preview-local.cmd -FetchLegacyAssets
+```
+
+该命令会下载旧文所需图片到 `public/images/articles/`。成功后运行：
+
+```powershell
+npm run verify:legacy-assets
+```
+
+再将图片目录提交到 Git。`scripts/legacy-assets.private.json` 只用于一次性本地下载，已被 `.gitignore` 排除，不要提交。
