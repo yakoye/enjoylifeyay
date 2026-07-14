@@ -51,7 +51,7 @@
   {
     "id": "feishu-helper",
     "name": "飞书小助理",
-    "description": "飞书相关浏览器扩展。",
+    "description": "飞书相关浏览器扩展。(私有)",
     "category": "browser-extension",
     "status": "development",
     "url": "",
@@ -90,7 +90,7 @@
     "description": "网页阅读辅助扩展。",
     "category": "browser-extension",
     "status": "development",
-    "url": "",
+    "url": "https://chromewebstore.google.com/detail/%E7%AE%80%E8%AF%BB-%C2%B7-%E7%BD%91%E9%A1%B5%E9%98%85%E8%AF%BB%E5%8A%A9%E6%89%8B/oejilhalodfgihcpdpnnlhpembpdobhi?authuser=0&hl=zh-CN",
     "githubUrl": "",
     "project": "quiet-reader",
     "draft": false,
