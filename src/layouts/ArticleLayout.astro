@@ -1,11 +1,12 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import { getSectionInfo } from '../config/content-model';
-import { getPublicTagSet, tagHref } from '../lib/tags';
+import { tagHref } from '../lib/tags';
 import { site } from '../config/site';
 import CopyCode from '../components/CopyCode.astro';
 import ArticleToc from '../components/ArticleToc.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 interface Heading { depth: number; slug: string; text: string; }
 interface Props { entry: CollectionEntry<'writing'>; headings?: Heading[]; }
@@ -33,7 +34,6 @@ const formatDateTime = (value?: Date | null) => {
 const publishedAt = data.publishedAt;
 const updatedAt = isMeaningfulDate(data.updated) ? data.updated : undefined;
 const section = getSectionInfo(data.section);
-const publicTagSet = getPublicTagSet(await getCollection('writing', ({ data: item }) => !item.draft));
 const toc = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'BlogPosting', headline: data.title,
@@ -46,19 +46,19 @@ const jsonLd = {
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article class="article-page">
     <header class="article-header">
+      <Breadcrumbs items={[
+        { label: section.parentLabel, href: section.parentHref },
+        { label: section.label, href: section.href },
+      ]} />
       <h1>{data.title}</h1>
-      <div class="writing-meta">
-        <a href={section.parentHref}>{section.parentLabel}</a>
-        <span aria-hidden="true"> · </span>
-        <a href={section.href}>{section.label}</a>
-        {data.tags.length > 0 && <>
-          <span aria-hidden="true"> · </span>
-          {data.tags.map((tag, index) => <>
-            {index > 0 && <span aria-hidden="true"> / </span>}
-            {publicTagSet.has(tag) ? <a href={tagHref(tag)}>{tag}</a> : <span>{tag}</span>}
-          </>)}
-        </>}
-      </div>
+      {data.tags.length > 0 && (
+        <div class="article-tags" aria-label="文章标签">
+          <div class="article-tag-list">
+            {data.tags.map((tag) => <a href={tagHref(tag)}>#{tag}</a>)}
+          </div>
+          <a class="all-tags-link" href="/tags/">全部标签</a>
+        </div>
+      )}
       <div class="article-meta">
         <span>发布：{formatDateTime(publishedAt)}</span>
         {updatedAt && <span>最后修订：{formatDate(updatedAt)}</span>}

@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import SectionMap from '../../components/SectionMap.astro';
+import SectionDirectory from '../../components/SectionDirectory.astro';
 import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getVisibleSectionPages } from '../../lib/section-pages';
@@ -17,7 +17,7 @@ const highlights = tools.filter((tool) => tool.data.featured || ['dictfloat', 'r
 <BaseLayout title={page.data.title} description={page.data.description}>
   <h1>{page.data.title}</h1>
   <p class="page-intro">{page.data.intro}</p>
-  <SectionMap label={page.data.title} sectionHref="/tools/" items={mapItems} />
+  <SectionDirectory items={mapItems} />
 
   <section aria-labelledby="tool-highlights">
     <h2 id="tool-highlights">常用入口</h2>

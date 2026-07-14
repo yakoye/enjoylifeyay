@@ -5,6 +5,7 @@ import DatedTextList from '../../components/DatedTextList.astro';
 import BookshelfList from '../../components/BookshelfList.astro';
 import WritingList from '../../components/WritingList.astro';
 import SectionMap from '../../components/SectionMap.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getVisibleSectionPages, matchesWritingSectionPage } from '../../lib/section-pages';
 
@@ -64,9 +65,13 @@ const toolItems = toolEntries.map((item) => ({
 ---
 
 <BaseLayout title={data.title} description={data.description} activeNav={`/${data.section}/`}>
+  <Breadcrumbs items={[
+    { label: data.section === 'technology' ? '技术' : data.section === 'tools' ? '工具' : data.section === 'reading' ? '阅读' : data.section === 'nature' ? '自然' : '生活', href: `/${data.section}/` },
+    { label: data.title },
+  ]} />
   <h1>{data.title}</h1>
   <p class="page-intro">{data.description}</p>
-  <SectionMap label={data.section === 'technology' ? '技术' : data.section === 'tools' ? '工具' : data.section === 'reading' ? '阅读' : data.section === 'nature' ? '自然' : '生活'} sectionHref={`/${data.section}/`} items={siblingMapItems} currentHref={currentHref} />
+  <SectionMap label="同级主题" items={siblingMapItems} currentHref={currentHref} />
 
   <article class:list={['article-prose', 'section-page-prose', { 'external-sites-prose': data.section === 'reading' && data.routeSlug === 'sites' }]}>
     <Content />

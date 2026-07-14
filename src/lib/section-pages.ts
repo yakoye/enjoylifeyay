@@ -38,5 +38,5 @@ export async function getVisibleSectionPages(section: Parent) {
 
   return visible
     .sort((a, b) => a.data.order - b.data.order)
-    .map((entry) => ({ title: entry.data.title, href: `/${entry.data.section}/${entry.data.routeSlug}/` }));
+    .map((entry) => ({ title: entry.data.title, description: entry.data.description, href: `/${entry.data.section}/${entry.data.routeSlug}/` }));
 }

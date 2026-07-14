@@ -1,0 +1,19 @@
+---
+interface Item { title: string; href: string; description?: string; }
+interface Props { items: Item[]; label?: string; }
+const { items, label = '主题' } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section class="section-directory" aria-labelledby="section-directory-title">
+    <h2 id="section-directory-title">{label}</h2>
+    <div class="section-directory-grid">
+      {items.map((item) => (
+        <a class="section-directory-item" href={item.href}>
+          <strong>{item.title}</strong>
+          {item.description && <span>{item.description}</span>}
+        </a>
+      ))}
+    </div>
+  </section>
+)}

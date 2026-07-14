@@ -17,7 +17,7 @@ test('v0.18 站外专题由独立 Markdown 页面维护', async () => {
 
   assert.match(config, /const sectionPages = defineCollection/);
   assert.match(sites, /showInMap:\s*true/);
-  assert.match(page, /SectionMap/);
+  assert.match(page, /SectionDirectory/);
   assert.match(page, /getVisibleSectionPages\('reading'\)/);
   assert.ok(siteLines.length >= 96, '站外专题 Markdown 应保留用户维护的 96 个入口');
   for (const heading of ['工程、系统与程序设计', '认知、决策与学习', '科学、未来与社会', '数字考古与知识档案', '文学、思想与非虚构', '生活、独立工作与行走']) {
@@ -63,7 +63,7 @@ test('v0.18 二级地图和二级页面覆盖五个栏目', async () => {
   assert.match(dynamicPage, /getStaticPaths/);
   for (const section of ['technology', 'tools', 'reading', 'nature', 'life']) {
     const parent = await read(`src/pages/${section}/index.astro`);
-    assert.match(parent, /SectionMap/, `${section} 首页应提供简洁二级地图`);
+    assert.match(parent, /SectionDirectory/, `${section} 首页应提供带说明的二级主题目录`);
     const files = await readFile(path.join(root, `src/content/section-pages/${section}/`), 'utf8').catch(() => '');
     assert.equal(files, '', 'directories are checked by static paths below');
   }

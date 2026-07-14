@@ -6,7 +6,7 @@ const file = (value) => new URL(`../${value}`, import.meta.url);
 
 test('v0.22 reading parent shows recent article links without duplicating article bodies or directory data', async () => {
   const page = await readFile(file('src/pages/reading/index.astro'), 'utf8');
-  assert.match(page, /SectionMap/);
+  assert.match(page, /SectionDirectory/);
   assert.match(page, /WritingList/);
   assert.match(page, /最近文章/);
   for (const forbidden of ["getCollection('books')", 'reading-sites.json']) {
@@ -17,8 +17,8 @@ test('v0.22 reading parent shows recent article links without duplicating articl
 test('v0.14 technology and tools defer sections to reusable maps instead of empty card directories', async () => {
   const technology = await readFile(file('src/pages/technology/index.astro'), 'utf8');
   const tools = await readFile(file('src/pages/tools/index.astro'), 'utf8');
-  assert.match(technology, /SectionMap/);
-  assert.match(tools, /SectionMap/);
+  assert.match(technology, /SectionDirectory/);
+  assert.match(tools, /SectionDirectory/);
   assert.doesNotMatch(tools, /个人网站与生活工具/);
 });
 

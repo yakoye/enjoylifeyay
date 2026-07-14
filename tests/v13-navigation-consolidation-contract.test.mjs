@@ -35,7 +35,7 @@ test('v0.13 provides consolidated technology reading life routes and preserves o
 
 test('v0.13 merges project presentation into tools without adding a separate public project menu', async () => {
   const toolsPage = await readFile(file('src/pages/tools/index.astro'), 'utf8');
-  assert.match(toolsPage, /SectionMap/);
+  assert.match(toolsPage, /SectionDirectory/);
   assert.doesNotMatch(toolsPage, /历史内容来源/);
   assert.doesNotMatch(toolsPage, /个人网站与生活工具/);
 });

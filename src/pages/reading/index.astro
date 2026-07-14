@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import SectionMap from '../../components/SectionMap.astro';
+import SectionDirectory from '../../components/SectionDirectory.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { isInParentSection } from '../../config/content-model';
@@ -17,7 +17,7 @@ const mapItems = await getVisibleSectionPages('reading');
 <BaseLayout title={page.data.title} description={page.data.description}>
   <h1>{page.data.title}</h1>
   <p class="page-intro">{page.data.intro}</p>
-  <SectionMap label={page.data.title} sectionHref="/reading/" items={mapItems} />
+  <SectionDirectory items={mapItems} />
 
   <section aria-labelledby="reading-recent-writing">
     <h2 id="reading-recent-writing">最近文章</h2>

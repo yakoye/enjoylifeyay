@@ -7,20 +7,21 @@ import test from 'node:test';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const read = (relative) => readFile(join(root, relative), 'utf8');
 
-test('v0.19 二级地图的一级栏目可直接返回父页', async () => {
-  const component = await read('src/components/SectionMap.astro');
-  assert.match(component, /sectionHref/);
-  assert.match(component, /<a class="section-map-label" href=\{sectionHref\}[\s\S]*>\{label\}<\/a>/);
+test('v0.24 一级目录与二级页面都保留清楚的返回路径', async () => {
+  const directory = await read('src/components/SectionDirectory.astro');
+  const breadcrumbs = await read('src/components/Breadcrumbs.astro');
+  assert.match(directory, /item\.href/);
+  assert.match(breadcrumbs, /面包屑导航/);
 
   for (const section of ['technology', 'tools', 'reading', 'nature', 'life']) {
     const parent = await read(`src/pages/${section}/index.astro`);
-    assert.match(parent, new RegExp(`sectionHref="/${section}/"`));
+    assert.match(parent, /SectionDirectory/);
   }
 
   const child = await read('src/pages/[section]/[slug].astro');
-  assert.match(child, /sectionHref=\{`\/\$\{data\.section\}\/`\}/);
+  assert.match(child, /<Breadcrumbs items=/);
+  assert.match(child, /href: `\/\$\{data\.section\}\//);
 });
-
 test('v0.19 每篇文章保留发布日期和可显示的发布时间', async () => {
   const schema = await read('src/content.config.ts');
   const articleLayout = await read('src/layouts/ArticleLayout.astro');

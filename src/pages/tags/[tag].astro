@@ -2,20 +2,21 @@
 import { getCollection, getEntry } from 'astro:content';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { decodeTagParam, getPublicTags } from '../../lib/tags';
+import { encodeTagParam, getPublicTags } from '../../lib/tags';
 
 export async function getStaticPaths() {
   const writing = await getCollection('writing', ({ data }) => !data.draft);
-  return getPublicTags(writing).map(({ tag }) => ({ params: { tag } }));
+  return getPublicTags(writing).map(({ tag }) => ({
+    params: { tag: encodeTagParam(tag) },
+    props: { tag },
+  }));
 }
 
 const page = await getEntry('sitePages', 'tags');
 if (!page) throw new Error('Missing Markdown page content: tags');
-const tag = decodeTagParam(Astro.params.tag);
+const { tag } = Astro.props as { tag: string };
 const writing = (await getCollection('writing', ({ data }) => !data.draft && data.tags.includes(tag)))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const publicTags = new Set(getPublicTags(await getCollection('writing', ({ data }) => !data.draft)).map(({ tag: item }) => item));
-if (!publicTags.has(tag)) return new Response(null, { status: 404 });
 ---
 
 <BaseLayout title={tag} description={`与“${tag}”有关的文章。`}>

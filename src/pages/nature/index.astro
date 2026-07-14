@@ -1,7 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import DatedTextList from '../../components/DatedTextList.astro';
-import SectionMap from '../../components/SectionMap.astro';
+import SectionDirectory from '../../components/SectionDirectory.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getVisibleSectionPages } from '../../lib/section-pages';
 
@@ -24,7 +24,7 @@ const items = entries.map(({ data }) => ({
 <BaseLayout title={page.data.title} description={page.data.description}>
   <h1>{page.data.title}</h1>
   <p class="page-intro">{page.data.intro}</p>
-  <SectionMap label={page.data.title} sectionHref="/nature/" items={mapItems} />
+  <SectionDirectory items={mapItems} />
 
   <section aria-labelledby="nature-recent-observations">
     <h2 id="nature-recent-observations">最近观察</h2>
