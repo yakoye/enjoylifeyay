@@ -10,7 +10,8 @@ test('生产构建生成 Pagefind 静态索引', async () => {
 
 test('搜索页使用本地 Pagefind 并显示结构化结果', async () => {
   const page = await readFile(new URL('../src/pages/search/index.astro', import.meta.url), 'utf8');
-  assert.match(page, /\/pagefind\/pagefind\.js/);
+  assert.match(page, /data-base=\{import\.meta\.env\.BASE_URL\}/);
+  assert.match(page, /import\(`\$\{basePath\}pagefind\/pagefind\.js`\)/);
   assert.match(page, /result\.meta\.type/);
   assert.match(page, /result\.meta\.description/);
   assert.match(page, /result\.meta\.date/);

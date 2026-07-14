@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: technology
-format: "article"
-topics: ["PCIe", "低功耗"]
+section: technology/pcie
 tags: ["PCIe", "ASPM", "L1 Substates"]
-series: ["pcie-high-speed-interconnect"]
 legacy: false
 cover: ""
 coverAlt: ""

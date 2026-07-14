@@ -15,9 +15,9 @@ test('实施报告覆盖交付、迁移、问题与部署', async () => {
   }
 });
 
-test('README 记录 v1 开发、检查和内容维护命令', async () => {
+test('README 记录当前开发、完整校验和自动发布命令', async () => {
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
-  for (const command of ['npm run dev', 'npm test', 'npm run check', 'npm run build', 'npm run check:links']) {
+  for (const command of ['npm run dev', 'npm run verify', 'git push origin main']) {
     assert.ok(readme.includes(command));
   }
 });

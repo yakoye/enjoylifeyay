@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: technology
-format: "answer"
-topics: ["PCIe", "调试"]
+section: technology/pcie
 tags: ["PCIe", "BAR", "调试"]
-series: ["pcie-high-speed-interconnect"]
 legacy: false
 cover: ""
 coverAlt: ""

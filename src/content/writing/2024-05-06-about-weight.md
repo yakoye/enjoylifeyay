@@ -7,11 +7,8 @@ updated: 2026-07-02
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: life
-format: "note"
-topics: ["生活", "运动"]
+section: life/food
 tags: ["习惯", "饮食", "运动"]
-series: []
 legacy: false
 cover: ""
 coverAlt: ""

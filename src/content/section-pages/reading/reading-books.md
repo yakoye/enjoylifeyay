@@ -5,6 +5,7 @@ title: 书架
 description: 在读、读过和准备阅读的书籍索引。
 order: 2
 kind: books
+showInMap: true
 draft: false
 bookStatuses: ["reading", "read", "wishlist"]
 ---

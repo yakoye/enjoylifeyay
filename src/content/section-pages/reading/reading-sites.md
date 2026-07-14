@@ -3,8 +3,9 @@ section: reading
 routeSlug: sites
 title: 站外专题
 description: 按主题整理的独立博客、长文专栏与知识档案。
-order: 5
+order: 4
 kind: markdown
+showInMap: true
 draft: false
 ---
 

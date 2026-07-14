@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type PublishedBook = CollectionEntry<'books'> & {
+  data: Extract<CollectionEntry<'books'>['data'], { draft: false }>;
+};
+
+interface Props {
+  entries: PublishedBook[];
+}
+
+const { entries } = Astro.props;
+const groups = [
+  { label: '在读', statuses: ['reading'] },
+  { label: '读过', statuses: ['read'] },
+  { label: '待读', statuses: ['wishlist'] },
+] as const;
+const visibleGroups = groups
+  .map((group) => ({ ...group, items: entries.filter((item) => group.statuses.includes(item.data.status as never)) }))
+  .filter((group) => group.items.length > 0);
+---
+
+{visibleGroups.map((group) => (
+  <section class="text-list-section" aria-labelledby={`books-${group.statuses[0]}`}>
+    <h2 class="text-list-heading" id={`books-${group.statuses[0]}`}>{group.label}</h2>
+    <ul class="text-list">
+      {group.items.map((item) => (
+        <li>
+          <span class="text-list-title">{item.data.title}</span>
+          {item.data.note && <span class="text-list-description">：{item.data.note}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+))}

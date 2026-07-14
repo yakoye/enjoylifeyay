@@ -1,378 +1,153 @@
-# 构建、预览与发布（Windows PowerShell）
+# 构建、预览与发布
 
-## 一键本地检查并自动打开网页
+## 环境与目录
 
-日常改完文章、图片或样式后，优先双击仓库根目录的：
+本站按 Node.js 24.x 维护，唯一开发目录为：
 
-```text
-preview-local.cmd
+```powershell
+cd D:\work\code\code_o\github_ye\enjoylifeyay
+node -v
 ```
 
-或在 PowerShell 执行：
+预期版本为 `v24.x.x`。依赖必须按 `package-lock.json` 安装：
+
+```powershell
+npm ci
+```
+
+## 本地开发与预览
+
+开发模式：
+
+```powershell
+npm run dev
+```
+
+日常完整预览可双击 `preview-local.cmd`，或执行：
 
 ```powershell
 npm run preview:local
 ```
 
-脚本会完成：
-
-```text
-npm run check
-npm test
-npm run audit:toc
-npm run audit:public-copy
-npm run build
-npm run check:links
-npm run preview -- --host 127.0.0.1 --port 4321
-```
-
-然后自动打开 `http://127.0.0.1:4321/`。
-
-首次使用、依赖被清理，或 `package.json` / `package-lock.json` 有变化时，用：
+首次使用或依赖变化时执行：
 
 ```powershell
-preview-local.cmd -Install
+.\preview-local.cmd -Install
 ```
-
-它会先执行 `npm ci`。正常写文章时不要每次都强制 `npm ci`，这样更快，也能减少 Windows 锁住 Rolldown / Rollup 原生模块的概率。
 
 停止后台预览：
 
-```text
-stop-local-preview.cmd
-```
-
-完整参数和故障排查见 [`V0.11.2_ONE_CLICK_LOCAL_PREVIEW.md`](V0.11.2_ONE_CLICK_LOCAL_PREVIEW.md)。
-
-本仓库按 **Node.js 24.x** 维护。请在仓库根目录执行命令：
-
 ```powershell
-cd C:\Users\color\Documents\EnjoyLife
-node -v
+.\stop-local-preview.cmd
 ```
 
-预期版本为 `v24.x.x`。`npm ci` 依赖 `package-lock.json`，不要把它删掉。
+## 完整校验
 
-## 一次完整的本地校验
-
-首次安装依赖，或更新 `package-lock.json` 后，先执行：
-
-```powershell
-npm ci
-```
-
-`npm ci` 成功后，按顺序执行：
-
-```powershell
-npm run check
-npm test
-npm run audit:toc
-npm run audit:public-copy
-npm run build
-npm run check:links
-```
-
-命令含义：
-
-| 命令 | 作用 | 成功标志 |
-| --- | --- | --- |
-| `npm ci` | 严格按锁文件安装依赖 | 命令正常结束，`node_modules/.bin/astro` 存在 |
-| `npm run check` | Astro 与 TypeScript 检查 | 没有 `astro is not recognized` 或类型错误 |
-| `npm test` | 内容模型、路由、SEO、迁移台账与视觉规则测试 | 全部测试通过 |
-| `npm run audit:toc` | 检查每篇公开文章均有可生成“目录”的分节标题 | 不出现 `MISSING` |
-| `npm run audit:public-copy` | 检查公开页面没有开发、迁移或占位文案 | 输出 `Public-copy audit passed.` |
-| `npm run build` | 同步历史归档、生成静态站和 Pagefind 中文搜索索引 | 生成 `src/data/legacyArchive.ts`、`dist/` 与 `dist/pagefind/` |
-| `npm run check:links` | 检查构建结果中的主要站内链接 | 不报 `dist/index.html not found` 或死链错误 |
-
-也可以在依赖已经安装后使用一条命令完成四项校验：
+提交前统一运行：
 
 ```powershell
 npm run verify
 ```
 
-`npm run verify` 等同于：
+这条命令依次检查 Astro/TypeScript、内容模型、页面契约、文章目录、公开文案、科学资料引用、历史图片、静态构建与产物链接。成功后会生成包含 Pagefind 中文索引的 `dist/`。
+
+科学常识文章需要联网复核全部 PMID、PMCID 和 DOI 时，额外执行：
 
 ```powershell
-npm run check
-npm test
-npm run audit:toc
-npm run audit:public-copy
+npm run verify:science-references -- --online
+```
+
+## 双平台构建差异
+
+Cloudflare Pages 部署在域名根路径：
+
+```powershell
 npm run build
-npm run check:links
 ```
 
-## 中文 Pagefind 搜索说明
-
-构建命令使用：
-
-```text
-pagefind --site dist --force-language zh --silent
-```
-
-`zh` 会让 Pagefind 以单一中文索引构建站点，`--silent` 只保留真正错误输出，因此不会再显示 `Pagefind doesn't support stemming for the language zh-cn` 的提示。
-
-这不是搜索失效。中文没有英文那样的词根变化；Pagefind 对中文使用分词。搜索单词、词组和带引号的精确短语都可以正常工作。不要为了消掉该提示把页面语言改成英文。
-
-## 历史来源同步
-
-`docs/CONTENT_MIGRATION_MANIFEST.csv` 是 CSDN、知乎与旧博客历史条目的维护台账。每次 `npm run build` 都会自动执行：
+GitHub Pages 默认项目地址部署在 `/enjoylifeyay/` 子路径，CI 使用：
 
 ```powershell
-npm run sync:legacy-archive
+$env:BASE_PATH = "/enjoylifeyay/"
+npm run build
+Remove-Item Env:BASE_PATH
 ```
 
-它会更新 `src/data/legacyArchive.ts`，由 `/archive/` 展示按年份排序的历史链接。手工更新 CSV 后，也可单独运行这条命令再查看差异。
+两次构建使用同一份源码，但输出不能混用。站点 canonical、RSS 和 Sitemap 的正式来源始终是 `https://enjoylifeyay.goldke.online`。
 
-## 本地预览
-
-只有 `npm run build` 成功后再预览：
+## 推荐发布流程
 
 ```powershell
-npm run preview
+cd D:\work\code\code_o\github_ye\enjoylifeyay
+git pull --ff-only
+npm run verify
+git status
+git add -A
+git commit -m "content: update site"
+git push origin main
 ```
 
-终端会显示本地地址，通常为 `http://localhost:4321/`。预览进程会持续占用当前终端；确认后按 `Ctrl+C` 停止。
+推送到 `main` 后，[`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) 会先校验，再启动两个互不覆盖的部署任务：
 
-至少检查：
+- Cloudflare Pages → `https://enjoylifeyay.goldke.online`
+- GitHub Pages → `https://yakoye.github.io/enjoylifeyay/`
+
+GitHub Pages 的 **Source** 必须设为 **GitHub Actions**。仓库 Actions Secrets 必须存在 `CLOUDFLARE_ACCOUNT_ID` 与 `CLOUDFLARE_API_TOKEN`；Token 只授予 Pages 编辑权限，严禁写入仓库。
+
+## Cloudflare 手动兜底
+
+只有自动发布暂时不可用时才需要：
+
+```powershell
+npm run build
+npm run deploy:pages
+```
+
+项目名固定为 `enjoylifeyay`，生产分支固定为 `main`。本机首次使用 Wrangler 时可运行 `npx wrangler login`。
+
+## 发布后检查
+
+至少检查两个域名下的以下页面：
 
 ```text
 /
-/writing/
-/series/
-/tools/
-/nature/
-/bookshelf/
-/favorites/
-/projects/
-/about/
+/reading/
+/reading/articles/
+/reading/books/
+/reading/principles/
 /search/
 /archive/
 /rss.xml
-/sitemap-index.xml
 ```
 
+还要确认两篇最新文章可打开、图片无 404、站内链接没有跳出当前部署域名、文章页没有评论区域或 `/api/comments` 请求。
 
-## 评论功能的本地预览与正式启用
+## Windows 文件锁排查
 
-`npm run preview` 只提供 Astro 静态页面预览，不会运行 Pages Functions；评论区在这种预览中显示“评论服务暂时不可用”属于正常现象。
-
-评论由根目录 `functions/api/comments.js` 提供 API，并保存到 Cloudflare D1。第一次启用时先按：
-
-```text
-docs/COMMENTS_D1.md
-```
-
-创建 `enjoylife-comments` 数据库、执行 `database/comments.sql`、并在 Pages 项目中绑定 `COMMENTS_DB`。
-
-要在本地同时运行静态页面和 Pages Function，先构建后执行：
+若 `npm ci` 出现 `EPERM`、`rolldown-binding...node` 或 `rollup...node`，先停止当前仓库的 Astro、Vite、Wrangler 和 Node 进程，再运行：
 
 ```powershell
-npm run build
-npx wrangler pages dev dist --d1 COMMENTS_DB=<你的D1数据库ID>
-```
-
-Wrangler 本地开发默认使用本地 D1 数据，生产评论仍以 Cloudflare Dashboard 中绑定的远端 D1 为准。
-
-## GitHub 备份
-
-本地检查通过后，先把源码提交到 GitHub：
-
-```powershell
-git status
-git add -A
-git commit -m "feat: import legacy writing and document release workflow"
-git push origin main
-```
-
-GitHub 是源码备份；Cloudflare Pages 是部署结果。不要只部署、不提交源码。
-
-## Cloudflare Pages 手动发布
-
-确认 `dist/` 已由当前代码构建后执行：
-
-```powershell
-npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
-```
-
-项目名必须为 `enjoylifeyay`，生产分支必须为 `main`。首次使用 Wrangler 时，如出现登录提示，先执行：
-
-```powershell
-npx wrangler login
-```
-
-然后重新执行发布命令。发布成功后检查：
-
-```text
-https://enjoylifeyay.pages.dev/
-```
-
-> 若 Cloudflare Pages 已连接 GitHub 并把 `main` 设为 Production branch，`git push origin main` 本身也会触发自动部署。手动 Wrangler 发布和 Git 集成可以并存，但发布前仍必须先完成本地构建。
-
-## 推荐的完整发布顺序
-
-```powershell
-cd C:\Users\color\Documents\EnjoyLife
-
-npm ci
-npm run check
-npm test
-npm run audit:toc
-npm run audit:public-copy
-npm run build
-npm run check:links
-
-npm run preview
-# 在浏览器检查完成后，按 Ctrl+C 停止预览。
-
-git add -A
-git commit -m "feat: import legacy writing and document release workflow"
-git push origin main
-
-npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
-```
-
-## Windows：`EPERM` / `rolldown-binding...node` / `rollup...node` 文件锁
-
-下面的错误表示 Windows 正在占用旧 `node_modules` 中的原生模块，**不是 Node 24 不兼容**：
-
-```text
-EPERM: operation not permitted, unlink
-...rolldown-binding.win32-x64-msvc.node
-```
-
-出现后不要继续运行 `npm run check`、`npm run build` 或部署；它们会因为 `npm ci` 未完成而连锁失败。
-
-先关闭当前项目的 VS Code 窗口、`npm run dev` / `npm run preview` / Wrangler 终端，以及打开了 `node_modules` 的资源管理器窗口。然后在新的 PowerShell 中运行：
-
-```powershell
-cd C:\Users\color\Documents\EnjoyLife
-
-Get-CimInstance Win32_Process -Filter "Name='node.exe'" |
-  Select-Object ProcessId, CommandLine |
-  Format-Table -Wrap
-```
-
-若命令行中显示 EnjoyLife、Astro、Vite 或 Wrangler，使用对应进程号结束它：
-
-```powershell
-taskkill /F /T /PID <进程号>
-```
-
-若当前没有其他重要 Node 项目在运行，可结束全部 Node 进程：
-
-```powershell
-taskkill /F /T /IM node.exe
-Start-Sleep -Seconds 2
-```
-
-然后清理本地生成目录：
-
-```powershell
-cmd /c rmdir /s /q node_modules
-Remove-Item -Recurse -Force dist, .astro -ErrorAction SilentlyContinue
-Test-Path node_modules
-```
-
-最后一条必须输出 `False`。之后再执行：
-
-```powershell
-npm ci
-```
-
-仓库还提供辅助脚本：
-
-```powershell
-# 只清理 node_modules、dist、.astro
-powershell -ExecutionPolicy Bypass -File .\scripts\reset-local.ps1
-
-# 同时结束正在运行的 Node 开发服务器；
-# 若没有 node.exe，该脚本会正常提示并继续，不会报错。
 powershell -ExecutionPolicy Bypass -File .\scripts\reset-local.ps1 -StopAllNode
+npm ci
 ```
 
-若仍然无法删除，最省时间的处理是重启电脑，重启后不要先打开 VS Code 或启动开发服务器，先执行清理和 `npm ci`。如果 Windows Defender 的“受控文件夹访问”阻止 Documents 目录写入，可以把仓库移到例如 `D:\code\EnjoyLife`，或为 `node.exe` 放行。
+不要在 `npm ci` 失败后继续构建。仍无法清理时，重启 Windows 后先安装依赖，再打开开发服务器。
 
-## 不要上传的内容
-
-不要把以下内容提交或发布到公开仓库：
+## 不提交的内容
 
 - `.env`、Cloudflare API Token、登录凭证；
-- FamilyJourney 的 R2、D1、私有照片、家庭数据；
-- 未核对的知乎正文、转载正文、附件型资料；
-- `node_modules/`、`dist/`、`.astro/`。
+- `node_modules/`、`dist/`、`.astro/`、`.wrangler/`；
+- FamilyJourney 的 R2、D1、私有照片或家庭数据；
+- 未核对的公开链接、知乎正文、转载正文或附件资料。
 
-## 图片迁入与发布顺序
+无法确认的内容必须保持占位并设置 `draft: true`。
 
-新文章图片默认进入 `public/images/`，构建后会进入 `dist/images/`，并随 Wrangler 发布到 Cloudflare Pages；运行时访客不会从 GitHub raw URL 下载这些图片。
+## 历史文章图片
 
-已迁入旧 旧个人站 文章仍使用旧图时，先预览迁移计划：
-
-```powershell
-npm run import:legacy-images -- --dry-run
-```
-
-确认图片来源和数量后执行：
-
-```powershell
-npm run import:legacy-images -- --write
-```
-
-该命令会下载图片到 `public/images/legacy/<mediaKey>/`，同时更新 Markdown 为本站 `/images/...` 路径。随后重新运行完整校验与发布：
-
-```powershell
-npm run check
-npm test
-npm run audit:toc
-npm run audit:public-copy
-npm run build
-npm run check:links
-npm run preview
-
-npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
-```
-
-图片目录规则、R2 何时再用和隐私边界见：`docs/MEDIA_MANAGEMENT.md`。
-
-
-## v0.11 更新
-
-写作页已移除领域与形式筛选；评论支持可选邮箱、命令行管理与可选自动公开模式。参见 `docs/COMMENTS_D1.md`、`docs/V0.11_COMMENTS_ADMIN_MSI.md`。
-
-## v0.11：部署评论 Function 的关键条件
-
-`functions/api/comments.js` 不是 Astro 构建产物，不能复制到 `dist/`。请始终在项目**根目录**执行：
-
-```powershell
-npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
-```
-
-Wrangler 会在命令运行目录发现根目录的 `functions/` 并随 Pages 部署上传 Function。不要先 `cd dist` 再发布，否则线上可能只得到静态页面而没有 `/api/comments`。
-
-绑定 `COMMENTS_DB` 或变量 `COMMENTS_MODERATION` 有变化后，都要重新运行上面的部署命令；随后用：
-
-```powershell
-npm run comments:probe -- pcie-msi-msix-introduction
-```
-
-确认线上 API 返回 `configured: true`。
-
-### Windows 路径说明（v0.11.3）
-
-`npm test` 与 `npm run audit:toc` 已使用跨平台的 `fileURLToPath()` 处理文章目录。若你看到 `C:\C:\Users\...` 这种重复盘符错误，说明仍在使用 v0.11.2 或更早版本的测试/审计脚本；请覆盖 `tests/v10-comments-toc-contract.test.mjs` 与 `scripts/audit-writing-toc.mjs`，或直接使用 v0.11.3。
-
-## v0.15：首次下载旧文章本地图片
-
-第一次升级到 v0.15 时，在项目根目录执行：
+第一次迁入旧文章图片时运行：
 
 ```powershell
 .\preview-local.cmd -FetchLegacyAssets
 ```
 
-或手动执行：
-
-```powershell
-npm run fetch:legacy-assets
-npm run verify:legacy-assets
-```
-
-图片下载完成后会存到 `public/images/articles/`，正式部署不会再向已退役的旧个人站请求图片。
+图片会进入 `public/images/articles/`。随后重新执行 `npm run verify` 并提交；线上访客不会从 GitHub raw URL 加载这些图片。

@@ -5,7 +5,7 @@ import test from 'node:test';
 test('正式站点 URL 只在集中配置中定义', async () => {
   const site = await readFile(new URL('../src/config/site.ts', import.meta.url), 'utf8');
   const astro = await readFile(new URL('../astro.config.mjs', import.meta.url), 'utf8');
-  assert.match(site, /https:\/\/enjoylifeyay\.pages\.dev/);
+  assert.match(site, /https:\/\/enjoylifeyay\.goldke\.online/);
   assert.match(site, /name:\s*['"]Enjoy Life['"]/);
   assert.match(site, /技术 · 工具 · 阅读 · 自然 · 生活/);
   assert.match(astro, /site\.url/);

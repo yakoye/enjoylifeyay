@@ -20,6 +20,7 @@ const routes = [
   'src/pages/projects/index.astro',
   'src/pages/now/index.astro',
   'src/pages/tags/index.astro',
+  'src/pages/tags/[tag].astro',
   'src/pages/404.astro',
 ];
 
@@ -30,7 +31,7 @@ test('all public routes and compatibility redirects exist', async () => {
 test('home and consolidated category pages are data driven', async () => {
   const home = await readFile(new URL('../src/pages/index.astro', import.meta.url), 'utf8');
   assert.match(home, /nowItems/);
-  assert.match(home, /getCollection\(['"]series['"]/);
+  assert.match(home, /featuredSection/);
   assert.match(home, /最近更新/);
   assert.match(home, /正在做/);
 
@@ -56,6 +57,8 @@ test('core content pages filter drafts and sample content does not invent extern
     const source = await readFile(new URL(`../${route}`, import.meta.url), 'utf8');
     assert.match(source, /draft/);
   }
-  const sample = await readFile(new URL('../src/content/writing/site-notes.md', import.meta.url), 'utf8');
+  const sectionPages = await readFile(new URL('../src/lib/section-pages.ts', import.meta.url), 'utf8');
+  assert.match(sectionPages, /!data\.draft/);
+  const sample = await readFile(new URL('../tests/fixtures/writing/site-notes.md', import.meta.url), 'utf8');
   assert.doesNotMatch(sample, /https?:\/\//);
 });

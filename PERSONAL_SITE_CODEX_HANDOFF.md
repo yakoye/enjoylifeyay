@@ -55,9 +55,7 @@
 ## v0.10 当前实现状态
 
 - 每篇公开文章都必须有可展开的“目录”；`npm run audit:toc` 会阻止无分节标题的公开文章进入发布流程。
-- 每篇公开文章末尾都有极简评论区，保存方式为 Pages Functions + `COMMENTS_DB` D1；评论默认 `pending`，审核后显示。
-- D1 建表、Pages 绑定、审核 SQL 与本地 Functions 预览详见 `docs/COMMENTS_D1.md`。
-- 评论不收集邮箱，不保存原始 IP；只保存昵称、正文、日期、审核状态与限流用 IP 哈希。
+- 网站不提供评论、登录或访客数据写入功能；保持纯静态输出。
 
 ## 0. 给 Codex 的首要指令
 
@@ -65,7 +63,7 @@
 
 必须遵守：
 
-1. 使用 **Astro 的静态输出模式**、Markdown / MDX 内容集合、TypeScript、语义化 HTML 和原生 CSS。站点主体保持 Astro 静态输出；文章评论是唯一的轻量动态能力，使用 Cloudflare Pages Functions + 独立评论 D1，默认审核后显示。不要为其引入 React、登录、CMS 或其他接口服务。
+1. 使用 **Astro 的静态输出模式**、Markdown / MDX 内容集合、TypeScript、语义化 HTML 和原生 CSS。站点保持纯静态输出，不使用 Pages Functions、D1、React、登录、CMS 或其他接口服务。
 2. 目标部署平台是 **Cloudflare Pages + GitHub Git integration**。构建产物为 `dist/`。
 3. 内容必须优先存放在 Git 仓库中；GitHub 是版本与备份来源。不要把文章正文存到第三方数据库。
 4. 网站桌面正文最大宽度必须为 **890px**，居中；手机端左右保留 **16px** 左右内边距。
@@ -1365,7 +1363,7 @@ Codex 不得把本项目做成以下任意一种：
 
 ## v0.11 追加交接
 
-评论从 v0.10 的纯审核制扩展为：默认审核 + 可选 `COMMENTS_MODERATION=auto` 自动公开；邮箱可选且永不公开。远端 D1 管理走仓库内 `scripts/comments-admin.mjs`，不要新建公开管理后台或把管理员权限放在前端。
+评论功能已经移除；不要重新加入评论组件、评论 API、D1 或公开管理后台。
 
 
 ## v0.11.2：本地一键预览

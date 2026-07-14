@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: reading
-format: "article"
-topics: ["读书笔记", "空间"]
+section: reading/articles
 tags: ["读书笔记", "数学"]
-series: ["reading-learning"]
 legacy: false
 cover: ""
 coverAlt: ""

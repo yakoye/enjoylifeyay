@@ -2,23 +2,20 @@ import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-test('仓库记录完整的 Windows 构建、预览与 Wrangler 发布流程', async () => {
+test('仓库记录完整的 Windows 校验、双平台自动发布与手动兜底流程', async () => {
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   const guide = await readFile(new URL('../docs/BUILD_PREVIEW_DEPLOY.md', import.meta.url), 'utf8');
   for (const command of [
     'npm ci',
-    'npm run check',
-    'npm test',
+    'npm run verify',
     'npm run build',
-    'npm run check:links',
-    'npm run preview',
-    'npx wrangler pages deploy dist --project-name enjoylifeyay --branch main',
+    'npm run deploy:pages',
+    'git push origin main',
   ]) {
     assert.ok(readme.includes(command), `README 缺少 ${command}`);
     assert.ok(guide.includes(command), `发布指南缺少 ${command}`);
   }
   await access(new URL('../scripts/reset-local.ps1', import.meta.url));
-  await access(new URL('../scripts/verify-and-deploy.ps1', import.meta.url));
   await access(new URL('../scripts/local-preview.ps1', import.meta.url));
   await access(new URL('../scripts/stop-local-preview.ps1', import.meta.url));
   await access(new URL('../preview-local.cmd', import.meta.url));

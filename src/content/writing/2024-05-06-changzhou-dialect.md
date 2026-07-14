@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: life
-format: "article"
-topics: ["方言", "地方记忆"]
-tags: ["方言", "常州"]
-series: []
+section: nature/places
+tags: ["方言", "常州", "地方记忆"]
 legacy: false
 cover: ""
 coverAlt: ""

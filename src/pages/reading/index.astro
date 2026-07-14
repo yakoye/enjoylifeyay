@@ -3,14 +3,15 @@ import { getCollection, getEntry } from 'astro:content';
 import SectionMap from '../../components/SectionMap.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isInParentSection } from '../../config/content-model';
+import { getVisibleSectionPages } from '../../lib/section-pages';
 
 const page = await getEntry('sitePages', 'reading');
 if (!page) throw new Error('Missing Markdown page content: reading');
-const readingWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'reading'))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'reading'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((entry) => ({ title: entry.data.title, href: `/reading/${entry.data.routeSlug}/` }));
+const recentWriting = (await getCollection('writing', ({ data }) => !data.draft && isInParentSection(data.section, 'reading')))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 8);
+const mapItems = await getVisibleSectionPages('reading');
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
@@ -19,7 +20,7 @@ const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft 
   <SectionMap label={page.data.title} sectionHref="/reading/" items={mapItems} />
 
   <section aria-labelledby="reading-recent-writing">
-    <h2 id="reading-recent-writing">最近阅读文章</h2>
-    <WritingList entries={readingWriting.slice(0, 8)} />
+    <h2 id="reading-recent-writing">最近文章</h2>
+    <WritingList entries={recentWriting} emptyMessage={false} />
   </section>
 </BaseLayout>

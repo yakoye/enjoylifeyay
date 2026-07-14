@@ -1,328 +1,109 @@
-# Enjoy Life
+# EnjoyLife
 
-一个以“技术 · 工具 · 阅读 · 自然 · 生活”为主线的极简个人知识与生活档案站。
+以“技术 · 工具 · 阅读 · 自然 · 生活”为主线的个人知识与生活档案站。项目使用 Astro 生成纯静态网页，不使用 React、SSR、数据库、登录、CMS 或评论系统。
 
-正式地址：<https://enjoylifeyay.pages.dev>
+## 线上地址
 
-## 正式栏目
+- 主站（Cloudflare Pages）：<https://enjoylifeyay.goldke.online>
+- 备用站（GitHub Pages 默认地址）：<https://yakoye.github.io/enjoylifeyay/>
 
-```text
-主页  技术  工具  阅读  自然  生活  归档  关于
-```
+两个地址由同一次 `main` 分支提交分别构建、分别发布，任何一边部署失败都不会覆盖另一边的线上版本。页面 canonical 始终指向主站。
 
-栏目分工：
+## 唯一开发目录
 
-- **技术**：PCIe、芯片、固件、开发环境与工程实践；技术专题也放在这里。
-- **工具**：自己做的项目、浏览器扩展、PCIe 工具、记录工具与资料库。
-- **阅读**：本站阅读文章、书架、翻译与写作计划，以及独立维护的站外专题。
-- **自然**：植物、动物、季节、行走、摄影与地方记忆。
-- **生活**：思考、运动、饮食、旅行、家庭与日常方法。
-- **归档**：按日期汇总本站文章与尚未迁入的历史技术条目。
-
-旧入口会自动跳转；内容去重和旧图本地化规则见 [`docs/V0.15_PRIVATE_LEGACY_MIGRATION.md`](docs/V0.15_PRIVATE_LEGACY_MIGRATION.md)。
-
-## 最常用：一键检查并打开本地网页
-
-日常改完 Markdown、图片、CSS 或页面后，双击仓库根目录的：
+以后只在这里维护：
 
 ```text
-preview-local.cmd
+D:\work\code\code_o\github_ye\enjoylifeyay
 ```
 
-或在 PowerShell 中执行：
+旧目录只作为历史备份，不再从旧目录提交或部署，以免内容相互覆盖。
+
+## 日常更新与自动发布
+
+开始修改前先同步远端：
 
 ```powershell
-.\preview-local.cmd
+cd D:\work\code\code_o\github_ye\enjoylifeyay
+git pull --ff-only
 ```
 
-它会自动执行：
-
-```text
-check → test → ToC 审计 → build → 链接检查 → 打开 http://127.0.0.1:4321/
-```
-
-第一次使用、刚清理过 `node_modules`、或修改了 `package.json / package-lock.json` 后，使用：
+首次使用或依赖变化时执行 `npm ci`。完成文章或代码修改后：
 
 ```powershell
-.\preview-local.cmd -Install
+npm run verify
+git status
+git add -A
+git commit -m "content: update articles"
+git push origin main
 ```
 
-本次 v0.15 首次迁移旧文章图片时，使用：
+`git push origin main` 会触发 [GitHub Actions](.github/workflows/deploy.yml)：
+
+1. 先运行完整校验；
+2. 使用根路径构建并发布到 Cloudflare Pages；
+3. 使用 `/enjoylifeyay/` 基础路径单独构建并发布到 GitHub Pages。
+
+在 GitHub 仓库的 **Actions** 页面可以查看两边的发布结果。不要提交 `node_modules/`、`dist/`、`.astro/`、`.wrangler/`、`.env` 或任何密钥。
+
+## 第一次启用自动发布
+
+仓库管理员只需配置一次：
+
+1. GitHub 仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
+2. GitHub 仓库 **Settings → Secrets and variables → Actions** 新建：
+   - `CLOUDFLARE_ACCOUNT_ID`
+   - `CLOUDFLARE_API_TOKEN`
+3. Cloudflare Token 只授予该账户的 Pages 编辑权限，不把 Token 写进代码或文档。
+
+Cloudflare 项目名固定为 `enjoylifeyay`，自定义域名继续由该项目管理。紧急情况下可在本机完成根路径构建后手动发布：
 
 ```powershell
-.\preview-local.cmd -FetchLegacyAssets
+npm run build
+npm run deploy:pages
 ```
 
-它会先把旧文图片下载为本站 `public/images/articles/` 本地文件，再继续检查、构建和打开网页。
-
-停止本地预览：
-
-```text
-stop-local-preview.cmd
-```
-
-只有出现 Rollup / Rolldown 的 `EPERM` 文件占用错误时，才使用：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\reset-local.ps1 -StopAllNode
-```
-
-
-## v0.15：旧文章与图片本地化
-
-旧个人站的文章已迁入本站。第一次使用 v0.15 时，先运行：
-
-```powershell
-npm run fetch:legacy-assets
-npm run verify:legacy-assets
-```
-
-图片会保存到 `public/images/articles/`，随后由 Cloudflare Pages 提供访问。`scripts/legacy-assets.private.json` 仅用于一次性本地下载，已加入 `.gitignore`，不要提交到 GitHub。
-
-## 持续本地开发
-
-需要边编辑边刷新时，可以使用 Astro 开发服务器：
+## 本地开发
 
 ```powershell
 npm ci
 npm run dev
 ```
 
-终端会显示本地地址；停止时按 `Ctrl+C`。正式发布前仍应使用“一键检查并打开本地网页”或完整构建流程。
-
-## 手动检查、预览与发布
-
-在项目根目录执行：
+也可以双击 `preview-local.cmd`，它会先检查、构建，再打开本地网页。首次安装依赖可运行：
 
 ```powershell
-npm ci
-
-npm run check
-npm test
-npm run audit:toc
-npm run verify:public-content
-npm run verify:legacy-assets
-npm run build
-npm run check:links
-
-npm run preview
-# 浏览器检查完成后按 Ctrl+C 停止预览。
-
-npx wrangler pages deploy dist --project-name enjoylifeyay --branch main
+.\preview-local.cmd -Install
 ```
 
-建议发布前先提交源码：
+停止后台预览可双击 `stop-local-preview.cmd`，或运行 `npm run preview:local:stop`。
 
-```powershell
-git add -A
-git commit -m "docs: update site content"
-git push origin main
-```
+## 内容入口
 
-## 以后怎样新增内容
-
-### 新增文章
-
-1. 复制 [`docs/templates/new-writing.md`](docs/templates/new-writing.md)。
-2. 放到 `src/content/writing/`，文件名用 `YYYY-MM-DD-english-slug.md`。
-3. 写清 `domain`：
-   - `technology` → 技术
-   - `reading` → 阅读
-   - `life` → 生活
-   - `nature` → 自然
-   - `tool` → 工具相关记录
-4. 初始使用 `draft: true`；本地检查后改为 `draft: false`。
-5. 图片目录使用稳定的 `mediaKey`：`public/images/articles/<mediaKey>/`。
-6. 每篇公开文章至少写一个 `##`、`###` 或 `####` 标题，文章页会自动生成默认折叠的“目录”。
-
-骑行文章建议使用：
-
-```yaml
-domain: life
-series: ["life-cycling"]
-```
-
-跑步文章建议使用：
-
-```yaml
-domain: life
-series: ["life-running"]
-```
-
-### 新增工具、网站、资料库或长期参考
-
-| 内容 | 维护文件 | 页面位置 |
-| --- | --- | --- |
-| 公开工具、扩展、自己 DIY 项目、资料库 | `src/content/tools.json` | 工具 |
-| 饮食、影集与家庭、运动网站 | `src/content/tools.json`（`category: "websites-life"`） | 生活 |
-| 历史内容来源（CSDN / 知乎） | `src/content/favorites.json` | 工具 / 历史内容来源 |
-| 站外阅读专题 | `src/content/section-pages/reading/reading-sites.md` | 阅读 / 站外专题 |
-| 自然观察 | `src/content/nature.json` | 自然 |
-| 主页与正在做 | `src/content/site-pages/home.md` | 主页与 `/now/` |
-
-完整字段说明见：
-
-- [`docs/CONTENT_MAINTENANCE.md`](docs/CONTENT_MAINTENANCE.md)
-- [`docs/MEDIA_MANAGEMENT.md`](docs/MEDIA_MANAGEMENT.md)
-- [`docs/COMMENTS_D1.md`](docs/COMMENTS_D1.md)
-- [`docs/BUILD_PREVIEW_DEPLOY.md`](docs/BUILD_PREVIEW_DEPLOY.md)
-
-
-
-## v0.18.1：覆盖升级兼容修复
-
-使用压缩包覆盖已有仓库时，旧版的 `src/content/reading-sites.json` 可能仍留在磁盘上。该文件已不参与网站运行；站外专题只从：
-
-```text
-src/content/section-pages/reading/reading-sites.md
-```
-
-读取。v0.18.1 的测试只校验运行时不会引用旧 JSON，因此无需为通过测试而手动删除旧文件。想保持仓库整洁时可以自行删除该旧 JSON。
-
-## v0.18：Markdown 内容地图与二级页面
-
-五个一级栏目现在都使用同一套“父页 + 简洁地图 + 二级页面”结构：
-
-```text
-技术：技术文章 / PCIe 与高速互连 / 芯片、固件与 SoC / 系统与开发环境 / 工程与职业
-工具：自己 DIY 项目 / Chrome 扩展与网页工具 / PCIe 硬件工具 / 文字图片与记录 / 资料库
-阅读：阅读文章 / 书架 / 我翻译的书 / 我写的书 / 站外专题
-自然：植物 / 动物 / 季节 / 行走与观察 / 地方记忆
-生活：生活与思考 / 运动 / 饮食 / 旅行 / 家庭 / 日常与方法
-```
-
-二级页面的标题、说明和正文均来自 Markdown：
-
-```text
-src/content/section-pages/<一级栏目>/
-```
-
-站外专题现在是独立 Markdown 页面：
-
-```text
-src/content/section-pages/reading/reading-sites.md
-```
-
-- 名称可直接跳转。
-- 不排名、不打分、不做卡片。
-- 桌面端每条说明最多两行；手机端自然换行。
-- 想置顶某个站点时，直接把它移动到对应分类的最前面；不要重复收录。
-- 用户最初提供的 JSON 仅作为迁移备份保存于 `docs/imports/reading-sites-2026-07-02.json`，不参与网站运行。
-
-## 技术与部署
-
-- Node.js：`24.x`
-- Astro 静态输出
-- Markdown / MDX
-- Pagefind 本地全文搜索
-- Cloudflare Pages Functions + D1（评论）
-- GitHub 源码备份
-- Cloudflare Pages 静态发布
-
-Cloudflare Pages 配置：
-
-| 配置项 | 值 |
+| 内容 | 唯一维护位置 |
 | --- | --- |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
-| Production branch | `main` |
-| Node version | `24.x` |
+| 文章（含总结、原则） | `src/content/writing/` |
+| 站外专题 | `src/content/section-pages/reading/reading-sites.md` |
+| 一级页面文字 | `src/content/site-pages/` |
+| 二级栏目页面 | `src/content/section-pages/` |
+| 工具与项目 | `src/content/tools.json` |
+| 自然观察 | `src/content/nature.json` |
+| 书架 | `src/content/books.json` |
 
-## 重要边界
+文章的 `section` 决定唯一栏目，`tags` 用于跨栏目检索且最多 3 个。原则正文只保留在对应文章中；栏目页只显示索引，不复制正文。完整规则见 [内容模型](docs/CONTENT_MODEL.md) 和 [内容维护](docs/CONTENT_MAINTENANCE.md)。
 
-- 不提交 `node_modules/`、`dist/`、`.astro/`、`.env`、Token 或任何密钥。
-- FamilyJourney 的 R2、D1、照片、家庭数据、私有仓库与本站严格隔离。
-- 旧文迁入必须保留首次日期和原始来源；不确定的正文、图片版权或知乎标题不要猜测。
-- 站点保持“文本目录”视觉：文字优先、蓝色链接、克制细线、无卡片墙、无红色标题和状态徽章。
+## 新增文章
 
+在 `src/content/writing/` 新建 `YYYY-MM-DD-english-slug.md`，可复制 `docs/templates/new-writing.md`。发布前确认：
 
-## v0.14 内容去重规则
+- `draft: false`；不能确认的正文或链接必须保留 `draft: true`，不得编造；
+- `section` 只填一个有效栏目；
+- `tags` 最多 3 个；
+- 正文不要重复 frontmatter 中的文章标题；
+- 至少有一个 `##` 至 `####` 分节标题。
 
-- **阅读**只显示已经公开的阅读文章；书架条目和阅读专题不在阅读页重复列出。
-- **技术专题**只展示至少有一篇公开文章的专题，避免链接到空目录。
-- **工具**只放自己做的项目、Chrome 扩展、PCIe 工具、记录工具、资料库与历史来源。
-- **生活**独立放饮食、影集与家庭、运动相关的网站；这些链接不会在工具页重复出现。
-- `Rich Editor` 与 `quick_note_richtext` 使用可直接渲染 HTML 的 CDN 链接；源码链接仍保存在 `tools.json` 的 `githubUrl` 字段中。
+## 更多说明
 
-
-
-## v0.14.1：本地预览可靠性
-
-- 仅改文章、工具数据或 CSS：运行 `./preview-local.cmd`。
-- 覆盖新版本、依赖异常或需要完全重装依赖：运行 `./preview-local.cmd -Install`。该命令会先自动清理旧的 `node_modules`、`dist`、`.astro`，并关闭残留 Node 进程。
-- 若 Windows 仍报 `EPERM`，关闭 VS Code / 资源管理器项目窗口并重启后再次运行 `./preview-local.cmd -Install`。
-- 详见 `docs/V0.14.1_PREVIEW_RELIABILITY_FIX.md`。
-
-## v0.16：ZPark 骑跑两项记录
-
-新增 2020-10-31 的生活文章《中关村软件园 ZPark 骑跑两项第一名》。照片存放在：
-
-```text
-public/images/articles/2020-10-31-zpark-duathlon-first/
-```
-
-该文章同时归入“骑行”和“跑步”专题；以后骑跑两项记录也可以同时写入：
-
-```yaml
-series: ["life-cycling", "life-running"]
-```
-
-
-## v0.17.3：站外专题两行说明与数据更新
-
-- 已同步用户维护的 96 条站外阅读数据。
-- 桌面端站点说明允许最多两行；手机端自然换行。
-- 详情见 [`docs/V0.17.3_READING_SITES_TWO_LINES.md`](docs/V0.17.3_READING_SITES_TWO_LINES.md)。
-
-## v0.20：Markdown 页面与渲染一致性
-
-面向读者的一级页面文字、完整静态页面正文和站外专题继续统一由 Markdown 维护：
-
-```text
-src/content/site-pages/
-src/content/section-pages/
-src/content/writing/
-```
-
-其中，站外专题仍在：
-
-```text
-src/content/section-pages/reading/reading-sites.md
-```
-
-普通无序列表、Markdown 列表和数据目录现在使用同一套较大的黑色圆点；站外专题桌面端每条说明最多两行。文章代码块使用 Shiki 的浅色与深色双主题：浅色页面显示浅灰代码背景，深色页面显示深色代码背景。
-
-维护位置和验收流程见 [`docs/V0.20_MARKDOWN_RENDERING_CONSISTENCY.md`](docs/V0.20_MARKDOWN_RENDERING_CONSISTENCY.md)。
-
-## v0.19：二级地图、发布时间与公开文案
-
-五个一级栏目中的二级地图现在都以父栏目作为可点击入口。例如页面出现：
-
-```text
-技术：技术文章 · PCIe 与高速互连 · …
-```
-
-点击“技术”即可回到技术首页；工具、阅读、自然、生活同样适用。
-
-每篇文章 Frontmatter 需要同时保留：
-
-```yaml
-date: 2026-07-05
-publishedAt: 2026-07-05T12:00:00+08:00
-```
-
-文章页会显示：
-
-```text
-发布：2026-07-05 12:00:00
-```
-
-旧文只有日期时，暂以当天 `00:00:00+08:00` 作为时间默认值；找到准确时间后直接修改 `publishedAt`。
-
-公开网页只保留面向读者的文字。开发、迁移、部署和维护提示只放在 `docs/` 中。发布前可额外运行：
-
-```powershell
-npm run audit:public-copy
-```
-
-详细规则见 [`docs/V0.19_NAVIGATION_PUBLISH_TIME_AND_PUBLIC_COPY.md`](docs/V0.19_NAVIGATION_PUBLISH_TIME_AND_PUBLIC_COPY.md)。
+- [构建、预览与发布](docs/BUILD_PREVIEW_DEPLOY.md)
+- [内容维护](docs/CONTENT_MAINTENANCE.md)
+- [更新记录](docs/CHANGELOG.md)

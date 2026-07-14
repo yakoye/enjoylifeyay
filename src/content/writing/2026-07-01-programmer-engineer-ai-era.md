@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: technology
-format: article
-topics: ["工程师", "程序员", "AI"]
-tags: ["工程师", "程序员", "AI", "独立创作"]
-series: []
+section: technology/engineering
+tags: ["工程师", "AI", "独立创作"]
 legacy: false
 cover: ""
 coverAlt: ""

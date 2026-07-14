@@ -4,10 +4,11 @@ import test from 'node:test';
 
 const file = (value) => new URL(`../${value}`, import.meta.url);
 
-test('v0.14 reading parent keeps a single reading article stream without books or external-site duplication', async () => {
+test('v0.22 reading parent shows recent article links without duplicating article bodies or directory data', async () => {
   const page = await readFile(file('src/pages/reading/index.astro'), 'utf8');
-  assert.match(page, /WritingList/);
   assert.match(page, /SectionMap/);
+  assert.match(page, /WritingList/);
+  assert.match(page, /最近文章/);
   for (const forbidden of ["getCollection('books')", 'reading-sites.json']) {
     assert.equal(page.includes(forbidden), false, `reading page must not retain ${forbidden}`);
   }

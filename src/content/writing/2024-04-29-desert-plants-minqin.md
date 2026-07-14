@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: nature
-format: "observation"
-topics: ["植物", "民勤", "地方记忆"]
-tags: ["植物", "民勤", "沙生植物"]
-series: ["nature-walking"]
+section: nature/plants
+tags: ["植物", "民勤", "地方记忆"]
 legacy: false
 cover: ""
 coverAlt: ""

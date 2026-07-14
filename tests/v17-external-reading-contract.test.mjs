@@ -16,8 +16,9 @@ test('v0.18 站外专题由独立 Markdown 页面维护', async () => {
   const siteLines = sites.match(/^\s*- \[[^\]]+\]\(https?:\/\//gm) ?? [];
 
   assert.match(config, /const sectionPages = defineCollection/);
+  assert.match(sites, /showInMap:\s*true/);
   assert.match(page, /SectionMap/);
-  assert.ok(page.includes('`/reading/${entry.data.routeSlug}/`'));
+  assert.match(page, /getVisibleSectionPages\('reading'\)/);
   assert.ok(siteLines.length >= 96, '站外专题 Markdown 应保留用户维护的 96 个入口');
   for (const heading of ['工程、系统与程序设计', '认知、决策与学习', '科学、未来与社会', '数字考古与知识档案', '文学、思想与非虚构', '生活、独立工作与行走']) {
     assert.match(sites, new RegExp(`## ${heading}`));
@@ -68,7 +69,7 @@ test('v0.18 二级地图和二级页面覆盖五个栏目', async () => {
   }
   for (const file of [
     'technology/technology-pcie.md', 'technology/technology-engineering.md',
-    'tools/tools-extensions.md', 'reading/reading-translated-books.md', 'reading/reading-my-books.md', 'reading/reading-sites.md',
+    'tools/tools-extensions.md', 'reading/reading-articles.md', 'reading/reading-books.md', 'reading/reading-principles.md', 'reading/reading-sites.md',
     'nature/nature-walking.md', 'life/life-travel.md', 'life/life-food.md', 'life/life-family.md',
   ]) {
     await access(path.join(root, 'src/content/section-pages', file));

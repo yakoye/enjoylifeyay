@@ -3,6 +3,7 @@ import { getCollection, getEntry } from 'astro:content';
 import DatedTextList from '../../components/DatedTextList.astro';
 import SectionMap from '../../components/SectionMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getVisibleSectionPages } from '../../lib/section-pages';
 
 const page = await getEntry('sitePages', 'nature');
 if (!page) throw new Error('Missing Markdown page content: nature');
@@ -10,9 +11,7 @@ const allEntries = await getCollection('nature');
 type PublishedNature = (typeof allEntries)[number] & { data: Extract<(typeof allEntries)[number]['data'], { draft: false }> };
 const entries = allEntries.filter((entry): entry is PublishedNature => entry.data.draft === false)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'nature'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((entry) => ({ title: entry.data.title, href: `/nature/${entry.data.routeSlug}/` }));
+const mapItems = await getVisibleSectionPages('nature');
 const items = entries.map(({ data }) => ({
   title: data.title,
   description: data.description,

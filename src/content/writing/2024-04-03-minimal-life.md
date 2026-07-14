@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: life
-format: "note"
-topics: ["生活", "整理"]
+section: life/thoughts
 tags: ["极简", "生活"]
-series: []
 legacy: false
 cover: ""
 coverAlt: ""

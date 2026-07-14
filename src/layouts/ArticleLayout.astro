@@ -1,10 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
-import { categoryLabels, formatLabels } from '../config/site';
+import { getSectionInfo } from '../config/content-model';
+import { getPublicTagSet, tagHref } from '../lib/tags';
 import { site } from '../config/site';
 import CopyCode from '../components/CopyCode.astro';
-import Comments from '../components/Comments.astro';
 
 interface Heading { depth: number; slug: string; text: string; }
 interface Props { entry: CollectionEntry<'writing'>; headings?: Heading[]; }
@@ -31,12 +31,9 @@ const formatDateTime = (value?: Date | null) => {
 };
 const publishedAt = data.publishedAt;
 const updatedAt = isMeaningfulDate(data.updated) ? data.updated : undefined;
-const domainRoutes = { technology: '/technology/', reading: '/reading/', life: '/life/', nature: '/nature/', tool: '/tools/' } as const;
+const section = getSectionInfo(data.section);
+const publicTagSet = getPublicTagSet(await getCollection('writing', ({ data: item }) => !item.draft));
 const toc = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
-const allSeries = await getCollection('series', ({ data }) => !data.draft);
-const relatedSeries = data.series
-  .map((id) => allSeries.find((seriesEntry) => seriesEntry.data.id === id))
-  .filter((seriesEntry): seriesEntry is CollectionEntry<'series'> => Boolean(seriesEntry));
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'BlogPosting', headline: data.title,
   description: data.description, datePublished: publishedAt.toISOString(),
@@ -44,23 +41,23 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={data.title} description={data.description} contentType="文章" publishedAt={publishedAt} activeNav={domainRoutes[data.domain]}>
+<BaseLayout title={data.title} description={data.description} contentType="文章" publishedAt={publishedAt} activeNav={section.parentHref}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article>
     <header class="article-header">
       <h1>{data.title}</h1>
-      <div class="writing-meta"><a href={domainRoutes[data.domain]}>{categoryLabels[data.domain]}</a> · {formatLabels[data.format]}{data.tags.length > 0 && ` · ${data.tags.join(' / ')}`}</div>
-      {relatedSeries.length > 0 && (
-        <div class="article-series">
-          所属专题：
-          {relatedSeries.map((seriesEntry, index) => (
-            <>
-              {index > 0 && ' · '}
-              <a href={`/series/${seriesEntry.data.id}/`}>{seriesEntry.data.title}</a>
-            </>
-          ))}
-        </div>
-      )}
+      <div class="writing-meta">
+        <a href={section.parentHref}>{section.parentLabel}</a>
+        <span aria-hidden="true"> · </span>
+        <a href={section.href}>{section.label}</a>
+        {data.tags.length > 0 && <>
+          <span aria-hidden="true"> · </span>
+          {data.tags.map((tag, index) => <>
+            {index > 0 && <span aria-hidden="true"> / </span>}
+            {publicTagSet.has(tag) ? <a href={tagHref(tag)}>{tag}</a> : <span>{tag}</span>}
+          </>)}
+        </>}
+      </div>
       <div class="article-meta">
         <span>发布：{formatDateTime(publishedAt)}</span>
         {updatedAt && <span>最后修订：{formatDate(updatedAt)}</span>}
@@ -68,7 +65,6 @@ const jsonLd = {
     </header>
     {toc.length >= 1 && <details class="article-toc"><summary aria-label="展开或收起目录">目录</summary><ol>{toc.map((heading) => <li class:list={{ nested: heading.depth === 3, 'nested-deep': heading.depth === 4 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></details>}
     <div class="article-prose"><slot /></div>
-    <Comments article={entry.id} />
   </article>
   <CopyCode />
 </BaseLayout>

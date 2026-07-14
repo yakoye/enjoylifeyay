@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: reading
-format: "note"
-topics: ["读书笔记", "决策"]
-tags: ["读书笔记", "原则"]
-series: ["reading-learning"]
+section: reading/articles
+tags: ["读书笔记", "决策"]
 legacy: false
 cover: ""
 coverAlt: ""

@@ -7,11 +7,8 @@ updated: 2026-07-02
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: technology
-format: "reference"
-topics: ["PCIe", "高速互连"]
-tags: ["PCIe", "索引"]
-series: ["pcie-high-speed-interconnect"]
+section: technology/pcie
+tags: ["PCIe", "速查表"]
 legacy: false
 cover: ""
 coverAlt: ""

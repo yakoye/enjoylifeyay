@@ -7,11 +7,8 @@ updated: null
 source: native
 sourceUrl: ""
 migratedAt: null
-domain: life
-format: note
-topics: ["骑行", "运动", "生活"]
+section: life/movement
 tags: ["骑行", "行走", "长期记录"]
-series: ["life-cycling"]
 legacy: false
 cover: ""
 coverAlt: ""

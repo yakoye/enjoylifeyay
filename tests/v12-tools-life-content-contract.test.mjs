@@ -22,12 +22,12 @@ test('v0.12 tools include the supplied public tool and site links', async () => 
   assert.ok(tools.find((tool) => tool.id === 'familyjourney').url.startsWith('https://familyjourney.pages.dev'));
 });
 
-test('v0.12 adds about page and cycling/running articles', async () => {
+test('v0.21 keeps cycling and running in the shared movement section', async () => {
   await stat(fromHere('../src/pages/about/me.astro'));
   const cycling = await readFile(fromHere('../src/content/writing/2026-07-01-the-long-road-i-have-ridden.md'), 'utf8');
   const running = await readFile(fromHere('../src/content/writing/2026-07-01-when-i-run.md'), 'utf8');
-  assert.match(cycling, /series: \["life-cycling"\]/);
-  assert.match(running, /series: \["life-running"\]/);
+  assert.match(cycling, /section: life\/movement/);
+  assert.match(running, /section: life\/movement/);
 });
 
 test('v0.12 narrows normal article images on desktop while preserving a wide opt-in', async () => {

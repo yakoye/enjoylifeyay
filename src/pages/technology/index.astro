@@ -3,14 +3,14 @@ import { getCollection, getEntry } from 'astro:content';
 import SectionMap from '../../components/SectionMap.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isInParentSection } from '../../config/content-model';
+import { getVisibleSectionPages } from '../../lib/section-pages';
 
 const page = await getEntry('sitePages', 'technology');
 if (!page) throw new Error('Missing Markdown page content: technology');
-const technicalWriting = (await getCollection('writing', ({ data }) => !data.draft && data.domain === 'technology'))
+const technicalWriting = (await getCollection('writing', ({ data }) => !data.draft && isInParentSection(data.section, 'technology')))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'technology'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((entry) => ({ title: entry.data.title, href: `/technology/${entry.data.routeSlug}/` }));
+const mapItems = await getVisibleSectionPages('technology');
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>

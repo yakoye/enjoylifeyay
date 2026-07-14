@@ -1,28 +1,32 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { categoryLabels, formatLabels } from '../config/site';
+import { getSectionInfo } from '../config/content-model';
 
 interface Props { entries: CollectionEntry<'writing'>[]; emptyMessage?: string | false; }
 const { entries, emptyMessage = '暂无文章。' } = Astro.props;
-const formatDate = (value: Date) => value.toISOString().slice(0, 10);
+const formatDate = (value: Date) => new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit',
+}).format(value);
 ---
 
 {entries.length ? (
   <ul class="dated-list writing-list" data-writing-list>
-    {entries.map((entry) => (
-      <li class="dated-list-item writing-item" data-domain={entry.data.domain} data-format={entry.data.format}>
-        <span class="dated-list-bullet" aria-hidden="true">•</span>
-        <div class="dated-list-content">
-          <a class="dated-list-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
-          <span class="dated-list-description">：{entry.data.description}</span>
-          <div class="dated-list-meta">
-            {categoryLabels[entry.data.domain]} · {formatLabels[entry.data.format]}
-            {entry.data.tags.length > 0 && ` · ${entry.data.tags.slice(0, 3).join(' / ')}`}
-            {entry.data.source !== 'native' && ` · 原载于 ${entry.data.source}`}
+    {entries.map((entry) => {
+      const section = getSectionInfo(entry.data.section);
+      return (
+        <li class="dated-list-item writing-item" data-section={entry.data.section}>
+          <span class="dated-list-bullet" aria-hidden="true">•</span>
+          <div class="dated-list-content">
+            <a class="dated-list-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
+            <span class="dated-list-description">：{entry.data.description}</span>
+            <div class="dated-list-meta">
+              {section.parentLabel} · {section.label}
+              {entry.data.tags.length > 0 && ` · ${entry.data.tags.join(' / ')}`}
+            </div>
           </div>
-        </div>
-        <time class="dated-list-date" datetime={formatDate(entry.data.date)}>{formatDate(entry.data.date)}</time>
-      </li>
-    ))}
+          <time class="dated-list-date" datetime={formatDate(entry.data.date)}>{formatDate(entry.data.date)}</time>
+        </li>
+      );
+    })}
   </ul>
 ) : (emptyMessage ? <p class="empty-state">{emptyMessage}</p> : null)}

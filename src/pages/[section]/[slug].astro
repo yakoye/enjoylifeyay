@@ -2,9 +2,11 @@
 import { getCollection, render } from 'astro:content';
 import DirectoryList from '../../components/DirectoryList.astro';
 import DatedTextList from '../../components/DatedTextList.astro';
+import BookshelfList from '../../components/BookshelfList.astro';
 import WritingList from '../../components/WritingList.astro';
 import SectionMap from '../../components/SectionMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getVisibleSectionPages, matchesWritingSectionPage } from '../../lib/section-pages';
 
 export async function getStaticPaths() {
   const pages = await getCollection('sectionPages', ({ data }) => !data.draft);
@@ -18,9 +20,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const { data } = entry;
 const currentHref = `/${data.section}/${data.routeSlug}/`;
-const siblingMapItems = (await getCollection('sectionPages', ({ data: item }) => !item.draft && item.section === data.section))
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((item) => ({ title: item.data.title, href: `/${item.data.section}/${item.data.routeSlug}/` }));
+const siblingMapItems = await getVisibleSectionPages(data.section);
 
 const allWriting = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -30,12 +30,7 @@ const allNature = await getCollection('nature');
 const allBooks = await getCollection('books');
 
 const writingEntries = data.kind === 'writing'
-  ? allWriting.filter((item) => {
-      if (data.writingDomain && item.data.domain !== data.writingDomain) return false;
-      if (data.writingSeries.length > 0 && !data.writingSeries.some((series) => item.data.series.includes(series))) return false;
-      if (data.writingTopics.length > 0 && !data.writingTopics.some((topic) => item.data.topics.includes(topic) || item.data.tags.includes(topic))) return false;
-      return true;
-    })
+  ? allWriting.filter((item) => matchesWritingSectionPage(item, entry))
   : [];
 
 const toolEntries = data.kind === 'tools'
@@ -52,15 +47,6 @@ const natureEntries: PublishedNature[] = data.kind === 'nature'
 const bookEntries: PublishedBook[] = data.kind === 'books'
   ? allBooks.filter((item): item is PublishedBook => item.data.draft === false && data.bookStatuses.includes(item.data.status))
   : [];
-
-const bookItems = bookEntries.map((item) => ({
-  title: item.data.title,
-  description: item.data.note,
-  meta: item.data.author,
-  date: item.data.finishedAt || item.data.startedAt,
-  href: item.data.relatedWriting[0] ? `/writing/${item.data.relatedWriting[0]}/` : undefined,
-  metaInline: true,
-}));
 
 const natureItems = natureEntries.map((item) => ({
   title: item.data.title,
@@ -89,5 +75,5 @@ const toolItems = toolEntries.map((item) => ({
   {data.kind === 'writing' && <WritingList entries={writingEntries} emptyMessage={false} />}
   {data.kind === 'tools' && <DirectoryList items={toolItems} emptyMessage={false} />}
   {data.kind === 'nature' && <DatedTextList items={natureItems} emptyMessage={false} />}
-  {data.kind === 'books' && <DatedTextList items={bookItems} emptyMessage={false} />}
+  {data.kind === 'books' && <BookshelfList entries={bookEntries} />}
 </BaseLayout>

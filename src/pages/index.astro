@@ -8,8 +8,7 @@ if (!home) throw new Error('Missing Markdown page content: home');
 
 const writing = (await getCollection('writing', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 6);
-const featuredSeries = (await getCollection('series', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.order - b.data.order).find((entry) => entry.data.id === 'pcie-high-speed-interconnect');
+const featuredSection = await getEntry('sectionPages', 'technology/technology-pcie');
 const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
   .find((entry) => entry.data.featured && ['available', 'development'].includes(entry.data.status));
 ---
@@ -30,9 +29,9 @@ const featuredTool = (await getCollection('tools', ({ data }) => !data.draft))
     <ul class="plain-list">{home.data.nowItems.map((item) => <li>{item}</li>)}</ul>
   </section>
 
-  {featuredSeries && <section aria-labelledby="featured-series">
-    <h2 id="featured-series">技术专题</h2>
-    <p class="feature-line"><a href={`/series/${featuredSeries.data.id}/`}>{featuredSeries.data.title}</a><span>{featuredSeries.data.description}</span></p>
+  {featuredSection && <section aria-labelledby="featured-section">
+    <h2 id="featured-section">技术入口</h2>
+    <p class="feature-line"><a href={`/technology/${featuredSection.data.routeSlug}/`}>{featuredSection.data.title}</a><span>{featuredSection.data.description}</span></p>
   </section>}
 
   {featuredTool && <section aria-labelledby="featured-tool">

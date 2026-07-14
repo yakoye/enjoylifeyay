@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { writingSectionIds } from './config/content-model';
 
 const date = z.coerce.date();
 // Put null first: z.coerce.date() would otherwise coerce null to Unix epoch 1970-01-01.
@@ -22,11 +23,10 @@ const writing = defineCollection({
     source: z.enum(['native', 'CSDN', 'Zhihu']).default('native'),
     sourceUrl: optionalUrl,
     migratedAt: optionalDate,
-    domain: z.enum(['technology', 'reading', 'life', 'nature', 'tool']),
-    format: z.enum(['article', 'answer', 'note', 'guide', 'reference', 'project-log', 'observation']),
-    topics: z.array(z.string()).default([]),
-    tags: z.array(z.string()).default([]),
-    series: z.array(z.string()).default([]),
+    /** One stable reader-facing home: parent section + second-level section. */
+    section: z.enum(writingSectionIds),
+    /** Cross-section terms a reader may deliberately look for. Keep this concise. */
+    tags: z.array(z.string().min(1)).max(3).default([]),
     legacy: z.boolean().default(false),
     cover: z.string().default(''),
     coverAlt: z.string().default(''),
@@ -35,20 +35,6 @@ const writing = defineCollection({
   }),
 });
 
-const series = defineCollection({
-  loader: file('src/content/series.json'),
-  schema: z.object({
-    id: z.string(),
-    title: z.string(),
-    description: z.string(),
-    audience: z.string().default(''),
-    status: z.enum(['active', 'directory', 'archived']),
-    order: z.number().int().nonnegative(),
-    topics: z.array(z.string()).default([]),
-    progress: z.number().min(0).max(100).optional(),
-    ...common,
-  }),
-});
 
 const tools = defineCollection({
   loader: file('src/content/tools.json'),
@@ -110,9 +96,10 @@ const sectionPages = defineCollection({
     description: z.string().min(1),
     order: z.number().int().nonnegative(),
     kind: z.enum(['writing', 'tools', 'nature', 'books', 'markdown']).default('markdown'),
-    writingDomain: z.enum(['technology', 'reading', 'life', 'nature', 'tool']).optional(),
-    writingSeries: z.array(z.string()).default([]),
-    writingTopics: z.array(z.string()).default([]),
+    writingSectionPrefix: z.enum(['technology', 'tools', 'reading', 'nature', 'life']).optional(),
+    writingSections: z.array(z.enum(writingSectionIds)).default([]),
+    /** Markdown pages stay hidden from the map until they contain real reader content. */
+    showInMap: z.boolean().default(false),
     toolCategories: z.array(z.enum(['pcie-hardware', 'browser-extension', 'writing-media', 'websites-life', 'knowledge-library', 'diy-project'])).default([]),
     natureCategories: z.array(z.enum(['plant', 'animal', 'season', 'hiking-cycling', 'urban-wild', 'photo-aerial', 'local-memory'])).default([]),
     bookStatuses: z.array(z.enum(['reading', 'read', 'wishlist'])).default([]),
@@ -133,4 +120,4 @@ const sitePages = defineCollection({
   }),
 });
 
-export const collections = { writing, series, tools, nature, books, favorites, sectionPages, sitePages };
+export const collections = { writing, tools, nature, books, favorites, sectionPages, sitePages };

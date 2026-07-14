@@ -3,14 +3,13 @@ import { getCollection, getEntry } from 'astro:content';
 import SectionMap from '../../components/SectionMap.astro';
 import DirectoryList from '../../components/DirectoryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getVisibleSectionPages } from '../../lib/section-pages';
 
 const page = await getEntry('sitePages', 'tools');
 if (!page) throw new Error('Missing Markdown page content: tools');
 const tools = (await getCollection('tools', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
-const mapItems = (await getCollection('sectionPages', ({ data }) => !data.draft && data.section === 'tools'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((entry) => ({ title: entry.data.title, href: `/tools/${entry.data.routeSlug}/` }));
+const mapItems = await getVisibleSectionPages('tools');
 const highlights = tools.filter((tool) => tool.data.featured || ['dictfloat', 'regcalc-text-tool', 'pcie-tools-index'].includes(tool.data.id))
   .map(({ data }) => ({ title: data.name, description: data.description, href: data.url || data.githubUrl || undefined }));
 ---

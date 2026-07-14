@@ -2,26 +2,23 @@ import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-test('v1 定义六类严格内容集合', async () => {
+test('v0.21 内容集合使用 section 与 tags 的精简文章模型', async () => {
   const schema = await readFile(new URL('../src/content.config.ts', import.meta.url), 'utf8');
-  for (const name of ['writing', 'series', 'tools', 'nature', 'books', 'favorites']) {
+  for (const name of ['writing', 'tools', 'nature', 'books', 'favorites', 'sectionPages', 'sitePages']) {
     assert.match(schema, new RegExp(`\\b${name}\\b`));
   }
-  for (const value of ['technology', 'reading', 'life', 'nature', 'tool']) {
-    assert.match(schema, new RegExp(`['"]${value}['"]`));
-  }
-  for (const value of ['article', 'answer', 'note', 'guide', 'reference', 'project-log', 'observation']) {
-    assert.match(schema, new RegExp(`['"]${value}['"]`));
+  assert.match(schema, /section:\s*z\.enum\(writingSectionIds\)/);
+  assert.match(schema, /tags:\s*z\.array\(z\.string\(\)\.min\(1\)\)\.max\(3\)/);
+  for (const obsolete of ['domain:', 'format:', 'topics:', 'series:']) {
+    assert.doesNotMatch(schema, new RegExp(obsolete));
   }
   assert.match(schema, /draft:\s*z\.boolean\(\)\.default\(true\)/);
 });
 
 test('可维护目录数据存在且未知链接保持空值', async () => {
-  const files = ['series.json', 'tools.json', 'nature.json', 'books.json', 'favorites.json'];
+  const files = ['tools.json', 'nature.json', 'books.json', 'favorites.json'];
   await Promise.all(files.map((file) => access(new URL(`../src/content/${file}`, import.meta.url))));
-  const series = JSON.parse(await readFile(new URL('../src/content/series.json', import.meta.url), 'utf8'));
   const tools = JSON.parse(await readFile(new URL('../src/content/tools.json', import.meta.url), 'utf8'));
-  assert.equal(series.length, 10);
   assert.ok(tools.length >= 11);
   for (const entry of tools) {
     if (entry.status === 'link-pending') {
