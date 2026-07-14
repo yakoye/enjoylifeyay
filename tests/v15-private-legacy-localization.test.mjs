@@ -33,6 +33,9 @@ test('v0.15 提供一次性本地旧图下载与发布前完整性检查', async
   // The one-time source manifest intentionally stays out of distributable archives
   // so that retired legacy-host URLs are not committed or published.
   assert.match(await readFile(join(root, 'scripts/fetch-legacy-assets.mjs'), 'utf8'), /legacy-assets\.private\.json/);
+  const verifyScript = await readFile(join(root, 'scripts/verify-legacy-assets.mjs'), 'utf8');
+  assert.doesNotMatch(verifyScript, /legacy-assets\.private\.json/);
+  assert.match(verifyScript, /src[\\/]content[\\/]writing/);
   assert.match(gitignore, /scripts\/legacy-assets\.private\.json/);
 });
 
