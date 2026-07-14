@@ -46,6 +46,8 @@ test('仓库提供互不影响的 Cloudflare 与 GitHub Pages 自动部署', asy
     readFile(file('.gitignore'), 'utf8'),
   ]);
   assert.match(workflow, /npm run verify/);
+  assert.match(workflow, /workflow_dispatch:/);
+  assert.match(workflow, /github\.event_name == 'workflow_dispatch'/);
   assert.match(workflow, /CLOUDFLARE_API_TOKEN/);
   assert.match(workflow, /CLOUDFLARE_ACCOUNT_ID/);
   assert.match(workflow, /pages deploy dist --project-name enjoylifeyay --branch main/);
