@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import test from 'node:test';
 
 const file = (path) => new URL(`../${path}`, import.meta.url);
@@ -59,10 +59,10 @@ test('仓库提供互不影响的 Cloudflare 与 GitHub Pages 自动部署', asy
   await access(file('scripts/prefix-base-path.mjs'));
 });
 
-test('README 记录唯一开发目录和推送后双平台自动发布', async () => {
+test('README 只记录仓库名和推送后双平台自动发布', async () => {
   const readme = await readFile(file('README.md'), 'utf8');
   for (const marker of [
-    'D:\\work\\code\\code_o\\github_ye\\enjoylifeyay',
+    'enjoylifeyay',
     'git pull --ff-only',
     'npm run verify',
     'git push origin main',
@@ -70,4 +70,16 @@ test('README 记录唯一开发目录和推送后双平台自动发布', async (
     'https://yakoye.github.io/enjoylifeyay/',
     'GitHub Actions',
   ]) assert.ok(readme.includes(marker), `README 缺少 ${marker}`);
+});
+
+test('公开 Markdown 文档不暴露维护者本地绝对路径', async () => {
+  const markdownFiles = (await readdir(file('.'), { recursive: true }))
+    .filter((path) => path.endsWith('.md'))
+    .filter((path) => !path.startsWith('node_modules\\') && !path.startsWith('node_modules/'));
+
+  for (const path of markdownFiles) {
+    const content = await readFile(file(path.replaceAll('\\', '/')), 'utf8');
+    assert.doesNotMatch(content, /D:\\work\\code\\code_o\\github_ye\\enjoylifeyay/i, `${path} 暴露了本地工作目录`);
+    assert.doesNotMatch(content, /C:\\Users\\color/i, `${path} 暴露了 Windows 用户目录`);
+  }
 });

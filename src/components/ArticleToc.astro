@@ -1,0 +1,150 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const previewCount = 3;
+const hasMoreThanPreview = headings.length > previewCount;
+---
+
+<aside class="article-toc-desktop" data-article-toc-desktop aria-label="文章目录">
+  <div class="article-toc-panel" data-toc-panel>
+    <div class="article-toc-panel-header">
+      <strong>目录</strong>
+      <button type="button" class="article-toc-action" data-toc-collapse aria-expanded="true">
+        收起
+        <span aria-hidden="true">‹</span>
+      </button>
+    </div>
+    <ol class="article-toc-list">
+      {headings.map((heading) => (
+        <li class={`toc-depth-${heading.depth}`}>
+          <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <div class="article-toc-rail" data-toc-rail>
+    <button type="button" class="article-toc-expand" data-toc-expand aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 6h2M5 12h2M5 18h2M10 6h9M10 12h9M10 18h9" />
+      </svg>
+      <span>展开目录</span>
+    </button>
+    <div class="article-toc-dot-track" aria-label="目录位置">
+      {headings.map((heading) => (
+        <a
+          href={`#${heading.slug}`}
+          class={`article-toc-dot toc-depth-${heading.depth}`}
+          data-toc-link={heading.slug}
+          aria-label={heading.text}
+          title={heading.text}
+        ><span class="sr-only">{heading.text}</span></a>
+      ))}
+    </div>
+  </div>
+</aside>
+
+<nav class="article-toc-mobile" data-article-toc-mobile aria-label="文章目录">
+  <div class="article-toc-mobile-title">目录</div>
+  <ol class="article-toc-mobile-list">
+    {headings.map((heading, index) => (
+      <li class={`toc-depth-${heading.depth}${index >= previewCount ? ' toc-preview-extra' : ''}`}>
+        <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
+      </li>
+    ))}
+  </ol>
+  {hasMoreThanPreview && (
+    <button type="button" class="article-toc-mobile-toggle" data-toc-mobile-toggle aria-expanded="false">
+      <span data-toc-mobile-label>展开目录</span>
+      <span class="article-toc-mobile-chevron" aria-hidden="true">⌄</span>
+    </button>
+  )}
+</nav>
+
+<script>
+  const initArticleToc = () => {
+    const desktopToc = document.querySelector<HTMLElement>('[data-article-toc-desktop]');
+    const mobileToc = document.querySelector<HTMLElement>('[data-article-toc-mobile]');
+    if (!desktopToc && !mobileToc) return;
+
+    const collapseButton = desktopToc?.querySelector<HTMLButtonElement>('[data-toc-collapse]');
+    const expandButton = desktopToc?.querySelector<HTMLButtonElement>('[data-toc-expand]');
+    const mobileToggle = mobileToc?.querySelector<HTMLButtonElement>('[data-toc-mobile-toggle]');
+    const mobileLabel = mobileToc?.querySelector<HTMLElement>('[data-toc-mobile-label]');
+    const mobileChevron = mobileToc?.querySelector<HTMLElement>('.article-toc-mobile-chevron');
+
+    const setDesktopCollapsed = (collapsed: boolean) => {
+      desktopToc?.classList.toggle('is-collapsed', collapsed);
+      collapseButton?.setAttribute('aria-expanded', String(!collapsed));
+      expandButton?.setAttribute('aria-expanded', String(!collapsed));
+    };
+
+    collapseButton?.addEventListener('click', () => setDesktopCollapsed(true));
+    expandButton?.addEventListener('click', () => setDesktopCollapsed(false));
+
+    mobileToggle?.addEventListener('click', () => {
+      const expanded = mobileToc?.classList.toggle('is-expanded') ?? false;
+      mobileToggle.setAttribute('aria-expanded', String(expanded));
+      if (mobileLabel) mobileLabel.textContent = expanded ? '收起目录' : '展开目录';
+      if (mobileChevron) mobileChevron.textContent = expanded ? '⌃' : '⌄';
+    });
+
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
+    const headingEntries = Array.from(new Set(links.map((link) => link.dataset.tocLink).filter(Boolean)))
+      .map((slug) => ({
+        slug: slug as string,
+        element: document.getElementById(slug as string),
+      }))
+      .filter((entry): entry is { slug: string; element: HTMLElement } => Boolean(entry.element));
+
+    if (headingEntries.length === 0) return;
+
+    const updateActiveHeading = () => {
+      const activationLine = 112;
+      let activeSlug = headingEntries[0].slug;
+
+      for (const entry of headingEntries) {
+        if (entry.element.getBoundingClientRect().top <= activationLine) activeSlug = entry.slug;
+        else break;
+      }
+
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        activeSlug = headingEntries.at(-1)?.slug ?? activeSlug;
+      }
+
+      for (const link of links) {
+        const active = link.dataset.tocLink === activeSlug;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    };
+
+    let ticking = false;
+    const requestActiveUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateActiveHeading();
+        ticking = false;
+      });
+    };
+
+    updateActiveHeading();
+    window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+    window.addEventListener('resize', requestActiveUpdate, { passive: true });
+    window.addEventListener('hashchange', requestActiveUpdate);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initArticleToc, { once: true });
+  else initArticleToc();
+</script>

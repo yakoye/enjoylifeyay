@@ -9,7 +9,8 @@ const writingDir = fileURLToPath(new URL('../src/content/writing/', import.meta.
 test('v0.10 每篇公开文章都有可展开的目录', async () => {
   const articleLayout = await readFile(new URL('../src/layouts/ArticleLayout.astro', import.meta.url), 'utf8');
   assert.match(articleLayout, /toc\.length >= 1/);
-  assert.match(articleLayout, /<summary aria-label="展开或收起目录">目录<\/summary>/);
+  assert.match(articleLayout, /import ArticleToc from '\.\.\/components\/ArticleToc\.astro'/);
+  assert.match(articleLayout, /<ArticleToc headings=\{toc\} \/>/);
 
   const filenames = (await readdir(writingDir)).filter((name) => /\.mdx?$/.test(name));
   for (const filename of filenames) {

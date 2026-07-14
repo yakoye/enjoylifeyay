@@ -1,8 +1,15 @@
 # 更新记录
 
+## v0.23
+
+- 文章页新增双端目录：桌面端默认在正文左侧展开，并在滚动时保持可见。
+- 桌面目录可以收起为圆点轨道，圆点仍可直接跳转到对应章节。
+- 手机端默认预览前三项目录，可在正文内展开全部目录或再次收起。
+- 桌面与手机目录都会跟随阅读位置高亮当前章节。
+
 ## v0.22
 
-- 将 `D:\work\code\code_o\github_ye\enjoylifeyay` 设为唯一开发目录。
+- 将 `enjoylifeyay` 仓库设为唯一维护来源。
 - 推送 `main` 后，GitHub Actions 分别部署 Cloudflare Pages 自定义域名与 GitHub Pages 默认项目地址。
 - 为 GitHub Pages 增加 `/enjoylifeyay/` 子路径构建，同时保持主站 canonical 指向自定义域名。
 - 完整移除评论组件、评论 API、管理脚本、D1 SQL 与现行评论配置文档。

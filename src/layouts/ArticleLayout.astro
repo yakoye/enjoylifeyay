@@ -5,6 +5,7 @@ import { getSectionInfo } from '../config/content-model';
 import { getPublicTagSet, tagHref } from '../lib/tags';
 import { site } from '../config/site';
 import CopyCode from '../components/CopyCode.astro';
+import ArticleToc from '../components/ArticleToc.astro';
 
 interface Heading { depth: number; slug: string; text: string; }
 interface Props { entry: CollectionEntry<'writing'>; headings?: Heading[]; }
@@ -43,7 +44,7 @@ const jsonLd = {
 
 <BaseLayout title={data.title} description={data.description} contentType="文章" publishedAt={publishedAt} activeNav={section.parentHref}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  <article>
+  <article class="article-page">
     <header class="article-header">
       <h1>{data.title}</h1>
       <div class="writing-meta">
@@ -63,7 +64,7 @@ const jsonLd = {
         {updatedAt && <span>最后修订：{formatDate(updatedAt)}</span>}
       </div>
     </header>
-    {toc.length >= 1 && <details class="article-toc"><summary aria-label="展开或收起目录">目录</summary><ol>{toc.map((heading) => <li class:list={{ nested: heading.depth === 3, 'nested-deep': heading.depth === 4 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></details>}
+    {toc.length >= 1 && <ArticleToc headings={toc} />}
     <div class="article-prose"><slot /></div>
   </article>
   <CopyCode />

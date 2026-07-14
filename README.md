@@ -9,22 +9,22 @@
 
 两个地址由同一次 `main` 分支提交分别构建、分别发布，任何一边部署失败都不会覆盖另一边的线上版本。页面 canonical 始终指向主站。
 
-## 唯一开发目录
+## 唯一维护仓库
 
-以后只在这里维护：
+以后只在名为以下名称的仓库中维护：
 
 ```text
-D:\work\code\code_o\github_ye\enjoylifeyay
+enjoylifeyay
 ```
 
-旧目录只作为历史备份，不再从旧目录提交或部署，以免内容相互覆盖。
+其他副本只作为历史备份，不再从其他副本提交或部署，以免内容相互覆盖。
 
 ## 日常更新与自动发布
 
 开始修改前先同步远端：
 
 ```powershell
-cd D:\work\code\code_o\github_ye\enjoylifeyay
+cd enjoylifeyay
 git pull --ff-only
 ```
 

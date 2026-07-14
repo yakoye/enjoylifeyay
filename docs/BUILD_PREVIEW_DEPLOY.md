@@ -2,10 +2,10 @@
 
 ## 环境与目录
 
-本站按 Node.js 24.x 维护，唯一开发目录为：
+本站按 Node.js 24.x 维护，仓库目录名为：
 
 ```powershell
-cd D:\work\code\code_o\github_ye\enjoylifeyay
+cd enjoylifeyay
 node -v
 ```
 
@@ -78,7 +78,7 @@ Remove-Item Env:BASE_PATH
 ## 推荐发布流程
 
 ```powershell
-cd D:\work\code\code_o\github_ye\enjoylifeyay
+cd enjoylifeyay
 git pull --ff-only
 npm run verify
 git status

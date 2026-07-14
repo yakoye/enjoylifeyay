@@ -26,7 +26,8 @@ test('全站支持 Ctrl 或 Cmd 加 K 进入搜索', async () => {
 test('文章支持目录、结构化数据、复制代码和 Figure', async () => {
   const article = await readFile(new URL('../src/layouts/ArticleLayout.astro', import.meta.url), 'utf8');
   assert.match(article, /application\/ld\+json/);
-  assert.match(article, /class="article-toc"/);
+  assert.match(article, /import ArticleToc from '\.\.\/components\/ArticleToc\.astro'/);
+  await access(new URL('../src/components/ArticleToc.astro', import.meta.url));
   await access(new URL('../src/components/CopyCode.astro', import.meta.url));
   await access(new URL('../src/components/Figure.astro', import.meta.url));
 });
