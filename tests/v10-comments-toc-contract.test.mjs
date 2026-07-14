@@ -19,23 +19,15 @@ test('v0.10 每篇公开文章都有可展开的目录', async () => {
   }
 });
 
-test('v0.10 文章末尾提供极简评论入口与 D1 审核 API', async () => {
+test('文章保留目录和代码增强，但不再提供评论入口或 API', async () => {
   const articleLayout = await readFile(new URL('../src/layouts/ArticleLayout.astro', import.meta.url), 'utf8');
-  const comments = await readFile(new URL('../src/components/Comments.astro', import.meta.url), 'utf8');
-  const api = await readFile(new URL('../functions/api/comments.js', import.meta.url), 'utf8');
-  const sql = await readFile(new URL('../database/comments.sql', import.meta.url), 'utf8');
-  const docs = await readFile(new URL('../docs/COMMENTS_D1.md', import.meta.url), 'utf8');
-
-  assert.match(articleLayout, /<Comments article=\{entry\.id\}/);
-  assert.match(comments, /邮箱（可选）/);
-  assert.match(comments, /昵称（可选）/);
-  assert.match(comments, /email/);
-  assert.match(api, /env\.COMMENTS_DB/);
-  assert.match(api, /'pending'/);
-  assert.match(api, /'approved'/);
-  assert.match(api, /crypto\.subtle\.digest/);
-  assert.match(sql, /CREATE TABLE IF NOT EXISTS comments/);
-  assert.match(docs, /COMMENTS_DB/);
+  assert.doesNotMatch(articleLayout, /Comments|评论/);
+  for (const path of [
+    '../src/components/Comments.astro',
+    '../functions/api/comments.js',
+    '../database/comments.sql',
+    '../docs/COMMENTS_D1.md',
+  ]) await assert.rejects(access(new URL(path, import.meta.url)));
   await access(new URL('../scripts/audit-writing-toc.mjs', import.meta.url));
 });
 
