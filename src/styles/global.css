@@ -1165,15 +1165,29 @@ main > section + section {
 .section-directory-item:focus-visible strong { color: var(--link); }
 
 .section-map {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.32rem 1rem;
   margin-top: 1.35rem;
   padding-top: 0.72rem;
   border-top: 1px solid var(--rule-color);
 }
 
+.section-map-prefix {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
 .section-map-label {
-  margin-right: 0.2rem;
   color: var(--muted);
   font-weight: 400;
+}
+
+.section-map > a,
+.section-map-current {
+  display: inline-block;
 }
 
 .section-map-current {
@@ -1243,8 +1257,8 @@ main > section + section {
   color: var(--link);
 }
 
-/* Article and observation lists now read in three deliberate lines:
-   title + date, summary, then hierarchy/meta information. */
+/* Article lists keep only the information needed for scanning:
+   title + date, followed by the summary. */
 .dated-list-item {
   grid-template-columns: 1.15rem minmax(0, 1fr);
   margin: 0.52rem 0;

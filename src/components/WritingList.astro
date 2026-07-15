@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { getSectionInfo } from '../config/content-model';
 
 interface Props { entries: CollectionEntry<'writing'>[]; emptyMessage?: string | false; }
 const { entries, emptyMessage = '暂无文章。' } = Astro.props;
@@ -11,24 +10,17 @@ const formatDate = (value: Date) => new Intl.DateTimeFormat('en-CA', {
 
 {entries.length ? (
   <ul class="dated-list writing-list" data-writing-list>
-    {entries.map((entry) => {
-      const section = getSectionInfo(entry.data.section);
-      return (
-        <li class="dated-list-item writing-item" data-section={entry.data.section}>
-          <span class="dated-list-bullet" aria-hidden="true">•</span>
-          <div class="dated-list-content">
-            <div class="dated-list-title-row">
-              <a class="dated-list-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
-              <time class="dated-list-date" datetime={formatDate(entry.data.date)}>{formatDate(entry.data.date)}</time>
-            </div>
-            <div class="dated-list-description">{entry.data.description}</div>
-            <div class="dated-list-meta">
-              {section.parentLabel} · {section.label}
-              {entry.data.tags.length > 0 && ` · ${entry.data.tags.join(' / ')}`}
-            </div>
+    {entries.map((entry) => (
+      <li class="dated-list-item writing-item" data-section={entry.data.section}>
+        <span class="dated-list-bullet" aria-hidden="true">•</span>
+        <div class="dated-list-content">
+          <div class="dated-list-title-row">
+            <a class="dated-list-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
+            <time class="dated-list-date" datetime={formatDate(entry.data.date)}>{formatDate(entry.data.date)}</time>
           </div>
-        </li>
-      );
-    })}
+          <div class="dated-list-description">{entry.data.description}</div>
+        </div>
+      </li>
+    ))}
   </ul>
 ) : (emptyMessage ? <p class="empty-state">{emptyMessage}</p> : null)}

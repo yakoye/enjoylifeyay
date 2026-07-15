@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import DirectoryList from '../../components/DirectoryList.astro';
 import TopicPreview from '../../components/TopicPreview.astro';
+import SectionMap from '../../components/SectionMap.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getVisibleSectionPageEntries, matchesWritingSectionPage } from '../../lib/section-pages';
@@ -49,11 +50,17 @@ const topicPreviews = sectionPages.map((sectionPage) => {
 }).filter(({ sectionPage, writingEntries, bookItems }) => (
   writingEntries.length > 0 || bookItems.length > 0 || sectionPage.data.kind === 'markdown'
 ));
+const categoryItems = sectionPages.map((sectionPage) => ({
+  title: sectionPage.data.title,
+  href: `/${sectionPage.data.section}/${sectionPage.data.routeSlug}/`,
+}));
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
   <h1>{page.data.title}</h1>
   <p class="page-intro">{page.data.intro}</p>
+
+  <SectionMap label="分类" items={categoryItems} />
 
   <div class="topic-preview-list">
     {topicPreviews.map(({ sectionPage, writingEntries, bookItems }) => {

@@ -17,13 +17,14 @@ const { label = '地图', items, currentHref = '', sectionHref = '' } = Astro.pr
 
 {items.length > 0 && (
   <nav class="section-map" aria-label={`${label}目录`}>
-    {sectionHref ? <a class="section-map-label" href={sectionHref} aria-label={`返回${label}首页`}>{label}</a> : <span class="section-map-label">{label}</span>}
-    <span class="section-map-colon" aria-hidden="true">：</span>
-    {items.map((item, index) => (
-      <>
-        {index > 0 && <span class="section-map-separator" aria-hidden="true">·</span>}
-        {item.href === currentHref ? <span class="section-map-current" aria-current="page">{item.title}</span> : <a href={item.href}>{item.title}</a>}
-      </>
+    <span class="section-map-prefix">
+      {sectionHref ? <a class="section-map-label" href={sectionHref} aria-label={`返回${label}首页`}>{label}</a> : <span class="section-map-label">{label}</span>}
+      <span class="section-map-colon" aria-hidden="true">：</span>
+    </span>
+    {items.map((item) => (
+      item.href === currentHref
+        ? <span class="section-map-current" aria-current="page">{item.title}</span>
+        : <a href={item.href}>{item.title}</a>
     ))}
   </nav>
 )}

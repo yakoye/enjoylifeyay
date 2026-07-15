@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('v0.25 writing lists render title and date first, then summary and hierarchy', async () => {
+test('v0.25.1 writing lists keep only title, date and summary', async () => {
   const [writing, dated, css] = await Promise.all([
     read('src/components/WritingList.astro'),
     read('src/components/DatedTextList.astro'),
@@ -13,7 +13,9 @@ test('v0.25 writing lists render title and date first, then summary and hierarch
   assert.match(writing, /dated-list-title-row/);
   assert.match(writing, /<time class="dated-list-date"/);
   assert.match(writing, /<div class="dated-list-description">\{entry\.data\.description\}<\/div>/);
-  assert.match(writing, /section\.parentLabel/);
+  assert.doesNotMatch(writing, /section\.parentLabel/);
+  assert.doesNotMatch(writing, /entry\.data\.tags/);
+  assert.doesNotMatch(writing, /dated-list-meta/);
   assert.doesNotMatch(writing, /dated-list-description">：/);
   assert.match(dated, /dated-list-title-row/);
   assert.match(css, /grid-template-columns:\s*minmax\(0, 1fr\) auto/);
