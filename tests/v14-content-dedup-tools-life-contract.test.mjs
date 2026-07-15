@@ -4,21 +4,21 @@ import test from 'node:test';
 
 const file = (value) => new URL(`../${value}`, import.meta.url);
 
-test('v0.22 reading parent shows recent article links without duplicating article bodies or directory data', async () => {
+test('v0.25 reading parent groups preview content without repeating entries', async () => {
   const page = await readFile(file('src/pages/reading/index.astro'), 'utf8');
-  assert.match(page, /SectionDirectory/);
+  assert.match(page, /TopicPreview/);
   assert.match(page, /WritingList/);
-  assert.match(page, /最近文章/);
-  for (const forbidden of ["getCollection('books')", 'reading-sites.json']) {
+  assert.match(page, /usedWriting/);
+  for (const forbidden of ['reading-sites.json']) {
     assert.equal(page.includes(forbidden), false, `reading page must not retain ${forbidden}`);
   }
 });
 
-test('v0.14 technology and tools defer sections to reusable maps instead of empty card directories', async () => {
+test('v0.25 technology and tools render reusable topic previews instead of card directories', async () => {
   const technology = await readFile(file('src/pages/technology/index.astro'), 'utf8');
   const tools = await readFile(file('src/pages/tools/index.astro'), 'utf8');
-  assert.match(technology, /SectionDirectory/);
-  assert.match(tools, /SectionDirectory/);
+  assert.match(technology, /TopicPreview/);
+  assert.match(tools, /TopicPreview/);
   assert.doesNotMatch(tools, /个人网站与生活工具/);
 });
 

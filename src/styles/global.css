@@ -1200,3 +1200,98 @@ main > section + section {
   .article-tags { display: block; }
   .all-tags-link { display: inline-block; margin-top: 0.3rem; }
 }
+
+/* v0.25 — first-level pages preview three unique entries per topic. */
+.topic-preview-list {
+  margin-top: 1.75rem;
+}
+
+.topic-preview + .topic-preview {
+  margin-top: 2.15rem;
+}
+
+.topic-preview-title {
+  margin: 0 0 0.62rem;
+  font-size: var(--font-h2);
+  line-height: 1.55;
+}
+
+.topic-preview-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.topic-preview-title a:hover,
+.topic-preview-title a:focus-visible {
+  color: var(--link);
+}
+
+.topic-preview-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--font-list);
+  line-height: 1.75;
+}
+
+.topic-preview-more {
+  margin: 0.45rem 0 0 1.65rem;
+  font-size: var(--font-meta);
+  line-height: 1.7;
+}
+
+.topic-preview-more a {
+  color: var(--link);
+}
+
+/* Article and observation lists now read in three deliberate lines:
+   title + date, summary, then hierarchy/meta information. */
+.dated-list-item {
+  grid-template-columns: 1.15rem minmax(0, 1fr);
+  margin: 0.52rem 0;
+}
+
+.dated-list-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.6rem 1rem;
+}
+
+.dated-list-title {
+  min-width: 0;
+  line-height: 1.65;
+}
+
+.dated-list-description {
+  display: block;
+  margin-top: 0.03rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.dated-list-meta {
+  margin-top: 0.05rem;
+}
+
+.dated-list-date {
+  align-self: baseline;
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  .topic-preview-list {
+    margin-top: 1.45rem;
+  }
+
+  .topic-preview + .topic-preview {
+    margin-top: 1.8rem;
+  }
+
+  .topic-preview-more {
+    margin-left: 1.65rem;
+  }
+
+  .dated-list-title-row {
+    gap: 0.45rem 0.65rem;
+  }
+}

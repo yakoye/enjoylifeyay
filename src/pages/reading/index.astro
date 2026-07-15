@@ -1,26 +1,75 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import SectionDirectory from '../../components/SectionDirectory.astro';
+import DirectoryList from '../../components/DirectoryList.astro';
+import TopicPreview from '../../components/TopicPreview.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { isInParentSection } from '../../config/content-model';
-import { getVisibleSectionPages } from '../../lib/section-pages';
+import { getVisibleSectionPageEntries, matchesWritingSectionPage } from '../../lib/section-pages';
 
 const page = await getEntry('sitePages', 'reading');
 if (!page) throw new Error('Missing Markdown page content: reading');
-const recentWriting = (await getCollection('writing', ({ data }) => !data.draft && isInParentSection(data.section, 'reading')))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 8);
-const mapItems = await getVisibleSectionPages('reading');
+const writing = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const allBooks = await getCollection('books');
+type PublishedBook = (typeof allBooks)[number] & { data: Extract<(typeof allBooks)[number]['data'], { draft: false }> };
+const books = allBooks.filter((entry): entry is PublishedBook => entry.data.draft === false)
+  .sort((a, b) => {
+    const aDate = a.data.finishedAt?.valueOf() || a.data.startedAt?.valueOf() || 0;
+    const bDate = b.data.finishedAt?.valueOf() || b.data.startedAt?.valueOf() || 0;
+    return bDate - aDate;
+  });
+const sectionPages = await getVisibleSectionPageEntries('reading');
+const usedWriting = new Set<string>();
+const usedBooks = new Set<string>();
+const topicPreviews = sectionPages.map((sectionPage) => {
+  const writingEntries = sectionPage.data.kind === 'writing'
+    ? writing
+      .filter((entry) => {
+        if (usedWriting.has(entry.id)) return false;
+        if (sectionPage.data.routeSlug === 'articles') return entry.data.section === 'reading/articles';
+        return matchesWritingSectionPage(entry, sectionPage);
+      })
+      .slice(0, 3)
+    : [];
+  writingEntries.forEach((entry) => usedWriting.add(entry.id));
+
+  const bookEntries = sectionPage.data.kind === 'books'
+    ? books
+      .filter((entry) => sectionPage.data.bookStatuses.includes(entry.data.status) && !usedBooks.has(entry.id))
+      .slice(0, 3)
+    : [];
+  bookEntries.forEach((entry) => usedBooks.add(entry.id));
+  const bookItems = bookEntries.map(({ data }) => ({
+    title: data.title,
+    description: data.note || undefined,
+    meta: data.author,
+  }));
+
+  return { sectionPage, writingEntries, bookItems };
+}).filter(({ sectionPage, writingEntries, bookItems }) => (
+  writingEntries.length > 0 || bookItems.length > 0 || sectionPage.data.kind === 'markdown'
+));
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
   <h1>{page.data.title}</h1>
   <p class="page-intro">{page.data.intro}</p>
-  <SectionDirectory items={mapItems} />
 
-  <section aria-labelledby="reading-recent-writing">
-    <h2 id="reading-recent-writing">最近文章</h2>
-    <WritingList entries={recentWriting} emptyMessage={false} />
-  </section>
+  <div class="topic-preview-list">
+    {topicPreviews.map(({ sectionPage, writingEntries, bookItems }) => {
+      const hasContent = writingEntries.length > 0 || bookItems.length > 0;
+      return (
+        <TopicPreview
+          title={sectionPage.data.title}
+          id={sectionPage.data.routeSlug}
+          href={`/${sectionPage.data.section}/${sectionPage.data.routeSlug}/`}
+          description={sectionPage.data.description}
+          hasContent={hasContent}
+        >
+          {writingEntries.length > 0 && <WritingList entries={writingEntries} emptyMessage={false} />}
+          {bookItems.length > 0 && <DirectoryList items={bookItems} emptyMessage={false} />}
+        </TopicPreview>
+      );
+    })}
+  </div>
 </BaseLayout>

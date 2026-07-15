@@ -40,11 +40,13 @@ const formatDate = (value?: Date | string | null) => {
               <li class="dated-list-item">
                 <span class="dated-list-bullet" aria-hidden="true">•</span>
                 <div class="dated-list-content">
-                  {item.href ? <a class="dated-list-title" href={item.href}>{item.title}</a> : <span class="dated-list-title">{item.title}</span>}
-                  {item.description && <span class="dated-list-description">：{item.description}</span>}
+                  <div class="dated-list-title-row">
+                    {item.href ? <a class="dated-list-title" href={item.href}>{item.title}</a> : <span class="dated-list-title">{item.title}</span>}
+                    {itemDate && <time class="dated-list-date" datetime={itemDate}>{itemDate}</time>}
+                  </div>
+                  {item.description && <div class="dated-list-description">{item.description}</div>}
                   {item.meta && (item.metaInline ? <span class="dated-list-inline-meta">（{item.meta}）</span> : <div class="dated-list-meta">{item.meta}</div>)}
                 </div>
-                {itemDate && <time class="dated-list-date" datetime={itemDate}>{itemDate}</time>}
               </li>
             );
           })}

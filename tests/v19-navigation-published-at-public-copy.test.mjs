@@ -8,14 +8,14 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const read = (relative) => readFile(join(root, relative), 'utf8');
 
 test('v0.24 一级目录与二级页面都保留清楚的返回路径', async () => {
-  const directory = await read('src/components/SectionDirectory.astro');
+  const directory = await read('src/components/TopicPreview.astro');
   const breadcrumbs = await read('src/components/Breadcrumbs.astro');
-  assert.match(directory, /item\.href/);
+  assert.match(directory, /href=\{href\}/);
   assert.match(breadcrumbs, /面包屑导航/);
 
   for (const section of ['technology', 'tools', 'reading', 'nature', 'life']) {
     const parent = await read(`src/pages/${section}/index.astro`);
-    assert.match(parent, /SectionDirectory/);
+    assert.match(parent, /TopicPreview/);
   }
 
   const child = await read('src/pages/[section]/[slug].astro');

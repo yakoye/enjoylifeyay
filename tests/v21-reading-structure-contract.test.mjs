@@ -7,12 +7,12 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (relative) => readFile(path.join(root, relative), 'utf8');
 
-test('阅读首页保留四个入口并显示最近文章索引', async () => {
+test('阅读首页保留四个入口并按主题预览内容', async () => {
   const page = await read('src/pages/reading/index.astro');
-  assert.match(page, /getVisibleSectionPages\('reading'\)/);
+  assert.match(page, /getVisibleSectionPageEntries\('reading'\)/);
   assert.match(page, /WritingList/);
   assert.match(page, /getCollection\('writing'/);
-  assert.match(page, /最近文章/);
+  assert.match(page, /TopicPreview/);
 
   const expected = [
     ['reading-articles.md', 'articles', '总结', '1'],

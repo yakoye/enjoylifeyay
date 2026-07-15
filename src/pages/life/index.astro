@@ -1,25 +1,43 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import SectionDirectory from '../../components/SectionDirectory.astro';
+import TopicPreview from '../../components/TopicPreview.astro';
 import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { isInParentSection } from '../../config/content-model';
-import { getVisibleSectionPages } from '../../lib/section-pages';
+import { getVisibleSectionPageEntries, matchesWritingSectionPage } from '../../lib/section-pages';
 
 const page = await getEntry('sitePages', 'life');
 if (!page) throw new Error('Missing Markdown page content: life');
 const allLifeWriting = (await getCollection('writing', ({ data }) => !data.draft && isInParentSection(data.section, 'life')))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const mapItems = await getVisibleSectionPages('life');
+const sectionPages = await getVisibleSectionPageEntries('life');
+const usedWriting = new Set<string>();
+const topicPreviews = sectionPages.map((sectionPage) => {
+  const entries = sectionPage.data.kind === 'writing'
+    ? allLifeWriting
+      .filter((entry) => matchesWritingSectionPage(entry, sectionPage) && !usedWriting.has(entry.id))
+      .slice(0, 3)
+    : [];
+  entries.forEach((entry) => usedWriting.add(entry.id));
+  return { sectionPage, entries };
+}).filter(({ sectionPage, entries }) => entries.length > 0 || sectionPage.data.kind === 'markdown');
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
   <h1>{page.data.title}</h1>
   <p class="page-intro">{page.data.intro}</p>
-  <SectionDirectory items={mapItems} />
 
-  <section aria-labelledby="life-recent-writing">
-    <h2 id="life-recent-writing">最近生活记录</h2>
-    <WritingList entries={allLifeWriting.slice(0, 8)} />
-  </section>
+  <div class="topic-preview-list">
+    {topicPreviews.map(({ sectionPage, entries }) => (
+      <TopicPreview
+        title={sectionPage.data.title}
+        id={sectionPage.data.routeSlug}
+        href={`/${sectionPage.data.section}/${sectionPage.data.routeSlug}/`}
+        description={sectionPage.data.description}
+        hasContent={entries.length > 0}
+      >
+        <WritingList entries={entries} emptyMessage={false} />
+      </TopicPreview>
+    ))}
+  </div>
 </BaseLayout>

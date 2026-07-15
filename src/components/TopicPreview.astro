@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  description?: string;
+  hasContent?: boolean;
+  id?: string;
+}
+
+const { title, href, description = '', hasContent = true, id = 'section' } = Astro.props;
+---
+
+<section class="topic-preview" aria-labelledby={`topic-${id}`}>
+  <h2 class="topic-preview-title" id={`topic-${id}`}><a href={href}>{title}</a></h2>
+  {hasContent ? <slot /> : (description && <p class="topic-preview-description">{description}</p>)}
+  <p class="topic-preview-more"><a href={href}>查看更多 &gt;&gt;</a></p>
+</section>

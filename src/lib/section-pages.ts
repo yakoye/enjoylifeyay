@@ -18,7 +18,7 @@ function isPublishedBook(entry: CollectionEntry<'books'>): entry is CollectionEn
   return entry.data.draft === false;
 }
 
-export async function getVisibleSectionPages(section: Parent) {
+export async function getVisibleSectionPageEntries(section: Parent) {
   const [pages, writing, tools, nature, books] = await Promise.all([
     getCollection('sectionPages', ({ data }) => !data.draft && data.section === section),
     getCollection('writing', ({ data }) => !data.draft),
@@ -36,7 +36,14 @@ export async function getVisibleSectionPages(section: Parent) {
     return false;
   });
 
-  return visible
-    .sort((a, b) => a.data.order - b.data.order)
-    .map((entry) => ({ title: entry.data.title, description: entry.data.description, href: `/${entry.data.section}/${entry.data.routeSlug}/` }));
+  return visible.sort((a, b) => a.data.order - b.data.order);
+}
+
+export async function getVisibleSectionPages(section: Parent) {
+  const visible = await getVisibleSectionPageEntries(section);
+  return visible.map((entry) => ({
+    title: entry.data.title,
+    description: entry.data.description,
+    href: `/${entry.data.section}/${entry.data.routeSlug}/`,
+  }));
 }

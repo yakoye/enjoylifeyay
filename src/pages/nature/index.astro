@@ -1,9 +1,9 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import DatedTextList from '../../components/DatedTextList.astro';
-import SectionDirectory from '../../components/SectionDirectory.astro';
+import TopicPreview from '../../components/TopicPreview.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getVisibleSectionPages } from '../../lib/section-pages';
+import { getVisibleSectionPageEntries } from '../../lib/section-pages';
 
 const page = await getEntry('sitePages', 'nature');
 if (!page) throw new Error('Missing Markdown page content: nature');
@@ -11,23 +11,41 @@ const allEntries = await getCollection('nature');
 type PublishedNature = (typeof allEntries)[number] & { data: Extract<(typeof allEntries)[number]['data'], { draft: false }> };
 const entries = allEntries.filter((entry): entry is PublishedNature => entry.data.draft === false)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const mapItems = await getVisibleSectionPages('nature');
-const items = entries.map(({ data }) => ({
-  title: data.title,
-  description: data.description,
-  date: data.date,
-  meta: [data.location, data.method].filter(Boolean).join(' · '),
-  href: data.relatedWriting[0] ? `/writing/${data.relatedWriting[0]}/` : undefined,
-}));
+const sectionPages = await getVisibleSectionPageEntries('nature');
+const usedNature = new Set<string>();
+const topicPreviews = sectionPages.map((sectionPage) => {
+  const matchedEntries = sectionPage.data.kind === 'nature'
+    ? entries
+      .filter((entry) => sectionPage.data.natureCategories.includes(entry.data.category) && !usedNature.has(entry.id))
+      .slice(0, 3)
+    : [];
+  matchedEntries.forEach((entry) => usedNature.add(entry.id));
+  const items = matchedEntries.map(({ data }) => ({
+    title: data.title,
+    description: data.description,
+    date: data.date,
+    meta: [data.location, data.method].filter(Boolean).join(' · '),
+    href: data.relatedWriting[0] ? `/writing/${data.relatedWriting[0]}/` : undefined,
+  }));
+  return { sectionPage, items };
+}).filter(({ sectionPage, items }) => items.length > 0 || sectionPage.data.kind === 'markdown');
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
   <h1>{page.data.title}</h1>
   <p class="page-intro">{page.data.intro}</p>
-  <SectionDirectory items={mapItems} />
 
-  <section aria-labelledby="nature-recent-observations">
-    <h2 id="nature-recent-observations">最近观察</h2>
-    <DatedTextList items={items} />
-  </section>
+  <div class="topic-preview-list">
+    {topicPreviews.map(({ sectionPage, items }) => (
+      <TopicPreview
+        title={sectionPage.data.title}
+        id={sectionPage.data.routeSlug}
+        href={`/${sectionPage.data.section}/${sectionPage.data.routeSlug}/`}
+        description={sectionPage.data.description}
+        hasContent={items.length > 0}
+      >
+        <DatedTextList items={items} emptyMessage={false} />
+      </TopicPreview>
+    ))}
+  </div>
 </BaseLayout>

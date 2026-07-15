@@ -17,14 +17,16 @@ const formatDate = (value: Date) => new Intl.DateTimeFormat('en-CA', {
         <li class="dated-list-item writing-item" data-section={entry.data.section}>
           <span class="dated-list-bullet" aria-hidden="true">•</span>
           <div class="dated-list-content">
-            <a class="dated-list-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
-            <span class="dated-list-description">：{entry.data.description}</span>
+            <div class="dated-list-title-row">
+              <a class="dated-list-title" href={`/writing/${entry.id}/`}>{entry.data.title}</a>
+              <time class="dated-list-date" datetime={formatDate(entry.data.date)}>{formatDate(entry.data.date)}</time>
+            </div>
+            <div class="dated-list-description">{entry.data.description}</div>
             <div class="dated-list-meta">
               {section.parentLabel} · {section.label}
               {entry.data.tags.length > 0 && ` · ${entry.data.tags.join(' / ')}`}
             </div>
           </div>
-          <time class="dated-list-date" datetime={formatDate(entry.data.date)}>{formatDate(entry.data.date)}</time>
         </li>
       );
     })}

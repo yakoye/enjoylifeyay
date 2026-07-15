@@ -23,12 +23,12 @@ test('v0.24 second-level pages show parent breadcrumb and active sibling topic',
   assert.match(css, /\.section-map-current::after/);
 });
 
-test('v0.24 parent sections use descriptive topic directories', async () => {
-  const directory = await read('src/components/SectionDirectory.astro');
-  assert.match(directory, /section-directory-grid/);
-  assert.match(directory, /item\.description/);
+test('v0.25 parent sections use descriptive topic previews', async () => {
+  const directory = await read('src/components/TopicPreview.astro');
+  assert.match(directory, /topic-preview/);
+  assert.match(directory, /description/);
   for (const section of ['technology', 'tools', 'reading', 'nature', 'life']) {
     const page = await read(`src/pages/${section}/index.astro`);
-    assert.match(page, /SectionDirectory/);
+    assert.match(page, /TopicPreview/);
   }
 });

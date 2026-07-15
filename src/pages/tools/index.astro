@@ -1,26 +1,65 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import SectionDirectory from '../../components/SectionDirectory.astro';
 import DirectoryList from '../../components/DirectoryList.astro';
+import TopicPreview from '../../components/TopicPreview.astro';
+import WritingList from '../../components/WritingList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getVisibleSectionPages } from '../../lib/section-pages';
+import { getVisibleSectionPageEntries, matchesWritingSectionPage } from '../../lib/section-pages';
 
 const page = await getEntry('sitePages', 'tools');
 if (!page) throw new Error('Missing Markdown page content: tools');
 const tools = (await getCollection('tools', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
-const mapItems = await getVisibleSectionPages('tools');
-const highlights = tools.filter((tool) => tool.data.featured || ['dictfloat', 'regcalc-text-tool', 'pcie-tools-index'].includes(tool.data.id))
-  .map(({ data }) => ({ title: data.name, description: data.description, href: data.url || data.githubUrl || undefined }));
+const writing = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sectionPages = await getVisibleSectionPageEntries('tools');
+const usedTools = new Set<string>();
+const usedWriting = new Set<string>();
+const topicPreviews = sectionPages.map((sectionPage) => {
+  const writingEntries = sectionPage.data.kind === 'writing'
+    ? writing
+      .filter((entry) => matchesWritingSectionPage(entry, sectionPage) && !usedWriting.has(entry.id))
+      .slice(0, 3)
+    : [];
+  writingEntries.forEach((entry) => usedWriting.add(entry.id));
+
+  const toolEntries = sectionPage.data.kind === 'tools'
+    ? tools
+      .filter((entry) => sectionPage.data.toolCategories.includes(entry.data.category) && !usedTools.has(entry.id))
+      .slice(0, 3)
+    : [];
+  toolEntries.forEach((entry) => usedTools.add(entry.id));
+
+  const toolItems = toolEntries.map(({ data }) => ({
+    title: data.name,
+    description: data.description,
+    href: data.url || data.githubUrl || undefined,
+  }));
+  return { sectionPage, writingEntries, toolItems };
+}).filter(({ sectionPage, writingEntries, toolItems }) => (
+  writingEntries.length > 0 || toolItems.length > 0 || sectionPage.data.kind === 'markdown'
+));
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
   <h1>{page.data.title}</h1>
   <p class="page-intro">{page.data.intro}</p>
-  <SectionDirectory items={mapItems} />
 
-  <section aria-labelledby="tool-highlights">
-    <h2 id="tool-highlights">常用入口</h2>
-    <DirectoryList items={highlights} />
-  </section>
+  <div class="topic-preview-list">
+    {topicPreviews.map(({ sectionPage, writingEntries, toolItems }) => {
+      const hasContent = writingEntries.length > 0 || toolItems.length > 0;
+      return (
+        <TopicPreview
+          title={sectionPage.data.title}
+          id={sectionPage.data.routeSlug}
+          href={`/${sectionPage.data.section}/${sectionPage.data.routeSlug}/`}
+          description={sectionPage.data.description}
+          hasContent={hasContent}
+        >
+          {writingEntries.length > 0 && <WritingList entries={writingEntries} emptyMessage={false} />}
+          {toolItems.length > 0 && <DirectoryList items={toolItems} emptyMessage={false} />}
+        </TopicPreview>
+      );
+    })}
+  </div>
 </BaseLayout>
